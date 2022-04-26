@@ -1,0 +1,10 @@
+{
+    "login":{
+        "login":"Login",
+        "username":"Username",
+        "password":"Password"
+    },
+    "error":{
+        "TestError":"todo remove this error"
+    }
+}

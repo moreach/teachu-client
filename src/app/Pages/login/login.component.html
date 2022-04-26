@@ -1,0 +1,10 @@
+<form [formGroup]="form">
+    <h1>{{ 'login.login' | translate }}</h1>
+    <mat-form-field>
+        <input matInput type="text" formControlName="username" [placeholder]="'login.username' | translate" required>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="password" formControlName="password" [placeholder]="'login.password' | translate" required>
+    </mat-form-field>
+    <button mat-flat-button color="primary" type="submit" [disabled]="!form.valid || !form.dirty">{{ 'login.login' | translate }}</button>
+</form>
