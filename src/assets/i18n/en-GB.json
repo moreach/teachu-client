@@ -4,7 +4,12 @@
         "username":"Username",
         "password":"Password"
     },
-    "error":{
-        "TestError":"todo remove this error"
+    "errorBackend":{
+        "testError":"todo remove this error"
+    },
+    "errorHandling":{
+        "errorOccured":"Error Occured",
+        "input":"Input",
+        "output":"Output"
     }
 }

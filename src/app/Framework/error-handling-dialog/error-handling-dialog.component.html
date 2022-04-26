@@ -1,2 +1,11 @@
-<p>error-handling-dialog works!</p>
-<!-- todo -->
+<h1 mat-dialog-title>{{ 'errorHandling.errorOccured' | translate }}</h1>
+<div mat-dialog-content>
+    <h2>{{ 'errorHandling.input' | translate }}</h2>
+    <pre>
+      {{ data.request | json }}
+    </pre>
+    <h2>{{ 'errorHandling.output' | translate }}</h2>
+    <pre>
+      {{ data.error | json }}
+    </pre>
+</div>
