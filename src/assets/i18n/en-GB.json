@@ -1,0 +1,21 @@
+{
+    "login":{
+        "login":"Login",
+        "email":"Mail",
+        "password":"Password",
+        "loginWrong":"Login was wrong"
+    },
+    "ping":{
+        "ping":"Ping",
+        "loginSuccessful":"Login successful",
+        "pingResult":"Ping result"
+    },
+    "errorBackend":{
+        "testError":"todo remove this error"
+    },
+    "errorHandling":{
+        "errorOccured":"Error Occured",
+        "input":"Input",
+        "output":"Output"
+    }
+}

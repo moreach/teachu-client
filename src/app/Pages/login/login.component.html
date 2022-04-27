@@ -1,0 +1,13 @@
+<form [formGroup]="form">
+    <h1>{{ 'login.login' | translate }}</h1>
+    <mat-error *ngIf="loginWrong">
+        {{ 'login.loginWrong' | translate }}
+    </mat-error>
+    <mat-form-field>
+        <input matInput type="text" formControlName="email" [placeholder]="'login.email' | translate" required>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="password" formControlName="password" [placeholder]="'login.password' | translate" required>
+    </mat-form-field>
+    <button mat-flat-button color="primary" type="submit" (click)="login()" [disabled]="!form.valid || !form.dirty">{{ 'login.login' | translate }}</button>
+</form>
