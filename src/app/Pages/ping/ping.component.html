@@ -1,0 +1,6 @@
+<div class="form">
+    <h1>{{ 'ping.loginSuccessful' | translate }}</h1>
+    <button mat-flat-button color="primary" type="submit" (click)="logout()">Logout</button>
+    <button mat-flat-button color="primary" type="submit" (click)="ping()">Ping</button>
+    <h2>{{ 'ping.pingResult' | translate }}: {{ pingResult }}</h2>
+</div>

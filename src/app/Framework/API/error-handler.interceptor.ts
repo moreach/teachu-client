@@ -3,9 +3,10 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse
 } from '@angular/common/http';
-import { catchError, Observable, switchMap, tap } from 'rxjs';
+import { catchError, NEVER, Observable, of, switchMap, tap } from 'rxjs';
 import { appConfig } from 'src/app/Config/appConfig';
 import { endpoints } from 'src/app/Config/endpoints';
 import { RefreshTokenDTO } from 'src/app/DTOs/RefreshTokenDTO';
@@ -40,29 +41,33 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError(error => {
         if (error.status === 401) {
-          return this.api.callApi<TokenDTO>(endpoints.Refresh,  {
-            refreshToken: this.tokenService.getRefreshToken() 
-          } as RefreshTokenDTO, 'POST').pipe(
+          return this.api.callApiWithError<TokenDTO>(endpoints.Login,  {
+            refresh: this.tokenService.getRefreshToken()
+          } as RefreshTokenDTO, 'PUT').pipe(
             tap(token => {
               if (typeof(token) !== 'string') {
-                this.tokenService.setToken(token.token);
-                this.tokenService.setRefreshToken(token.refreshToken);
+                this.tokenService.setToken(token.access);
+                this.tokenService.setRefreshToken(token.refresh);
               } else {
                 this.tokenService.removeToken();
                 this.tokenService.removeRefreshToken();
                 this.errorHandler.redirectToLogin();
               }
             }),
-            switchMap(token => next.handle(this.cloneRequest(request, (typeof(token) !== 'string' ? token.token : '')))),
+            switchMap(token => next.handle(this.cloneRequest(request, (typeof(token) !== 'string' ? token.access : '')))),
           );
         } 
-        // todo check for payload contains errorKey -> return key
-        // test this
-        // else if (!!error.payload?.errorKey) {
-        //   return of(error.payload.errorKey)
+        // else if (!!(error as HttpErrorResponse).error){
+          // todo test this
+          // return errorKey
+          // const errorKey = error.message.split(':')[1];
+        //   console.log(error.error);
+        //   return of({
+        //     ...error,
+        //     status: 200
+        //   });
         // }
         else {
-          console.log(error)
           return this.errorHandler.handleError({
             error,
             request

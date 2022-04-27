@@ -1,8 +1,14 @@
 {
     "login":{
         "login":"Login",
-        "username":"Username",
-        "password":"Password"
+        "email":"Mail",
+        "password":"Password",
+        "loginWrong":"Login was wrong"
+    },
+    "ping":{
+        "ping":"Ping",
+        "loginSuccessful":"Login successful",
+        "pingResult":"Ping result"
     },
     "errorBackend":{
         "testError":"todo remove this error"

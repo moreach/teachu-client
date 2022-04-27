@@ -1,4 +1,4 @@
 export const endpoints = {
-    Login: 'login',
-    Refresh: 'refresh',
+    Login: 'security/token',
+    Ping: 'api/ping',
 }

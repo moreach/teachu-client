@@ -13,6 +13,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ErrorHandlerInterceptor } from './Framework/API/error-handler.interceptor';
 import { LoginComponent } from './Pages/login/login.component';
+import { PingComponent } from './Pages/ping/ping.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -23,7 +24,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     ErrorHandlingDialogComponent,
     SpinnerDirective,
-    LoginComponent
+    LoginComponent,
+    PingComponent
   ],
   imports: [
     BrowserModule,
