@@ -1,17 +1,84 @@
-// todo custom styling like: https://material.angular.io/guide/theming and https://material.io/design/color/
+// theme generated with: http://mcg.mbitson.com/#!?mcgpalette0=%23ba00ff&themename=mcgtheme
 @use '@angular/material' as mat;
+@import './styles/colors';
 
 @include mat.core();
 
-$teachu-primary: mat.define-palette(mat.$indigo-palette);
-$teachu-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-$teachu-warn: mat.define-palette(mat.$red-palette);
+$teachu-primary-palette: (
+    50 : #ffe5ef,
+    100 : #ffbfd7,
+    200 : #ff94bc,
+    300 : #ff69a1,
+    400 : #ff488c,
+    500 : $teachu-primary,
+    600 : #ff2470,
+    700 : #ff1e65,
+    800 : #ff185b,
+    900 : #ff0f48,
+    A100 : #ffffff,
+    A200 : #fff7f9,
+    A400 : #ffc4d0,
+    A700 : #ffabbc,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$teachu-accent-palette: (
+    50 : #f7e0ff,
+    100 : #eab3ff,
+    200 : #dd80ff,
+    300 : #cf4dff,
+    400 : #c426ff,
+    500 : $teachu-accent,
+    600 : #b300ff,
+    700 : #ab00ff,
+    800 : #a300ff,
+    900 : #9400ff,
+    A100 : #ffffff,
+    A200 : #f9f2ff,
+    A400 : #e1bfff,
+    A700 : #d5a6ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$mat-teachu-primary: mat.define-palette($teachu-primary-palette);
+$mat-teachu-accent: mat.define-palette($teachu-accent-palette);
+$mat-teachu-warn: mat.define-palette(mat.$red-palette);
 
 $teachu-theme: mat.define-light-theme((
   color: (
-    primary: $teachu-primary,
-    accent: $teachu-accent,
-    warn: $teachu-warn,
+    primary: $mat-teachu-primary,
+    accent: $mat-teachu-accent,
+    warn: $mat-teachu-warn,
   )
 ));
 
@@ -19,3 +86,11 @@ $teachu-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.toast-container {
+  pointer-events: none;
+  position: fixed;
+  z-index: 999999;
+  margin-left: calc(100vw - 332px - 10px);
+  bottom: 10px;
+}

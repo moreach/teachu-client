@@ -3,5 +3,5 @@ export const appConfig = {
     APPLICATION_TOKEN: 'teachu-token',
     APPLICATION_REFRESH_TOKEN: 'teachu-refresh-token',
     APPLICATION_LANGUAGE: 'teachu-language',
-    BACKEND_ERRORKEY:'errorKey',
+    BACKEND_ERROR_TITLE_SUFFIX:'_title',
 }

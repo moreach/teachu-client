@@ -11,7 +11,8 @@
         "pingResult":"Ping result"
     },
     "errorBackend":{
-        "testError":"todo remove this error"
+        "unknownError_title":"Unknown Error",
+        "unknownError":"Unknown Error Occured"
     },
     "errorHandling":{
         "errorOccured":"Error Occured",
