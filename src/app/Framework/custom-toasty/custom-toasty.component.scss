@@ -1,0 +1,12 @@
+@import './../../../styles/colors';
+
+mat-card {
+    width: 300px;
+    background-color: $teachu-primary;
+    color: $teachu-white;
+    margin-top: 10px;
+    mat-card-title {
+        display: grid;
+        grid-template-columns: 1fr 20px;
+    }
+}

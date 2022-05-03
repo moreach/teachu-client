@@ -14,6 +14,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ErrorHandlerInterceptor } from './Framework/API/error-handler.interceptor';
 import { LoginComponent } from './Pages/login/login.component';
 import { PingComponent } from './Pages/ping/ping.component';
+import { CustomToastyComponent } from './Framework/custom-toasty/custom-toasty.component';
+import { ToastrModule } from 'ngx-toastr';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -25,7 +27,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ErrorHandlingDialogComponent,
     SpinnerDirective,
     LoginComponent,
-    PingComponent
+    PingComponent,
+    CustomToastyComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,13 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
+    }),
+    ToastrModule.forRoot({
+      toastComponent: CustomToastyComponent,
+      timeOut: 3000,
+      maxOpened: 5,
+      newestOnTop: true,
+      preventDuplicates: true,
     }),
   ],
   providers: [

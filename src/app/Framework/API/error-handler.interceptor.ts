@@ -4,9 +4,8 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpErrorResponse
 } from '@angular/common/http';
-import { catchError, NEVER, Observable, of, switchMap, tap } from 'rxjs';
+import { catchError, Observable, switchMap, tap } from 'rxjs';
 import { appConfig } from 'src/app/Config/appConfig';
 import { endpoints } from 'src/app/Config/endpoints';
 import { RefreshTokenDTO } from 'src/app/DTOs/RefreshTokenDTO';
@@ -40,10 +39,11 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError(error => {
+        // unauthorized -> try refresh token
         if (error.status === 401) {
           return this.api.callApiWithError<TokenDTO>(endpoints.Login,  {
-            refresh: this.tokenService.getRefreshToken()
-          } as RefreshTokenDTO, 'PUT').pipe(
+            refresh: this.tokenService.getRefreshToken(),
+          } as TokenDTO, 'PUT').pipe(
             tap(token => {
               if (typeof(token) !== 'string') {
                 this.tokenService.setToken(token.access);
@@ -56,18 +56,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
             }),
             switchMap(token => next.handle(this.cloneRequest(request, (typeof(token) !== 'string' ? token.access : '')))),
           );
-        } 
-        // else if (!!(error as HttpErrorResponse).error){
-          // todo test this
-          // return errorKey
-          // const errorKey = error.message.split(':')[1];
-        //   console.log(error.error);
-        //   return of({
-        //     ...error,
-        //     status: 200
-        //   });
-        // }
-        else {
+        } else {
           return this.errorHandler.handleError({
             error,
             request

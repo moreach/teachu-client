@@ -13,5 +13,5 @@ maybe change Backend URL in environment.ts
 
 ## Build the project
 
-ng serve in the root directory of the repository
+ng build in the root directory of the repository
 setting in environment.prod.ts will be automatically applied
