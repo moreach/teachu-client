@@ -52,6 +52,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       maxOpened: 5,
       newestOnTop: true,
       preventDuplicates: true,
+      positionClass: 'toast-bottom-right',
     }),
   ],
   providers: [
