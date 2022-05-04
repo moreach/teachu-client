@@ -3,7 +3,8 @@
         "login":"Login",
         "email":"Mail",
         "password":"Password",
-        "loginWrong":"Login was wrong"
+        "loginWrong":"Login was wrong",
+        "logout":"Logout"
     },
     "ping":{
         "ping":"Ping",
@@ -18,5 +19,28 @@
         "errorOccured":"Error Occured",
         "input":"Input",
         "output":"Output"
+    },
+    "languages":{
+        "languages":"Languages",
+        "english":"English",
+        "arabic":"Arabic",
+        "chinese":"Chinese",
+        "danish":"Danish",
+        "dutch":"Dutch",
+        "finnish":"Finnish",
+        "french":"French",
+        "german":"German",
+        "hindi":"Hindi",
+        "italian":"Italian",
+        "japanese":"Japanese",
+        "korean":"Korean",
+        "polish":"Polish",
+        "portuguese":"Portuguese",
+        "russian":"Russian",
+        "spanish":"Spanish",
+        "swedish":"Swedish",
+        "thai":"Thai",
+        "turkish":"Turkish",
+        "vietnamese":"Vietnamese"
     }
 }

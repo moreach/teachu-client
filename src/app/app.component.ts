@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LanguagesService } from './Languages/languages.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'teachu';
+
+  constructor (
+    private languageService: LanguagesService,
+  ) {
+    this.languageService.setLanguageOnStartup();
+  }
 }
