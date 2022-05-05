@@ -17,6 +17,7 @@ import { PingComponent } from './Pages/ping/ping.component';
 import { CustomToastyComponent } from './Framework/custom-toasty/custom-toasty.component';
 import { ToastrModule } from 'ngx-toastr';
 import { LanguageLookupComponent } from './Languages/language-lookup.component';
+import { BreadcrumbsComponent } from './Framework/breadcrumbs/breadcrumbs.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -31,6 +32,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PingComponent,
     CustomToastyComponent,
     LanguageLookupComponent,
+    BreadcrumbsComponent,
   ],
   imports: [
     BrowserModule,
