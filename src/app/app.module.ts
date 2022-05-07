@@ -16,8 +16,10 @@ import { LoginComponent } from './Pages/login/login.component';
 import { PingComponent } from './Pages/ping/ping.component';
 import { CustomToastyComponent } from './Framework/custom-toasty/custom-toasty.component';
 import { ToastrModule } from 'ngx-toastr';
-import { LanguageLookupComponent } from './Languages/language-lookup.component';
 import { BreadcrumbsComponent } from './Framework/breadcrumbs/breadcrumbs.component';
+import { LanguageLookupComponent } from './Framework/Languages/language-lookup.component';
+import { TextEditorComponent } from './Framework/text-editor/text-editor.component';
+import { TextEditorActionBarComponent } from './Framework/text-editor/text-editor-action-bar.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,6 +35,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CustomToastyComponent,
     LanguageLookupComponent,
     BreadcrumbsComponent,
+    TextEditorComponent,
+    TextEditorActionBarComponent,
   ],
   imports: [
     BrowserModule,

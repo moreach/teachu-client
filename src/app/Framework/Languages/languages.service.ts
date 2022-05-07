@@ -1,7 +1,7 @@
 import { KeyValue } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { TokenService } from '../Framework/API/token.service';
+import { TokenService } from '../API/token.service';
 
 @Injectable({
   providedIn: 'root'

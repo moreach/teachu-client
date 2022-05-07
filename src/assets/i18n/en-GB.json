@@ -3,7 +3,7 @@
         "login":"Login",
         "email":"Mail",
         "password":"Password",
-        "loginWrong":"Login was wrong",
+        "wrong":"Login was wrong",
         "logout":"Logout"
     },
     "ping":{
