@@ -1,0 +1,3 @@
+<button *ngFor="let field of editorFields" mat-button (click)="editorClick(field.key, this.editor)">
+    <mat-icon>{{ field.value }}</mat-icon>
+</button>

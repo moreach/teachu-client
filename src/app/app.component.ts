@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LanguagesService } from './Languages/languages.service';
+import { LanguagesService } from './Framework/Languages/languages.service';
 
 @Component({
   selector: 'app-root',
@@ -14,4 +14,7 @@ export class AppComponent {
   ) {
     this.languageService.setLanguageOnStartup();
   }
+
+  // todo navbar
+  // todo text-editor
 }
