@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { ErrorDTO } from 'src/app/DTOs/ErrorDTO';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -16,24 +15,6 @@ export class ApiService {
     const request = this.buildRequest(endpoint, payload, method);
 
     return request as Observable<T>;
-  }
-
-  callApiWithError<T>(endpoint: string, payload: any, method: HttpMethods) {
-    const request = this.buildRequest(endpoint, payload, method);
-
-    return (request as Observable<T | ErrorDTO>).pipe(
-      map(result => {
-        const error = result as ErrorDTO;
-        if (!error) {
-          return null;
-        }
-        if (error.errorKey !== undefined) {
-          return 'error.' + error.errorKey;
-        } else {
-          return result as T;
-        }
-      }),
-    ) as Observable<T | string>;
   }
 
   private buildRequest(endpoint: string, payload: any, method: HttpMethods) {

@@ -39,22 +39,21 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError(error => {
-        // unauthorized -> try refresh token
+        if (this.tokenService.isExpired()) {
+          this.tokenService.removeToken();
+          this.tokenService.removeRefreshToken();
+          this.errorHandler.redirectToLogin();
+        }
         if (error.status === 401) {
-          return this.api.callApiWithError<TokenDTO>(endpoints.Login,  {
+          return this.api.callApi<TokenDTO>(endpoints.Login,  {
             refresh: this.tokenService.getRefreshToken(),
           } as TokenDTO, 'PUT').pipe(
             tap(token => {
-              if (typeof(token) !== 'string') {
-                this.tokenService.setToken(token.access);
-                this.tokenService.setRefreshToken(token.refresh);
-              } else {
-                this.tokenService.removeToken();
-                this.tokenService.removeRefreshToken();
-                this.errorHandler.redirectToLogin();
-              }
+              this.tokenService.setToken(token.access);
+              this.tokenService.setRefreshToken(token.refresh);
+              this.tokenService.setExpired(token.expires);
             }),
-            switchMap(token => next.handle(this.cloneRequest(request, (typeof(token) !== 'string' ? token.access : '')))),
+            switchMap(token => next.handle(this.cloneRequest(request, token.access))),
           );
         } else {
           return this.errorHandler.handleError({

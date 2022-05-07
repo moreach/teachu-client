@@ -12,6 +12,10 @@ export class TokenService {
     localStorage.setItem(appConfig.APPLICATION_TOKEN, token);
   }
 
+  setExpired(expires: Date) {
+    localStorage.setItem(appConfig.APPLICATION_EXPIRES, expires.toString());
+  }
+
   getToken(): string | null {
     return localStorage.getItem(appConfig.APPLICATION_TOKEN);
   }
@@ -30,6 +34,16 @@ export class TokenService {
 
   removeRefreshToken() {
     localStorage.removeItem(appConfig.APPLICATION_REFRESH_TOKEN);
+  }
+
+  isExpired(): boolean {
+    const expires = localStorage.getItem(appConfig.APPLICATION_EXPIRES);
+    if (!expires) {
+      return false;
+    }
+    const expiresDate = new Date(expires);
+    const now = new Date();
+    return now > expiresDate;
   }
 
   getSelectedLanguage() {

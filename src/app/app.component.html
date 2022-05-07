@@ -1,1 +1,13 @@
-<router-outlet></router-outlet>
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+        <app-nav-bar></app-nav-bar>
+    </mat-drawer>
+    <div class="menu-toggle">
+      <button type="button" mat-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div class="page">
+        <router-outlet></router-outlet>
+    </div>
+</mat-drawer-container>
