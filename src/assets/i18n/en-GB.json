@@ -6,6 +6,9 @@
         "wrong":"Login was wrong",
         "logout":"Logout"
     },
+    "userSettings":{
+        "emailField": "E-Mail Address"
+    },
     "ping":{
         "ping":"Ping",
         "loginSuccessful":"Login successful",

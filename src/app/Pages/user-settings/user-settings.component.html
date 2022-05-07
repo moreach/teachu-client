@@ -1,0 +1,9 @@
+<div>
+    <form [formGroup]="userForm">
+        <mat-form-field appearance="fill">
+            <mat-label>{{ "userSettings.emailField" | translate}}</mat-label>
+            <input matInput placeholder='{{ "userSettings.emailField" | translate }}' formControlName="email">
+        </mat-form-field>
+
+    </form>
+</div>

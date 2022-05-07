@@ -3,4 +3,5 @@ export const appRoutes = {
     App: 'app',
     Login: 'login',
     Ping: 'ping',
+    UserSettings: 'user',
 }
