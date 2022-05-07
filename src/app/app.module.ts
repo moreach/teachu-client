@@ -20,6 +20,7 @@ import { BreadcrumbsComponent } from './Framework/breadcrumbs/breadcrumbs.compon
 import { LanguageLookupComponent } from './Framework/Languages/language-lookup.component';
 import { TextEditorComponent } from './Framework/text-editor/text-editor.component';
 import { TextEditorActionBarComponent } from './Framework/text-editor/text-editor-action-bar.component';
+import { NavBarComponent } from './Pages/index/nav-bar/nav-bar.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -37,6 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BreadcrumbsComponent,
     TextEditorComponent,
     TextEditorActionBarComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,

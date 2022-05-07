@@ -14,7 +14,4 @@ export class AppComponent {
   ) {
     this.languageService.setLanguageOnStartup();
   }
-
-  // todo navbar
-  // todo text-editor
 }
