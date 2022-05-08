@@ -1,0 +1,12 @@
+<ng-container *ngIf="position === 'start'">
+    <ng-container *ngTemplateOutlet="button"></ng-container>
+</ng-container>
+<ng-content></ng-content>
+<ng-container *ngIf="position === 'end'">
+    <ng-container *ngTemplateOutlet="button"></ng-container>
+</ng-container>
+<ng-template #button>
+    <button mat-icon-button [disabled]="disabled">
+        <mat-icon>{{target.expanded ? 'expand_more' : 'chevron_right'}}</mat-icon>
+    </button>
+</ng-template>

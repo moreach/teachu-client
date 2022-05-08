@@ -1,11 +1,35 @@
-.page {
-    padding: 40px;
-    padding-top: 20px;
-    display: flex;
-    height: calc(100vh - 120px);
-}
+@import './../styles/colors';
 
-.menu-toggle {
-    padding-left: 20px;
-    padding-top: 20px;
+.root {
+  width: 100%;
+  min-height: 100vh;
+  display: block;
+  background-color: $teachu-white;
+
+  .outline {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: clamp(300px, 30%, 400px) auto;
+    grid-template-rows: 100px auto;
+
+    .nav {
+      background-color: $teachu-grey;
+    }
+
+    .nav-header {
+      display: flex;
+      align-items: center;
+
+      font-size: 1.6rem;
+      color: $teachu-primary;
+
+      .child {
+        padding-left: 20px;
+      }
+    }
+
+    .page {
+      padding: 20px;
+    }
+  }
 }

@@ -1,0 +1,27 @@
+@import 'src/styles/_colors.scss';
+
+.menu-tree {
+  padding: 15px;
+
+  .menu-tree-item {
+    cursor: pointer;
+
+    height: 50px;
+    width: 100%;
+
+    border-radius: 5px;
+  }
+
+  .menu-tree-item:hover {
+    background-color: $teachu-grey-darker;
+  }
+
+  .menu-tree-item:hover {
+    background-color: $teachu-grey-darker;
+  }
+
+  .menu-tree-indented-leave {
+    padding-left: 20px;
+    width: calc(100% - 20px);
+  }
+}

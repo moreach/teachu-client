@@ -1,0 +1,15 @@
+.menu-leave {
+  display: flex;
+  height: 100%;
+  align-items: center;
+
+  .menu-leave-content {
+    padding-left: 10px;
+    font-size: 1rem;
+  }
+
+  .menu-leave-icon {
+    padding-left: 10px;
+    font-size: 1.5rem;
+  }
+}

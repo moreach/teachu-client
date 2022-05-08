@@ -85,8 +85,14 @@ $teachu-theme: mat.define-light-theme((
 
 @include mat.all-component-themes($teachu-theme);
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 // remove default toasty styles
 .toast-container .ngx-toastr {

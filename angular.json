@@ -27,6 +27,7 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
+              "src/styles/normalize-browser.css",
               "src/favicon.ico",
               "src/assets"
             ],

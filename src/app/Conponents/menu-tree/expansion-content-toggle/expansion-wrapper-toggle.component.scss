@@ -1,0 +1,12 @@
+:host {
+  cursor: pointer;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+
+  &.end {
+    justify-content: space-between;
+    display: flex;
+  }
+}
+
