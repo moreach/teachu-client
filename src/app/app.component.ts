@@ -1,9 +1,7 @@
-import {Component, HostListener} from '@angular/core';
-import {LanguagesService} from './Framework/Languages/languages.service';
-import { OverlayContainer } from '@angular/cdk/overlay';
-import { AfterViewInit, Component } from '@angular/core';
-import { DarkThemeService } from './Framework/dark-theme/dark-theme.service';
-import { LanguagesService } from './Framework/Languages/languages.service';
+import {AfterViewInit, Component, HostListener} from "@angular/core";
+import {LanguagesService} from "./Framework/Languages/languages.service";
+import {DarkThemeService} from "./Framework/dark-theme/dark-theme.service";
+import {OverlayContainer} from "@angular/cdk/overlay";
 
 @Component({
     selector: 'app-root',

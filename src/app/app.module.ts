@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -29,6 +29,9 @@ import {
 } from "./Conponents/menu-tree/expansion-content-toggle/expansion-wrapper-toggle.component";
 import {OutlineNavHeaderComponent} from './Conponents/outline-header/outline-nav-header/outline-nav-header.component';
 import {OutlineHeaderComponent} from './Conponents/outline-header/outline-header/outline-header.component';
+import {UserSettingsComponent} from "./Pages/user-settings/user-settings.component";
+import {MaterialFileInputModule} from "ngx-material-file-input";
+import {MAT_DATE_LOCALE} from "@angular/material/core";
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -46,7 +49,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         BreadcrumbsComponent,
         TextEditorComponent,
         TextEditorActionBarComponent,
-        NavBarComponent,
         UserSettingsComponent,
         MenuTreeComponent,
         ExpansionWrapperComponent,
