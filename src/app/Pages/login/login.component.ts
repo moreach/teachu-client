@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { endpoints } from 'src/app/Config/endpoints';
@@ -8,6 +8,7 @@ import { TokenDTO } from 'src/app/DTOs/TokenDTO';
 import { ApiService } from 'src/app/Framework/API/api.service';
 import { ErrorHandlingService } from 'src/app/Framework/API/error-handling.service';
 import { TokenService } from 'src/app/Framework/API/token.service';
+import { DarkThemeService } from 'src/app/Framework/dark-theme/dark-theme.service';
 import { FormGroupTyped } from 'src/app/Material/types';
 
 @Component({
@@ -26,9 +27,10 @@ export class LoginComponent {
     private tokenService: TokenService,
     private router: Router,
     private errorHandler: ErrorHandlingService,
+    private darkThemeService: DarkThemeService,
   ) {
     this.form = this.formBuilder.group({
-      email: '',
+      email: ['', Validators.email],
       password: '',
     }) as FormGroupTyped<LoginDTO>;
 
@@ -37,17 +39,19 @@ export class LoginComponent {
       this.tokenService.removeRefreshToken();
       this.errorHandler.redirectToLogin();
     }
-    const refreshToken = this.tokenService.getRefreshToken();
-    if (refreshToken) {
+    const refresh = this.tokenService.getRefreshToken();
+    if (refresh) {
       this.api.callApi<TokenDTO>(endpoints.Login, {
-        refreshToken
+        refresh
       }, 'PUT').subscribe(token => {
         this.tokenService.setToken(token.access);
         this.tokenService.setRefreshToken(token.refresh);
-        this.tokenService.setExpired(token.expires);
+        this.tokenService.setExpired(token.refreshExpires);
         this.router.navigate([appRoutes.App, appRoutes.Ping]);
       });
     }
+
+    this.darkThemeService.setDarkTheme(this.darkThemeService.getDarkTheme());
   }
 
   login() {
@@ -56,7 +60,7 @@ export class LoginComponent {
     }, 'POST').subscribe(token => {
       this.tokenService.setToken(token.access);
       this.tokenService.setRefreshToken(token.refresh);
-      this.tokenService.setExpired(token.expires);
+      this.tokenService.setExpired(token.refreshExpires);
       this.router.navigate([appRoutes.App, appRoutes.Ping]);
     });
   }

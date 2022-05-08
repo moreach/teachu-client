@@ -36,6 +36,10 @@ export class TokenService {
     localStorage.removeItem(appConfig.APPLICATION_REFRESH_TOKEN);
   }
 
+  removeExpired() {
+    localStorage.removeItem(appConfig.APPLICATION_EXPIRES);
+  }
+
   isExpired(): boolean {
     const expires = localStorage.getItem(appConfig.APPLICATION_EXPIRES);
     if (!expires) {

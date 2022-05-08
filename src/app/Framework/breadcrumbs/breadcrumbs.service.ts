@@ -24,7 +24,7 @@ export class BreadcrumbsService {
   }
 
   loadBreadcrumbs(url: string[]) {
-    // todo replace with breadcrumbs from backend
+    // todo imlpement from backend endpoint
     return of([{
       url: 'app',
       translation: 'home'

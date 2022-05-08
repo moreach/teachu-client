@@ -44,6 +44,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
           this.tokenService.removeRefreshToken();
           this.errorHandler.redirectToLogin();
         }
+
         if (error.status === 401) {
           return this.api.callApi<TokenDTO>(endpoints.Login,  {
             refresh: this.tokenService.getRefreshToken(),
@@ -51,7 +52,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
             tap(token => {
               this.tokenService.setToken(token.access);
               this.tokenService.setRefreshToken(token.refresh);
-              this.tokenService.setExpired(token.expires);
+              this.tokenService.setExpired(token.refreshExpires);
             }),
             switchMap(token => next.handle(this.cloneRequest(request, token.access))),
           );
