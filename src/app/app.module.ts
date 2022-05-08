@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -46,6 +46,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         BreadcrumbsComponent,
         TextEditorComponent,
         TextEditorActionBarComponent,
+        NavBarComponent,
+        UserSettingsComponent,
         MenuTreeComponent,
         ExpansionWrapperComponent,
         MenuNodeComponent,
@@ -78,6 +80,7 @@ export function HttpLoaderFactory(http: HttpClient) {
             preventDuplicates: true,
             positionClass: 'toast-bottom-right',
         }),
+        MaterialFileInputModule,
     ],
     providers: [
         {
@@ -85,6 +88,10 @@ export function HttpLoaderFactory(http: HttpClient) {
             useClass: ErrorHandlerInterceptor,
             multi: true
         },
+        {
+            provide: MAT_DATE_LOCALE,
+            useValue: 'de-DE'
+        }
     ],
     bootstrap: [AppComponent]
 })

@@ -1,21 +1,34 @@
 import {Component, HostListener} from '@angular/core';
 import {LanguagesService} from './Framework/Languages/languages.service';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { AfterViewInit, Component } from '@angular/core';
+import { DarkThemeService } from './Framework/dark-theme/dark-theme.service';
+import { LanguagesService } from './Framework/Languages/languages.service';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
     title = 'TeachU';
     bigWindow: boolean = false;
     menuClosed: boolean = false;
 
-    constructor(
+    constructor (
         private languageService: LanguagesService,
-    )  {
-        this.onResize();
+        private darkTheme: DarkThemeService,
+        private overlay: OverlayContainer,
+    ) {
         this.languageService.setLanguageOnStartup();
+        this.darkTheme.isDarkTheme$.asObservable().subscribe((isDarkTheme) => {
+            this.setDarkTheme(isDarkTheme);
+        });
+        this.onResize();
+    }
+
+    ngAfterViewInit(): void {
+        this.setDarkTheme(this.darkTheme.getDarkTheme());
     }
 
     @HostListener("window:resize", [])
@@ -27,6 +40,15 @@ export class AppComponent {
 
         if(this.bigWindow && !oldBigWindow)
             this.menuClosed = false;
+    }
+
+    setDarkTheme(isDarkTheme: boolean) {
+        document.body.classList.toggle('darkTheme', isDarkTheme);
+        if (isDarkTheme) {
+            this.overlay.getContainerElement().classList.add('darkTheme');
+        } else {
+            this.overlay.getContainerElement().classList.remove('darkTheme');
+        }
     }
 
     toggleMenu() {

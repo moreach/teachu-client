@@ -1,4 +1,5 @@
 export const endpoints = {
-    Login: 'security/token',
+    Login: 'auth',
     Ping: 'api/ping',
+    User: 'user'
 }
