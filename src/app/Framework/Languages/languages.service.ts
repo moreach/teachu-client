@@ -46,7 +46,7 @@ export class LanguagesService {
   }
 
   selectableLanguages() {
-    // todo translate to languages in json files
+    // todo translate manually with excel helper to languages in json files
     return languages.filter(l => l.key === 'en-GB');
   }
 

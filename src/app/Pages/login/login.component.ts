@@ -8,6 +8,7 @@ import { TokenDTO } from 'src/app/DTOs/TokenDTO';
 import { ApiService } from 'src/app/Framework/API/api.service';
 import { ErrorHandlingService } from 'src/app/Framework/API/error-handling.service';
 import { TokenService } from 'src/app/Framework/API/token.service';
+import { DarkThemeService } from 'src/app/Framework/dark-theme/dark-theme.service';
 import { FormGroupTyped } from 'src/app/Material/types';
 
 @Component({
@@ -26,6 +27,7 @@ export class LoginComponent {
     private tokenService: TokenService,
     private router: Router,
     private errorHandler: ErrorHandlingService,
+    private darkThemeService: DarkThemeService,
   ) {
     this.form = this.formBuilder.group({
       email: ['', Validators.email],
@@ -48,6 +50,8 @@ export class LoginComponent {
         this.router.navigate([appRoutes.App, appRoutes.Ping]);
       });
     }
+
+    this.darkThemeService.setDarkTheme(this.darkThemeService.getDarkTheme());
   }
 
   login() {

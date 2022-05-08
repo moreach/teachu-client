@@ -3,7 +3,6 @@
         <mat-label>{{ "userSettings.email" | translate}}</mat-label>
         <input matInput [placeholder]="'userSettings.email' | translate" formControlName="email">
     </mat-form-field>
-    <button mat-button (click)="changePassword(userForm)">{{ 'userSettings.changePassword' | translate }}</button>
     <mat-form-field>
         <mat-label>{{ "userSettings.firstName" | translate}}</mat-label>
         <input matInput [placeholder]="'userSettings.firstName' | translate" formControlName="firstName">
@@ -45,9 +44,10 @@
         <input matInput [placeholder]="'userSettings.phone' | translate" formControlName="phone">
     </mat-form-field>
     <mat-form-field>
-        <ngx-mat-file-input [placeholder]="'userSettings.profileImg' | translate" formControlName="profileImg" accept=".png, .jpg">
+        <ngx-mat-file-input [placeholder]="'userSettings.profileImage' | translate" formControlName="profileImage" accept=".png, .jpg">
         </ngx-mat-file-input>
         <mat-icon matSuffix aria-hidden="false">attach_file</mat-icon>
     </mat-form-field>
     <button mat-button [disabled]="!userForm.valid" (click)="saveUser(userForm)">{{ 'framework.save' | translate }}</button>
+    <button mat-button (click)="changePassword(userForm)">{{ 'userSettings.changePassword' | translate }}</button>
 </form>

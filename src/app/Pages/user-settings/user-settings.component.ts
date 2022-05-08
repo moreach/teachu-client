@@ -4,8 +4,9 @@ import {endpoints} from "../../Config/endpoints";
 import {FormBuilder, Validators} from "@angular/forms";
 import {FormGroupTyped} from "../../Material/types";
 import {UserDTO} from "../../DTOs/UserDTO";
-import { KeyValue } from "@angular/common";
 import { DarkThemeService } from "src/app/Framework/dark-theme/dark-theme.service";
+import { SEXS } from "src/app/Enums/Sex";
+import { UserProfileDTO } from "src/app/DTOs/UserProfileDTO";
 
 @Component({
     selector: "user-settings",
@@ -13,14 +14,8 @@ import { DarkThemeService } from "src/app/Framework/dark-theme/dark-theme.servic
     styleUrls: ["./user-settings.component.scss"]
 })
 export class UserSettingsComponent {
-    // todo apply backend changes
-
     userForm: FormGroupTyped<UserDTO>;
-    sexs: KeyValue<string, string>[] = [
-        { key: "sex_male", value: "male" },
-        { key: "sex_female", value: "female" },
-        { key: "sex_other", value: "other" }
-    ];
+    sexs = SEXS;
     isLoading: boolean = true;
 
     constructor(
@@ -33,7 +28,6 @@ export class UserSettingsComponent {
                 Validators.email,
                 Validators.required
             ]],
-            password: [""],
             firstName: ["",[
                 Validators.required,
                 Validators.minLength(2),
@@ -56,24 +50,28 @@ export class UserSettingsComponent {
             postalCode: ["", Validators.required],
             street: ["", Validators.required],
             phone: ["", Validators.required],
-            profileImg: ["", Validators.required],
+            profileImage: ["", Validators.required],
         }) as FormGroupTyped<UserDTO>;
         this.userForm.controls.email.disable();
-        this.apiService.callApi(endpoints.User, {}, "GET").subscribe((user) => { 
-            this.userForm.patchValue(user as UserDTO);
+        this.apiService.callApi<UserDTO>(endpoints.User, {}, "GET").subscribe((user) => { 
+            this.userForm.patchValue({
+                ...user,
+                birthday: new Date(user.birthday),
+            } as UserDTO);
             this.isLoading = false;
         });
     }
 
     saveUser(form: FormGroupTyped<UserDTO>) {
+        // todo test / adjust with endpoint from backend
         this.isLoading = true;
-        this.apiService.callApi<UserDTO>(endpoints.User, form.value, "PUT").subscribe(_ => {
+        this.apiService.callApi(endpoints.User, form.value as UserProfileDTO, "PUT").subscribe(_ => {
             this.isLoading = false;
         });
     }
 
     changePassword(form: FormGroupTyped<UserDTO>) {
-        // todo
+        // todo implement popup -> confirm, new 1st password, new 2nd password -> 1st & 2nd password must be equal by validator, then send to backend
     }
 
     changeDarkTheme(isDarkTheme: boolean) {

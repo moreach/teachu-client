@@ -24,7 +24,7 @@
         "postalCode":"Postal Code",
         "street":"Street",
         "phone":"Phone",
-        "profileImg":"Profile Image"
+        "profileImage":"Profile Image"
     },
     "ping":{
         "ping":"Ping",
