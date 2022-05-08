@@ -1,4 +1,7 @@
 {
+    "framework":{
+        "save":"Save"
+    },
     "login":{
         "login":"Login",
         "email":"Mail",
@@ -7,7 +10,21 @@
         "logout":"Logout"
     },
     "userSettings":{
-        "emailField": "E-Mail Address"
+        "email":"E-Mail Address",
+        "changePassword":"Change Password",
+        "firstName":"Firstname",
+        "lastName":"Lastname",
+        "birthday":"Birthday",
+        "sex":"Sex",
+        "sex_male":"Male",
+        "sex_female":"Female",
+        "sex_other":"Other",
+        "darkTheme":"Dark Theme",
+        "city":"City",
+        "postalCode":"Postal Code",
+        "street":"Street",
+        "phone":"Phone",
+        "profileImg":"Profile Image"
     },
     "ping":{
         "ping":"Ping",

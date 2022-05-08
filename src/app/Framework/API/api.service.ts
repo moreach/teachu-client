@@ -19,20 +19,11 @@ export class ApiService {
 
   private buildRequest(endpoint: string, payload: any, method: HttpMethods) {
     const requestEndpoint = `${environment.URL_API}${endpoint}`;
-  
-    let params = {};
-    if ((method === 'GET' || method === 'DELETE') && !!payload) {
-      if (typeof payload === 'string') {
-        params = new HttpParams().set('id', payload);
-      } else if (Object.keys(payload).length > 1) {
-        params = payload;
-      }
-    }
 
     let request: any;
     switch (method) {
       case 'GET':
-        request = this.http.get(requestEndpoint, { params });
+        request = this.http.get(requestEndpoint, payload);
         break;
       case 'POST':
         request = this.http.post(requestEndpoint, payload);
@@ -41,7 +32,9 @@ export class ApiService {
         request = this.http.put(requestEndpoint, payload);
         break;
       case 'DELETE':
-        request = this.http.delete(requestEndpoint, { params });
+        request = this.http.delete(requestEndpoint, {
+          body: payload
+        });
         break;
     }
 

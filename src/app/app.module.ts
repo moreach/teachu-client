@@ -22,6 +22,8 @@ import { TextEditorComponent } from './Framework/text-editor/text-editor.compone
 import { TextEditorActionBarComponent } from './Framework/text-editor/text-editor-action-bar.component';
 import { NavBarComponent } from './Pages/index/nav-bar/nav-bar.component';
 import { UserSettingsComponent } from './Pages/user-settings/user-settings.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -66,6 +68,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       preventDuplicates: true,
       positionClass: 'toast-bottom-right',
     }),
+    MaterialFileInputModule,
   ],
   providers: [
     {
@@ -73,6 +76,10 @@ export function HttpLoaderFactory(http: HttpClient) {
       useClass: ErrorHandlerInterceptor,
       multi: true
     },
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: 'de-DE'
+    }
   ],
   bootstrap: [AppComponent]
 })

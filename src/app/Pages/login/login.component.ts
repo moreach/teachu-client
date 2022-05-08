@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { endpoints } from 'src/app/Config/endpoints';
@@ -28,7 +28,7 @@ export class LoginComponent {
     private errorHandler: ErrorHandlingService,
   ) {
     this.form = this.formBuilder.group({
-      email: '',
+      email: ['', Validators.email],
       password: '',
     }) as FormGroupTyped<LoginDTO>;
 
@@ -37,14 +37,14 @@ export class LoginComponent {
       this.tokenService.removeRefreshToken();
       this.errorHandler.redirectToLogin();
     }
-    const refreshToken = this.tokenService.getRefreshToken();
-    if (refreshToken) {
+    const refresh = this.tokenService.getRefreshToken();
+    if (refresh) {
       this.api.callApi<TokenDTO>(endpoints.Login, {
-        refreshToken
+        refresh
       }, 'PUT').subscribe(token => {
         this.tokenService.setToken(token.access);
         this.tokenService.setRefreshToken(token.refresh);
-        this.tokenService.setExpired(token.expires);
+        this.tokenService.setExpired(token.refreshExpires);
         this.router.navigate([appRoutes.App, appRoutes.Ping]);
       });
     }
@@ -56,7 +56,7 @@ export class LoginComponent {
     }, 'POST').subscribe(token => {
       this.tokenService.setToken(token.access);
       this.tokenService.setRefreshToken(token.refresh);
-      this.tokenService.setExpired(token.expires);
+      this.tokenService.setExpired(token.refreshExpires);
       this.router.navigate([appRoutes.App, appRoutes.Ping]);
     });
   }
