@@ -1,15 +1,32 @@
 <div class="root">
-    <div class="outline">
-        <div class="nav-header nav">
-            <mat-icon class="child">menu</mat-icon>
-            <span class="child">{{title}}</span>
+    <div [ngClass]="{
+            'big-outline': bigWindow,
+            'big-outline-closed': menuClosed && bigWindow,
+            'small-outline': !bigWindow}">
+        <div *ngIf="bigWindow" class="nav">
+            <app-outline-nav-header [(menuClosed)]="menuClosed" [menuToggleIcon]="'close'"> </app-outline-nav-header>
         </div>
-        <div class="header">
 
+        <div class="header">
+            <app-outline-header [(menuClosed)]="menuClosed"></app-outline-header>
         </div>
-        <div class="nav-body nav">
+
+        <div *ngIf="!bigWindow && !menuClosed" class="floating-nav">
+            <div class="nav-background" (click)="toggleMenu()"></div>
+            <div class="floating-nav-content">
+                <div class="floating-nav-content-header">
+                    <app-outline-nav-header [(menuClosed)]="menuClosed" [menuToggleIcon]="'close'"> </app-outline-nav-header>
+                </div>
+                <div>
+                    <app-menu-tree></app-menu-tree>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="bigWindow" class="nav">
             <app-menu-tree></app-menu-tree>
         </div>
+
         <div class="page">
             <router-outlet></router-outlet>
         </div>

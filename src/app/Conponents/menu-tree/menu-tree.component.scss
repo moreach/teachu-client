@@ -2,6 +2,7 @@
 
 .menu-tree {
   padding: 15px;
+  overflow-y: auto;
 
   .menu-tree-item {
     cursor: pointer;
@@ -10,10 +11,8 @@
     width: 100%;
 
     border-radius: 5px;
-  }
-
-  .menu-tree-item:hover {
-    background-color: $teachu-grey-darker;
+    transition: background-color 0.3s ease-out;
+    color: $teachu-black;
   }
 
   .menu-tree-item:hover {

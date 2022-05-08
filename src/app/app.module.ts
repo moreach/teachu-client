@@ -27,6 +27,8 @@ import {MenuLeaveComponent} from './Conponents/menu-tree/menu-leave/menu-leave.c
 import {
     ExpansionWrapperToggleComponent
 } from "./Conponents/menu-tree/expansion-content-toggle/expansion-wrapper-toggle.component";
+import {OutlineNavHeaderComponent} from './Conponents/outline-header/outline-nav-header/outline-nav-header.component';
+import {OutlineHeaderComponent} from './Conponents/outline-header/outline-header/outline-header.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -49,6 +51,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         MenuNodeComponent,
         MenuLeaveComponent,
         ExpansionWrapperToggleComponent,
+        OutlineNavHeaderComponent,
+        OutlineHeaderComponent,
     ],
     imports: [
         BrowserModule,
