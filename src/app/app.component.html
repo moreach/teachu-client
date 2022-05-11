@@ -1,13 +1,34 @@
-<mat-drawer-container class="example-container" autosize>
-    <mat-drawer #drawer class="example-sidenav" mode="side">
-        <app-nav-bar></app-nav-bar>
-    </mat-drawer>
-    <div class="menu-toggle">
-      <button type="button" mat-button (click)="drawer.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
+<div class="root">
+    <div [ngClass]="{
+            'big-outline': bigWindow,
+            'big-outline-closed': menuClosed && bigWindow,
+            'small-outline': !bigWindow}">
+        <div *ngIf="bigWindow" class="nav">
+            <app-outline-nav-header [(menuClosed)]="menuClosed" [menuToggleIcon]="'close'"> </app-outline-nav-header>
+        </div>
+
+        <div class="header">
+            <app-outline-header [(menuClosed)]="menuClosed" [currentUser]="getCurrentUser()"></app-outline-header>
+        </div>
+
+        <div *ngIf="!bigWindow && !menuClosed" class="floating-nav">
+            <div class="nav-background" (click)="toggleMenu()"></div>
+            <div class="floating-nav-content">
+                <div class="floating-nav-content-header">
+                    <app-outline-nav-header [(menuClosed)]="menuClosed" [menuToggleIcon]="'close'"> </app-outline-nav-header>
+                </div>
+                <div>
+                    <app-menu-tree></app-menu-tree>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="bigWindow" class="nav">
+            <app-menu-tree></app-menu-tree>
+        </div>
+
+        <div class="page">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-    <div class="page">
-        <router-outlet></router-outlet>
-    </div>
-</mat-drawer-container>
+</div>

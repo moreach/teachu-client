@@ -1,0 +1,15 @@
+@import 'src/styles/_colors.scss';
+
+.nav{
+  color: $teachu-black;
+  font-size: 1.6rem;
+
+  display: flex;
+  align-items: center;
+  height: 100%;
+  overflow-x: hidden;
+
+  .child {
+    margin-left: 20px;
+  }
+}

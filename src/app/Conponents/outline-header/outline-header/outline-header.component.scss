@@ -1,0 +1,28 @@
+@import 'src/styles/_colors.scss';
+
+.header{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  .header-left-side, .header-right-side {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+
+    width: 50%;
+    height: 100%;
+  }
+
+  .header-left-side{
+    margin-left: 20px;
+    justify-content: flex-start;
+  }
+
+  .header-right-side{
+    margin-right: 20px;
+    justify-content: flex-end;
+  }
+}

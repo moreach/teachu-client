@@ -1,0 +1,5 @@
+<div class="menu-node">
+    <mat-icon class="menu-node-icon">{{node?.icon}}</mat-icon>
+    <span class="menu-node-content" *ngIf="node?.translatedTitle">{{node?.translatedTitle}}</span>
+    <span class="menu-node-content" *ngIf="node?.titleTranslationKey">{{node?.titleTranslationKey}}</span>
+</div>
