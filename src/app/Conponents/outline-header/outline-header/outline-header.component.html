@@ -1,5 +1,10 @@
 <div class="header">
-    <button *ngIf="menuClosed" mat-icon-button class="child" (click)="toggleMenu()">
-        <mat-icon>{{menuToggleIcon}}</mat-icon>
-    </button>
+    <div class="header-left-side">
+        <button *ngIf="menuClosed" mat-icon-button class="child" (click)="toggleMenu()">
+            <mat-icon>{{menuToggleIcon}}</mat-icon>
+        </button>
+    </div>
+    <div class="header-right-side">
+        <app-profile-pic [width]="60" [height]="60" [user]="currentUser"></app-profile-pic>
+    </div>
 </div>

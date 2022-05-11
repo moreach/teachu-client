@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {UserDTO} from "../../../DTOs/UserDTO";
 
 @Component({
     selector: 'app-outline-header',
@@ -7,6 +8,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class OutlineHeaderComponent{
 
+    @Input() currentUser: UserDTO | undefined;
     @Input() menuToggleIcon: string = "menu";
     @Input() menuClosed: boolean = false;
     @Output() menuClosedChange: EventEmitter<boolean> = new EventEmitter();

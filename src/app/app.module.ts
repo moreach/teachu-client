@@ -32,6 +32,7 @@ import {OutlineHeaderComponent} from './Conponents/outline-header/outline-header
 import {UserSettingsComponent} from "./Pages/user-settings/user-settings.component";
 import {MaterialFileInputModule} from "ngx-material-file-input";
 import {MAT_DATE_LOCALE} from "@angular/material/core";
+import {ProfilePicComponent} from './Conponents/profile-pic/profile-pic.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -57,6 +58,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ExpansionWrapperToggleComponent,
         OutlineNavHeaderComponent,
         OutlineHeaderComponent,
+        ProfilePicComponent,
     ],
     imports: [
         BrowserModule,
