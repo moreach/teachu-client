@@ -2,6 +2,9 @@
     "framework":{
         "save":"Save"
     },
+    "dashboard":{
+        "dashboard":"Dashboard"
+    },
     "login":{
         "login":"Login",
         "email":"Mail",
@@ -9,7 +12,14 @@
         "wrong":"Login was wrong",
         "logout":"Logout"
     },
+    "grades":{
+        "grades":"Grades"
+    },
+    "timetable":{
+        "timetable":"Timetable"
+    },
     "userSettings":{
+        "userSettings":"Settings",
         "email":"E-Mail Address",
         "changePassword":"Change Password",
         "firstName":"Firstname",
@@ -25,11 +35,6 @@
         "street":"Street",
         "phone":"Phone",
         "profileImage":"Profile Image"
-    },
-    "ping":{
-        "ping":"Ping",
-        "loginSuccessful":"Login successful",
-        "pingResult":"Ping result"
     },
     "errorBackend":{
         "unknownError_title":"Unknown Error",

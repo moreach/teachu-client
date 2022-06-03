@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { appRoutes } from './Config/appRoutes';
 import { AppGuard } from './Framework/API/app.guard';
+import { DashboardComponent } from './Pages/dashboard/dashboard.component';
+import { GradesComponent } from './Pages/grades/grades.component';
 import { LoginComponent } from './Pages/login/login.component';
-import { PingComponent } from './Pages/ping/ping.component';
+import { TimetableComponent } from './Pages/timetable/timetable.component';
 import {UserSettingsComponent} from "./Pages/user-settings/user-settings.component";
 
 const routes: Routes = [
@@ -12,8 +14,10 @@ const routes: Routes = [
     path: appRoutes.App,
     canActivate: [AppGuard],
     children: [
-      { path: appRoutes.Ping, component: PingComponent },
-      { path: appRoutes.UserSettings, component: UserSettingsComponent }
+      { path: appRoutes.Dashboard, component: DashboardComponent },
+      { path: appRoutes.Grades, component: GradesComponent },
+      { path: appRoutes.Timetable, component: TimetableComponent },
+      { path: appRoutes.UserSettings, component: UserSettingsComponent },
     ],
   },
 ];

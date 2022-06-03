@@ -13,7 +13,6 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {ErrorHandlerInterceptor} from './Framework/API/error-handler.interceptor';
 import {LoginComponent} from './Pages/login/login.component';
-import {PingComponent} from './Pages/ping/ping.component';
 import {CustomToastyComponent} from './Framework/custom-toasty/custom-toasty.component';
 import {ToastrModule} from 'ngx-toastr';
 import {BreadcrumbsComponent} from './Framework/breadcrumbs/breadcrumbs.component';
@@ -24,15 +23,16 @@ import {MenuTreeComponent} from './Conponents/menu-tree/menu-tree.component';
 import {ExpansionWrapperComponent} from './Conponents/menu-tree/expansion-wrapper/expansion-wrapper.component';
 import {MenuNodeComponent} from './Conponents/menu-tree/menu-node/menu-node.component';
 import {MenuLeaveComponent} from './Conponents/menu-tree/menu-leave/menu-leave.component';
-import {
-    ExpansionWrapperToggleComponent
-} from "./Conponents/menu-tree/expansion-content-toggle/expansion-wrapper-toggle.component";
+import { ExpansionWrapperToggleComponent } from "./Conponents/menu-tree/expansion-content-toggle/expansion-wrapper-toggle.component";
 import {OutlineNavHeaderComponent} from './Conponents/outline-header/outline-nav-header/outline-nav-header.component';
 import {OutlineHeaderComponent} from './Conponents/outline-header/outline-header/outline-header.component';
 import {UserSettingsComponent} from "./Pages/user-settings/user-settings.component";
 import {MaterialFileInputModule} from "ngx-material-file-input";
 import {MAT_DATE_LOCALE} from "@angular/material/core";
 import {ProfilePicComponent} from './Conponents/profile-pic/profile-pic.component';
+import { DashboardComponent } from './Pages/dashboard/dashboard.component';
+import { TimetableComponent } from './Pages/timetable/timetable.component';
+import { GradesComponent } from './Pages/grades/grades.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -44,7 +44,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         ErrorHandlingDialogComponent,
         SpinnerDirective,
         LoginComponent,
-        PingComponent,
         CustomToastyComponent,
         LanguageLookupComponent,
         BreadcrumbsComponent,
@@ -59,6 +58,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         OutlineNavHeaderComponent,
         OutlineHeaderComponent,
         ProfilePicComponent,
+        DashboardComponent,
+        TimetableComponent,
+        GradesComponent,
     ],
     imports: [
         BrowserModule,

@@ -1,4 +1,5 @@
 <form [formGroup]="userForm" *showSpinner="isLoading">
+    <h1>{{ 'userSettings.userSettings' | translate }}</h1>
     <mat-form-field>
         <mat-label>{{ "userSettings.email" | translate}}</mat-label>
         <input matInput [placeholder]="'userSettings.email' | translate" formControlName="email">

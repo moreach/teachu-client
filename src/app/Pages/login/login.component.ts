@@ -47,7 +47,7 @@ export class LoginComponent {
         this.tokenService.setToken(token.access);
         this.tokenService.setRefreshToken(token.refresh);
         this.tokenService.setExpired(token.refreshExpires);
-        this.router.navigate([appRoutes.App, appRoutes.Ping]);
+        this.router.navigate([appRoutes.App, appRoutes.Dashboard]);
       });
     }
 
@@ -61,7 +61,7 @@ export class LoginComponent {
       this.tokenService.setToken(token.access);
       this.tokenService.setRefreshToken(token.refresh);
       this.tokenService.setExpired(token.refreshExpires);
-      this.router.navigate([appRoutes.App, appRoutes.Ping]);
+      this.router.navigate([appRoutes.App, appRoutes.Dashboard]);
     });
   }
 }
