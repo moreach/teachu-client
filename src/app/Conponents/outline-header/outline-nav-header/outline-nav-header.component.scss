@@ -1,7 +1,7 @@
 @import 'src/styles/_colors.scss';
 
 .nav{
-  color: $teachu-black;
+  color: var(--teachu-black);
   font-size: 1.6rem;
 
   display: flex;

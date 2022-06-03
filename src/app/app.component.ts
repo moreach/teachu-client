@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, HostListener} from "@angular/core";
 import {LanguagesService} from "./Framework/Languages/languages.service";
 import {DarkThemeService} from "./Framework/dark-theme/dark-theme.service";
-import {OverlayContainer} from "@angular/cdk/overlay";
 import {UserDTO} from "./DTOs/UserDTO";
 
 const WINDOW_WIDTH_BREAKPOINT: number = 1000;
@@ -19,17 +18,16 @@ export class AppComponent implements AfterViewInit {
     constructor (
         private languageService: LanguagesService,
         private darkTheme: DarkThemeService,
-        private overlay: OverlayContainer,
     ) {
         this.languageService.setLanguageOnStartup();
         this.darkTheme.isDarkTheme$.asObservable().subscribe((isDarkTheme) => {
-            this.setDarkTheme(isDarkTheme);
+            this.darkTheme.applyDarkTheme(isDarkTheme);
         });
         this.onResize();
     }
 
     ngAfterViewInit(): void {
-        this.setDarkTheme(this.darkTheme.getDarkTheme());
+        this.darkTheme.applyDarkTheme(this.darkTheme.getDarkTheme());
     }
 
     @HostListener("window:resize", [])
@@ -41,15 +39,6 @@ export class AppComponent implements AfterViewInit {
 
         if(this.bigWindow && !oldBigWindow)
             this.menuClosed = false;
-    }
-
-    setDarkTheme(isDarkTheme: boolean) {
-        document.body.classList.toggle('darkTheme', isDarkTheme);
-        if (isDarkTheme) {
-            this.overlay.getContainerElement().classList.add('darkTheme');
-        } else {
-            this.overlay.getContainerElement().classList.remove('darkTheme');
-        }
     }
 
     toggleMenu() {
