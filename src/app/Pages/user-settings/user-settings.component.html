@@ -1,4 +1,5 @@
 <form [formGroup]="userForm" *showSpinner="isLoading">
+    <h1>{{ 'userSettings.userSettings' | translate }}</h1>
     <mat-form-field>
         <mat-label>{{ "userSettings.email" | translate}}</mat-label>
         <input matInput [placeholder]="'userSettings.email' | translate" formControlName="email">
@@ -26,7 +27,6 @@
         </mat-select>
     </mat-form-field>
     <app-language-lookup></app-language-lookup>
-    <mat-slide-toggle (change)="changeDarkTheme(userForm.value.darkTheme)" formControlName="darkTheme">{{ 'userSettings.darkTheme' | translate }}</mat-slide-toggle>
     <mat-form-field>
         <mat-label>{{ "userSettings.city" | translate}}</mat-label>
         <input matInput [placeholder]="'userSettings.city' | translate" formControlName="city">
@@ -48,6 +48,7 @@
         </ngx-mat-file-input>
         <mat-icon matSuffix aria-hidden="false">attach_file</mat-icon>
     </mat-form-field>
+    <mat-slide-toggle (change)="changeDarkTheme(userForm.value.darkTheme)" formControlName="darkTheme">{{ 'userSettings.darkTheme' | translate }}</mat-slide-toggle>
     <button mat-button [disabled]="!userForm.valid" (click)="saveUser(userForm)">{{ 'framework.save' | translate }}</button>
     <button mat-button (click)="changePassword(userForm)">{{ 'userSettings.changePassword' | translate }}</button>
 </form>

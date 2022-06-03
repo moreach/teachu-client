@@ -1,6 +1,6 @@
 <div class="menu-leave" (click)="redirectToUrl()">
     <mat-icon class="menu-leave-icon">{{item?.icon}}</mat-icon>
     <span class="menu-leave-content" *ngIf="item?.translatedTitle">{{item?.translatedTitle}}</span>
-    <span class="menu-leave-content" *ngIf="item?.titleTranslationKey">{{item?.titleTranslationKey}}</span>
+    <span class="menu-leave-content" *ngIf="item?.titleTranslationKey">{{item?.titleTranslationKey! | translate}}</span>
 </div>
 

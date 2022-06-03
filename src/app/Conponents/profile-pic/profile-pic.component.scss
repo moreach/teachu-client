@@ -3,13 +3,13 @@
 .profile-picture-container{
   padding: 1px;
 
-  border: 1px solid $teachu-black;
+  border: 1px solid var(--teachu-black);
   border-radius: 50%;
   transition: 250ms filter ease-out;
 }
 
 .profile-picture-container:hover{
-  filter: drop-shadow(0 0 0.5rem $teachu-black) opacity(70%);
+  filter: drop-shadow(0 0 0.5rem var(--teachu-black)) opacity(70%);
   cursor: pointer;
 }
 

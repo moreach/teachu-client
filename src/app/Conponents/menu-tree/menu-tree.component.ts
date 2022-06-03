@@ -12,7 +12,7 @@ export class MenuTreeComponent {
     menuTree: MenuTreeDTO;
 
     constructor(
-        private menuService: MenuTreeService,
+        menuService: MenuTreeService,
     ) {
         this.menuTree = menuService.getMenuTree();
     }

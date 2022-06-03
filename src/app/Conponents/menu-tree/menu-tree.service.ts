@@ -10,16 +10,35 @@ export class MenuTreeService {
     }
 
     getMenuTree(): MenuTreeDTO {
+        // todo replace with backend endpoint
         return {
             tree: [
                 {
-                    icon: "error",
+                    icon: "home",
                     leave: true,
-                    translatedTitle: "Dashboard",
+                    titleTranslationKey: "dashboard.dashboard",
                     url: "/app/dashboard"
                 },
                 {
-                    icon: "home",
+                    icon: "calendar_today",
+                    leave: true,
+                    titleTranslationKey: "timetable.timetable",
+                    url: "/app/timetable"
+                },
+                {
+                    icon: "grade",
+                    leave: true,
+                    titleTranslationKey: "grades.grades",
+                    url: "/app/grades"
+                },
+                {
+                    icon: "settings",
+                    leave: true,
+                    titleTranslationKey: "userSettings.userSettings",
+                    url: "/app/user"
+                },
+                {
+                    icon: "error",
                     leave: false,
                     translatedTitle: "Classes",
                     children: [
@@ -34,21 +53,9 @@ export class MenuTreeService {
                             leave: true,
                             translatedTitle: "BM19f",
                             url: "/app/class/BM19f"
-                        },
-                        {
-                            icon: "error",
-                            leave: true,
-                            translatedTitle: "MI21a",
-                            url: "/app/class/MI21a"
-                        },
+                        }
                     ]
-                },
-                {
-                    icon: "error",
-                    leave: true,
-                    translatedTitle: "Coolboard",
-                    url: "/app/coolboard"
-                },
+                }
             ]
         };
     }

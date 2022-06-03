@@ -1,3 +1,4 @@
+import { OverlayContainer } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { appConfig } from 'src/app/Config/appConfig';
@@ -9,7 +10,9 @@ export class DarkThemeService {
 
   isDarkTheme$ = new BehaviorSubject<boolean>(false);
 
-  constructor() {}
+  constructor(
+    private overlay: OverlayContainer
+  ) {}
   
   setDarkTheme(isDarkTheme: boolean) {
     localStorage.setItem(appConfig.APPLICATION_DARK_THEME, isDarkTheme.valueOf().toString());
@@ -22,5 +25,20 @@ export class DarkThemeService {
       return false;
     }
     return isDarkTheme === 'true';
+  }
+
+  applyDarkTheme(isDarkTheme: boolean) {
+    document.body.classList.toggle('darkTheme', isDarkTheme);
+    this.overlay.getContainerElement().classList.toggle('darkTheme', isDarkTheme);
+
+    const styles: string[] = ['primary', 'accent', 'white', 'grey', 'grey-darker', 'black', 'accent-1', 'accent-2', 'accent-3', 'accent-4', 'accent-5', 'accent-6'];
+    const setTo: string = isDarkTheme ? 'dark' : 'light';
+    var r = document.querySelector(':root') as HTMLElement;
+    var computed = getComputedStyle(r);
+
+    styles.forEach(style => {
+      var newColor = computed.getPropertyValue(`--teachu-${setTo}-${style}`);
+      r.style.setProperty(`--teachu-${style}`, newColor);
+    });
   }
 }

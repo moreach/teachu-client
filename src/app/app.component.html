@@ -1,4 +1,4 @@
-<div class="root">
+<mat-drawer-container class="root">
     <div [ngClass]="{
             'big-outline': bigWindow,
             'big-outline-closed': menuClosed && bigWindow,
@@ -8,7 +8,7 @@
         </div>
 
         <div class="header">
-            <app-outline-header [(menuClosed)]="menuClosed" [currentUser]="getCurrentUser()"></app-outline-header>
+            <app-outline-header [(menuClosed)]="menuClosed" [currentUser]="(getCurrentUser$() | async)!"></app-outline-header>
         </div>
 
         <div *ngIf="!bigWindow && !menuClosed" class="floating-nav">
@@ -31,4 +31,4 @@
             <router-outlet></router-outlet>
         </div>
     </div>
-</div>
+</mat-drawer-container>

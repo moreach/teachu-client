@@ -1,7 +1,9 @@
 export const appRoutes = {
     Empty: '',
     App: 'app',
+    Dashboard: 'dashboard',
+    Grades: 'grades',
     Login: 'login',
-    Ping: 'ping',
+    Timetable: 'timetable',
     UserSettings: 'user',
 }
