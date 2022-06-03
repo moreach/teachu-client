@@ -1,4 +1,6 @@
 form {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    gap: 8px;
 }

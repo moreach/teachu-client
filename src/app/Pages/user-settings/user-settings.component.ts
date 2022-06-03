@@ -54,6 +54,7 @@ export class UserSettingsComponent {
         }) as FormGroupTyped<UserDTO>;
         this.userForm.controls.email.disable();
         this.apiService.callApi<UserDTO>(endpoints.User, {}, "GET").subscribe((user) => { 
+            this.darkTheme.setDarkTheme(user.darkTheme);
             this.userForm.patchValue({
                 ...user,
                 birthday: new Date(user.birthday),

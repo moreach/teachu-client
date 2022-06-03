@@ -2,6 +2,9 @@ import {AfterViewInit, Component, HostListener} from "@angular/core";
 import {LanguagesService} from "./Framework/Languages/languages.service";
 import {DarkThemeService} from "./Framework/dark-theme/dark-theme.service";
 import {UserDTO} from "./DTOs/UserDTO";
+import { endpoints } from "./Config/endpoints";
+import { Observable } from "rxjs";
+import { ApiService } from "./Framework/API/api.service";
 
 const WINDOW_WIDTH_BREAKPOINT: number = 1000;
 
@@ -18,6 +21,7 @@ export class AppComponent implements AfterViewInit {
     constructor (
         private languageService: LanguagesService,
         private darkTheme: DarkThemeService,
+        private apiService: ApiService,
     ) {
         this.languageService.setLanguageOnStartup();
         this.darkTheme.isDarkTheme$.asObservable().subscribe((isDarkTheme) => {
@@ -45,21 +49,7 @@ export class AppComponent implements AfterViewInit {
         this.menuClosed = !this.menuClosed;
     }
 
-    getCurrentUser(): UserDTO{
-        return {
-            email: "test@mail.com",
-            role: "STUDENT",
-            firstName: "Test",
-            lastName: "User",
-            birthday: new Date(new Date().setFullYear(new Date().getFullYear() - 10)),
-            sex: "MALE",
-            language: "ENGLISH",
-            darkTheme: false,
-            city: "CoolState",
-            postalCode: "12332",
-            street: "BestStreet 10",
-            phone: "+41 23 098 65 71",
-            profileImage: "assets/images/mock-profile-image.jpg"
-        };
+    getCurrentUser$(): Observable<UserDTO> {
+        return this.apiService.callApi<UserDTO>(endpoints.User, {}, "GET");
     }
 }
