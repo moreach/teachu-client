@@ -1,0 +1,10 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: .6fr 1fr;
+    width: 100%;
+    margin-bottom: 8px;
+
+    > :first-child {
+        font-weight: bold;
+    }
+}

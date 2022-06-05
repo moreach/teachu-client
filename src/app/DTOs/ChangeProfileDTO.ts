@@ -5,5 +5,4 @@ export interface ChangeProfileDTO {
     darkTheme: boolean;
     phone: string;
     profileImage: string;
-    notes: string;
 }

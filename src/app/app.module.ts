@@ -33,6 +33,7 @@ import {ProfilePicComponent} from './Conponents/profile-pic/profile-pic.componen
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { TimetableComponent } from './Pages/timetable/timetable.component';
 import { GradesComponent } from './Pages/grades/grades.component';
+import { ReadonlyFieldComponent } from './Conponents/readonly-field/readonly-field.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -61,6 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         DashboardComponent,
         TimetableComponent,
         GradesComponent,
+        ReadonlyFieldComponent,
     ],
     imports: [
         BrowserModule,

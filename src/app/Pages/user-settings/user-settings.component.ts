@@ -7,6 +7,7 @@ import {UserDTO} from "../../DTOs/UserDTO";
 import { DarkThemeService } from "src/app/Framework/dark-theme/dark-theme.service";
 import { SEXS } from "src/app/Enums/Sex";
 import { UserProfileDTO } from "src/app/DTOs/UserProfileDTO";
+import { ChangeProfileDTO } from "src/app/DTOs/ChangeProfileDTO";
 
 @Component({
     selector: "user-settings",
@@ -14,7 +15,7 @@ import { UserProfileDTO } from "src/app/DTOs/UserProfileDTO";
     styleUrls: ["./user-settings.component.scss"]
 })
 export class UserSettingsComponent {
-    userForm: FormGroupTyped<UserDTO>;
+    userForm: FormGroupTyped<UserDTO & {mail: string}>;
     sexs = SEXS;
     isLoading: boolean = true;
 
@@ -24,39 +25,26 @@ export class UserSettingsComponent {
       private darkTheme: DarkThemeService,
     ) {
         this.userForm = this.builder.group({
-            email: ["", [
-                Validators.email,
-                Validators.required
-            ]],
-            firstName: ["",[
-                Validators.required,
-                Validators.minLength(2),
-                Validators.maxLength(100)
-            ]],
-            lastName: ["", [
-                Validators.required,
-                Validators.minLength(2),
-                Validators.maxLength(100)
-            ]],
-            birthday: ["", Validators.required],
-            sex: ["", Validators.required],
-            language: ["", Validators.required],
+            mail: '',
+            email: '',
+            firstName: '',
+            lastName: '',
+            birthday: null,
+            sex: null,
+            language: null,
             darkTheme: ["", Validators.required],
-            city: ["", [
-                Validators.required,
-                Validators.minLength(2),
-                Validators.maxLength(100)
-            ]],
-            postalCode: ["", Validators.required],
-            street: ["", Validators.required],
+            city: '',
+            postalCode: '',
+            street: '',
             phone: ["", Validators.required],
             profileImage: ["", Validators.required],
-        }) as FormGroupTyped<UserDTO>;
+        }) as FormGroupTyped<UserDTO & { mail: string }>;
         this.userForm.controls.email.disable();
         this.apiService.callApi<UserDTO>(endpoints.User, {}, "GET").subscribe((user) => { 
             this.darkTheme.setDarkTheme(user.darkTheme);
             this.userForm.patchValue({
                 ...user,
+                mail: user.email,
                 birthday: new Date(user.birthday),
             } as UserDTO);
             this.isLoading = false;
@@ -66,7 +54,13 @@ export class UserSettingsComponent {
     saveUser(form: FormGroupTyped<UserDTO>) {
         // todo test / adjust with endpoint from backend
         this.isLoading = true;
-        this.apiService.callApi(endpoints.User, form.value as UserProfileDTO, "PUT").subscribe(_ => {
+        const formValue = {
+            language: form.value.language,
+            darkTheme: form.value.darkTheme,
+            phone: form.value.phone,
+            profileImage: form.value.profileImage
+        } as ChangeProfileDTO;
+        this.apiService.callApi(endpoints.UserProfile, formValue, "PUT").subscribe(_ => {
             this.isLoading = false;
         });
     }
