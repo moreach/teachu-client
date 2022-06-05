@@ -1,6 +1,7 @@
 {
     "framework":{
-        "save":"Save"
+        "save":"Save",
+        "close":"Close"
     },
     "dashboard":{
         "dashboard":"Dashboard"
@@ -34,7 +35,10 @@
         "postalCode":"Postal Code",
         "street":"Street",
         "phone":"Phone",
-        "profileImage":"Profile Image"
+        "profileImage":"Profile Image",
+        "passwordOld":"Old Password",
+        "passwordNew":"New Password",
+        "passwordConfirm":"Repeat New Password"
     },
     "errorBackend":{
         "unknownError_title":"Unknown Error",

@@ -8,6 +8,8 @@ import { DarkThemeService } from "src/app/Framework/dark-theme/dark-theme.servic
 import { SEXS } from "src/app/Enums/Sex";
 import { UserProfileDTO } from "src/app/DTOs/UserProfileDTO";
 import { ChangeProfileDTO } from "src/app/DTOs/ChangeProfileDTO";
+import { MatDialog } from "@angular/material/dialog";
+import { ChangePasswordDialogComponent } from "./change-password-dialog/change-password-dialog.component";
 
 @Component({
     selector: "user-settings",
@@ -15,7 +17,7 @@ import { ChangeProfileDTO } from "src/app/DTOs/ChangeProfileDTO";
     styleUrls: ["./user-settings.component.scss"]
 })
 export class UserSettingsComponent {
-    userForm: FormGroupTyped<UserDTO & {mail: string}>;
+    userForm: FormGroupTyped<UserDTO>;
     sexs = SEXS;
     isLoading: boolean = true;
 
@@ -23,9 +25,9 @@ export class UserSettingsComponent {
       private apiService: ApiService,
       private builder: FormBuilder,
       private darkTheme: DarkThemeService,
+      private dialog: MatDialog,
     ) {
         this.userForm = this.builder.group({
-            mail: '',
             email: '',
             firstName: '',
             lastName: '',
@@ -38,13 +40,11 @@ export class UserSettingsComponent {
             street: '',
             phone: ["", Validators.required],
             profileImage: ["", Validators.required],
-        }) as FormGroupTyped<UserDTO & { mail: string }>;
-        this.userForm.controls.email.disable();
+        }) as FormGroupTyped<UserDTO>;
         this.apiService.callApi<UserDTO>(endpoints.User, {}, "GET").subscribe((user) => { 
             this.darkTheme.setDarkTheme(user.darkTheme);
             this.userForm.patchValue({
                 ...user,
-                mail: user.email,
                 birthday: new Date(user.birthday),
             } as UserDTO);
             this.isLoading = false;
@@ -52,7 +52,7 @@ export class UserSettingsComponent {
     }
 
     saveUser(form: FormGroupTyped<UserDTO>) {
-        // todo test / adjust with endpoint from backend
+        // todo fix with backend
         this.isLoading = true;
         const formValue = {
             language: form.value.language,
@@ -65,8 +65,8 @@ export class UserSettingsComponent {
         });
     }
 
-    changePassword(form: FormGroupTyped<UserDTO>) {
-        // todo implement popup -> confirm, new 1st password, new 2nd password -> 1st & 2nd password must be equal by validator, then send to backend
+    changePassword() {
+        this.dialog.open(ChangePasswordDialogComponent, { });
     }
 
     changeDarkTheme(isDarkTheme: boolean) {
