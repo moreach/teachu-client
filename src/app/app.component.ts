@@ -3,9 +3,9 @@ import {LanguagesService} from "./Framework/Languages/languages.service";
 import {DarkThemeService} from "./Framework/dark-theme/dark-theme.service";
 import {UserDTO} from "./DTOs/UserDTO";
 import { endpoints } from "./Config/endpoints";
-import { map, Observable, of, switchMap } from "rxjs";
+import { distinctUntilChanged, filter, map, Observable, of, startWith, switchMap } from "rxjs";
 import { ApiService } from "./Framework/API/api.service";
-import { ActivatedRoute } from "@angular/router";
+import { NavigationEnd, Router } from "@angular/router";
 import { appRoutes } from "./Config/appRoutes";
 
 const WINDOW_WIDTH_BREAKPOINT: number = 1000;
@@ -24,7 +24,7 @@ export class AppComponent implements AfterViewInit {
         private languageService: LanguagesService,
         private darkTheme: DarkThemeService,
         private apiService: ApiService,
-        private activeRoute: ActivatedRoute,
+        private router: Router,
     ) {
         this.languageService.setLanguageOnStartup();
         this.darkTheme.isDarkTheme$.asObservable().subscribe((isDarkTheme) => {
@@ -53,14 +53,23 @@ export class AppComponent implements AfterViewInit {
     }
 
     getCurrentUser$(): Observable<UserDTO | undefined> {
-        return this.activeRoute.url.pipe(
-            map(url => url.some(u => u.path.toLowerCase() === appRoutes.App)),
+        return this.isSignedIn$().pipe(
             switchMap(isAuthenticated => {
                 if(isAuthenticated)
                     return this.apiService.callApi<UserDTO>(endpoints.User, {}, 'GET');
                 else
                     return of(undefined);
             })
+        );
+    }
+
+    isSignedIn$(): Observable<boolean>  {
+        return this.router.events.pipe(
+            filter(event => event instanceof NavigationEnd),
+            map(event => (event as NavigationEnd).url),
+            startWith(this.router.url),
+            map(url => url.split('/').some(u => u.toLowerCase() === appRoutes.App)),
+            distinctUntilChanged(),
         );
     }
 }

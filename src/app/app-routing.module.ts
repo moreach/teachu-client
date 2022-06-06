@@ -9,6 +9,8 @@ import { TimetableComponent } from './Pages/timetable/timetable.component';
 import {UserSettingsComponent} from "./Pages/user-settings/user-settings.component";
 
 const routes: Routes = [
+  { path: '', redirectTo: `/${appRoutes.Login}`, pathMatch: 'full' },
+  { path: appRoutes.App, redirectTo: `/${appRoutes.App}/${appRoutes.Dashboard}`, pathMatch: 'full' },
   { path: appRoutes.Login, component: LoginComponent },
   {
     path: appRoutes.App,
