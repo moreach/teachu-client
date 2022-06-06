@@ -1,0 +1,18 @@
+h2 {
+    margin-top: 16px;
+}
+
+.lesson {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    .duration {
+        font-weight: bold;
+    }
+    .subject {
+        font-style: italic;
+    }
+}
