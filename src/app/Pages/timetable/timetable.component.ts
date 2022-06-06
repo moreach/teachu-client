@@ -10,6 +10,8 @@ import { TimetableService } from './timetable.service';
 })
 export class TimetableComponent {
 
+  relevantDate: Date = new Date();
+
   constructor(
     private timetableService: TimetableService,
   ) { }
@@ -18,9 +20,15 @@ export class TimetableComponent {
     return this.timetableService.getTimetable$(new Date(), new Date());
   }
 
-  getLessonsWeek$(relevantDate: Date): Observable<LessonDTO[]> {
-    const firstDayOfWeek = this.timetableService.getFirstDayOfWeek(relevantDate);
-    const lastDayOfWeek = this.timetableService.getLastDayOfWeek(relevantDate);
-    return this.timetableService.getTimetable$(firstDayOfWeek, lastDayOfWeek);
+  getLessonsWeek$(): Observable<LessonDTO[]> {
+    return this.timetableService.getTimetable$(this.getStartDate(), this.getEndDate());
   }
+
+  getStartDate(){
+    return this.timetableService.getFirstDayOfWeek(this.relevantDate);
+  }
+
+  getEndDate(){
+    return this.timetableService.getLastDayOfWeek(this.relevantDate);
+  }  
 }

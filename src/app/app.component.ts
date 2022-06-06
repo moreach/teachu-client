@@ -53,13 +53,15 @@ export class AppComponent implements AfterViewInit {
     }
 
     getCurrentUser$(): Observable<UserDTO | undefined> {
+        // todo bind to backend without endless loop :)
         return this.isSignedIn$().pipe(
-            switchMap(isAuthenticated => {
-                if(isAuthenticated)
-                    return this.apiService.callApi<UserDTO>(endpoints.User, {}, 'GET');
-                else
-                    return of(undefined);
-            })
+            map(_ => undefined)
+            // switchMap(isAuthenticated => {
+            //     if(isAuthenticated)
+            //         return this.apiService.callApi<UserDTO>(endpoints.User, {}, 'GET');
+            //     else
+            //         return of(undefined);
+            // })
         );
     }
 

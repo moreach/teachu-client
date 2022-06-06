@@ -4,6 +4,6 @@
         <app-timetable-today [lessons]="(getLessonsToday$() | async) ?? []"></app-timetable-today>
     </mat-tab>
     <mat-tab [label]="'timetable.calendar' | translate">
-
+        <app-timetable-calendar [lessons]="(getLessonsWeek$() | async) ?? []" [startDate]="getStartDate()" [endDate]="getEndDate()"></app-timetable-calendar>
     </mat-tab>
 </mat-tab-group>

@@ -19,7 +19,8 @@
     "timetable":{
         "timetable":"Timetable",
         "today":"Today",
-        "calendar":"Calendar"
+        "calendar":"Calendar",
+        "weekFrom":"Week from"
     },
     "userSettings":{
         "userSettings":"Settings",

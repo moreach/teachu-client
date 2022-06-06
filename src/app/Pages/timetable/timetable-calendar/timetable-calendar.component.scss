@@ -1,0 +1,43 @@
+h2 {
+    margin-top: 16px;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: auto repeat(7, 1fr);
+    border: 1px solid var(--teachu-black);
+    .day {
+        border-left: 1px solid var(--teachu-black);
+    }
+    .hours {
+        &.info {
+            margin-left: 8px;
+            margin-right: 8px;
+        }
+        .block {
+            height: 32px;
+            box-sizing: border-box;
+        }
+        .placeholder {
+            height: 16px;
+        }
+        .hour {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        &.day .hour {
+            border-top: 1px dotted var(--teachu-black);
+        }
+    }
+    > .day:nth-last-of-type(-n+2) {
+        .hour {
+            background-color: var(--teachu-grey);
+        }
+    }
+    .day.today {
+        .date {
+            background-color: var(--teachu-primary);
+        }
+    }
+}
