@@ -35,6 +35,8 @@ import { TimetableComponent } from './Pages/timetable/timetable.component';
 import { GradesComponent } from './Pages/grades/grades.component';
 import { ReadonlyFieldComponent } from './Conponents/readonly-field/readonly-field.component';
 import { ChangePasswordDialogComponent } from './Pages/user-settings/change-password-dialog/change-password-dialog.component';
+import { TimetableTodayComponent } from './Pages/timetable/timetable-today/timetable-today.component';
+import { TimetableCalendarComponent } from './Pages/timetable/timetable-calendar/timetable-calendar.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -65,6 +67,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         GradesComponent,
         ReadonlyFieldComponent,
         ChangePasswordDialogComponent,
+        TimetableTodayComponent,
+        TimetableCalendarComponent,
     ],
     imports: [
         BrowserModule,

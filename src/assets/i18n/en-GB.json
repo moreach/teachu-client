@@ -17,7 +17,10 @@
         "grades":"Grades"
     },
     "timetable":{
-        "timetable":"Timetable"
+        "timetable":"Timetable",
+        "today":"Today",
+        "calendar":"Calendar",
+        "weekFrom":"Week from"
     },
     "userSettings":{
         "userSettings":"Settings",

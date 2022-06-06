@@ -1,0 +1,17 @@
+<h2>{{ 'timetable.weekFrom' | translate }} {{ startDate | date:'dd.MM.yyyy' }} - {{ endDate | date:'dd.MM.yyyy' }}</h2>
+<div class="calendar">
+    <div class="hours info">
+        <div class="block placeholder"></div>
+        <div *ngFor="let hour of getHours(true)" class="block hour">
+            {{ hour }}
+        </div>
+        <div class="block placeholder"></div>
+    </div>
+    <div *ngFor="let day of getAllDates()" [ngClass]="{ day: true, hours: true, today: isToday(day) }">
+        <div class="block hour date">
+            {{ day | date: 'dd.MM.yyyy' }}
+        </div>
+        <div *ngFor="let hour of getHours()" class="block hour">
+        </div>
+    </div>
+</div>
