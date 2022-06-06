@@ -1,44 +1,14 @@
 <form [formGroup]="userForm" *showSpinner="isLoading">
     <h1>{{ 'userSettings.userSettings' | translate }}</h1>
-    <mat-form-field>
-        <mat-label>{{ "userSettings.email" | translate}}</mat-label>
-        <input matInput [placeholder]="'userSettings.email' | translate" formControlName="email">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>{{ "userSettings.firstName" | translate}}</mat-label>
-        <input matInput [placeholder]="'userSettings.firstName' | translate" formControlName="firstName">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>{{ "userSettings.lastName" | translate}}</mat-label>
-        <input matInput [placeholder]="'userSettings.lastName' | translate" formControlName="lastName">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>{{ "userSettings.birthday" | translate}}</mat-label>
-        <input required matInput [matDatepicker]="birthday" formControlName="birthday">
-        <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
-        <mat-datepicker #birthday></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>{{ "userSettings.sex" | translate }}</mat-label>
-        <mat-select required formControlName="sex">
-            <mat-option *ngFor="let sex of sexs" [value]="sex.value">
-                {{ ('userSettings.' + sex.key) | translate }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+    <app-readonly-field [label]="'userSettings.email' | translate" [value]="userForm.value.email"></app-readonly-field>
+    <app-readonly-field [label]="'userSettings.firstName' | translate" [value]="userForm.value.firstName"></app-readonly-field>
+    <app-readonly-field [label]="'userSettings.lastName' | translate" [value]="userForm.value.lastName"></app-readonly-field>
+    <app-readonly-field [label]="'userSettings.birthday' | translate" [value]="userForm.value.birthday | date:'shortDate'"></app-readonly-field>
+    <app-readonly-field [label]="'userSettings.sex' | translate" [value]="userForm.value.sex"></app-readonly-field>
+    <app-readonly-field [label]="'userSettings.city' | translate" [value]="userForm.value.city"></app-readonly-field>
+    <app-readonly-field [label]="'userSettings.postalCode' | translate" [value]="userForm.value.postalCode"></app-readonly-field>
+    <app-readonly-field [label]="'userSettings.street' | translate" [value]="userForm.value.street"></app-readonly-field>
     <app-language-lookup></app-language-lookup>
-    <mat-form-field>
-        <mat-label>{{ "userSettings.city" | translate}}</mat-label>
-        <input matInput [placeholder]="'userSettings.city' | translate" formControlName="city">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>{{ "userSettings.postalCode" | translate}}</mat-label>
-        <input matInput [placeholder]="'userSettings.postalCode' | translate" formControlName="postalCode">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>{{ "userSettings.street" | translate}}</mat-label>
-        <input matInput [placeholder]="'userSettings.street' | translate" formControlName="street">
-    </mat-form-field>
     <mat-form-field>
         <mat-label>{{ "userSettings.phone" | translate}}</mat-label>
         <input matInput [placeholder]="'userSettings.phone' | translate" formControlName="phone">
@@ -49,6 +19,6 @@
         <mat-icon matSuffix aria-hidden="false">attach_file</mat-icon>
     </mat-form-field>
     <mat-slide-toggle (change)="changeDarkTheme(userForm.value.darkTheme)" formControlName="darkTheme">{{ 'userSettings.darkTheme' | translate }}</mat-slide-toggle>
-    <button mat-button [disabled]="!userForm.valid" (click)="saveUser(userForm)">{{ 'framework.save' | translate }}</button>
-    <button mat-button (click)="changePassword(userForm)">{{ 'userSettings.changePassword' | translate }}</button>
+    <button mat-button color="primary" [disabled]="!userForm.valid" (click)="saveUser(userForm)">{{ 'framework.save' | translate }}</button>
+    <button mat-button (click)="changePassword()">{{ 'userSettings.changePassword' | translate }}</button>
 </form>

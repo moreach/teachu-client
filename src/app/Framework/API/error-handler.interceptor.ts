@@ -39,7 +39,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError(error => {
-        if (this.tokenService.isExpired()) {
+        if (this.tokenService.isExpired() || (error.url as string).split('/').some(u => u === endpoints.Login)) {
           this.tokenService.removeToken();
           this.tokenService.removeRefreshToken();
           this.errorHandler.redirectToLogin();
