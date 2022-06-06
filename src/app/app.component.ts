@@ -3,7 +3,7 @@ import {LanguagesService} from "./Framework/Languages/languages.service";
 import {DarkThemeService} from "./Framework/dark-theme/dark-theme.service";
 import {UserDTO} from "./DTOs/UserDTO";
 import { endpoints } from "./Config/endpoints";
-import { distinctUntilChanged, filter, map, Observable, of, switchMap } from "rxjs";
+import { distinctUntilChanged, filter, map, Observable, of, startWith, switchMap } from "rxjs";
 import { ApiService } from "./Framework/API/api.service";
 import { NavigationEnd, Router } from "@angular/router";
 import { appRoutes } from "./Config/appRoutes";
@@ -66,8 +66,9 @@ export class AppComponent implements AfterViewInit {
     isSignedIn$(): Observable<boolean>  {
         return this.router.events.pipe(
             filter(event => event instanceof NavigationEnd),
-            map(event => (event as NavigationEnd).url.split('/')),
-            map(url => url.some(u => u.toLowerCase() === appRoutes.App)),
+            map(event => (event as NavigationEnd).url),
+            startWith(this.router.url),
+            map(url => url.split('/').some(u => u.toLowerCase() === appRoutes.App)),
             distinctUntilChanged(),
         );
     }

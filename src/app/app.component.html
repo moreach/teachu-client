@@ -1,5 +1,5 @@
 <mat-drawer-container class="root">
-    <div *ngIf="isSignedIn$() | async" [ngClass]="{
+    <div *ngIf="(isSignedIn$() | async); else loginOnly" [ngClass]="{
         'big-outline': bigWindow,
         'big-outline-closed': menuClosed && bigWindow,
         'small-outline': !bigWindow}">
@@ -31,4 +31,7 @@
             <router-outlet></router-outlet>
         </div>
     </div>
+    <ng-template #loginOnly class="login-only">
+        <router-outlet></router-outlet>
+    </ng-template>
 </mat-drawer-container>
