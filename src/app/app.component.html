@@ -1,8 +1,8 @@
 <mat-drawer-container class="root">
-    <div [ngClass]="{
-            'big-outline': bigWindow,
-            'big-outline-closed': menuClosed && bigWindow,
-            'small-outline': !bigWindow}">
+    <div *ngIf="(isSignedIn$() | async); else loginOnly" [ngClass]="{
+        'big-outline': bigWindow,
+        'big-outline-closed': menuClosed && bigWindow,
+        'small-outline': !bigWindow}">
         <div *ngIf="bigWindow" class="nav">
             <app-outline-nav-header [(menuClosed)]="menuClosed" [menuToggleIcon]="'close'"> </app-outline-nav-header>
         </div>
@@ -31,4 +31,7 @@
             <router-outlet></router-outlet>
         </div>
     </div>
+    <ng-template #loginOnly class="login-only">
+        <router-outlet></router-outlet>
+    </ng-template>
 </mat-drawer-container>
