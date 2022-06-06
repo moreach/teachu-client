@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {MenuTreeItemDTO} from "../../../DTOs/MenuTreeDTO";
 import {Router} from "@angular/router";
 
@@ -10,13 +10,15 @@ import {Router} from "@angular/router";
 export class MenuLeaveComponent {
 
     @Input() item: MenuTreeItemDTO | undefined;
+    @Output() leaveClickedEvent = new EventEmitter<void>();
 
     constructor(
         private router: Router,
     ) {
     }
 
-    redirectToUrl() {
+    leaveClicked() {
+        this.leaveClickedEvent.emit();
         this.router.navigate([this.item?.url]);
     }
 }

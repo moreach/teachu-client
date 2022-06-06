@@ -18,7 +18,7 @@
                     <app-outline-nav-header [(menuClosed)]="menuClosed" [menuToggleIcon]="'close'"> </app-outline-nav-header>
                 </div>
                 <div>
-                    <app-menu-tree></app-menu-tree>
+                    <app-menu-tree (leaveClickedEvent)="toggleMenu()"></app-menu-tree>
                 </div>
             </div>
         </div>
