@@ -1,8 +1,8 @@
 <mat-drawer-container class="root">
-    <div [ngClass]="{
-            'big-outline': bigWindow,
-            'big-outline-closed': menuClosed && bigWindow,
-            'small-outline': !bigWindow}">
+    <div *ngIf="isSignedIn$() | async" [ngClass]="{
+        'big-outline': bigWindow,
+        'big-outline-closed': menuClosed && bigWindow,
+        'small-outline': !bigWindow}">
         <div *ngIf="bigWindow" class="nav">
             <app-outline-nav-header [(menuClosed)]="menuClosed" [menuToggleIcon]="'close'"> </app-outline-nav-header>
         </div>
