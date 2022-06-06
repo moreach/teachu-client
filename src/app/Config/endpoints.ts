@@ -3,4 +3,5 @@ export const endpoints = {
     User: 'user',
     UserProfile: 'user/profile',
     ChangePassword: 'user/password',
+    studentGrade: 'grade/student',
 }

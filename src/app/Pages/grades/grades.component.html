@@ -1,1 +1,17 @@
 <h1>{{ 'grades.grades' | translate }}</h1>
+<!-- way to complicated else if structure up ahead 🤷 -->
+<div *ngIf="getCurrentUserRole() === 'STUDENT' else parentAdminView">
+    <h2>STUDENT</h2>
+    <app-grades-student-view></app-grades-student-view>
+</div>
+
+<ng-template #parentAdminView >
+    <div *ngIf="getCurrentUserRole() === 'PARENT' else adminView">
+        <h2>PARENT</h2>
+        <app-grades-parent-view></app-grades-parent-view>
+    </div>
+    <ng-template #adminView>
+        <h2>TEACHER</h2>
+        <app-grades-teacher-view></app-grades-teacher-view>
+    </ng-template>
+</ng-template>

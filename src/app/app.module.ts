@@ -37,6 +37,9 @@ import { ReadonlyFieldComponent } from './Conponents/readonly-field/readonly-fie
 import { ChangePasswordDialogComponent } from './Pages/user-settings/change-password-dialog/change-password-dialog.component';
 import { TimetableTodayComponent } from './Pages/timetable/timetable-today/timetable-today.component';
 import { TimetableCalendarComponent } from './Pages/timetable/timetable-calendar/timetable-calendar.component';
+import {GradesStudentViewComponent} from "./Pages/grades/grades-student-view/grades-student-view.component";
+import { GradesTeacherViewComponent } from './Pages/grades/grades-teacher-view/grades-teacher-view.component';
+import { GradesParentViewComponent } from './Pages/grades/grades-parent-view/grades-parent-view.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -69,6 +72,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         ChangePasswordDialogComponent,
         TimetableTodayComponent,
         TimetableCalendarComponent,
+        GradesStudentViewComponent,
+        GradesTeacherViewComponent,
+        GradesParentViewComponent,
     ],
     imports: [
         BrowserModule,
