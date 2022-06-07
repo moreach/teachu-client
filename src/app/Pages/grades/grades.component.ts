@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Role} from "../../Enums/Role";
+import {UserService} from "../user-settings/user.service";
 
 @Component({
     selector: 'app-grades',
@@ -8,13 +9,14 @@ import {Role} from "../../Enums/Role";
 })
 export class GradesComponent implements OnInit {
 
-    constructor() { }
+    currentUserRole!: Role;
+
+    constructor(
+        private userService: UserService,
+    ) { }
 
     ngOnInit(): void {
-
-    }
-
-    getCurrentUserRole(): Role {
-        return "STUDENT";
+        this.userService.getCurrentUser$().subscribe((user) =>
+            this.currentUserRole = user.role);
     }
 }
