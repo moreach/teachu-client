@@ -2,7 +2,7 @@
     <ng-container *ngFor="let menuTreeItem of menuTree.tree">
         <ng-container *ngIf="menuTreeItem.leave; else node">
             <div class="menu-tree-item">
-                <app-menu-leave [item]="menuTreeItem"></app-menu-leave>
+                <app-menu-leave (leaveClickedEvent)="leaveClicked()" [item]="menuTreeItem"></app-menu-leave>
             </div>
         </ng-container>
         <ng-template #node>

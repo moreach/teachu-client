@@ -1,9 +1,9 @@
 <h1>{{ 'timetable.timetable' | translate }}</h1>
 <mat-tab-group mat-align-tabs="start">
-    <mat-tab [label]="'timetable.today' | translate">
-        <app-timetable-today [lessons]="(getLessonsToday$() | async) ?? []"></app-timetable-today>
+    <mat-tab [label]="'timetable.day' | translate">
+        <app-timetable-today (changeRelevantDate)="changeRelevantDateDay($event)" [lessons]="(getLessonsToday$() | async) ?? []" [date]="(relevantDateDay$ | async)!"></app-timetable-today>
     </mat-tab>
     <mat-tab [label]="'timetable.calendar' | translate">
-        <app-timetable-calendar [lessons]="(getLessonsWeek$() | async) ?? []" [startDate]="getStartDate()" [endDate]="getEndDate()"></app-timetable-calendar>
+        <app-timetable-calendar (changeRelevantDate)="changeRelevantDateCalendar($event)" [lessons]="(getLessonsWeek$() | async) ?? []" [relevantDate]="getStartDate()"></app-timetable-calendar>
     </mat-tab>
 </mat-tab-group>
