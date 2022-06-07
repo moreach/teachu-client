@@ -54,7 +54,7 @@ export class TimetableService {
       } as LessonDTO,
       {
         class: 'BM19c',
-        subject: 'Geschicht',
+        subject: 'Geschichte',
         teacher: 'B. Piller',
         room: 'M3xx',
         start: new Date(2022, 5, 15, 9, 10),
