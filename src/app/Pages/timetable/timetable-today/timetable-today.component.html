@@ -1,4 +1,14 @@
-<h2>{{ date | date:'dd.MM.yyyy' }}</h2>
+<div class="head">
+    <h2>{{ date | date:'dd.MM.yyyy' }}</h2>
+    <div>
+        <button (click)="changeDay(-1)" mat-icon-button>
+            <mat-icon>chevron_left</mat-icon>
+        </button>
+        <button (click)="changeDay(1)" mat-icon-button>
+            <mat-icon>chevron_right</mat-icon>
+        </button>
+    </div>
+</div>
 <mat-divider></mat-divider>
 <div *ngFor="let lesson of lessons">
     <div class="lesson">

@@ -1,5 +1,9 @@
-h2 {
+.head {
     margin-top: 16px;
+    display: flex;
+    :last-child {
+        margin-left: auto;
+    }
 }
 
 .lesson {
