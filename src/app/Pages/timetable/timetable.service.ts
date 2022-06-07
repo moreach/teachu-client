@@ -17,32 +17,32 @@ export class TimetableService {
         subject: 'Sport',
         room: 'Halle 1',
         teacher: 'W. Kozlowski',
-        start: new Date(2022, 6, 14, 8, 35),
-        end: new Date(2022, 6, 14, 9, 35)
+        start: new Date(2022, 5, 14, 8, 35),
+        end: new Date(2022, 5, 14, 9, 35)
       } as LessonDTO,
       {
         class: 'IN19a',
         subject: 'Informatik',
         room: 'B426',
         teacher: 'M. Bachofner',
-        start: new Date(2022, 6, 14, 10, 0),
-        end: new Date(2022, 6, 14, 12, 0)
+        start: new Date(2022, 5, 14, 10, 0),
+        end: new Date(2022, 5, 14, 12, 0)
       } as LessonDTO,
       {
         class: 'IN19a',
         subject: 'Informatik',
         room: 'B426',
         teacher: 'M. Bachofner',
-        start: new Date(2022, 6, 14, 13, 0),
-        end: new Date(2022, 6, 14, 17, 10)
+        start: new Date(2022, 5, 14, 13, 0),
+        end: new Date(2022, 5, 14, 17, 10)
       } as LessonDTO,
       {
         class: 'BM19c',
         subject: 'Wirtschaft & Recht',
         teacher: 'S. Bonaparter',
         room: 'M3xx',
-        start: new Date(2022, 6, 15, 7, 30),
-        end: new Date(2022, 6, 15, 9, 5)
+        start: new Date(2022, 5, 15, 7, 30),
+        end: new Date(2022, 5, 15, 9, 5)
       } as LessonDTO,
     ])
   }
