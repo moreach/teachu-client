@@ -1,5 +1,9 @@
-h2 {
+.head {
     margin-top: 16px;
+    display: flex;
+    :last-child {
+        margin-left: auto;
+    }
 }
 
 .calendar {
@@ -21,13 +25,23 @@ h2 {
         .placeholder {
             height: 16px;
         }
-        .hour {
+        .hour,
+        .lesson {
             display: flex;
             align-items: center;
             justify-content: center;
         }
         &.day .hour {
             border-top: 1px dotted var(--teachu-black);
+        }
+        .lesson {
+            position: relative;
+            margin-left: 2px;
+            margin-right: 2px;
+            margin-bottom: 2px;
+            border-radius: 4px;
+            font-size: 12px;
+            text-align: center;
         }
     }
     > .day:nth-last-of-type(-n+2) {

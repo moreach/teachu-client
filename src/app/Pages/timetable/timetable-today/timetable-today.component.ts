@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LessonDTO } from 'src/app/DTOs/LessonDTO';
 
 @Component({
@@ -8,9 +8,13 @@ import { LessonDTO } from 'src/app/DTOs/LessonDTO';
 })
 export class TimetableTodayComponent {
 
-  date: Date = new Date();
+  @Input() date: Date = new Date();
   @Input() lessons: LessonDTO[] = [];
+  @Output() changeRelevantDate = new EventEmitter<number>();
 
   constructor() { }
 
+  changeDay(days: number) {
+    this.changeRelevantDate.emit(days);
+  }
 }

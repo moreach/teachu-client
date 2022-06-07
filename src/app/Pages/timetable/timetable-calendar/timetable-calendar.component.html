@@ -1,4 +1,14 @@
-<h2>{{ 'timetable.weekFrom' | translate }} {{ startDate | date:'dd.MM.yyyy' }} - {{ endDate | date:'dd.MM.yyyy' }}</h2>
+<div class="head">
+    <h2>{{ 'timetable.weekFrom' | translate }} {{ startOfWeek | date:'dd.MM.yyyy' }} - {{ endOfWeek | date:'dd.MM.yyyy' }}</h2>
+    <div>
+        <button (click)="changeWeek(-1)" mat-icon-button>
+            <mat-icon>chevron_left</mat-icon>
+        </button>
+        <button (click)="changeWeek(1)" mat-icon-button>
+            <mat-icon>chevron_right</mat-icon>
+        </button>
+    </div>
+</div>
 <div class="calendar">
     <div class="hours info">
         <div class="block placeholder"></div>
@@ -7,11 +17,14 @@
         </div>
         <div class="block placeholder"></div>
     </div>
-    <div *ngFor="let day of getAllDates()" [ngClass]="{ day: true, hours: true, today: isToday(day) }">
+    <div *ngFor="let day of days" [ngClass]="{ day: true, hours: true, today: isToday(day) }">
         <div class="block hour date">
             {{ day | date: 'dd.MM.yyyy' }}
         </div>
         <div *ngFor="let hour of getHours()" class="block hour">
+        </div>
+        <div *ngFor="let lesson of getLessonsOfDay(day)" class="lesson block" [ngStyle]="{'background-color': getColor(lesson), 'height': getHeight(lesson), 'margin-top': getMarginTop(lesson)}">
+            {{ lesson.subject }} ({{ lesson.room }})
         </div>
     </div>
 </div>
