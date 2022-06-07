@@ -1,12 +1,9 @@
 import {AfterViewInit, Component, HostListener} from "@angular/core";
 import {LanguagesService} from "./Framework/Languages/languages.service";
 import {DarkThemeService} from "./Framework/dark-theme/dark-theme.service";
-import {UserDTO} from "./DTOs/UserDTO";
-import { endpoints } from "./Config/endpoints";
-import { distinctUntilChanged, filter, map, Observable, of, startWith, switchMap } from "rxjs";
-import { ApiService } from "./Framework/API/api.service";
-import { NavigationEnd, Router } from "@angular/router";
-import { appRoutes } from "./Config/appRoutes";
+import { UserService } from "./Pages/user-settings/user.service";
+import { Observable, of, startWith, switchMap } from "rxjs";
+import { UserDTO } from "./DTOs/UserDTO";
 
 const WINDOW_WIDTH_BREAKPOINT: number = 1000;
 
@@ -19,18 +16,30 @@ export class AppComponent implements AfterViewInit {
     title = 'TeachU';
     bigWindow: boolean = false;
     menuClosed: boolean = false;
+    isSignedIn$: Observable<boolean>;
+    currentUser$: Observable<UserDTO | undefined>;
 
     constructor (
         private languageService: LanguagesService,
         private darkTheme: DarkThemeService,
-        private apiService: ApiService,
-        private router: Router,
+        private userService: UserService,
     ) {
         this.languageService.setLanguageOnStartup();
         this.darkTheme.isDarkTheme$.asObservable().subscribe((isDarkTheme) => {
             this.darkTheme.applyDarkTheme(isDarkTheme);
         });
         this.onResize();
+        this.isSignedIn$ = this.userService.isSignedIn$();
+        this.currentUser$ = this.isSignedIn$.pipe(
+            startWith(false),
+            switchMap(isSignedIn => {
+                if (isSignedIn) {
+                    return this.userService.getCurrentUser$()
+                } else {
+                    return of(undefined)
+                }
+            })
+        );
     }
 
     ngAfterViewInit(): void {
@@ -50,28 +59,5 @@ export class AppComponent implements AfterViewInit {
 
     toggleMenu() {
         this.menuClosed = !this.menuClosed;
-    }
-
-    getCurrentUser$(): Observable<UserDTO | undefined> {
-        // todo bind to backend without endless loop :)
-        return this.isSignedIn$().pipe(
-            map(_ => undefined)
-            // switchMap(isAuthenticated => {
-            //     if(isAuthenticated)
-            //         return this.apiService.callApi<UserDTO>(endpoints.User, {}, 'GET');
-            //     else
-            //         return of(undefined);
-            // })
-        );
-    }
-
-    isSignedIn$(): Observable<boolean>  {
-        return this.router.events.pipe(
-            filter(event => event instanceof NavigationEnd),
-            map(event => (event as NavigationEnd).url),
-            startWith(this.router.url),
-            map(url => url.split('/').some(u => u.toLowerCase() === appRoutes.App)),
-            distinctUntilChanged(),
-        );
     }
 }

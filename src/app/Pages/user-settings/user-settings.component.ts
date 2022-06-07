@@ -10,6 +10,7 @@ import { UserProfileDTO } from "src/app/DTOs/UserProfileDTO";
 import { ChangeProfileDTO } from "src/app/DTOs/ChangeProfileDTO";
 import { MatDialog } from "@angular/material/dialog";
 import { ChangePasswordDialogComponent } from "./change-password-dialog/change-password-dialog.component";
+import { UserService } from "./user.service";
 
 @Component({
     selector: "user-settings",
@@ -22,10 +23,10 @@ export class UserSettingsComponent {
     isLoading: boolean = true;
 
     constructor(
-      private apiService: ApiService,
       private builder: FormBuilder,
       private darkTheme: DarkThemeService,
       private dialog: MatDialog,
+      private userService: UserService,
     ) {
         this.userForm = this.builder.group({
             email: '',
@@ -41,7 +42,7 @@ export class UserSettingsComponent {
             phone: ["", Validators.required],
             profileImage: ["", Validators.required],
         }) as FormGroupTyped<UserDTO>;
-        this.apiService.callApi<UserDTO>(endpoints.User, {}, "GET").subscribe((user) => { 
+        this.userService.getCurrentUser$().subscribe((user) => { 
             this.darkTheme.setDarkTheme(user.darkTheme);
             this.userForm.patchValue({
                 ...user,
@@ -60,9 +61,7 @@ export class UserSettingsComponent {
             phone: form.value.phone,
             profileImage: form.value.profileImage
         } as ChangeProfileDTO;
-        this.apiService.callApi(endpoints.UserProfile, formValue, "PUT").subscribe(_ => {
-            this.isLoading = false;
-        });
+        this.userService.saveUser$(formValue).subscribe(_ => this.isLoading = false);
     }
 
     changePassword() {
