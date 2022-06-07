@@ -23,8 +23,8 @@
         </div>
         <div *ngFor="let hour of getHours()" class="block hour">
         </div>
-        <div *ngFor="let lesson of getLessonsOfDay(day)" class="lesson block" [ngStyle]="{'background-color': getColor(), 'height': getHeight(), 'margin-top': getMarginTop()}">
-            {{ lesson.start | date: 'HH:mm' }} - {{ lesson.end | date: 'HH:mm' }}<br>({{ lesson.subject }} - {{ lesson.room }})
+        <div *ngFor="let lesson of getLessonsOfDay(day)" class="lesson block" [ngStyle]="{'background-color': getColor(lesson), 'height': getHeight(lesson), 'margin-top': getMarginTop(lesson)}">
+            {{ lesson.subject }} ({{ lesson.room }})
         </div>
     </div>
 </div>

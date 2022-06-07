@@ -11,7 +11,7 @@ export class TimetableService {
 
   getTimetable$(from: Date, to: Date): Observable<LessonDTO[]> {
     // todo implement enpoint from backend
-    return of([
+    const mockData = [
       {
         class: 'IN19a',
         subject: 'Sport',
@@ -39,12 +39,48 @@ export class TimetableService {
       {
         class: 'BM19c',
         subject: 'Wirtschaft & Recht',
-        teacher: 'S. Bonaparter',
+        teacher: 'S. Bonaparte',
         room: 'M3xx',
         start: new Date(2022, 5, 15, 7, 30),
         end: new Date(2022, 5, 15, 9, 5)
       } as LessonDTO,
-    ])
+      {
+        class: 'BM19c',
+        subject: 'Mathematik',
+        teacher: 'S. La Rosa',
+        room: 'M3xx',
+        start: new Date(2022, 5, 15, 9, 10),
+        end: new Date(2022, 5, 15, 11, 0)
+      } as LessonDTO,
+      {
+        class: 'BM19c',
+        subject: 'Geschicht',
+        teacher: 'B. Piller',
+        room: 'M3xx',
+        start: new Date(2022, 5, 15, 9, 10),
+        end: new Date(2022, 5, 15, 11, 0)
+      } as LessonDTO,
+      {
+        class: 'BM19c',
+        subject: 'Physik',
+        teacher: 'F. Widmer',
+        room: 'M3xx',
+        start: new Date(2022, 5, 15, 13, 10),
+        end: new Date(2022, 5, 15, 14, 45)
+      } as LessonDTO,
+      {
+        class: 'BM19c',
+        subject: 'IDPA',
+        teacher: 'F. Widmer',
+        room: 'M3xx',
+        start: new Date(2022, 5, 15, 15, 55),
+        end: new Date(2022, 5, 15, 17, 30)
+      } as LessonDTO,
+    ];
+    const start = new Date(from.getFullYear(), from.getMonth(), from.getDate());
+    const end = new Date(to.getFullYear(), to.getMonth(), to.getDate(), 23, 59);
+    const filtered = mockData.filter(l => l.start > start && l.start < end);
+    return of(filtered);
   }
 
   getFirstDayOfWeek(date: Date) {
