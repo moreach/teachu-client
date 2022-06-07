@@ -57,4 +57,19 @@ export class TimetableCalendarComponent {
   getLessonsOfDay(day: Date) {
     return this.lessons.filter(lesson => lesson.start.toDateString() === day.toDateString());
   }
+
+  getColor() {
+    // todo
+    return 'var(--teachu-accent)';
+  }
+
+  getHeight() {
+    // todo
+    return 'calc(64px - 4px)';
+  }
+
+  getMarginTop() {
+    // todo
+    return 'calc(-128px + 2px)';
+  }
 }

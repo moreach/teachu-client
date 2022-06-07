@@ -31,7 +31,9 @@
             <router-outlet></router-outlet>
         </div>
     </div>
-    <ng-template #loginOnly class="login-only">
-        <router-outlet></router-outlet>
+    <ng-template #loginOnly>
+        <div class="login-only">
+            <router-outlet></router-outlet>
+        </div>
     </ng-template>
 </mat-drawer-container>
