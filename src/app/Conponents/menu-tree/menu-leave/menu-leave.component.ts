@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 export class MenuLeaveComponent {
 
     @Input() item: MenuTreeItemDTO | undefined;
-    @Output() leaveClickedEvent = new EventEmitter<void>();
+    @Output() leaveClickedEvent = new EventEmitter<MenuTreeItemDTO>();
 
     constructor(
         private router: Router,
@@ -18,7 +18,7 @@ export class MenuLeaveComponent {
     }
 
     leaveClicked() {
-        this.leaveClickedEvent.emit();
+        this.leaveClickedEvent.emit(this.item);
         this.router.navigate([this.item?.url]);
     }
 }
