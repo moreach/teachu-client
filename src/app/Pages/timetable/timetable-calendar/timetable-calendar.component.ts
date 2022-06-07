@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LessonDTO } from 'src/app/DTOs/LessonDTO';
+import { TimetableService } from '../timetable.service';
 
 @Component({
   selector: 'app-timetable-calendar',
@@ -8,24 +9,30 @@ import { LessonDTO } from 'src/app/DTOs/LessonDTO';
 })
 export class TimetableCalendarComponent {
 
-  @Input() startDate: Date = new Date();
-  @Input() endDate: Date = new Date();
+  startOfWeek: Date = new Date();
+  endOfWeek: Date = new Date();
+  days: Date[] = [];
+
+  @Input() set relevantDate(day: Date) {
+    this.startOfWeek = this.timetableService.getFirstDayOfWeek(day);
+    this.endOfWeek = this.timetableService.getLastDayOfWeek(day);
+
+    let start = this.startOfWeek;
+    this.days = [];
+    while (start <= this.endOfWeek) {
+      this.days.push(new Date(start));
+      start.setDate(start.getDate() + 1);
+    }
+
+    this.startOfWeek = this.timetableService.getFirstDayOfWeek(day);
+  }
   @Input() lessons: LessonDTO[] = [];
 
   @Output() changeRelevantDate = new EventEmitter<number>();
 
-  constructor() { }
-
-  getAllDates(): Date[] {
-    const dates: Date[] = [];
-    const start = this.startDate;
-    const end = this.endDate;
-    while (start <= end) {
-      dates.push(new Date(start));
-      start.setDate(start.getDate() + 1);
-    }
-    return dates;
-  }
+  constructor(
+    private timetableService: TimetableService,
+  ) { }
 
   getHours(firstEmpty: boolean = false) {
     const hours: string[] = [];
@@ -45,5 +52,9 @@ export class TimetableCalendarComponent {
 
   changeWeek(weeks: number) {
     this.changeRelevantDate.emit(weeks * 7);
+  }
+
+  getLessonsOfDay(day: Date) {
+    return this.lessons.filter(lesson => lesson.start.toDateString() === day.toDateString());
   }
 }
