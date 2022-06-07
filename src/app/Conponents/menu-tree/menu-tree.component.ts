@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {MenuTreeService} from "./menu-tree.service";
-import {MenuTreeDTO} from "../../DTOs/MenuTreeDTO";
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {MenuTreeDTO, MenuTreeItemDTO} from "../../DTOs/MenuTreeDTO";
 
 @Component({
     selector: 'app-menu-tree',
@@ -9,17 +8,14 @@ import {MenuTreeDTO} from "../../DTOs/MenuTreeDTO";
 })
 export class MenuTreeComponent {
 
-    @Output() leaveClickedEvent = new EventEmitter<void>();
+    @Input() indentationWidth: number = 10;
+    @Input() treeData: MenuTreeDTO = { tree: [] };
+    @Output() leaveClickedEvent = new EventEmitter<MenuTreeItemDTO>();
 
-    menuTree: MenuTreeDTO;
-
-    constructor(
-        menuService: MenuTreeService,
-    ) {
-        this.menuTree = menuService.getMenuTree();
+    constructor() {
     }
 
-    leaveClicked() {
-        this.leaveClickedEvent.emit();
+    leaveClicked(data: MenuTreeItemDTO) {
+        this.leaveClickedEvent.emit(data);
     }
 }
