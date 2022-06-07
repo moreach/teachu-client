@@ -30,5 +30,9 @@ export class TimetableComponent {
 
   getEndDate(){
     return this.timetableService.getLastDayOfWeek(this.relevantDate);
-  }  
+  }
+
+  changeRelevantDate(days: number) {
+    this.relevantDate.setDate(this.relevantDate.getDate() + days);
+  }
 }

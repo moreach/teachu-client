@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LessonDTO } from 'src/app/DTOs/LessonDTO';
 
 @Component({
@@ -11,6 +11,8 @@ export class TimetableCalendarComponent {
   @Input() startDate: Date = new Date();
   @Input() endDate: Date = new Date();
   @Input() lessons: LessonDTO[] = [];
+
+  @Output() changeRelevantDate = new EventEmitter<number>();
 
   constructor() { }
 
@@ -39,5 +41,9 @@ export class TimetableCalendarComponent {
 
   isToday(date: Date) {
     return date.toDateString() === new Date().toDateString();
+  }
+
+  changeWeek(weeks: number) {
+    this.changeRelevantDate.emit(weeks * 7);
   }
 }
