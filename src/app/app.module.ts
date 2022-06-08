@@ -37,6 +37,9 @@ import { ReadonlyFieldComponent } from './Conponents/readonly-field/readonly-fie
 import { ChangePasswordDialogComponent } from './Pages/user-settings/change-password-dialog/change-password-dialog.component';
 import { TimetableTodayComponent } from './Pages/timetable/timetable-today/timetable-today.component';
 import { TimetableCalendarComponent } from './Pages/timetable/timetable-calendar/timetable-calendar.component';
+import { ChatOverviewComponent } from './Pages/chat/chat-overview/chat-overview.component';
+import { ChatConversationComponent } from './Pages/chat/chat-conversation/chat-conversation.component';
+import { ChatConversationInfoComponent } from './Pages/chat/chat-conversation-info/chat-conversation-info.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -69,6 +72,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         ChangePasswordDialogComponent,
         TimetableTodayComponent,
         TimetableCalendarComponent,
+        ChatOverviewComponent,
+        ChatConversationComponent,
+        ChatConversationInfoComponent,
     ],
     imports: [
         BrowserModule,

@@ -22,6 +22,12 @@
         "calendar":"Calendar",
         "weekFrom":"Week from"
     },
+    "chat":{
+        "chat":"Chat",
+        "you":"You",
+        "leftTheChat":"Left the Chat",
+        "joinedTheChat":"Joined the Chat"
+    },
     "userSettings":{
         "userSettings":"Settings",
         "email":"E-Mail Address",

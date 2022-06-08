@@ -1,0 +1,42 @@
+<div *ngIf="conversation$ | async as conversation">
+    <div class="chat-info" (click)="openSettings()">
+        <img [src]="conversation.info.chatImage" class="chat-image">
+        <div class="chat-info-detail">
+            <div>
+                <div class="chat-title">{{ conversation.info.chatName }}</div>
+                <div *ngIf="conversation.info.chatType === 'GROUP'">
+                    {{ formatParticipants(conversation.info.participants) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="messages">
+        <div *ngFor="let message of conversation.messages">
+            <div *ngIf="!message.isInfoOnly; else infoOnly" class="message-wrapper">
+                <div *ngIf="message.sender; else messageSelf" class="message message-non-self">
+                    <div class="message-sender">{{ message.sender }}</div>
+                    <mat-divider></mat-divider>
+                    <div class="message-message">{{ message.message }}</div>
+                    <mat-divider></mat-divider>
+                    <div class="message-timestamp">{{ isToday(message.timestamp) ? (message.timestamp | date:'HH:mm') : (message.timestamp | date:'dd.MM.yyyy HH:mm') }}</div>
+                </div>
+                <ng-template #messageSelf>
+                    <div class="message message-self">
+                        <div class="message-message">{{ message.message }}</div>
+                        <mat-divider></mat-divider>
+                        <div class="message-timestamp">{{ isToday(message.timestamp) ? (message.timestamp | date:'HH:mm') : (message.timestamp | date:'dd.MM.yyyy HH:mm') }}</div>
+                    </div>
+                </ng-template>
+            </div>
+            <ng-template #infoOnly>
+                <div class="message-wrapper">
+                    <div class="info-message">{{ message.message.split('|')[0] }} - {{ message.message.split('|')[1] | translate }}</div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div>
+        area for new message
+    </div>
+</div>
