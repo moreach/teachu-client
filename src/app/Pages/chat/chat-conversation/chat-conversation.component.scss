@@ -25,6 +25,10 @@
     .messages {
         margin-top: 4px;
         margin-bottom: 8px;
+        max-height: calc(100vh - 280px);
+        overflow: auto;
+        display: flex;
+        flex-direction: column-reverse;
         .message-wrapper {
             display: flex;
             .info-message,
