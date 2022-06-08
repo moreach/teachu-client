@@ -1,4 +1,5 @@
 import {Injectable} from "@angular/core";
+import { Observable, of } from "rxjs";
 import {MenuTreeDTO} from "../../DTOs/MenuTreeDTO";
 
 @Injectable({
@@ -9,9 +10,9 @@ export class MenuTreeService {
     constructor() {
     }
 
-    getMenuTree(): MenuTreeDTO {
+    getMenuTree$(): Observable<MenuTreeDTO> {
         // todo replace with backend endpoint
-        return {
+        const mockData = {
             tree: [
                 {
                     icon: "home",
@@ -30,6 +31,12 @@ export class MenuTreeService {
                     leave: true,
                     titleTranslationKey: "grades.grades",
                     url: "/app/grades"
+                },
+                {
+                    icon: "chat",
+                    leave: true,
+                    titleTranslationKey: "chat.chat",
+                    url: "/app/chat"
                 },
                 {
                     icon: "settings",
@@ -60,5 +67,6 @@ export class MenuTreeService {
                 }
             ]
         };
+        return of(mockData);
     }
 }

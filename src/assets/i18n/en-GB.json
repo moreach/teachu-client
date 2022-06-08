@@ -22,6 +22,9 @@
         "calendar":"Calendar",
         "weekFrom":"Week from"
     },
+    "chat":{
+        "chat":"Chat"
+    },
     "userSettings":{
         "userSettings":"Settings",
         "email":"E-Mail Address",
