@@ -1,19 +1,36 @@
 <div class="menu-tree">
-    <ng-container *ngFor="let menuTreeItem of menuTree.tree">
-        <ng-container *ngIf="menuTreeItem.leave; else node">
-            <div class="menu-tree-item">
-                <app-menu-leave (leaveClickedEvent)="leaveClicked()" [item]="menuTreeItem"></app-menu-leave>
-            </div>
-        </ng-container>
-        <ng-template #node>
-            <div class="menu-tree-item" expansionContentToggle [target]="item">
-                <app-menu-node [node]="menuTreeItem"></app-menu-node>
-            </div>
-            <div #item expansion-wrapper [expanded]="true" style="overflow: hidden">
-                <div class="menu-tree-item menu-tree-indented-leave" *ngFor="let leave of menuTreeItem.children">
-                    <app-menu-leave [item]="leave"></app-menu-leave>
+    <ng-template #nodeTemplateRef let-node>
+        <div>
+            <ng-container *ngIf="node.leave else subNode">
+                <div class="menu-tree-item"
+                     [style.padding-left]="(indentationWidth * node.level) + 'px'"
+                     [style.width]="'calc(100% - ' + (indentationWidth * node.level) + 'px)'">
+                    <app-menu-leave [item]="node" (leaveClickedEvent)="leaveClicked($event)"></app-menu-leave>
                 </div>
-            </div>
+            </ng-container>
+            <ng-template #subNode>
+                <div expansionContentToggle
+                     class="menu-tree-item"
+                     [style.padding-left]="(indentationWidth * node.level) + 'px'"
+                     [style.width]="'calc(100% - ' + (indentationWidth * node.level) + 'px)'"
+                     [target]="item">
+                    <app-menu-node [node]="node"></app-menu-node>
+                </div>
+                <div #item expansion-wrapper
+                     [expanded]="false"
+                     style="overflow: hidden">
+                    <ng-template ngFor
+                                 [ngForOf]="node.children"
+                                 [ngForTemplate]="nodeTemplateRef">
+                    </ng-template>
+                </div>
+            </ng-template>
+        </div>
+    </ng-template>
+
+    <div *ngFor="let rootNode of treeData.tree">
+        <ng-template [ngTemplateOutlet]="nodeTemplateRef"
+                     [ngTemplateOutletContext]="{ $implicit: rootNode }">
         </ng-template>
-    </ng-container>
+    </div>
 </div>

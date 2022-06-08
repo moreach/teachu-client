@@ -4,6 +4,8 @@ import {DarkThemeService} from "./Framework/dark-theme/dark-theme.service";
 import { UserService } from "./Pages/user-settings/user.service";
 import { Observable, of, startWith, switchMap } from "rxjs";
 import { UserDTO } from "./DTOs/UserDTO";
+import {MenuTreeDTO} from "./DTOs/MenuTreeDTO";
+import {MenuTreeService} from "./Conponents/menu-tree/menu-tree.service";
 
 const WINDOW_WIDTH_BREAKPOINT: number = 1000;
 
@@ -16,6 +18,7 @@ export class AppComponent implements AfterViewInit {
     title = 'TeachU';
     bigWindow: boolean = false;
     menuClosed: boolean = false;
+    menuTree: MenuTreeDTO;
     isSignedIn$: Observable<boolean>;
     currentUser$: Observable<UserDTO | undefined>;
 
@@ -23,6 +26,7 @@ export class AppComponent implements AfterViewInit {
         private languageService: LanguagesService,
         private darkTheme: DarkThemeService,
         private userService: UserService,
+        private menuTreeService: MenuTreeService,
     ) {
         this.languageService.setLanguageOnStartup();
         this.darkTheme.isDarkTheme$.asObservable().subscribe((isDarkTheme) => {
@@ -40,6 +44,8 @@ export class AppComponent implements AfterViewInit {
                 }
             })
         );
+
+        this.menuTree = this.menuTreeService.getMenuTree();
     }
 
     ngAfterViewInit(): void {

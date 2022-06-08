@@ -46,12 +46,14 @@ export class MenuTreeService {
                             icon: "error",
                             leave: true,
                             translatedTitle: "IN19a",
+                            level: 1,
                             url: "/app/class/IN19a"
                         },
                         {
                             icon: "error",
                             leave: true,
                             translatedTitle: "BM19f",
+                            level: 1,
                             url: "/app/class/BM19f"
                         }
                     ]
