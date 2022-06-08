@@ -1,6 +1,9 @@
 <div class="head">
     <h1>{{ 'chat.chat' | translate }}</h1>
-    <button mat-button (click)="openNewChatDialog()">{{ 'chat.newChat' | translate }}</button>
+    <div>
+        <button mat-button (click)="openNewPrivateChatDialog()">{{ 'chat.newPrivateChat' | translate }}</button>
+        <button mat-button (click)="openNewGroupChatDialog()">{{ 'chat.newGroupChat' | translate }}</button>
+    </div>
 </div>
 <div *ngIf="chatOverviews$ | async as chatOverviews">
     <mat-divider></mat-divider>

@@ -167,4 +167,9 @@ export class ChatService {
     // todo implement from backend endpoint
     return of(null);
   }
+
+  sendMessage$(chatId: string, message: string) {
+    // todo implement from backend endpoint
+    return of(null);
+  }
 }

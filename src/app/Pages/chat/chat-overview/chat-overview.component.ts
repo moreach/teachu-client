@@ -7,7 +7,8 @@ import { ChatOverviewDTO } from 'src/app/DTOs/ChatOverviewDTO';
 import { isToday } from 'src/app/Framework/Helpers/DateHelpers';
 import { truncateToMaxChars } from 'src/app/Framework/Helpers/StringHelpers';
 import { ChatService } from '../chat.service';
-import { NewChatDialogComponent } from '../new-chat-dialog/new-chat-dialog.component';
+import { NewGroupChatDialogComponent } from '../new-group-chat-dialog/new-group-chat-dialog.component';
+import { NewPrivateChatDialogComponent } from '../new-private-chat-dialog/new-private-chat-dialog.component';
 
 @Component({
   selector: 'app-chat-overview',
@@ -41,7 +42,11 @@ export class ChatOverviewComponent {
     return isToday(date);
   }
 
-  openNewChatDialog() {
-    this.dialog.open(NewChatDialogComponent, { });
+  openNewPrivateChatDialog() {
+    this.dialog.open(NewPrivateChatDialogComponent, { });
+  }
+
+  openNewGroupChatDialog() {
+    this.dialog.open(NewGroupChatDialogComponent, { });
   }
 }

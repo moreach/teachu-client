@@ -1,4 +1,4 @@
-<div *ngIf="conversation$ | async as conversation">
+<div *ngIf="conversation$ | async as conversation" class="page">
     <div class="chat-info" (click)="openSettings()">
         <img [src]="conversation.info.chatImage" class="chat-image">
         <div class="chat-info-detail">
@@ -36,7 +36,15 @@
         </div>
     </div>
     <mat-divider></mat-divider>
-    <div>
-        area for new message
-    </div>
+    <form class="new-message">
+        <mat-form-field>
+            <mat-label>{{ 'chat.message' | translate }}</mat-label>
+            <textarea matInput [formControl]="newMessageControl"></textarea>
+        </mat-form-field>
+        <div class="wrapper">
+            <button mat-icon-button (click)="sendMessage()" [disabled]="!newMessageControl.valid">
+                <mat-icon>send</mat-icon>
+            </button>
+        </div>
+    </form>
 </div>

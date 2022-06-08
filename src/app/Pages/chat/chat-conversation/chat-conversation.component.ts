@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { ChatConversationDTO } from 'src/app/DTOs/ChatConversationDTO';
 import { ChatParticipantDTO } from 'src/app/DTOs/ChatParticipantDTO';
@@ -17,13 +18,21 @@ export class ChatConversationComponent implements OnInit {
 
   chatId: string = '';
   conversation$: Observable<ChatConversationDTO>;
+  newMessageControl = new FormControl('', Validators.required);
 
   constructor(
     private chatService: ChatService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
   ) { 
-    this.conversation$ = this.chatService.getChatConversation$(this.chatId);
+    this.conversation$ = this.chatService.getChatConversation$(this.chatId).pipe(
+      map(c => {
+        return {
+          info: c.info,
+          messages: c.messages.reverse(), // column reverse is used to keep the scroll at the bottom
+        }
+      }),
+    );
   }
 
   ngOnInit(): void {
@@ -41,5 +50,11 @@ export class ChatConversationComponent implements OnInit {
 
   isToday(date: Date) {
     return isToday(date);
+  }
+
+  sendMessage() {
+    this.chatService.sendMessage$(this.chatId, this.newMessageControl.value).subscribe(_ => {
+      this.newMessageControl = new FormControl('', Validators.required);
+    });
   }
 }

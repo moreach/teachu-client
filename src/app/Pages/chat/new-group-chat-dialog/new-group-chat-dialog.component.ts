@@ -1,67 +1,64 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { BehaviorSubject, combineLatest, map, Observable, startWith, tap } from 'rxjs';
-import { ChatNewGroupDTO } from 'src/app/DTOs/ChatNewGroupDTO';
+import { combineLatest, map, Observable, startWith } from 'rxjs';
 import { ChatUserDTO } from 'src/app/DTOs/ChatUserDTO';
-import { FormGroupTyped } from 'src/app/Material/types';
 import { ChatService } from '../chat.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 @Component({
-  selector: 'app-new-chat-dialog',
-  templateUrl: './new-chat-dialog.component.html',
-  styleUrls: ['./new-chat-dialog.component.scss']
+  selector: 'app-new-group-chat-dialog',
+  templateUrl: './new-group-chat-dialog.component.html',
+  styleUrls: ['./new-group-chat-dialog.component.scss']
 })
-export class NewChatDialogComponent implements OnInit {
+export class NewGroupChatDialogComponent implements OnInit {
 
-  groupFrom: FormGroupTyped<ChatNewGroupDTO>;
-  privateFormUserId = new FormControl('');
-  groupFormUserId = new FormControl('');
-  filteredOptionsPrivate$ = new BehaviorSubject<ChatUserDTO[]>([]);
+  groupFrom: FormGroup;
+  groupFormUserId;
   filteredOptionsGroup$: Observable<ChatUserDTO[]> | undefined;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   selectedUser: string[] = [];
+  allUsers: ChatUserDTO[] = [];
 
   @ViewChild('userIdInput') userIdInput: ElementRef<HTMLInputElement> | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
     private chatService: ChatService,
-    private dialogRef: MatDialogRef<NewChatDialogComponent>,
+    private dialogRef: MatDialogRef<NewGroupChatDialogComponent>,
   ) { 
     this.groupFrom = this.formBuilder.group({
       chatName: ['', Validators.required],
       chatImage: '',
-      usersId: [],
-    }) as FormGroupTyped<ChatNewGroupDTO>;
+    });
+
+    this.groupFormUserId = new FormControl('', () => {
+      if (this.selectedUser.length === 0 || this.selectedUser.some(u => !this.allUsers.some(s => s.id === u))) {
+        return { invalid: true };
+      }
+      return null;
+    });
   }
 
   ngOnInit(): void {
-    combineLatest([
-      this.chatService.getChatUser$(),
-      this.privateFormUserId.valueChanges.pipe(startWith(''))
-    ]).pipe(
-      map(([users, value]) => this._filter(value, users))
-    ).subscribe(filteredUsers => this.filteredOptionsPrivate$.next(filteredUsers));
-
+    const users$ = this.chatService.getChatUser$();
+    users$.subscribe(users => this.allUsers = users);
     this.filteredOptionsGroup$ = combineLatest([
-      this.chatService.getChatUser$(),
+      users$,
       this.groupFormUserId.valueChanges.pipe(startWith(''))
     ]).pipe(
       map(([users, value]) => this._filter(value, users))
     );
   }
 
-  createPrivateChat(userId: string) {
-    this.chatService.createChatPrivate$(userId).subscribe(_ => {
-      this.close();
-    });
-  }
-
-  createGroupChat(value: ChatNewGroupDTO) {
+  createGroupChat() {
+    const value = {
+      chatName: this.groupFrom.value.chatName,
+      chatImage: this.groupFrom.value.chatImage,
+      usersId: this.selectedUser,
+    }
     this.chatService.createChatGroup$(value).subscribe(_ => {
       this.close();
     });
@@ -71,13 +68,13 @@ export class NewChatDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  _filter(value: string, users: ChatUserDTO[]): ChatUserDTO[] {
-    const filterValue = value.toLowerCase();
+  _filter(value: string | null, users: ChatUserDTO[]): ChatUserDTO[] {
+    const filterValue = (value ?? '').toLowerCase();
     return users.filter(user => user.name.toLowerCase().includes(filterValue));
   }
 
   getNameFromId(id: string) {
-    const filtered = this.filteredOptionsPrivate$.value.filter(user => user.id === id);
+    const filtered = this.allUsers.filter(user => user.id === id);
     if (filtered.length === 0) {
       return '';
     }
@@ -90,6 +87,7 @@ export class NewChatDialogComponent implements OnInit {
       this.selectedUser.push(value);
     }
     event.chipInput!.clear();
+    this.selectedUser = this.selectedUser.filter(user => this.allUsers.some(u => u.id === user));
     this.groupFormUserId.setValue(null);
   }
 
@@ -98,6 +96,7 @@ export class NewChatDialogComponent implements OnInit {
     if (index >= 0) {
       this.selectedUser.splice(index, 1);
     }
+    this.groupFormUserId.updateValueAndValidity();
   }
 
   selectUser(event: MatAutocompleteSelectedEvent): void {
@@ -106,5 +105,6 @@ export class NewChatDialogComponent implements OnInit {
       this.userIdInput.nativeElement.value = '';
     }
     this.groupFormUserId.setValue(null);
+    this.groupFormUserId.updateValueAndValidity();
   }
 }
