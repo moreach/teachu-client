@@ -3,11 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { appRoutes } from 'src/app/Config/appRoutes';
 
 @Component({
-  selector: 'app-chat-detail',
-  templateUrl: './chat-detail.component.html',
-  styleUrls: ['./chat-detail.component.scss']
+  selector: 'app-chat-conversation',
+  templateUrl: './chat-conversation.component.html',
+  styleUrls: ['./chat-conversation.component.scss']
 })
-export class ChatDetailComponent implements OnInit {
+export class ChatConversationComponent implements OnInit {
 
   chatId: string = '';
 
@@ -21,6 +21,6 @@ export class ChatDetailComponent implements OnInit {
   }
 
   openSettings() {
-    this.router.navigate([`${appRoutes.App}/${appRoutes.Chat}/${this.chatId}/${appRoutes.ChatSettings}`]);
+    this.router.navigate([`${appRoutes.App}/${appRoutes.Chat}/${this.chatId}/${appRoutes.ConversationInfo}`]);
   }
 }

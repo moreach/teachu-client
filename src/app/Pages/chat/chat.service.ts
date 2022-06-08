@@ -57,7 +57,7 @@ export class ChatService {
     
   }
 
-  getChatSettings$ () {
+  getChatConversationInfo$ () {
 
   }
 }

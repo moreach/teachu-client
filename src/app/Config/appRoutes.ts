@@ -3,7 +3,7 @@ export const appRoutes = {
     App: 'app',
     Chat: 'chat',
     ChatId: 'chatId',
-    ChatSettings: 'settings',
+    ConversationInfo: 'info',
     Dashboard: 'dashboard',
     Grades: 'grades',
     Login: 'login',

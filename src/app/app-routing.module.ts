@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { appRoutes } from './Config/appRoutes';
 import { AppGuard } from './Framework/API/app.guard';
-import { ChatDetailComponent } from './Pages/chat/chat-detail/chat-detail.component';
+import { ChatConversationComponent } from './Pages/chat/chat-conversation/chat-conversation.component';
 import { ChatOverviewComponent } from './Pages/chat/chat-overview/chat-overview.component';
-import { ChatSettingsComponent } from './Pages/chat/chat-settings/chat-settings.component';
+import { ChatConversationInfoComponent } from './Pages/chat/chat-conversation-info/chat-conversation-info.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { GradesComponent } from './Pages/grades/grades.component';
 import { LoginComponent } from './Pages/login/login.component';
@@ -23,8 +23,8 @@ const routes: Routes = [
       { path: appRoutes.Grades, component: GradesComponent },
       { path: appRoutes.Timetable, component: TimetableComponent },
       { path: appRoutes.Chat, component: ChatOverviewComponent, pathMatch: 'full' },
-      { path: `${appRoutes.Chat}/:${appRoutes.ChatId}`, component: ChatDetailComponent, pathMatch: 'full' },
-      { path: `${appRoutes.Chat}/:${appRoutes.ChatId}/${appRoutes.ChatSettings}`, component: ChatSettingsComponent },
+      { path: `${appRoutes.Chat}/:${appRoutes.ChatId}`, component: ChatConversationComponent, pathMatch: 'full' },
+      { path: `${appRoutes.Chat}/:${appRoutes.ChatId}/${appRoutes.ConversationInfo}`, component: ChatConversationInfoComponent },
       { path: appRoutes.UserSettings, component: UserSettingsComponent },
     ],
   },
