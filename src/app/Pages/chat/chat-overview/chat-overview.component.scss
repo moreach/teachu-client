@@ -1,3 +1,11 @@
+.head {
+    display: flex;
+    :last-child {
+        margin-left: auto;
+    }
+    margin-bottom: 8px;
+}
+
 .chat-overview-detail {
     cursor: pointer;
     display: grid;

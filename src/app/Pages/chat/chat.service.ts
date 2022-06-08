@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { ChatConversationDTO } from 'src/app/DTOs/ChatConversationDTO';
 import { ChatConversationInfoDTO } from 'src/app/DTOs/ChatConversationInfoDTO';
 import { ChatMessageDTO } from 'src/app/DTOs/ChatMessageDTO';
+import { ChatNewGroupDTO } from 'src/app/DTOs/ChatNewGroupDTO';
 import { ChatOverviewDTO } from 'src/app/DTOs/ChatOverviewDTO';
+import { ChatUserDTO } from 'src/app/DTOs/ChatUserDTO';
 import { addMinutes } from 'src/app/Framework/Helpers/DateHelpers';
 
 @Injectable({
@@ -14,7 +16,7 @@ export class ChatService {
   constructor() { }
 
   getChatOverview$(): Observable<ChatOverviewDTO[]> {
-    // todo implement from backend endpoint
+    // todo implement from backend endpoint with websocket
     const mockData = [
       {
         chatId: '1',
@@ -57,8 +59,7 @@ export class ChatService {
   }
 
   getChatConversation$(chatId: string): Observable<ChatConversationDTO> {
-    // todo implement from backend endpoint
-    // mockdata for group chat Mathinachhilf
+    // todo implement from backend endpoint with websocket - mockdata for group chat Mathinachhilf
     const mockData = {
       info: {
         chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
@@ -66,7 +67,7 @@ export class ChatService {
         chatType: 'GROUP',
         isUserAdmin: true,
         participants: [{
-          name: 'Eric Wermelinger',
+          name: null,
           image: 'https://www.w3schools.com/howto/img_avatar.png',
           role: 'STUDENT',
           isAdmin: true
@@ -132,7 +133,38 @@ export class ChatService {
     return of(mockData);
   }
 
-  getChatConversationInfo$ () {
+  getChatConversationInfo$(chatId: string): Observable<ChatConversationInfoDTO> {
+    // todo implement from backend endpoint with websocket
+    return this.getChatConversation$(chatId).pipe(
+      map(chatConversation => chatConversation.info)
+    );
+  }
 
+  getChatUser$(): Observable<ChatUserDTO[]> {
+    // todo implement from backend endpoint
+    const mockData = [{
+      id: '1',
+      name: 'Oliver Umbricht'
+    }, {
+      id: '2',
+      name: 'Felix Winzenried'
+    }, {
+      id: '3',
+      name: 'Micha Schweizer'
+    }, {
+      id: '4',
+      name: 'Roman Bürge'
+    }];
+    return of(mockData);
+  }
+
+  createChatGroup$(value: ChatNewGroupDTO) {
+    // todo implement from backend endpoint
+    return of(null);
+  }
+
+  createChatPrivate$(userId: string) {
+    // todo implement from backend endpoint
+    return of(null);
   }
 }

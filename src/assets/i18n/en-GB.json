@@ -26,7 +26,14 @@
         "chat":"Chat",
         "you":"You",
         "leftTheChat":"Left the Chat",
-        "joinedTheChat":"Joined the Chat"
+        "joinedTheChat":"Joined the Chat",
+        "newChat":"New Chat",
+        "privateChat":"Private Chat",
+        "groupChat":"Group Chat",
+        "chatName":"Chat Name",
+        "chatImage":"Chat Image",
+        "user":"User",
+        "users":"Users"
     },
     "userSettings":{
         "userSettings":"Settings",

@@ -1,4 +1,7 @@
-<h1>{{ 'chat.chat' | translate }}</h1>
+<div class="head">
+    <h1>{{ 'chat.chat' | translate }}</h1>
+    <button mat-button (click)="openNewChatDialog()">{{ 'chat.newChat' | translate }}</button>
+</div>
 <div *ngIf="chatOverviews$ | async as chatOverviews">
     <mat-divider></mat-divider>
     <div *ngFor="let chat of chatOverviews">
