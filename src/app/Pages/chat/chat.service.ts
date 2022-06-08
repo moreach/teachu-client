@@ -125,7 +125,7 @@ export class ChatService {
       }, {
         message: 'Chömed Buebe dünd mal schaffe',
         sender: 'Stefano La Rosa',
-        timestamp: addMinutes(new Date(), -2000),
+        timestamp: addMinutes(new Date(), -10),
         isInfoOnly: false
       }] as ChatMessageDTO[]
     } as ChatConversationDTO;

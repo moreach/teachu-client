@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { ChatConversationDTO } from 'src/app/DTOs/ChatConversationDTO';
 import { ChatParticipantDTO } from 'src/app/DTOs/ChatParticipantDTO';
+import { isToday } from 'src/app/Framework/Helpers/DateHelpers';
 import { truncateToMaxChars } from 'src/app/Framework/Helpers/StringHelpers';
 import { ChatService } from '../chat.service';
 
@@ -36,5 +37,9 @@ export class ChatConversationComponent implements OnInit {
   formatParticipants(participants: ChatParticipantDTO[]): string {
     const concatenated = participants.map(p => p.name).filter(p => !!p).join(', ');
     return truncateToMaxChars(concatenated, 100);
+  }
+
+  isToday(date: Date) {
+    return isToday(date);
   }
 }

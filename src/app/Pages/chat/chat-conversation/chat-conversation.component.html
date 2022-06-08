@@ -18,13 +18,13 @@
                     <mat-divider></mat-divider>
                     <div class="message-message">{{ message.message }}</div>
                     <mat-divider></mat-divider>
-                    <div class="message-timestamp">{{ message.timestamp | date:'dd.MM.yyyy HH:mm' }}</div>
+                    <div class="message-timestamp">{{ isToday(message.timestamp) ? (message.timestamp | date:'HH:mm') : (message.timestamp | date:'dd.MM.yyyy HH:mm') }}</div>
                 </div>
                 <ng-template #messageSelf>
                     <div class="message message-self">
                         <div class="message-message">{{ message.message }}</div>
                         <mat-divider></mat-divider>
-                        <div class="message-timestamp">{{ message.timestamp | date:'dd.MM.yyyy HH:mm' }}</div>
+                        <div class="message-timestamp">{{ isToday(message.timestamp) ? (message.timestamp | date:'HH:mm') : (message.timestamp | date:'dd.MM.yyyy HH:mm') }}</div>
                     </div>
                 </ng-template>
             </div>
@@ -35,6 +35,7 @@
             </ng-template>
         </div>
     </div>
+    <mat-divider></mat-divider>
     <div>
         area for new message
     </div>
