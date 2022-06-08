@@ -6,5 +6,5 @@ export interface ChatConversationInfoDTO {
     chatType: ChatType;
     chatImage: string;
     participants: ChatParticipantDTO[];
-    isAdmin: boolean;
+    isUserAdmin: boolean;
 }

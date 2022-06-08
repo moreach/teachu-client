@@ -1,0 +1,49 @@
+.chat-info {
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 8px;
+
+    .chat-image {
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        object-fit: cover;
+    }
+
+    .chat-info-detail {
+        display: flex;
+        align-items: center;
+        .chat-title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+}
+
+.messages {
+    .message-wrapper {
+        .info-message,
+        .message {
+            display: inline-block;
+            border-radius: 4px;
+            padding: 2px;
+            padding-left: 4px;
+            padding-right: 4px;
+            margin-top: 4px;
+        }
+        .info-message {
+            background-color: var(--teachu-grey-darker);
+        }
+        .message.message-non-self {
+            background-color: var(--teachu-accent);
+        }
+        .message.message-self {
+            background-color: var(--teachu-primary);
+        }
+        .message-sender,
+        .message-timestamp {
+            font-size: 12px;
+        }
+    }
+}

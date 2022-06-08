@@ -24,7 +24,9 @@
     },
     "chat":{
         "chat":"Chat",
-        "you":"You"
+        "you":"You",
+        "leftTheChat":"Left the Chat",
+        "joinedTheChat":"Joined the Chat"
     },
     "userSettings":{
         "userSettings":"Settings",

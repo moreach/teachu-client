@@ -1,6 +1,6 @@
 export interface ChatMessageDTO {
     message: string;
     sender: string | null; // null -> from yourself
-    date: Date;
+    timestamp: Date;
     isInfoOnly: boolean;
 }
