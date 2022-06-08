@@ -36,7 +36,7 @@ export class ChatService {
         chatName: 'Micha Schweizer',
         chatType: 'PRIVATE',
         chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
-        lastMessage: 'Last message Chat Micha',
+        lastMessage: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s',
         lastMessageFrom: 'Micha Schweizer',
         lastMessageDate: addMinutes(new Date(), -2000)
       } as ChatOverviewDTO,

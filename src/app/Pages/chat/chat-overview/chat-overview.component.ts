@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ChatOverviewDTO } from 'src/app/DTOs/ChatOverviewDTO';
 import { isToday } from 'src/app/Framework/Helpers/DateHelpers';
+import { truncateToMaxChars } from 'src/app/Framework/Helpers/StringHelpers';
 import { ChatService } from '../chat.service';
 
 @Component({
@@ -16,7 +17,14 @@ export class ChatOverviewComponent {
   constructor(
     private chatService: ChatService,
   ) {
-    this.chatOverviews$ = this.chatService.getChatOverview$();
+    this.chatOverviews$ = this.chatService.getChatOverview$().pipe(
+      map(chatOverviews => chatOverviews.map(c => {
+        return {
+          ...c,
+          lastMessage: truncateToMaxChars(c.lastMessage, 100),
+        } 
+      }))
+    );
   }
 
   openDetail(chatId: string) {

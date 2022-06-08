@@ -1,21 +1,23 @@
 <h1>{{ 'chat.chat' | translate }}</h1>
-<div *ngIf="chatOverviews$ | async as chatOverviews" class="chat-overview">
+<div *ngIf="chatOverviews$ | async as chatOverviews">
     <mat-divider></mat-divider>
     <div *ngFor="let chat of chatOverviews">
         <div class="chat-overview-detail" (click)="openDetail(chat.chatId)">
             <img [src]="chat.chatImage" class="chat-image">
-            <div>
-                <div class="chat-title">{{ chat.chatName }}</div>
-                <div *ngIf="chat.chatType === 'GROUP'; else private" class="chat-last-msg">
-                    {{ chat.lastMessageFrom ?? ('chat.you' | translate) }}: {{ chat.lastMessage }}
-                </div>
-                <ng-template #private>
-                    <div class="chat-last-msg">
-                        {{ chat.lastMessageFrom === null ? ('chat.you' | translate) + ': ' : '' }}{{ chat.lastMessage }}
+            <div class="chat-middle-section">
+                <div>
+                    <div class="chat-title">{{ chat.chatName }}</div>
+                    <div *ngIf="chat.chatType === 'GROUP'; else private" class="chat-last-msg">
+                        {{ chat.lastMessageFrom ?? ('chat.you' | translate) }}: <i>{{ chat.lastMessage }}</i>
                     </div>
-                </ng-template>
+                    <ng-template #private>
+                        <div class="chat-last-msg">
+                            {{ chat.lastMessageFrom === null ? ('chat.you' | translate) + ': ' : '' }}<i>{{ chat.lastMessage }}</i>
+                        </div>
+                    </ng-template>
+                </div>
             </div>
-            <div>
+            <div class="chat-last-msg-date">
                 {{ isToday(chat.lastMessageDate) ? (chat.lastMessageDate | date: 'HH:mm') : (chat.lastMessageDate | date: 'dd.MM.yyyy') }}
             </div>
         </div>        
