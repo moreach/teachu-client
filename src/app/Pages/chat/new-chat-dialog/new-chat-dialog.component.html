@@ -7,7 +7,7 @@
                 <mat-label>{{ 'chat.user' | translate }}</mat-label>
                 <input type="text" matInput [formControl]="privateFormUserId" [matAutocomplete]="auto" required>
                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="getNameFromId.bind(this)">
-                    <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option.id">
+                    <mat-option *ngFor="let option of filteredOptionsPrivate$ | async" [value]="option.id">
                         {{ option.name }}
                     </mat-option>
                 </mat-autocomplete>
@@ -29,8 +29,24 @@
                 </ngx-mat-file-input>
                 <mat-icon matSuffix aria-hidden="false">attach_file</mat-icon>
             </mat-form-field>
-            
-            <!-- multi-select -->
+            <mat-form-field>
+                <mat-label>{{ 'chat.users' | translate }}</mat-label>
+                <mat-chip-list #chipList>
+                    <mat-chip *ngFor="let userId of selectedUser" (removed)="removeUser(userId)">
+                    {{ userId }}
+                        <button matChipRemove>
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip>
+                    <input [placeholder]="'chat.user' | translate" #userIdInput [formControl]="groupFormUserId"
+                        [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="addUser($event)">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectUser($event)">
+                    <mat-option *ngFor="let user of filteredOptionsGroup$ | async" [value]="user.id">
+                        {{ user.name }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
             <div class="buttons">
                 <button mat-flat-button type="submit" (click)="close()">{{ 'framework.close' | translate }}</button>
                 <button mat-flat-button color="primary" type="submit" (click)="createGroupChat(groupFrom.value)" [disabled]="!groupFrom.valid || !groupFrom.dirty">{{ 'framework.save' | translate }}</button>
