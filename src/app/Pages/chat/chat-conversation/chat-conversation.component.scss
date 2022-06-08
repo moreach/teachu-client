@@ -1,62 +1,74 @@
-.chat-info {
-    cursor: pointer;
-    display: grid;
-    grid-template-columns: 48px 1fr;
-    gap: 8px;
-
-    .chat-image {
-        border-radius: 50%;
-        width: 48px;
-        height: 48px;
-        object-fit: cover;
-    }
-
-    .chat-info-detail {
-        display: flex;
-        align-items: center;
-        .chat-title {
-            font-size: 16px;
-            font-weight: bold;
+.page {
+    .chat-info {
+        cursor: pointer;
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 8px;
+    
+        .chat-image {
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+        }
+    
+        .chat-info-detail {
+            display: flex;
+            align-items: center;
+            .chat-title {
+                font-size: 16px;
+                font-weight: bold;
+            }
         }
     }
-}
-
-.messages {
-    margin-top: 4px;
-    margin-bottom: 8px;
-    .message-wrapper {
-        display: flex;
-        .info-message,
-        .message {
-            display: inline-block;
-            border-radius: 4px;
-            padding: 2px;
-            padding-left: 4px;
-            padding-right: 4px;
-            margin-top: 4px;
+    
+    .messages {
+        margin-top: 4px;
+        margin-bottom: 8px;
+        .message-wrapper {
+            display: flex;
+            .info-message,
+            .message {
+                display: inline-block;
+                border-radius: 4px;
+                padding: 2px;
+                padding-left: 4px;
+                padding-right: 4px;
+                margin-top: 4px;
+            }
+            .info-message {
+                margin: 0 auto;
+                background-color: var(--teachu-grey-darker);
+            }
+            .message.message-non-self {
+                background-color: var(--teachu-accent);
+            }
+            .message.message-self {
+                margin-left: auto;
+                background-color: var(--teachu-primary);
+            }
+            .message-sender,
+            .message-timestamp {
+                margin-top: -2px;
+                margin-bottom: -2px;
+            }
+            .message-sender {
+                font-size: 12px;
+            }
+            .message-timestamp {
+                font-size: 10px;
+                text-align: right;
+            }
         }
-        .info-message {
-            margin: 0 auto;
-            background-color: var(--teachu-grey-darker);
-        }
-        .message.message-non-self {
-            background-color: var(--teachu-accent);
-        }
-        .message.message-self {
-            margin-left: auto;
-            background-color: var(--teachu-primary);
-        }
-        .message-sender,
-        .message-timestamp {
-            margin-top: -2px;
-            margin-bottom: -2px;
-        }
-        .message-sender {
-            font-size: 12px;
-        }
-        .message-timestamp {
-            font-size: 10px;
-            text-align: right;
+    }
+    
+    .new-message {
+        margin-top: 8px;
+        display: grid;
+        grid-template-columns: 1fr 48px;
+        .wrapper {
+            display: flex;
+            align-items: center;
         }
     }
 }

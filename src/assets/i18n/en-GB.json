@@ -34,7 +34,8 @@
         "chatName":"Chat Name",
         "chatImage":"Chat Image",
         "user":"User",
-        "users":"Users"
+        "users":"Users",
+        "message":"Message"
     },
     "userSettings":{
         "userSettings":"Settings",

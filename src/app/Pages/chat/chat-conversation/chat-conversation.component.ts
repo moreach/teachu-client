@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
@@ -17,6 +18,7 @@ export class ChatConversationComponent implements OnInit {
 
   chatId: string = '';
   conversation$: Observable<ChatConversationDTO>;
+  newMessageControl = new FormControl('', Validators.required);
 
   constructor(
     private chatService: ChatService,
@@ -41,5 +43,11 @@ export class ChatConversationComponent implements OnInit {
 
   isToday(date: Date) {
     return isToday(date);
+  }
+
+  sendMessage() {
+    this.chatService.sendMessage$(this.chatId, this.newMessageControl.value).subscribe(_ => {
+      this.newMessageControl = new FormControl('', Validators.required);
+    });
   }
 }
