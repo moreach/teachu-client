@@ -23,7 +23,8 @@
         "weekFrom":"Week from"
     },
     "chat":{
-        "chat":"Chat"
+        "chat":"Chat",
+        "you":"You"
     },
     "userSettings":{
         "userSettings":"Settings",
