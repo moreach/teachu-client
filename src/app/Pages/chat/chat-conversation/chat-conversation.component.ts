@@ -24,7 +24,8 @@ export class ChatConversationComponent implements OnInit {
     private chatService: ChatService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-  ) { 
+  ) {
+    this.chatId = this.activatedRoute.snapshot.paramMap.get(appRoutes.ChatId) ?? '';
     this.conversation$ = this.chatService.getChatConversation$(this.chatId).pipe(
       map(c => {
         return {
@@ -36,11 +37,13 @@ export class ChatConversationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.chatId = this.activatedRoute.snapshot.paramMap.get(appRoutes.ChatId) ?? '';
+    
   }
 
-  openSettings() {
-    this.router.navigate([`${appRoutes.App}/${appRoutes.Chat}/${this.chatId}/${appRoutes.ConversationInfo}`]);
+  openSettings(conversation: ChatConversationDTO) {
+    if (conversation.info.chatType === 'GROUP') {
+      this.router.navigate([`${appRoutes.App}/${appRoutes.Chat}/${this.chatId}/${appRoutes.ConversationInfo}`]);
+    }
   }
 
   formatParticipants(participants: ChatParticipantDTO[]): string {

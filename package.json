@@ -22,6 +22,7 @@
     "@angular/router": "~13.0.0",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
+    "@types/uuid": "^8.3.4",
     "ngx-material-file-input": "^3.0.0",
     "ngx-toastr": "^14.3.0",
     "roosterjs": "^8.22.0",

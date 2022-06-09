@@ -1,12 +1,14 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { combineLatest, map, Observable, startWith } from 'rxjs';
 import { ChatUserDTO } from 'src/app/DTOs/ChatUserDTO';
 import { ChatService } from '../chat.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { v4 as guid } from 'uuid';
+import { ChatSaveGroupDTO } from 'src/app/DTOs/ChatSaveGroupDTO';
 
 @Component({
   selector: 'app-new-group-chat-dialog',
@@ -28,11 +30,22 @@ export class NewGroupChatDialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     private chatService: ChatService,
     private dialogRef: MatDialogRef<NewGroupChatDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) private dialogData: ChatSaveGroupDTO | undefined,
   ) { 
     this.groupFrom = this.formBuilder.group({
+      chatId: guid(),
       chatName: ['', Validators.required],
       chatImage: '',
     });
+
+    if (this.dialogData) {
+      this.groupFrom.patchValue({
+        chatId: this.dialogData.chatId,
+        chatName: this.dialogData.chatName,
+        chatImage: this.dialogData.chatImage,
+      });
+      this.selectedUser = this.dialogData.usersId.filter(u => !!u);
+    }
 
     this.groupFormUserId = new FormControl('', () => {
       if (this.selectedUser.length === 0 || this.selectedUser.some(u => !this.allUsers.some(s => s.id === u))) {
@@ -56,6 +69,7 @@ export class NewGroupChatDialogComponent implements OnInit {
 
   createGroupChat() {
     const value = {
+      chatId: this.groupFrom.value.chatId,
       chatName: this.groupFrom.value.chatName,
       chatImage: this.groupFrom.value.chatImage,
       usersId: this.selectedUser,

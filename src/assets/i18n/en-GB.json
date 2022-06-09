@@ -35,7 +35,9 @@
         "chatImage":"Chat Image",
         "user":"User",
         "users":"Users",
-        "message":"Message"
+        "message":"Message",
+        "leaveChat":"Leave Chat",
+        "editChat":"Edit Chat"
     },
     "userSettings":{
         "userSettings":"Settings",

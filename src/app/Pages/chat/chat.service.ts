@@ -3,7 +3,7 @@ import { map, Observable, of } from 'rxjs';
 import { ChatConversationDTO } from 'src/app/DTOs/ChatConversationDTO';
 import { ChatConversationInfoDTO } from 'src/app/DTOs/ChatConversationInfoDTO';
 import { ChatMessageDTO } from 'src/app/DTOs/ChatMessageDTO';
-import { ChatNewGroupDTO } from 'src/app/DTOs/ChatNewGroupDTO';
+import { ChatSaveGroupDTO } from 'src/app/DTOs/ChatSaveGroupDTO';
 import { ChatOverviewDTO } from 'src/app/DTOs/ChatOverviewDTO';
 import { ChatUserDTO } from 'src/app/DTOs/ChatUserDTO';
 import { addMinutes } from 'src/app/Framework/Helpers/DateHelpers';
@@ -68,35 +68,41 @@ export class ChatService {
         isUserAdmin: true,
         participants: [{
           name: null,
+          userId: null,
           image: 'https://www.w3schools.com/howto/img_avatar.png',
           role: 'STUDENT',
           isAdmin: true
         }, {
           name: 'Oliver Andreas Umbricht',
+          userId: '201',
           image: 'https://www.w3schools.com/howto/img_avatar.png',
           role: 'STUDENT',
           isAdmin: false
         }, {
           name: 'Felix Winzenried',
+          userId: '202',
           image: 'https://www.w3schools.com/howto/img_avatar.png',
           role: 'STUDENT',
           isAdmin: false
         }, {
           name: 'Stefano La Rosa',
+          userId: '206',
           image: 'https://www.w3schools.com/howto/img_avatar.png',
           role: 'TEACHER',
           isAdmin: false
         }, {
           name: 'Roberto Formisano',
+          userId: '207',
           image: 'https://www.w3schools.com/howto/img_avatar.png',
           role: 'TEACHER',
           isAdmin: false
         }, {
           name: 'Flurin Jan Bruppacher',
+          userId: '208',
           image: 'https://www.w3schools.com/howto/img_avatar.png',
           role: 'STUDENT',
           isAdmin: false
-        }]
+        }],
       } as ChatConversationInfoDTO,
       messages: [{
         message: 'Jonas Hauser|chat.leftTheChat',
@@ -154,11 +160,14 @@ export class ChatService {
     }, {
       id: '204',
       name: 'Roman Bürge'
+    }, {
+      id: '205',
+      name: 'Eric Wermelinger'
     }];
     return of(mockData);
   }
 
-  createChatGroup$(value: ChatNewGroupDTO) {
+  createChatGroup$(value: ChatSaveGroupDTO) {
     // todo implement from backend endpoint
     return of(null);
   }
@@ -169,6 +178,11 @@ export class ChatService {
   }
 
   sendMessage$(chatId: string, message: string) {
+    // todo implement from backend endpoint
+    return of(null);
+  }
+
+  leaveChat$(chatId: string) {
     // todo implement from backend endpoint
     return of(null);
   }

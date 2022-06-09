@@ -1,5 +1,5 @@
 <div *ngIf="conversation$ | async as conversation" class="page">
-    <div class="chat-info" (click)="openSettings()">
+    <div (click)="openSettings(conversation)" [ngClass]="{ 'chat-info': true, 'pointer': conversation.info.chatType === 'GROUP' }">
         <img [src]="conversation.info.chatImage" class="chat-image">
         <div class="chat-info-detail">
             <div>
