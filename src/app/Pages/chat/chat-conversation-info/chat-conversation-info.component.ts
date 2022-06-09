@@ -6,7 +6,7 @@ import { appRoutes } from 'src/app/Config/appRoutes';
 import { ChatConversationInfoDTO } from 'src/app/DTOs/ChatConversationInfoDTO';
 import { ChatSaveGroupDTO } from 'src/app/DTOs/ChatSaveGroupDTO';
 import { ChatService } from '../chat.service';
-import { NewGroupChatDialogComponent } from '../new-group-chat-dialog/new-group-chat-dialog.component';
+import { GroupChatDialogComponent } from '../group-chat-dialog/group-chat-dialog.component';
 
 @Component({
   selector: 'app-chat-conversation-info',
@@ -40,7 +40,7 @@ export class ChatConversationInfoComponent {
   }
 
   editChat(info: ChatConversationInfoDTO) {
-    this.dialog.open(NewGroupChatDialogComponent, {
+    this.dialog.open(GroupChatDialogComponent, {
       data: {
         chatId: this.chatId,
         chatName: info.chatName,

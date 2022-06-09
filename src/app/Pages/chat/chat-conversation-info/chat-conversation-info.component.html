@@ -16,8 +16,8 @@
             </div>
             <div class="chat-user-icon">
                 <div>
-                    <mat-icon *ngIf="user.role === 'STUDENT'">person_outline</mat-icon>
-                    <mat-icon *ngIf="user.role === 'PARENT'">person</mat-icon>
+                    <mat-icon *ngIf="user.role === 'STUDENT'">person</mat-icon>
+                    <mat-icon *ngIf="user.role === 'PARENT'">person_outline</mat-icon>
                     <mat-icon *ngIf="user.role === 'TEACHER'">school</mat-icon>
                     <mat-icon *ngIf="user.role === 'ADMIN'">plus_one</mat-icon>
                 </div>
@@ -29,7 +29,7 @@
     </div>
     <mat-divider></mat-divider>
     <div class="chat-leave">
-        <button *ngIf="info.isUserAdmin" mat-button (click)="editChat(info)">{{ 'chat.editChat' | translate }}</button>
+        <button *ngIf="info.isUserAdmin; else leave" mat-button (click)="editChat(info)">{{ 'chat.editChat' | translate }}</button>
         <ng-template #leave>
             <button mat-button (click)="leaveChat()">{{ 'chat.leaveChat' | translate }}</button>
         </ng-template>

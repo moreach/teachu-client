@@ -11,11 +11,11 @@ import { v4 as guid } from 'uuid';
 import { ChatSaveGroupDTO } from 'src/app/DTOs/ChatSaveGroupDTO';
 
 @Component({
-  selector: 'app-new-group-chat-dialog',
-  templateUrl: './new-group-chat-dialog.component.html',
-  styleUrls: ['./new-group-chat-dialog.component.scss']
+  selector: 'app-group-chat-dialog',
+  templateUrl: './group-chat-dialog.component.html',
+  styleUrls: ['./group-chat-dialog.component.scss']
 })
-export class NewGroupChatDialogComponent implements OnInit {
+export class GroupChatDialogComponent implements OnInit {
 
   groupFrom: FormGroup;
   groupFormUserId;
@@ -29,7 +29,7 @@ export class NewGroupChatDialogComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private chatService: ChatService,
-    private dialogRef: MatDialogRef<NewGroupChatDialogComponent>,
+    private dialogRef: MatDialogRef<GroupChatDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private dialogData: ChatSaveGroupDTO | undefined,
   ) { 
     this.groupFrom = this.formBuilder.group({
@@ -63,6 +63,7 @@ export class NewGroupChatDialogComponent implements OnInit {
       this.groupFormUserId.valueChanges.pipe(startWith(''))
     ]).pipe(
       map(([users, value]) => this._filter(value, users)),
+      map(users => users.filter(user => !this.selectedUser.includes(user.id))),
       map(users => users.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))),
     );
   }

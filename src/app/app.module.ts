@@ -40,8 +40,8 @@ import { TimetableCalendarComponent } from './Pages/timetable/timetable-calendar
 import { ChatOverviewComponent } from './Pages/chat/chat-overview/chat-overview.component';
 import { ChatConversationComponent } from './Pages/chat/chat-conversation/chat-conversation.component';
 import { ChatConversationInfoComponent } from './Pages/chat/chat-conversation-info/chat-conversation-info.component';
-import { NewGroupChatDialogComponent } from './Pages/chat/new-group-chat-dialog/new-group-chat-dialog.component';
-import { NewPrivateChatDialogComponent } from './Pages/chat/new-private-chat-dialog/new-private-chat-dialog.component';
+import { GroupChatDialogComponent } from './Pages/chat/group-chat-dialog/group-chat-dialog.component';
+import { PrivateChatDialogComponent } from './Pages/chat/private-chat-dialog/private-chat-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -77,8 +77,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         ChatOverviewComponent,
         ChatConversationComponent,
         ChatConversationInfoComponent,
-        NewGroupChatDialogComponent,
-        NewPrivateChatDialogComponent,
+        GroupChatDialogComponent,
+        PrivateChatDialogComponent,
     ],
     imports: [
         BrowserModule,

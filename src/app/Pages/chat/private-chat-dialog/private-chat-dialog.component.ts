@@ -6,11 +6,11 @@ import { ChatUserDTO } from 'src/app/DTOs/ChatUserDTO';
 import { ChatService } from '../chat.service';
 
 @Component({
-  selector: 'app-new-private-chat-dialog',
-  templateUrl: './new-private-chat-dialog.component.html',
-  styleUrls: ['./new-private-chat-dialog.component.scss']
+  selector: 'app-private-chat-dialog',
+  templateUrl: './private-chat-dialog.component.html',
+  styleUrls: ['./private-chat-dialog.component.scss']
 })
-export class NewPrivateChatDialogComponent implements OnInit {
+export class PrivateChatDialogComponent implements OnInit {
 
   privateFormUserId = new FormControl('');
   filteredOptionsPrivate$: Observable<ChatUserDTO[]> | undefined;
@@ -18,7 +18,7 @@ export class NewPrivateChatDialogComponent implements OnInit {
 
   constructor(
     private chatService: ChatService,
-    private dialogRef: MatDialogRef<NewPrivateChatDialogComponent>,
+    private dialogRef: MatDialogRef<PrivateChatDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private dialogData: { userId: string | undefined },
   ) { 
     if (this.dialogData.userId) {

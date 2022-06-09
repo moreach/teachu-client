@@ -9,8 +9,8 @@ import { ChatUserDTO } from 'src/app/DTOs/ChatUserDTO';
 import { isToday } from 'src/app/Framework/Helpers/DateHelpers';
 import { truncateToMaxChars } from 'src/app/Framework/Helpers/StringHelpers';
 import { ChatService } from '../chat.service';
-import { NewGroupChatDialogComponent } from '../new-group-chat-dialog/new-group-chat-dialog.component';
-import { NewPrivateChatDialogComponent } from '../new-private-chat-dialog/new-private-chat-dialog.component';
+import { GroupChatDialogComponent } from '../group-chat-dialog/group-chat-dialog.component';
+import { PrivateChatDialogComponent } from '../private-chat-dialog/private-chat-dialog.component';
 
 @Component({
   selector: 'app-chat-overview',
@@ -82,7 +82,7 @@ export class ChatOverviewComponent {
   }
 
   openNewPrivateChatDialog(userId?: string) {
-    this.dialog.open(NewPrivateChatDialogComponent, { 
+    this.dialog.open(PrivateChatDialogComponent, { 
       data: {
         userId
       }
@@ -90,7 +90,7 @@ export class ChatOverviewComponent {
   }
 
   openNewGroupChatDialog() {
-    this.dialog.open(NewGroupChatDialogComponent, { });
+    this.dialog.open(GroupChatDialogComponent, { });
   }
 
   _filter(value: string | null, users: UserOption[]) {
