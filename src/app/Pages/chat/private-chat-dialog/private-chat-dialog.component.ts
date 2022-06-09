@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { combineLatest, map, Observable, startWith } from 'rxjs';
 import { ChatUserDTO } from 'src/app/DTOs/ChatUserDTO';
 import { ChatService } from '../chat.service';
 
 @Component({
-  selector: 'app-new-private-chat-dialog',
-  templateUrl: './new-private-chat-dialog.component.html',
-  styleUrls: ['./new-private-chat-dialog.component.scss']
+  selector: 'app-private-chat-dialog',
+  templateUrl: './private-chat-dialog.component.html',
+  styleUrls: ['./private-chat-dialog.component.scss']
 })
-export class NewPrivateChatDialogComponent implements OnInit {
+export class PrivateChatDialogComponent implements OnInit {
 
   privateFormUserId = new FormControl('');
   filteredOptionsPrivate$: Observable<ChatUserDTO[]> | undefined;
@@ -18,8 +18,13 @@ export class NewPrivateChatDialogComponent implements OnInit {
 
   constructor(
     private chatService: ChatService,
-    private dialogRef: MatDialogRef<NewPrivateChatDialogComponent>,
-  ) { }
+    private dialogRef: MatDialogRef<PrivateChatDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) private dialogData: { userId: string | undefined },
+  ) { 
+    if (this.dialogData.userId) {
+      this.privateFormUserId.setValue(this.dialogData.userId);
+    }
+  }
 
   ngOnInit(): void {
     const allUsers$ = this.chatService.getChatUser$();
@@ -28,7 +33,8 @@ export class NewPrivateChatDialogComponent implements OnInit {
       allUsers$,
       this.privateFormUserId.valueChanges.pipe(startWith(''))
     ]).pipe(
-      map(([users, value]) => this._filter(value, users))
+      map(([users, value]) => this._filter(value, users)),
+      map(users => users.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))),
     );
 
     this.privateFormUserId.addValidators(() => {

@@ -1,6 +1,6 @@
 <form class="private-form">
     <h1>{{ 'chat.privateChat' | translate }}</h1>
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field appearance="fill">
         <mat-label>{{ 'chat.user' | translate }}</mat-label>
         <input type="text" matInput [formControl]="privateFormUserId" [matAutocomplete]="auto" required>
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="getNameFromId.bind(this)">

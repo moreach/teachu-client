@@ -1,6 +1,5 @@
 .page {
     .chat-info {
-        cursor: pointer;
         display: grid;
         grid-template-columns: 48px 1fr;
         gap: 8px;
@@ -20,6 +19,9 @@
                 font-weight: bold;
             }
         }
+    }
+    .chat-info.pointer {
+        cursor: pointer;
     }
     
     .messages {

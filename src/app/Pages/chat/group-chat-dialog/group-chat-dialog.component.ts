@@ -1,19 +1,21 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { combineLatest, map, Observable, startWith } from 'rxjs';
 import { ChatUserDTO } from 'src/app/DTOs/ChatUserDTO';
 import { ChatService } from '../chat.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { v4 as guid } from 'uuid';
+import { ChatSaveGroupDTO } from 'src/app/DTOs/ChatSaveGroupDTO';
 
 @Component({
-  selector: 'app-new-group-chat-dialog',
-  templateUrl: './new-group-chat-dialog.component.html',
-  styleUrls: ['./new-group-chat-dialog.component.scss']
+  selector: 'app-group-chat-dialog',
+  templateUrl: './group-chat-dialog.component.html',
+  styleUrls: ['./group-chat-dialog.component.scss']
 })
-export class NewGroupChatDialogComponent implements OnInit {
+export class GroupChatDialogComponent implements OnInit {
 
   groupFrom: FormGroup;
   groupFormUserId;
@@ -27,12 +29,23 @@ export class NewGroupChatDialogComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private chatService: ChatService,
-    private dialogRef: MatDialogRef<NewGroupChatDialogComponent>,
+    private dialogRef: MatDialogRef<GroupChatDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) private dialogData: ChatSaveGroupDTO | undefined,
   ) { 
     this.groupFrom = this.formBuilder.group({
+      chatId: guid(),
       chatName: ['', Validators.required],
       chatImage: '',
     });
+
+    if (this.dialogData) {
+      this.groupFrom.patchValue({
+        chatId: this.dialogData.chatId,
+        chatName: this.dialogData.chatName,
+        chatImage: this.dialogData.chatImage,
+      });
+      this.selectedUser = this.dialogData.usersId.filter(u => !!u);
+    }
 
     this.groupFormUserId = new FormControl('', () => {
       if (this.selectedUser.length === 0 || this.selectedUser.some(u => !this.allUsers.some(s => s.id === u))) {
@@ -49,12 +62,15 @@ export class NewGroupChatDialogComponent implements OnInit {
       users$,
       this.groupFormUserId.valueChanges.pipe(startWith(''))
     ]).pipe(
-      map(([users, value]) => this._filter(value, users))
+      map(([users, value]) => this._filter(value, users)),
+      map(users => users.filter(user => !this.selectedUser.includes(user.id))),
+      map(users => users.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))),
     );
   }
 
   createGroupChat() {
     const value = {
+      chatId: this.groupFrom.value.chatId,
       chatName: this.groupFrom.value.chatName,
       chatImage: this.groupFrom.value.chatImage,
       usersId: this.selectedUser,
