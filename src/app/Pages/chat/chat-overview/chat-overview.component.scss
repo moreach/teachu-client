@@ -1,9 +1,10 @@
 .head {
-    display: flex;
-    :last-child {
-        margin-left: auto;
-    }
+    display: grid;
+    grid-template-columns: 1fr auto auto;
     margin-bottom: 8px;
+    .search-bar {
+        margin-top: -16px;
+    }
 }
 
 .chat-overview-detail {

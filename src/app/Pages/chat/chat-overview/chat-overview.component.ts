@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { combineLatest, map, Observable, startWith, tap } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { ChatOverviewDTO } from 'src/app/DTOs/ChatOverviewDTO';
+import { ChatUserDTO } from 'src/app/DTOs/ChatUserDTO';
 import { isToday } from 'src/app/Framework/Helpers/DateHelpers';
 import { truncateToMaxChars } from 'src/app/Framework/Helpers/StringHelpers';
 import { ChatService } from '../chat.service';
@@ -18,6 +20,8 @@ import { NewPrivateChatDialogComponent } from '../new-private-chat-dialog/new-pr
 export class ChatOverviewComponent {
 
   chatOverviews$: Observable<ChatOverviewDTO[]>;
+  searchBarControl = new FormControl('');
+  searchBarUsers$: Observable<UserOption[]>;
 
   constructor(
     private chatService: ChatService,
@@ -32,6 +36,41 @@ export class ChatOverviewComponent {
         } 
       }))
     );
+
+    // todo reference from users to new and from existing to chat
+    this.searchBarUsers$ = combineLatest([
+      this.chatService.getChatUser$(),
+      this.chatOverviews$.pipe(
+        map(co => co.map(c => {
+          return {
+            id: c.chatId,
+            name: c.chatName,
+          } as ChatUserDTO
+        }))
+      ),
+      this.searchBarControl.valueChanges.pipe(startWith('')),
+    ]).pipe(
+      map(([users, chats, value]) => [users.filter(u => !chats.some(c => c.id === u.id)), chats, value]),
+      map(([users, chats, value]) => [
+          (users as ChatUserDTO[]).map(u => {
+            return {
+              ...u,
+              userExists: false,
+            } as UserOption
+          }),
+          (chats as ChatUserDTO[]).map(c => {
+            return {
+              ...c,
+              userExists: true,
+            } as UserOption
+          }),
+          value
+        ]
+      ),
+      map(([users, chats, value]) => [[...users, ...chats], value]),
+      map(([users, value]) => this._filter(value, users)),
+      map(users => users.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))),
+    );
   }
 
   openDetail(chatId: string) {
@@ -42,11 +81,35 @@ export class ChatOverviewComponent {
     return isToday(date);
   }
 
-  openNewPrivateChatDialog() {
-    this.dialog.open(NewPrivateChatDialogComponent, { });
+  openNewPrivateChatDialog(userId?: string) {
+    this.dialog.open(NewPrivateChatDialogComponent, { 
+      data: {
+        userId
+      }
+    });
   }
 
   openNewGroupChatDialog() {
     this.dialog.open(NewGroupChatDialogComponent, { });
   }
+
+  _filter(value: string | null, users: UserOption[]) {
+    const filterValue = (typeof value === 'string' ? value : '').toLowerCase();
+    return users.filter(user => user.name.toLowerCase().includes(filterValue));
+  }
+
+  selectUser(user: UserOption) {
+    if (user.userExists) {
+      this.openDetail(user.id);
+    } else {
+      this.openNewPrivateChatDialog(user.id);
+    }
+    this.searchBarControl.setValue('');
+  }
+}
+
+interface UserOption {
+  id: string;
+  name: string;
+  userExists: boolean;
 }

@@ -49,7 +49,8 @@ export class NewGroupChatDialogComponent implements OnInit {
       users$,
       this.groupFormUserId.valueChanges.pipe(startWith(''))
     ]).pipe(
-      map(([users, value]) => this._filter(value, users))
+      map(([users, value]) => this._filter(value, users)),
+      map(users => users.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))),
     );
   }
 

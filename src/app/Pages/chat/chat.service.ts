@@ -19,7 +19,7 @@ export class ChatService {
     // todo implement from backend endpoint with websocket
     const mockData = [
       {
-        chatId: '1',
+        chatId: '101',
         chatName: 'Mathinachhilf',
         chatType: 'GROUP',
         chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
@@ -28,7 +28,7 @@ export class ChatService {
         lastMessageDate: addMinutes(new Date(), -10)
       } as ChatOverviewDTO,
       {
-        chatId: '2',
+        chatId: '102',
         chatName: 'Chat 2',
         chatType: 'GROUP',
         chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
@@ -37,7 +37,7 @@ export class ChatService {
         lastMessageDate: addMinutes(new Date(), -20)
       } as ChatOverviewDTO,
       {
-        chatId: '3',
+        chatId: '103',
         chatName: 'Micha Schweizer',
         chatType: 'PRIVATE',
         chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
@@ -46,7 +46,7 @@ export class ChatService {
         lastMessageDate: addMinutes(new Date(), -2000)
       } as ChatOverviewDTO,
       {
-        chatId: '4',
+        chatId: '104',
         chatName: 'Jonas Hauser',
         chatType: 'PRIVATE',
         chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
@@ -143,16 +143,16 @@ export class ChatService {
   getChatUser$(): Observable<ChatUserDTO[]> {
     // todo implement from backend endpoint
     const mockData = [{
-      id: '1',
+      id: '201',
       name: 'Oliver Umbricht'
     }, {
-      id: '2',
+      id: '202',
       name: 'Felix Winzenried'
     }, {
-      id: '3',
+      id: '203',
       name: 'Micha Schweizer'
     }, {
-      id: '4',
+      id: '204',
       name: 'Roman Bürge'
     }];
     return of(mockData);
