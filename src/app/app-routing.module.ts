@@ -10,6 +10,8 @@ import { GradesComponent } from './Pages/grades/grades.component';
 import { LoginComponent } from './Pages/login/login.component';
 import { TimetableComponent } from './Pages/timetable/timetable.component';
 import {UserSettingsComponent} from "./Pages/user-settings/user-settings.component";
+import { SchoolInfosComponent } from './Pages/school-infos/school-infos.component';
+import { AbsencesComponent } from './Pages/absences/absences.component';
 
 const routes: Routes = [
   { path: '', redirectTo: `/${appRoutes.Login}`, pathMatch: 'full' },
@@ -20,8 +22,10 @@ const routes: Routes = [
     canActivate: [AppGuard],
     children: [
       { path: appRoutes.Dashboard, component: DashboardComponent },
-      { path: appRoutes.Grades, component: GradesComponent },
+      { path: appRoutes.SchoolInfos, component: SchoolInfosComponent },
       { path: appRoutes.Timetable, component: TimetableComponent },
+      { path: appRoutes.Grades, component: GradesComponent },
+      { path: appRoutes.Absences, component: AbsencesComponent },
       { path: appRoutes.Chat, component: ChatOverviewComponent, pathMatch: 'full' },
       { path: `${appRoutes.Chat}/:${appRoutes.ChatId}`, component: ChatConversationComponent, pathMatch: 'full' },
       { path: `${appRoutes.Chat}/:${appRoutes.ChatId}/${appRoutes.ConversationInfo}`, component: ChatConversationInfoComponent },

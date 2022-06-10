@@ -1,5 +1,6 @@
 export const appRoutes = {
     Empty: '',
+    Absences: 'absences',
     App: 'app',
     Chat: 'chat',
     ChatId: 'chatId',
@@ -7,6 +8,7 @@ export const appRoutes = {
     Dashboard: 'dashboard',
     Grades: 'grades',
     Login: 'login',
+    SchoolInfos: 'schoolInfos',
     Timetable: 'timetable',
     UserSettings: 'user',
 }

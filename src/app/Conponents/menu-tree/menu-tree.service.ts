@@ -21,6 +21,12 @@ export class MenuTreeService {
                     url: "/app/dashboard"
                 },
                 {
+                    icon: "info",
+                    leave: true,
+                    titleTranslationKey: "schoolInfos.schoolInfos",
+                    url: "/app/schoolInfos"
+                },
+                {
                     icon: "calendar_today",
                     leave: true,
                     titleTranslationKey: "timetable.timetable",
@@ -31,6 +37,12 @@ export class MenuTreeService {
                     leave: true,
                     titleTranslationKey: "grades.grades",
                     url: "/app/grades"
+                },
+                {
+                    icon: "not_interested",
+                    leave: true,
+                    titleTranslationKey: "absences.absences",
+                    url: "/app/absences"
                 },
                 {
                     icon: "chat",
@@ -45,7 +57,7 @@ export class MenuTreeService {
                     url: "/app/user"
                 },
                 {
-                    icon: "error",
+                    icon: "school",
                     leave: false,
                     translatedTitle: "Classes",
                     children: [

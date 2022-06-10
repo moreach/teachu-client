@@ -42,6 +42,8 @@ import { ChatConversationComponent } from './Pages/chat/chat-conversation/chat-c
 import { ChatConversationInfoComponent } from './Pages/chat/chat-conversation-info/chat-conversation-info.component';
 import { GroupChatDialogComponent } from './Pages/chat/group-chat-dialog/group-chat-dialog.component';
 import { PrivateChatDialogComponent } from './Pages/chat/private-chat-dialog/private-chat-dialog.component';
+import { AbsencesComponent } from './Pages/absences/absences.component';
+import { SchoolInfosComponent } from './Pages/school-infos/school-infos.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -79,6 +81,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         ChatConversationInfoComponent,
         GroupChatDialogComponent,
         PrivateChatDialogComponent,
+        AbsencesComponent,
+        SchoolInfosComponent,
     ],
     imports: [
         BrowserModule,
