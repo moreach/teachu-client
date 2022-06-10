@@ -3,15 +3,18 @@
         "save":"Save",
         "close":"Close"
     },
-    "dashboard":{
-        "dashboard":"Dashboard"
-    },
     "login":{
         "login":"Login",
         "email":"Mail",
         "password":"Password",
         "wrong":"Login was wrong",
         "logout":"Logout"
+    },
+    "dashboard":{
+        "dashboard":"Dashboard"
+    },
+    "schoolInfos":{
+        "schoolInfos":"School Infos"
     },
     "grades":{
         "grades":"Grades"
@@ -21,6 +24,9 @@
         "day":"Day",
         "calendar":"Calendar",
         "weekFrom":"Week from"
+    },
+    "absences":{
+        "absences":"Absences"
     },
     "chat":{
         "chat":"Chat",

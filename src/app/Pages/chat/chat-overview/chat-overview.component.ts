@@ -37,7 +37,6 @@ export class ChatOverviewComponent {
       }))
     );
 
-    // todo reference from users to new and from existing to chat
     this.searchBarUsers$ = combineLatest([
       this.chatService.getChatUser$(),
       this.chatOverviews$.pipe(
