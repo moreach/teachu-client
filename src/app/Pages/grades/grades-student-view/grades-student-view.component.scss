@@ -42,6 +42,30 @@
         background-color: var(--teachu-primary);
         border-radius: 10px;
 
+        .text-container {
+          display: flex;
+          flex-wrap: nowrap;
+          flex-direction: row;
+
+          .exam-title {
+            color: var(--teachu-white);
+            width: calc(100% - 40px);
+            font-size: 20px
+          }
+
+          .exam-grade {
+            color: var(--teachu-accent);
+            width: 40px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 25px
+          }
+
+          .exam-date {
+            color: var(--teachu-grey-darker);
+            font-style: italic;
+          }
+        }
       }
     }
   }
