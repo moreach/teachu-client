@@ -166,6 +166,29 @@ $teachu-dark-theme: mat.define-dark-theme((
   @include mat.all-component-themes($teachu-dark-theme);
 }
 
+/* -- SCROLLBAR -- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--teachu-white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--teachu-black);
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #282828;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #333333;
+}
+
 html, body { min-height: 100vh; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
