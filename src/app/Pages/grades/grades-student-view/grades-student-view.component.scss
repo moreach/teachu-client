@@ -61,16 +61,35 @@
             font-size: 25px
           }
 
-          .exam-date {
-            color: var(--teachu-grey-darker);
-            font-style: italic;
-          }
+            .exam-date {
+                color: var(--teachu-grey);
+                font-style: italic;
+            }
         }
       }
     }
   }
 
-  .student-content{
+    .student-content-collapsed {
+        display: block;
+    }
 
-  }
+    .student-content {
+        display: inline-grid;
+        grid-template-columns: clamp(200px, 20%, 250px) auto;
+        grid-template-rows: auto;
+
+        .class-grades {
+            animation: class-grade-animation 300ms ease-out;
+        }
+
+        @keyframes class-grade-animation {
+            0% {
+                width: 0
+            }
+            100% {
+                width: 100%
+            }
+        }
+    }
 }

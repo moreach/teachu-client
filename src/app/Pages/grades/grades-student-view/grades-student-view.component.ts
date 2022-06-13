@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SemesterDTO} from "../../../DTOs/grades/SemesterDTO";
 import {ApiService} from "../../../Framework/API/api.service";
 import {endpoints} from "../../../Config/endpoints";
@@ -18,6 +18,7 @@ export class GradesStudentViewComponent implements OnInit {
     allSemesterDTOs: SemesterDTO[] = [];
     examMenuTree: MenuTreeDTO = { tree: [] };
     lastExams: GradeDTO[] = [];
+    classSelected: boolean = false;
 
 
     constructor(
@@ -36,6 +37,7 @@ export class GradesStudentViewComponent implements OnInit {
 
     menuTreeLeaveClicked(treeItem: MenuTreeItemDTO){
         console.log(treeItem);
+        this.classSelected = true;
     }
 
     getDateString(date: number): string {
@@ -83,8 +85,7 @@ export class GradesStudentViewComponent implements OnInit {
                     let subjectLeave: MenuTreeItemDTO = {
                         icon: this.CLASS_ICON,
                         leave: true,
-                        translatedTitle: subject.subjectName,
-                        url: `/app/class/${schoolClass.schoolClass}/${subject.subjectName}`
+                        translatedTitle: subject.subjectName
                     };
                     schoolClassLeave.children!.push(subjectLeave);
                 }

@@ -1,3 +1,4 @@
+<!-- TODO: separate into components if possible -->
 <div class="student-view-container">
     <div class="student-header">
         <div class="student-recent-exams">
@@ -12,10 +13,14 @@
             </div>
         </div>
     </div>
-    <div class="student-content">
-        <app-menu-tree (leaveClickedEvent)="menuTreeLeaveClicked($event)"
-                       [treeData]="examMenuTree"
-                       [indentationWidth]="15">
-        </app-menu-tree>
+    <div [className]="classSelected ? 'student-content' : 'student-content-collapsed'">
+        <div class="class-menu-tree">
+            <app-menu-tree (leaveClickedEvent)="menuTreeLeaveClicked($event)"
+                           [treeData]="examMenuTree">
+            </app-menu-tree>
+        </div>
+        <div *ngIf="classSelected" class="class-grades">
+
+        </div>
     </div>
 </div>
