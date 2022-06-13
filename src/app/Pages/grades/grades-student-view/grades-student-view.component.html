@@ -1,3 +1,25 @@
-<p>grades-student-view works!</p>
+<div class="student-view-container">
+    <div class="student-header">
+        <div class="student-recent-exams">
+            <div class="student-recent-exam" *ngFor="let grade of lastExams">
+                <div>
+                    <span id="name">{{grade.name}}</span>
+                    <span id="mark">{{grade.mark}}</span>
+                </div>
+                <div>
+                    <span id="date">{{getDateString(grade.date)}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="student-content">
 
-<p>{{print()}}</p>
+    </div>
+</div>
+
+<div>
+    <app-menu-tree (leaveClickedEvent)="menuTreeLeaveClicked($event)"
+                   [treeData]="examMenuTree"
+                   [indentationWidth]="15">
+    </app-menu-tree>
+</div>

@@ -4,7 +4,7 @@ export interface GradeDTO{
     name: string;
     description: string;
     weight: number;
-    date: Date;
+    date: number;
     viewDate: string;
     mark: number;
     note: string;

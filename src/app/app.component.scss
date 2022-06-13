@@ -23,7 +23,7 @@
 
     display: inline-grid;
     transition: grid-template-columns 0.4s ease-out;
-    grid-template-columns: clamp(300px, 30%, 400px) auto;
+    grid-template-columns: clamp(250px, 25%, 300px) auto;
     grid-template-rows: 100px auto;
 
     .nav {
