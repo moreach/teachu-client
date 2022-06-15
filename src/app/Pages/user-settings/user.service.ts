@@ -34,4 +34,8 @@ export class UserService {
         distinctUntilChanged(),
     );
   }
+
+  saveDarkTheme$(darkTheme: boolean) {
+    return this.apiService.callApi(endpoints.UserDarkTheme, { darkTheme }, "PUT");
+  }
 }

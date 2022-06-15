@@ -1,12 +1,9 @@
 import {Component} from "@angular/core";
-import {ApiService} from "../../Framework/API/api.service";
-import {endpoints} from "../../Config/endpoints";
 import {FormBuilder, Validators} from "@angular/forms";
 import {FormGroupTyped} from "../../Material/types";
 import {UserDTO} from "../../DTOs/UserDTO";
 import { DarkThemeService } from "src/app/Framework/dark-theme/dark-theme.service";
 import { SEXS } from "src/app/Enums/Sex";
-import { UserProfileDTO } from "src/app/DTOs/UserProfileDTO";
 import { ChangeProfileDTO } from "src/app/DTOs/ChangeProfileDTO";
 import { MatDialog } from "@angular/material/dialog";
 import { ChangePasswordDialogComponent } from "./change-password-dialog/change-password-dialog.component";
@@ -42,7 +39,7 @@ export class UserSettingsComponent {
             phone: ["", Validators.required],
             profileImage: ["", Validators.required],
         }) as FormGroupTyped<UserDTO>;
-        this.userService.getCurrentUser$().subscribe((user) => { 
+        this.userService.getCurrentUser$().subscribe((user) => {
             this.darkTheme.setDarkTheme(user.darkTheme);
             this.userForm.patchValue({
                 ...user,
@@ -53,7 +50,7 @@ export class UserSettingsComponent {
     }
 
     saveUser(form: FormGroupTyped<UserDTO>) {
-        // todo fix with backend
+        // todo fix profile image with new component
         this.isLoading = true;
         const formValue = {
             language: form.value.language,
@@ -69,6 +66,8 @@ export class UserSettingsComponent {
     }
 
     changeDarkTheme(isDarkTheme: boolean) {
+        // todo fix in backend
         this.darkTheme.setDarkTheme(isDarkTheme);
+        this.userService.saveDarkTheme$(isDarkTheme).subscribe();
     }
 }
