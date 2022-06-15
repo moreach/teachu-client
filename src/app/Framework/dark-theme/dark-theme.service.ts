@@ -31,7 +31,7 @@ export class DarkThemeService {
     document.body.classList.toggle('darkTheme', isDarkTheme);
     this.overlay.getContainerElement().classList.toggle('darkTheme', isDarkTheme);
 
-    const styles: string[] = ['primary', 'accent', 'white', 'grey', 'grey-darker', 'black', 'accent-1', 'accent-2', 'accent-3', 'accent-4', 'accent-5', 'accent-6'];
+    const styles: string[] = ['primary', 'accent', 'white', 'grey', 'grey-darker', 'black', 'secondary', 'warn'];
     const setTo: string = isDarkTheme ? 'dark' : 'light';
     var r = document.querySelector(':root') as HTMLElement;
     var computed = getComputedStyle(r);

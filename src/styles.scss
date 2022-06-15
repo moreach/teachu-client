@@ -1,79 +1,16 @@
 // theme generated with: http://mcg.mbitson.com/#!?mcgpalette0=%23ba00ff&themename=mcgtheme
 @use '@angular/material' as mat;
 @import './styles/colors';
+@import './styles/mat-color-palettes';
 
 @include mat.core();
 
-$mat-teachu-warn: mat.define-palette(mat.$red-palette);
-
-$teachu-primary-palette: (
-    50 : #ffe5ef,
-    100 : #ffbfd7,
-    200 : #ff94bc,
-    300 : #ff69a1,
-    400 : #ff488c,
-    500 : var(--teachu-primary),
-    600 : #ff2470,
-    700 : #ff1e65,
-    800 : #ff185b,
-    900 : #ff0f48,
-    A100 : #ffffff,
-    A200 : #fff7f9,
-    A400 : #ffc4d0,
-    A700 : #ffabbc,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #ffffff,
-        600 : #ffffff,
-        700 : #ffffff,
-        800 : #ffffff,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
-);
-
-$teachu-accent-palette: (
-    50 : #f7e0ff,
-    100 : #eab3ff,
-    200 : #dd80ff,
-    300 : #cf4dff,
-    400 : #c426ff,
-    500 : var(--teachu-accent),
-    600 : #b300ff,
-    700 : #ab00ff,
-    800 : #a300ff,
-    900 : #9400ff,
-    A100 : #ffffff,
-    A200 : #f9f2ff,
-    A400 : #e1bfff,
-    A700 : #d5a6ff,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #ffffff,
-        500 : #ffffff,
-        600 : #ffffff,
-        700 : #ffffff,
-        800 : #ffffff,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
-);
-
+// --------------
+// - light mode -
+// --------------
 $mat-teachu-primary: mat.define-palette($teachu-primary-palette);
 $mat-teachu-accent: mat.define-palette($teachu-accent-palette);
+$mat-teachu-warn: mat.define-palette($teachu-warn-palette);
 
 $teachu-theme: mat.define-light-theme((
   color: (
@@ -85,80 +22,18 @@ $teachu-theme: mat.define-light-theme((
 
 @include mat.all-component-themes($teachu-theme);
 
-$teachu-dark-primary-palette: (
-    50 : #eaf9e7,
-    100 : #cbefc2,
-    200 : #a9e49a,
-    300 : #86d971,
-    400 : #6cd152,
-    500 : var(--teachu-dark-primary),
-    600 : #4bc32f,
-    700 : #41bc27,
-    800 : #38b521,
-    900 : #28a915,
-    A100 : #dfffdb,
-    A200 : #b2ffa8,
-    A400 : #84ff75,
-    A700 : #6dff5c,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #000000,
-        600 : #000000,
-        700 : #000000,
-        800 : #ffffff,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
-);
-
-$teachu-dark-accent-palette: (
-    50 : #e7fbfd,
-    100 : #c2f6fa,
-    200 : #9af0f6,
-    300 : #71eaf2,
-    400 : #52e6f0,
-    500 : var(--teachu-dark-accent),
-    600 : #2fddeb,
-    700 : #27d9e8,
-    800 : #21d5e5,
-    900 : #15cde0,
-    A100 : #ffffff,
-    A200 : #ddfbff,
-    A400 : #aaf6ff,
-    A700 : #90f3ff,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #000000,
-        600 : #000000,
-        700 : #000000,
-        800 : #000000,
-        900 : #000000,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
-);
-
+// --------------
+// - dark mode --
+// --------------
 $mat-teachu-dark-primary: mat.define-palette($teachu-dark-primary-palette);
 $mat-teachu-dark-accent: mat.define-palette($teachu-dark-accent-palette);
+$mat-teachu-dark-warn: mat.define-palette($teachu-dark-warn-palette);
 
 $teachu-dark-theme: mat.define-dark-theme((
   color: (
     primary: $mat-teachu-dark-primary,
     accent: $mat-teachu-dark-accent,
-    warn: $mat-teachu-warn,
+    warn: $mat-teachu-dark-warn,
   )
 ));
 
