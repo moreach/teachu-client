@@ -11,9 +11,14 @@
     align-items: center;
     flex-wrap: nowrap;
     flex-direction: row;
+    gap: 16px;
 
     width: 50%;
     height: 100%;
+
+    .header-title-wrapper {
+      margin-top: 20px;
+    }
   }
 
   .header-left-side{

@@ -54,7 +54,7 @@ export class MenuTreeService {
                     icon: "settings",
                     leave: true,
                     titleTranslationKey: "userSettings.userSettings",
-                    url: "/app/user"
+                    url: "/app/userSettings"
                 },
                 {
                     icon: "school",

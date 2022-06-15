@@ -10,5 +10,5 @@ export const appRoutes = {
     Login: 'login',
     SchoolInfos: 'schoolInfos',
     Timetable: 'timetable',
-    UserSettings: 'user',
+    UserSettings: 'userSettings',
 }
