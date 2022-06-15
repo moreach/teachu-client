@@ -1,5 +1,4 @@
 <form [formGroup]="userForm" *showSpinner="isLoading">
-    <h1>{{ 'userSettings.userSettings' | translate }}</h1>
     <app-readonly-field [label]="'userSettings.email' | translate" [value]="userForm.value.email"></app-readonly-field>
     <app-readonly-field [label]="'userSettings.firstName' | translate" [value]="userForm.value.firstName"></app-readonly-field>
     <app-readonly-field [label]="'userSettings.lastName' | translate" [value]="userForm.value.lastName"></app-readonly-field>
