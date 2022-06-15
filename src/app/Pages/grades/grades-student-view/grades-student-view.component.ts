@@ -4,6 +4,14 @@ import {ApiService} from "../../../Framework/API/api.service";
 import {endpoints} from "../../../Config/endpoints";
 import {MenuTreeDTO, MenuTreeItemDTO} from "../../../DTOs/MenuTreeDTO";
 import {GradeDTO} from "../../../DTOs/grades/GradeDTO";
+import {SchoolClassDTO} from "../../../DTOs/grades/SchoolClassDTO";
+import {SubjectDTO} from "../../../DTOs/grades/SubjectDTO";
+
+export interface SubjectData {
+    semester: SemesterDTO;
+    schoolClass: SchoolClassDTO;
+    subject: SubjectDTO;
+}
 
 @Component({
     selector: 'app-grades-student-view',
@@ -14,11 +22,13 @@ export class GradesStudentViewComponent implements OnInit {
     readonly RECENT_EXAMS_AMOUNT: number = 4;
     readonly SEMESTER_ICON: string = "home";
     readonly CLASS_ICON: string = "error";
+    readonly SUBJECT_ICON: string = "error";
 
     allSemesterDTOs: SemesterDTO[] = [];
     examMenuTree: MenuTreeDTO = { tree: [] };
     lastExams: GradeDTO[] = [];
     classSelected: boolean = false;
+    selectedSubject: SubjectData | undefined;
 
 
     constructor(
@@ -36,12 +46,14 @@ export class GradesStudentViewComponent implements OnInit {
     }
 
     menuTreeLeaveClicked(treeItem: MenuTreeItemDTO){
-        console.log(treeItem);
+        this.selectedSubject = treeItem.data! as SubjectData;
+        console.log(this.selectedSubject.schoolClass);
         this.classSelected = true;
     }
 
-    getDateString(date: number): string {
-       return new Date(date).toLocaleDateString();
+    getRoundedMark(mark: number | undefined): string {
+        if(mark === undefined) return "-";
+        return Math.round(mark * 100) / 100 + "";
     }
 
     private getLastExams(semesters: SemesterDTO[], amount?: number | undefined): GradeDTO[]{
@@ -83,9 +95,10 @@ export class GradesStudentViewComponent implements OnInit {
 
                 for (let subject of schoolClass.subjects) {
                     let subjectLeave: MenuTreeItemDTO = {
-                        icon: this.CLASS_ICON,
+                        icon: this.SUBJECT_ICON,
                         leave: true,
-                        translatedTitle: subject.subjectName
+                        translatedTitle: subject.subjectName,
+                        data: { semester, schoolClass, subject }
                     };
                     schoolClassLeave.children!.push(subjectLeave);
                 }

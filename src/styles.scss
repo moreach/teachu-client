@@ -5,6 +5,8 @@
 
 @include mat.core();
 
+$is-dark-theme: "false";
+
 // --------------
 // - light mode -
 // --------------
@@ -38,6 +40,7 @@ $teachu-dark-theme: mat.define-dark-theme((
 ));
 
 .darkTheme {
+  $dark-mode: "true";
   @include mat.all-component-themes($teachu-dark-theme);
 }
 

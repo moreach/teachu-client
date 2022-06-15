@@ -1,15 +1,11 @@
-<h1>{{ 'grades.grades' | translate }}</h1>
 <div [ngSwitch]="currentUserRole">
     <div *ngSwitchCase="'STUDENT'">
-        <h2>STUDENT</h2>
         <app-grades-student-view></app-grades-student-view>
     </div>
     <div *ngSwitchCase="'PARENT'">
-        <h2>PARENT</h2>
         <app-grades-parent-view></app-grades-parent-view>
     </div>
     <div *ngSwitchDefault>
-        <h2>TEACHER</h2>
         <app-grades-teacher-view></app-grades-teacher-view>
     </div>
 </div>
