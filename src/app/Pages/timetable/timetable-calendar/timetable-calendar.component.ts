@@ -37,7 +37,7 @@ export class TimetableCalendarComponent {
       if (!this.classToColor.some(cc => cc.key === l.class)) {
         this.classToColor.push({
           key: l.class,
-          value: `var(--teachu-accent-${(color % 6) + 1})`
+          value: `var(--teachu-accent-${(color % 6) + 1})` // FIXME @eric colors were renamed -> accent-? does no longer exist
         });
         color++;
       }
