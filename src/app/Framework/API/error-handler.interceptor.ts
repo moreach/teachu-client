@@ -8,7 +8,6 @@ import {
 import { catchError, Observable, switchMap, tap } from 'rxjs';
 import { appConfig } from 'src/app/Config/appConfig';
 import { endpoints } from 'src/app/Config/endpoints';
-import { RefreshTokenDTO } from 'src/app/DTOs/RefreshTokenDTO';
 import { TokenDTO } from 'src/app/DTOs/TokenDTO';
 import { ApiService } from './api.service';
 import { ErrorHandlingService } from './error-handling.service';
