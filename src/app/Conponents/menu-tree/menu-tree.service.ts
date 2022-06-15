@@ -1,4 +1,5 @@
 import {Injectable} from "@angular/core";
+import { Observable, of } from "rxjs";
 import {MenuTreeDTO} from "../../DTOs/MenuTreeDTO";
 
 @Injectable({
@@ -9,15 +10,21 @@ export class MenuTreeService {
     constructor() {
     }
 
-    getMenuTree(): MenuTreeDTO {
+    getMenuTree$(): Observable<MenuTreeDTO> {
         // todo replace with backend endpoint
-        return {
+        const mockData = {
             tree: [
                 {
                     icon: "home",
                     leave: true,
                     titleTranslationKey: "dashboard.dashboard",
                     url: "/app/dashboard"
+                },
+                {
+                    icon: "info",
+                    leave: true,
+                    titleTranslationKey: "schoolInfos.schoolInfos",
+                    url: "/app/schoolInfos"
                 },
                 {
                     icon: "calendar_today",
@@ -32,13 +39,25 @@ export class MenuTreeService {
                     url: "/app/grades"
                 },
                 {
+                    icon: "not_interested",
+                    leave: true,
+                    titleTranslationKey: "absences.absences",
+                    url: "/app/absences"
+                },
+                {
+                    icon: "chat",
+                    leave: true,
+                    titleTranslationKey: "chat.chat",
+                    url: "/app/chat"
+                },
+                {
                     icon: "settings",
                     leave: true,
                     titleTranslationKey: "userSettings.userSettings",
-                    url: "/app/user"
+                    url: "/app/userSettings"
                 },
                 {
-                    icon: "error",
+                    icon: "school",
                     leave: false,
                     translatedTitle: "Classes",
                     children: [
@@ -60,5 +79,6 @@ export class MenuTreeService {
                 }
             ]
         };
+        return of(mockData);
     }
 }

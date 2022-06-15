@@ -1,0 +1,37 @@
+.head {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    margin-bottom: 8px;
+    .search-bar {
+        margin-top: -16px;
+    }
+}
+
+.chat-overview-detail {
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    gap: 8px;
+
+    .chat-image {
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        object-fit: cover;
+    }
+
+    .chat-middle-section {
+        display: flex;
+        align-items: center;
+        .chat-title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+
+    .chat-last-msg-date {
+        margin: auto;
+    }
+}

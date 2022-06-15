@@ -3,15 +3,18 @@
         "save":"Save",
         "close":"Close"
     },
-    "dashboard":{
-        "dashboard":"Dashboard"
-    },
     "login":{
         "login":"Login",
         "email":"Mail",
         "password":"Password",
         "wrong":"Login was wrong",
         "logout":"Logout"
+    },
+    "dashboard":{
+        "dashboard":"Dashboard"
+    },
+    "schoolInfos":{
+        "schoolInfos":"School Infos"
     },
     "grades":{
         "grades":"Grades"
@@ -21,6 +24,26 @@
         "day":"Day",
         "calendar":"Calendar",
         "weekFrom":"Week from"
+    },
+    "absences":{
+        "absences":"Absences"
+    },
+    "chat":{
+        "chat":"Chat",
+        "you":"You",
+        "leftTheChat":"Left the Chat",
+        "joinedTheChat":"Joined the Chat",
+        "privateChat":"Private Chat",
+        "groupChat":"Group Chat",
+        "newGroupChat":"New Group Chat",
+        "newPrivateChat":"New Private Chat",
+        "chatName":"Chat Name",
+        "chatImage":"Chat Image",
+        "user":"User",
+        "users":"Users",
+        "message":"Message",
+        "leaveChat":"Leave Chat",
+        "editChat":"Edit Chat"
     },
     "userSettings":{
         "userSettings":"Settings",

@@ -1,8 +1,11 @@
 <div class="header">
     <div class="header-left-side">
-        <button *ngIf="menuClosed" mat-icon-button class="child" (click)="toggleMenu()">
+        <button *ngIf="menuClosed" mat-icon-button (click)="toggleMenu()">
             <mat-icon>{{menuToggleIcon}}</mat-icon>
         </button>
+        <div class="header-title-wrapper">
+            <h1>{{ (title$ | async)! | translate }}</h1>
+        </div>
     </div>
     <div class="header-right-side">
         <app-profile-pic [width]="60" [height]="60" [user]="currentUser"></app-profile-pic>

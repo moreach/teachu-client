@@ -37,9 +37,17 @@ import { ReadonlyFieldComponent } from './Conponents/readonly-field/readonly-fie
 import { ChangePasswordDialogComponent } from './Pages/user-settings/change-password-dialog/change-password-dialog.component';
 import { TimetableTodayComponent } from './Pages/timetable/timetable-today/timetable-today.component';
 import { TimetableCalendarComponent } from './Pages/timetable/timetable-calendar/timetable-calendar.component';
+import { ChatOverviewComponent } from './Pages/chat/chat-overview/chat-overview.component';
+import { ChatConversationComponent } from './Pages/chat/chat-conversation/chat-conversation.component';
+import { ChatConversationInfoComponent } from './Pages/chat/chat-conversation-info/chat-conversation-info.component';
+import { GroupChatDialogComponent } from './Pages/chat/group-chat-dialog/group-chat-dialog.component';
+import { PrivateChatDialogComponent } from './Pages/chat/private-chat-dialog/private-chat-dialog.component';
+import { AbsencesComponent } from './Pages/absences/absences.component';
+import { SchoolInfosComponent } from './Pages/school-infos/school-infos.component';
 import {GradesStudentViewComponent} from "./Pages/grades/grades-student-view/grades-student-view.component";
 import { GradesTeacherViewComponent } from './Pages/grades/grades-teacher-view/grades-teacher-view.component';
 import { GradesParentViewComponent } from './Pages/grades/grades-parent-view/grades-parent-view.component';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -75,6 +83,13 @@ export function HttpLoaderFactory(http: HttpClient) {
         GradesStudentViewComponent,
         GradesTeacherViewComponent,
         GradesParentViewComponent,
+        ChatOverviewComponent,
+        ChatConversationComponent,
+        ChatConversationInfoComponent,
+        GroupChatDialogComponent,
+        PrivateChatDialogComponent,
+        AbsencesComponent,
+        SchoolInfosComponent,
     ],
     imports: [
         BrowserModule,

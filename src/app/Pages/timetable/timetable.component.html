@@ -1,4 +1,3 @@
-<h1>{{ 'timetable.timetable' | translate }}</h1>
 <mat-tab-group mat-align-tabs="start">
     <mat-tab [label]="'timetable.day' | translate">
         <app-timetable-today (changeRelevantDate)="changeRelevantDateDay($event)" [lessons]="(getLessonsToday$() | async) ?? []" [date]="(relevantDateDay$ | async)!"></app-timetable-today>

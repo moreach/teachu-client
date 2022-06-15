@@ -1,0 +1,44 @@
+<div class="head">
+    <div>
+        <button mat-button (click)="openNewPrivateChatDialog()">{{ 'chat.newPrivateChat' | translate }}</button>
+        <button mat-button (click)="openNewGroupChatDialog()">{{ 'chat.newGroupChat' | translate }}</button>
+    </div>
+    <div class="search-bar">
+        <form>
+            <mat-form-field appearance="outline">
+                <input type="text" matInput [formControl]="searchBarControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectUser($event.option.value)">
+                    <mat-option *ngFor="let option of searchBarUsers$ | async" [value]="option">
+                        {{ option.name }}
+                    </mat-option>
+                </mat-autocomplete>
+                <button matSuffix mat-button><mat-icon >search</mat-icon></button>
+            </mat-form-field>
+        </form>
+    </div>
+</div>
+<div *ngIf="chatOverviews$ | async as chatOverviews">
+    <mat-divider></mat-divider>
+    <div *ngFor="let chat of chatOverviews">
+        <div class="chat-overview-detail" (click)="openDetail(chat.chatId)">
+            <img [src]="chat.chatImage" class="chat-image">
+            <div class="chat-middle-section">
+                <div>
+                    <div class="chat-title">{{ chat.chatName }}</div>
+                    <div *ngIf="chat.chatType === 'GROUP'; else private" class="chat-last-msg">
+                        {{ chat.lastMessageFrom ?? ('chat.you' | translate) }}: <i>{{ chat.lastMessage }}</i>
+                    </div>
+                    <ng-template #private>
+                        <div class="chat-last-msg">
+                            {{ chat.lastMessageFrom === null ? ('chat.you' | translate) + ': ' : '' }}<i>{{ chat.lastMessage }}</i>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="chat-last-msg-date">
+                {{ isToday(chat.lastMessageDate) ? (chat.lastMessageDate | date: 'HH:mm') : (chat.lastMessageDate | date: 'dd.MM.yyyy') }}
+            </div>
+        </div>        
+        <mat-divider></mat-divider>
+    </div>
+</div>

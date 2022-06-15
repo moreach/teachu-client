@@ -18,7 +18,7 @@ export class AppComponent implements AfterViewInit {
     title = 'TeachU';
     bigWindow: boolean = false;
     menuClosed: boolean = false;
-    menuTree: MenuTreeDTO;
+    menuTree$: Observable<MenuTreeDTO>;
     isSignedIn$: Observable<boolean>;
     currentUser$: Observable<UserDTO | undefined>;
 
@@ -45,7 +45,7 @@ export class AppComponent implements AfterViewInit {
             })
         );
 
-        this.menuTree = this.menuTreeService.getMenuTree();
+        this.menuTree$ = this.menuTreeService.getMenuTree$();
     }
 
     ngAfterViewInit(): void {

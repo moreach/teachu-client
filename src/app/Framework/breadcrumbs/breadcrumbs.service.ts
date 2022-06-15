@@ -15,7 +15,7 @@ export class BreadcrumbsService {
   ) {
     this.breadcrumbs$ = this.activatedRoute.url.pipe(
       map(url => url.map(segment => segment.path)),
-      switchMap(url => this.loadBreadcrumbs(url))
+      switchMap(url => this.loadBreadcrumbs$(url))
     );
   }
 
@@ -23,7 +23,7 @@ export class BreadcrumbsService {
     return this.breadcrumbs$;
   }
 
-  loadBreadcrumbs(url: string[]) {
+  loadBreadcrumbs$(url: string[]) {
     // todo imlpement from backend endpoint
     return of([{
       url: 'app',
