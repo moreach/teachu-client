@@ -35,8 +35,6 @@ import { TimetableComponent } from './Pages/timetable/timetable.component';
 import { GradesComponent } from './Pages/grades/grades.component';
 import { ReadonlyFieldComponent } from './Conponents/readonly-field/readonly-field.component';
 import { ChangePasswordDialogComponent } from './Pages/user-settings/change-password-dialog/change-password-dialog.component';
-import { TimetableTodayComponent } from './Pages/timetable/timetable-today/timetable-today.component';
-import { TimetableCalendarComponent } from './Pages/timetable/timetable-calendar/timetable-calendar.component';
 import { ChatOverviewComponent } from './Pages/chat/chat-overview/chat-overview.component';
 import { ChatConversationComponent } from './Pages/chat/chat-conversation/chat-conversation.component';
 import { ChatConversationInfoComponent } from './Pages/chat/chat-conversation-info/chat-conversation-info.component';
@@ -44,6 +42,7 @@ import { GroupChatDialogComponent } from './Pages/chat/group-chat-dialog/group-c
 import { PrivateChatDialogComponent } from './Pages/chat/private-chat-dialog/private-chat-dialog.component';
 import { AbsencesComponent } from './Pages/absences/absences.component';
 import { SchoolInfosComponent } from './Pages/school-infos/school-infos.component';
+import { LessonDetailsComponent } from './Pages/timetable/lesson-details/lesson-details.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -74,8 +73,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         GradesComponent,
         ReadonlyFieldComponent,
         ChangePasswordDialogComponent,
-        TimetableTodayComponent,
-        TimetableCalendarComponent,
         ChatOverviewComponent,
         ChatConversationComponent,
         ChatConversationInfoComponent,
@@ -83,6 +80,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         PrivateChatDialogComponent,
         AbsencesComponent,
         SchoolInfosComponent,
+        LessonDetailsComponent,
     ],
     imports: [
         BrowserModule,

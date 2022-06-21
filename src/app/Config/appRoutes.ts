@@ -8,6 +8,7 @@ export const appRoutes = {
     Dashboard: 'dashboard',
     Grades: 'grades',
     Login: 'login',
+    LessonId: 'lessonId',
     SchoolInfos: 'schoolInfos',
     Timetable: 'timetable',
     UserSettings: 'userSettings',
