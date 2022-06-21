@@ -1,0 +1,60 @@
+.head {
+    margin-top: 16px;
+    display: flex;
+    :last-child {
+        margin-left: auto;
+    }
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    border: 1px solid var(--teachu-black);
+    .day {
+        border-left: 1px solid var(--teachu-black);
+    }
+    .block {
+        height: 64px;
+        box-sizing: border-box;
+    }
+    .hour {
+        border-top: 1px dotted var(--teachu-black);
+    }
+    .date,
+    .hour {
+        padding: 4px;
+    }
+    .date,
+    .hour,
+    .lesson,
+    .dateInfo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .lesson {
+        height: 100%;
+        width: 100%;
+        border-radius: 4px;
+        font-size: 12px;
+        text-align: center;
+        cursor: pointer;
+    }
+    .dateInfo {
+        height: 100%;
+        width: 100%;
+        border-radius: 4px;
+    }
+    .today {
+        background-color: var(--teachu-warn);
+    }
+}
+
+.calendar.week {
+    grid-template-columns: repeat(8, 1fr);
+    > .day:nth-last-of-type(-n+2) {
+        .hour {
+            background-color: var(--teachu-grey);
+        }
+    }
+}

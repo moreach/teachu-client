@@ -18,6 +18,7 @@ export class UserSettingsComponent {
     userForm: FormGroupTyped<UserDTO>;
     sexs = SEXS;
     isLoading: boolean = true;
+    prevUser: ChangeProfileDTO | undefined;
 
     constructor(
       private builder: FormBuilder,
@@ -45,6 +46,12 @@ export class UserSettingsComponent {
                 ...user,
                 birthday: new Date(user.birthday),
             } as UserDTO);
+            this.prevUser = {
+                darkTheme: user.darkTheme,
+                language: user.language,
+                phone: user.phone,
+                profileImage: user.profileImage,
+            };
             this.isLoading = false;
         });
     }
@@ -56,8 +63,9 @@ export class UserSettingsComponent {
             language: form.value.language,
             darkTheme: form.value.darkTheme,
             phone: form.value.phone,
-            profileImage: form.value.profileImage
+            profileImage: 'chömmer d Vorarbet vom Micha is Backend merge?'
         } as ChangeProfileDTO;
+        this.prevUser = formValue;
         this.userService.saveUser$(formValue).subscribe(_ => this.isLoading = false);
     }
 
@@ -68,6 +76,11 @@ export class UserSettingsComponent {
     changeDarkTheme(isDarkTheme: boolean) {
         // todo fix in backend
         this.darkTheme.setDarkTheme(isDarkTheme);
-        this.userService.saveDarkTheme$(isDarkTheme).subscribe();
+        const formValue = {
+            ...this.prevUser,
+            darkTheme: isDarkTheme,
+        } as ChangeProfileDTO;
+        this.prevUser = formValue;
+        this.userService.saveUser$(formValue).subscribe();
     }
 }

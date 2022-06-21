@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { LessonDTO } from 'src/app/DTOs/LessonDTO';
+import { LessonInfoDTO } from 'src/app/DTOs/LessonInfoDTO';
+import { compareDates } from 'src/app/Framework/Helpers/DateHelpers';
 
 @Injectable({
   providedIn: 'root'
@@ -13,85 +15,133 @@ export class TimetableService {
     // todo implement enpoint from backend
     const mockData = [
       {
-        class: 'IN19a',
-        subject: 'Sport',
-        room: 'Halle 1',
-        teacher: 'W. Kozlowski',
-        start: new Date(2022, 5, 14, 8, 35),
-        end: new Date(2022, 5, 14, 9, 35)
-      } as LessonDTO,
-      {
-        class: 'IN19a',
-        subject: 'Informatik',
-        room: 'B426',
-        teacher: 'M. Bachofner',
-        start: new Date(2022, 5, 14, 10, 0),
-        end: new Date(2022, 5, 14, 12, 0)
-      } as LessonDTO,
-      {
-        class: 'IN19a',
-        subject: 'Informatik',
-        room: 'B426',
-        teacher: 'M. Bachofner',
-        start: new Date(2022, 5, 14, 13, 0),
-        end: new Date(2022, 5, 14, 17, 10)
-      } as LessonDTO,
-      {
-        class: 'BM19c',
-        subject: 'Wirtschaft & Recht',
-        teacher: 'S. Bonaparte',
-        room: 'M3xx',
-        start: new Date(2022, 5, 15, 7, 30),
-        end: new Date(2022, 5, 15, 9, 5)
-      } as LessonDTO,
-      {
-        class: 'BM19c',
+        class: 'B1a',
         subject: 'Mathematik',
-        teacher: 'S. La Rosa',
-        room: 'M3xx',
-        start: new Date(2022, 5, 15, 9, 10),
-        end: new Date(2022, 5, 15, 11, 0)
-      } as LessonDTO,
+        lessonNumber: 1,
+        room: 'O11',
+        date: new Date(),
+        teacher: 'M. Plaukovits',
+        lessonId: '1',
+      },
       {
-        class: 'BM19c',
-        subject: 'Geschichte',
-        teacher: 'B. Piller',
-        room: 'M3xx',
-        start: new Date(2022, 5, 15, 9, 10),
-        end: new Date(2022, 5, 15, 11, 0)
-      } as LessonDTO,
+        class: 'B2a',
+        subject: 'Mathematik',
+        lessonNumber: 2,
+        room: 'O11',
+        date: new Date(),
+        teacher: 'M. Plaukovits',
+        lessonId: '2',
+      },
       {
-        class: 'BM19c',
-        subject: 'Physik',
-        teacher: 'F. Widmer',
-        room: 'M3xx',
-        start: new Date(2022, 5, 15, 13, 10),
-        end: new Date(2022, 5, 15, 14, 45)
-      } as LessonDTO,
+        class: 'B3a',
+        subject: 'Mathematik',
+        lessonNumber: 3,
+        room: 'O11',
+        date: new Date(),
+        teacher: 'M. Plaukovits',
+        lessonId: '3',
+      },
       {
-        class: 'BM19c',
-        subject: 'IDPA',
-        teacher: 'F. Widmer',
-        room: 'M3xx',
-        start: new Date(2022, 5, 15, 15, 55),
-        end: new Date(2022, 5, 15, 17, 30)
-      } as LessonDTO,
-    ];
+        class: 'B4a',
+        subject: 'Deutsch',
+        lessonNumber: 4,
+        room: 'O12',
+        date: new Date(),
+        teacher: 'M. Hehlen',
+        lessonId: '4',
+      },
+      {
+        class: 'B3a',
+        subject: 'Französisch',
+        lessonNumber: 5,
+        room: 'O12',
+        date: new Date(),
+        teacher: 'D. Kamber',
+        lessonId: '5',
+      },
+      {
+        class: 'B3a',
+        subject: 'Französisch',
+        lessonNumber: 6,
+        room: 'O12',
+        date: new Date(),
+        teacher: 'D. Kamber',
+        lessonId: '6',
+      },
+      {
+        class: 'Freifach Gruppe 1',
+        subject: 'Italienisch',
+        lessonNumber: 7,
+        room: 'O12',
+        date: new Date(),
+        teacher: 'C. Notter',
+        lessonId: '7',
+      },
+      {
+        class: 'Freifach Gruppe 1',
+        subject: 'Italienisch',
+        lessonNumber: 8,
+        room: 'O12',
+        date: new Date(),
+        teacher: 'C. Notter',
+        lessonId: '8',
+      },
+    ] as LessonDTO[];
     const start = new Date(from.getFullYear(), from.getMonth(), from.getDate());
     const end = new Date(to.getFullYear(), to.getMonth(), to.getDate(), 23, 59);
-    const filtered = mockData.filter(l => l.start > start && l.start < end);
+    const filtered = mockData.filter(l => compareDates(l.date, start) && compareDates(end, l.date));
     return of(filtered);
   }
 
-  getFirstDayOfWeek(date: Date) {
-    const day = date.getDay();
-    const diff = date.getDate() - day + (day === 0 ? -6 : 1);
-    return new Date(date.setDate(diff));
+  getLessonInfo$(): Observable<LessonInfoDTO[]> {
+    // todo implement enpoint from backend
+    const mockData = [
+      {
+        lessonNumber: 1,
+        start: '8:00',
+        end: '9:00'
+      },
+      {
+        lessonNumber: 2,
+        start: '9:00',
+        end: '10:00'
+      },
+      {
+        lessonNumber: 3,
+        start: '10:00',
+        end: '11:00'
+      },
+      {
+        lessonNumber: 4,
+        start: '11:00',
+        end: '12:00'
+      },
+      {
+        lessonNumber: 5,
+        start: '13:00',
+        end: '14:00'
+      },
+      {
+        lessonNumber: 6,
+        start: '14:00',
+        end: '15:00'
+      },
+      {
+        lessonNumber: 7,
+        start: '15:00',
+        end: '16:00'
+      },
+      {
+        lessonNumber: 8,
+        start: '16:00',
+        end: '17:00'
+      },
+    ];
+    return of(mockData);
   }
 
-  getLastDayOfWeek(date: Date) {
-    const day = date.getDay();
-    const diff = date.getDate() - day + (day === 0 ? -6 : 1);
-    return new Date(date.setDate(diff + 6));
+  getLessonDetails$(lessonId: string): Observable<string> {
+    // todo implement enpoint from backend
+    return of('Lesson details');
   }
 }
