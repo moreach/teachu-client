@@ -1,0 +1,13 @@
+<div class="recent-exams-container">
+    <div class="recent-exam-list">
+        <div class="recent-exam" *ngFor="let grade of recentExams">
+            <div class="text-container" style="align-items: center;">
+                <span class="exam-title">{{grade.name}}</span>
+                <span class="exam-grade">{{grade.mark}}</span>
+            </div>
+            <div class="text-container" style="align-items: end;">
+                <span class="exam-date">{{grade.date | date: 'dd.MM.yyyy'}}</span>
+            </div>
+        </div>
+    </div>
+</div>

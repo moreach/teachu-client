@@ -1,31 +1,49 @@
 :root {
     // base
     --teachu-primary: #00214D; // is used for most things with color
+    --teachu-primary-brightest: #e0e4ea; // used as en underlying color when the primary is the font
+
     --teachu-accent: #00EBC7; // is used for things that should stand out
+    --teachu-accent-hover: #00e5ba; // used for accent areas on hover
+    --teachu-accent-click: #00dda6; // used for accent areas on active
+
     --teachu-white: #EFFFFF; // is used for texts and backgrounds
     --teachu-grey: #F4F4F6; // can be used for areas, texts or backgrounds
     --teachu-grey-darker: #D3D3D9; // can be used for areas, texts or backgrounds
     --teachu-black: #000914; // is used for texts and backgrounds
+
     --teachu-secondary: #AFB9C7; // something that doesn't do anything special but should have an other color (just a backup color)
     --teachu-warn: #FF5470; // used for stuff like delete or cancel buttons
 
     // lightmode
     --teachu-light-primary: #00214D;
+    --teachu-light-primary-brightest: #e0e4ea;
+
     --teachu-light-accent: #00EBC7;
+    --teachu-light-accent-hover: #00e5ba;
+    --teachu-light-accent-click: #00dda6;
+
     --teachu-light-white: #EFFFFF;
     --teachu-light-grey: #F4F4F6;
     --teachu-light-grey-darker: #D3D3D9;
     --teachu-light-black: #000914;
+
     --teachu-light-secondary: #AFB9C7;
     --teachu-light-warn: #FF5470;
 
     // darkmode
     --teachu-dark-primary: #99C5FF;
+    --teachu-dark-primary-brightest: #f3f8ff;
+
     --teachu-dark-accent: #467A56;
+    --teachu-dark-accent-hover: #376745;
+    --teachu-dark-accent-click: #204a2b;
+
     --teachu-dark-white: #1d1d1d;
     --teachu-dark-grey: #282828;
     --teachu-dark-grey-darker: #363636;
     --teachu-dark-black: #F2F6FF;
+
     --teachu-dark-secondary: #6A5B4F;
     --teachu-dark-warn: #A14A68;
 }

@@ -1,0 +1,102 @@
+@use '@angular/material' as mat;
+@import 'src/styles.scss';
+
+.class-grades {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-content: center;
+
+    .class-grades-header{
+        height: 100px;
+        width: 100%;
+
+        display: grid;
+        grid-template-rows: 100%;
+        grid-template-columns: 70% 30%;
+        align-items: center;
+
+        .class-grades-header-items{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+
+            .semester-grade-menu-toggle{
+                display: none;
+            }
+
+            @media (max-width: 540px) {
+                #semester-icon, #semester-text{
+                    display: none;
+                }
+            }
+
+            @media (max-width: 400px) {
+                #class-icon, #class-text{
+                    display: none;
+                }
+            }
+        }
+
+        .subject-average{
+            transition: background-color 300ms ease;
+
+            color: var(--teachu-primary);
+            font-size: 25px;
+            font-weight: bold;
+
+            padding: 10px;
+            border-radius: 5px;
+
+            background-color: var(--teachu-primary-brightest);
+        }
+    }
+
+
+    .grade-row{
+        cursor: pointer;
+        transition: background-color 300ms ease;
+
+        display: grid;
+        grid-template-rows: 100%;
+        grid-template-columns: 50% 30% 20%;
+        align-items: center;
+        justify-items: center;
+
+        background-color: var(--teachu-white);
+        border: 5px solid var(--teachu-grey);
+        border-radius: 10px;
+        margin: 5px;
+        padding: 10px;
+        height: 30px;
+
+        .grade-value{
+            text-align: center;
+        }
+
+        .grade-mark{
+            padding: 7px;
+            border-radius: 5px;
+
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--teachu-primary);
+
+            background-color: var(--teachu-primary-brightest);
+        }
+
+        .grade-date{
+            font-style: italic;
+        }
+
+        .grade-name{
+            font-size: 17px;
+        }
+    }
+
+    .grade-row:hover{
+        background-color: var(--teachu-grey);
+    }
+}

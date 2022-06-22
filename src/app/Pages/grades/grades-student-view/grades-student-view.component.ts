@@ -51,11 +51,6 @@ export class GradesStudentViewComponent implements OnInit {
         this.classSelected = true;
     }
 
-    getRoundedMark(mark: number | undefined): string {
-        if(mark === undefined) return "-";
-        return Math.round(mark * 100) / 100 + "";
-    }
-
     private getLastExams(semesters: SemesterDTO[], amount?: number | undefined): GradeDTO[]{
         let exams: GradeDTO[] = [];
         for (let semester of semesters) {

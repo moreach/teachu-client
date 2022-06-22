@@ -1,17 +1,6 @@
-<!-- TODO: separate into components if possible -->
 <div class="student-view-container">
     <div class="student-header">
-        <div class="student-recent-exams">
-            <div class="student-recent-exam" *ngFor="let grade of lastExams">
-                <div class="text-container" style="align-items: center;">
-                    <span class="exam-title">{{grade.name}}</span>
-                    <span class="exam-grade">{{grade.mark}}</span>
-                </div>
-                <div class="text-container" style="align-items: end;">
-                    <span class="exam-date">{{grade.date | date: 'dd.MM.yyyy'}}</span>
-                </div>
-            </div>
-        </div>
+        <app-recent-exams [recentExams]="lastExams"></app-recent-exams>
     </div>
     <div [className]="classSelected ? 'student-content' : 'student-content-collapsed'">
         <div class="class-menu-tree">
@@ -19,25 +8,6 @@
                            [treeData]="examMenuTree">
             </app-menu-tree>
         </div>
-        <div *ngIf="classSelected" class="class-grades">
-            <div class="class-grades-header">
-                <div class="class-grades-header-items">
-                    <mat-icon>{{SEMESTER_ICON}}</mat-icon>
-                    <span>{{selectedSubject?.semester?.semesterName}}</span>
-                    <mat-icon>{{CLASS_ICON}}</mat-icon>
-                    <span>{{selectedSubject?.schoolClass?.schoolClass}} </span>
-                    <mat-icon>{{SUBJECT_ICON}}</mat-icon>
-                    <span>{{selectedSubject?.subject?.subjectName}}</span>
-                </div>
-                <div class="class-grades-header-items" style="justify-content: end">
-                    <span class="subject-average">⌀ {{getRoundedMark(selectedSubject?.subject?.averageMark)}}</span>
-                </div>
-            </div>
-            <div class="grade-row" *ngFor="let grade of selectedSubject?.subject?.grades">
-                <span class="grade-value grade-name">{{grade.name}}</span>
-                <span class="grade-value grade-date">{{grade.date | date: 'dd.MM.yyyy'}}</span>
-                <span class="grade-value grade-mark">{{grade.mark}}</span>
-            </div>
-        </div>
+        <app-class-grades [classSelected]="classSelected" [selectedSubject]="selectedSubject" ></app-class-grades>
     </div>
 </div>
