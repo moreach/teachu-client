@@ -3,5 +3,6 @@ export const endpoints = {
     User: 'user',
     UserProfile: 'user/profile',
     ChangePassword: 'user/password',
+    UserDarkTheme: 'user/darkTheme',
     studentGrade: 'grade/student',
 }

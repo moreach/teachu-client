@@ -1,12 +1,9 @@
 import {Component} from "@angular/core";
-import {ApiService} from "../../Framework/API/api.service";
-import {endpoints} from "../../Config/endpoints";
 import {FormBuilder, Validators} from "@angular/forms";
 import {FormGroupTyped} from "../../Material/types";
 import {UserDTO} from "../../DTOs/UserDTO";
 import { DarkThemeService } from "src/app/Framework/dark-theme/dark-theme.service";
 import { SEXS } from "src/app/Enums/Sex";
-import { UserProfileDTO } from "src/app/DTOs/UserProfileDTO";
 import { ChangeProfileDTO } from "src/app/DTOs/ChangeProfileDTO";
 import { MatDialog } from "@angular/material/dialog";
 import { ChangePasswordDialogComponent } from "./change-password-dialog/change-password-dialog.component";
@@ -21,6 +18,7 @@ export class UserSettingsComponent {
     userForm: FormGroupTyped<UserDTO>;
     sexs = SEXS;
     isLoading: boolean = true;
+    prevUser: ChangeProfileDTO | undefined;
 
     constructor(
       private builder: FormBuilder,
@@ -42,25 +40,32 @@ export class UserSettingsComponent {
             phone: ["", Validators.required],
             profileImage: ["", Validators.required],
         }) as FormGroupTyped<UserDTO>;
-        this.userService.getCurrentUser$().subscribe((user) => { 
+        this.userService.getCurrentUser$().subscribe((user) => {
             this.darkTheme.setDarkTheme(user.darkTheme);
             this.userForm.patchValue({
                 ...user,
                 birthday: new Date(user.birthday),
             } as UserDTO);
+            this.prevUser = {
+                darkTheme: user.darkTheme,
+                language: user.language,
+                phone: user.phone,
+                profileImage: user.profileImage,
+            };
             this.isLoading = false;
         });
     }
 
     saveUser(form: FormGroupTyped<UserDTO>) {
-        // todo fix with backend
+        // todo fix profile image with new component
         this.isLoading = true;
         const formValue = {
             language: form.value.language,
             darkTheme: form.value.darkTheme,
             phone: form.value.phone,
-            profileImage: form.value.profileImage
+            profileImage: 'chömmer d Vorarbet vom Micha is Backend merge?'
         } as ChangeProfileDTO;
+        this.prevUser = formValue;
         this.userService.saveUser$(formValue).subscribe(_ => this.isLoading = false);
     }
 
@@ -69,6 +74,13 @@ export class UserSettingsComponent {
     }
 
     changeDarkTheme(isDarkTheme: boolean) {
+        // todo fix in backend
         this.darkTheme.setDarkTheme(isDarkTheme);
+        const formValue = {
+            ...this.prevUser,
+            darkTheme: isDarkTheme,
+        } as ChangeProfileDTO;
+        this.prevUser = formValue;
+        this.userService.saveUser$(formValue).subscribe();
     }
 }

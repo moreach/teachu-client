@@ -1,8 +1,9 @@
 export interface LessonDTO {
     class: string;
     subject: string;
-    start: Date;
-    end: Date;
+    lessonNumber: number;
+    date: Date;
     room: string;
     teacher: string;
+    lessonId: string;
 }

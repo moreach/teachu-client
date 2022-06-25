@@ -35,8 +35,10 @@ export class TextEditorComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.editor.dispose();
-    this.editor = null;
+    if (this.editor) {
+      this.editor.dispose();
+      this.editor = null;
+    }
   }
 
   getEditor(): IEditor {
