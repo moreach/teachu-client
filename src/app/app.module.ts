@@ -80,8 +80,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         GradesComponent,
         ReadonlyFieldComponent,
         ChangePasswordDialogComponent,
-        TimetableTodayComponent,
-        TimetableCalendarComponent,
         GradesStudentViewComponent,
         GradesTeacherViewComponent,
         GradesParentViewComponent,
