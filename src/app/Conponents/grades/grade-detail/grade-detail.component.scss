@@ -1,0 +1,73 @@
+.grade-detail-container{
+    word-break: break-word;
+
+    margin-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    .header{
+        display: grid;
+        grid-template-rows: 60px;
+        grid-template-columns: 65% 35%;
+        align-items: center;
+
+        .header-container{
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 10px;
+        }
+    }
+
+    .data-header {
+        font-size: 13px;
+        font-style: italic;
+    }
+
+    .data-value {
+        font-size: 15px;
+        display: block;
+        padding: 10px;
+        border: solid 3px var(--teachu-grey);
+        border-radius: 5px;
+    }
+
+    .icon-data-container{
+        margin: 10px;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+
+        .icon-data{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 5px;
+            justify-content: center;
+            align-items: center;
+
+            margin: 5px;
+            padding: 5px;
+            border-radius: 3px;
+            width: 125px;
+
+            color: var(--teachu-primary);
+            background-color: var(--teachu-primary-brightest);
+        }
+    }
+
+    #mark{
+        color: var(--teachu-primary);
+        font-size: 25px;
+        font-weight: bold;
+
+        padding: 10px;
+        border-radius: 5px;
+
+        background-color: var(--teachu-primary-brightest);
+    }
+}

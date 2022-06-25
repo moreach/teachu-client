@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {SubjectData} from "../../../Pages/grades/grades-student-view/grades-student-view.component";
+import {GradeDTO} from "../../../DTOs/grades/GradeDTO";
 
 @Component({
     selector: 'app-class-grades',
@@ -11,14 +12,18 @@ export class ClassGradesComponent {
     readonly CLASS_ICON: string = "error";
     readonly SUBJECT_ICON: string = "error";
 
-    @Input() classSelected: boolean = false;
     @Input() selectedSubject: SubjectData | undefined;
-    examMenuTreeOpen: boolean = true;
+    @Output() openMenuClicked: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Output() gradeSelected: EventEmitter<GradeDTO> = new EventEmitter<GradeDTO>();
 
     constructor() { }
 
     toggleMenuTree(){
-        this.examMenuTreeOpen = !this.examMenuTreeOpen;
+        this.openMenuClicked.emit(true);
+    }
+
+    selectGrade(grade: GradeDTO): void {
+        this.gradeSelected.emit(grade);
     }
 
     getRoundedMark(mark: number | undefined): string {

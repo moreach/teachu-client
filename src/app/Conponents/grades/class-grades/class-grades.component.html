@@ -1,10 +1,7 @@
-<div *ngIf="classSelected" class="class-grades">
+<div class="class-grades">
     <div class="class-grades-header">
         <div class="class-grades-header-items">
-            <button mat-icon-button
-                    color="primary"
-                    class="semester-grade-menu-toggle"
-                    (click)="toggleMenuTree()">
+            <button mat-icon-button color="primary" class="semester-grade-menu-toggle" (click)="toggleMenuTree()">
                 <mat-icon>
                     <span class="material-icons-outlined">keyboard_double_arrow_left</span>
                 </mat-icon>
@@ -20,7 +17,7 @@
             <span class="subject-average">⌀ {{getRoundedMark(selectedSubject?.subject?.averageMark)}}</span>
         </div>
     </div>
-    <div class="grade-row" *ngFor="let grade of selectedSubject?.subject?.grades">
+    <div class="grade-row" *ngFor="let grade of selectedSubject?.subject?.grades" (click)="selectGrade(grade)">
         <span class="grade-value grade-name">{{grade.name}}</span>
         <span class="grade-value grade-date">{{grade.date | date: 'dd.MM.yyyy'}}</span>
         <span class="grade-value grade-mark">{{grade.mark}}</span>

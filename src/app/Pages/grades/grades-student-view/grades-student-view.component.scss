@@ -1,8 +1,3 @@
-@use '@angular/material' as mat;
-
-@import 'src/styles/_colors.scss';
-@import 'src/styles.scss';
-
 .student-view-container{;
     width: 100%;
     height: 100%;
@@ -11,37 +6,19 @@
     grid-template-rows: 150px auto;
     grid-template-columns: auto;
 
-    .student-header{
-        width: inherit;
-        height: 100%;
-
-        display: grid;
-        grid-template-columns: 100%;
-
-        box-sizing: border-box;
-    }
-
     .student-content-collapsed {
         display: block;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 720px) {
         .student-content{
-            grid-template-columns: 100% !important;
-        }
-
-        .semester-grade-menu-toggle{
-            display: inline !important;
-        }
-
-        .class-menu-tree{
-            display: none;
+            display: block !important;
         }
     }
 
     .student-content {
         display: inline-grid;
-        grid-template-columns: clamp(200px, 20%, 250px) auto;
+        grid-template-columns: clamp(250px, 25%, 300px) auto;
         grid-template-rows: auto;
     }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {SemesterDTO} from "../../../DTOs/grades/SemesterDTO";
 import {ApiService} from "../../../Framework/API/api.service";
 import {endpoints} from "../../../Config/endpoints";
@@ -6,6 +6,7 @@ import {MenuTreeDTO, MenuTreeItemDTO} from "../../../DTOs/MenuTreeDTO";
 import {GradeDTO} from "../../../DTOs/grades/GradeDTO";
 import {SchoolClassDTO} from "../../../DTOs/grades/SchoolClassDTO";
 import {SubjectDTO} from "../../../DTOs/grades/SubjectDTO";
+import {GradeService} from "../../../Conponents/grades/grade.service";
 
 export interface SubjectData {
     semester: SemesterDTO;
@@ -19,89 +20,107 @@ export interface SubjectData {
     styleUrls: ['./grades-student-view.component.scss']
 })
 export class GradesStudentViewComponent implements OnInit {
+    readonly MENU_BREAKPOINT_PX: number = 720;
     readonly RECENT_EXAMS_AMOUNT: number = 4;
-    readonly SEMESTER_ICON: string = "home";
-    readonly CLASS_ICON: string = "error";
-    readonly SUBJECT_ICON: string = "error";
 
     allSemesterDTOs: SemesterDTO[] = [];
     examMenuTree: MenuTreeDTO = { tree: [] };
     lastExams: GradeDTO[] = [];
-    classSelected: boolean = false;
-    selectedSubject: SubjectData | undefined;
 
+    selectedSubject: SubjectData | undefined;
+    selectedGrade: GradeDTO | undefined;
+
+    inSmallMode: boolean = false;
+    menuOpen: boolean = true;
+    currentUIState: "MENU_ONLY" | "CLASS_GRADES_OVERVIEW" | "GRADES_OVERVIEW" = "MENU_ONLY";
 
     constructor(
         private api: ApiService,
+        private grades: GradeService,
     ) { }
 
     ngOnInit(): void {
+        this.onResize();
+
         this.api.callApi<any>(endpoints.studentGrade, {}, 'GET')
             .subscribe(request => {
                 this.allSemesterDTOs = request.semesters as SemesterDTO[];
-                console.log(this.allSemesterDTOs)
-                this.examMenuTree = this.generateMenuTree(this.allSemesterDTOs);
-                this.lastExams = this.getLastExams(this.allSemesterDTOs, this.RECENT_EXAMS_AMOUNT);
+                this.examMenuTree = this.grades.generateMenuTree(this.allSemesterDTOs);
+                this.lastExams = this.grades.getLastExams(this.allSemesterDTOs, this.RECENT_EXAMS_AMOUNT);
             });
     }
 
-    menuTreeLeaveClicked(treeItem: MenuTreeItemDTO){
-        this.selectedSubject = treeItem.data! as SubjectData;
-        console.log(this.selectedSubject.schoolClass);
-        this.classSelected = true;
+    @HostListener("window:resize", [])
+    onResize(): void {
+        this.inSmallMode = window.innerWidth <= this.MENU_BREAKPOINT_PX;
+
+        if(!this.inSmallMode)
+            this.menuOpen = true;
+        else if(this.selectedGrade !== undefined || this.selectedSubject !== undefined)
+            this.menuOpen = false;
+
+        this.updateUiState();
     }
 
-    private getLastExams(semesters: SemesterDTO[], amount?: number | undefined): GradeDTO[]{
-        let exams: GradeDTO[] = [];
-        for (let semester of semesters) {
-            for (let schoolClass of semester.schoolClasses) {
-                for (let subject of schoolClass.subjects) {
-                    for (let grade of subject.grades) {
-                        exams.push(grade);
-                    }
-                }
-            }
+    recentExamClicked(grade: GradeDTO): void {
+        this.selectedGrade = grade;
+        if(this.inSmallMode){
+            this.menuOpen = false;
         }
 
-        exams.sort((a, b) => b.date - a.date);
-        amount = amount || exams.length;
-        console.log(exams[0]);
-        return exams.slice(0, amount);
+        this.updateUiState();
     }
 
-    private generateMenuTree(semesters: SemesterDTO[]): MenuTreeDTO {
-        let menuTreeItems: MenuTreeItemDTO[] = [];
-
-        for (let semester of semesters) {
-            let semesterLeave: MenuTreeItemDTO = {
-                icon: this.SEMESTER_ICON,
-                leave: false,
-                translatedTitle: semester.semesterName,
-                children: []
-            };
-
-            for (let schoolClass of semester.schoolClasses) {
-                let schoolClassLeave: MenuTreeItemDTO = {
-                    icon: this.CLASS_ICON,
-                    leave: false,
-                    translatedTitle: schoolClass.schoolClass,
-                    children: []
-                };
-
-                for (let subject of schoolClass.subjects) {
-                    let subjectLeave: MenuTreeItemDTO = {
-                        icon: this.SUBJECT_ICON,
-                        leave: true,
-                        translatedTitle: subject.subjectName,
-                        data: { semester, schoolClass, subject }
-                    };
-                    schoolClassLeave.children!.push(subjectLeave);
-                }
-                semesterLeave.children!.push(schoolClassLeave);
-            }
-            menuTreeItems.push(semesterLeave);
+    menuTreeLeaveClicked(treeItem: MenuTreeItemDTO): void{
+        if(this.inSmallMode){
+            this.menuOpen = false;
         }
+        this.selectedSubject = treeItem.data as SubjectData;
+        this.selectedGrade = undefined;
 
-        return { tree: menuTreeItems }
+        this.updateUiState();
     }
+
+    gradeSelected(grade: GradeDTO): void {
+        this.selectedGrade = grade;
+        this.updateUiState();
+    }
+
+    openMenu(): void {
+        this.menuOpen = true;
+        this.updateUiState();
+    }
+
+    closeGradeDetails(): void {
+        this.selectedGrade = undefined;
+
+        this.updateUiState();
+    }
+
+    getGridClass(): string {
+        return this.currentUIState === "MENU_ONLY" ? "student-content-collapsed" : "student-content";
+    }
+
+    getMenuTreeDisplay(): string {
+        return this.currentUIState === "MENU_ONLY" || this.menuOpen ? "inherit" : "none";
+    }
+
+    getClassGradesDisplay(): string {
+        return this.currentUIState === "CLASS_GRADES_OVERVIEW" ? "inherit" : "none";
+    }
+
+    getGradesDisplay(): string {
+        return this.currentUIState === "GRADES_OVERVIEW" ? "inherit" : "none";
+    }
+
+    private updateUiState(): void {
+        if((this.selectedSubject === undefined && this.selectedGrade === undefined) || (this.inSmallMode && this.menuOpen)){
+            this.currentUIState = "MENU_ONLY";
+        }else if(this.selectedSubject !== undefined && this.selectedGrade === undefined){
+            this.currentUIState = "CLASS_GRADES_OVERVIEW";
+        }else if(this.selectedGrade !== undefined){
+            this.currentUIState = "GRADES_OVERVIEW";
+        }
+    }
+
 }

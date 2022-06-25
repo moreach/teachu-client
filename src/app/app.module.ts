@@ -49,6 +49,7 @@ import { GradesTeacherViewComponent } from './Pages/grades/grades-teacher-view/g
 import { GradesParentViewComponent } from './Pages/grades/grades-parent-view/grades-parent-view.component';
 import { RecentExamsComponent } from './Conponents/grades/recent-exams/recent-exams.component';
 import { ClassGradesComponent } from './Conponents/grades/class-grades/class-grades.component';
+import { GradeDetailComponent } from './Conponents/grades/grade-detail/grade-detail.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -94,6 +95,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         SchoolInfosComponent,
         RecentExamsComponent,
         ClassGradesComponent,
+        GradeDetailComponent,
     ],
     imports: [
         BrowserModule,

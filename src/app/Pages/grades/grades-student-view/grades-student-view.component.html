@@ -1,13 +1,18 @@
 <div class="student-view-container">
-    <div class="student-header">
-        <app-recent-exams [recentExams]="lastExams"></app-recent-exams>
-    </div>
-    <div [className]="classSelected ? 'student-content' : 'student-content-collapsed'">
-        <div class="class-menu-tree">
-            <app-menu-tree (leaveClickedEvent)="menuTreeLeaveClicked($event)"
-                           [treeData]="examMenuTree">
-            </app-menu-tree>
-        </div>
-        <app-class-grades [classSelected]="classSelected" [selectedSubject]="selectedSubject" ></app-class-grades>
+    <app-recent-exams [amount]="RECENT_EXAMS_AMOUNT" [semesterData]="allSemesterDTOs" (examClickedEvent)="recentExamClicked($event)"></app-recent-exams>
+    <div [class]="getGridClass()">
+        <app-menu-tree [style.display]="getMenuTreeDisplay()"
+                       (leaveClickedEvent)="menuTreeLeaveClicked($event)"
+                       [treeData]="examMenuTree">
+        </app-menu-tree>
+        <app-class-grades [style.display]="getClassGradesDisplay()"
+                          [selectedSubject]="selectedSubject"
+                          (gradeSelected)="gradeSelected($event)"
+                          (openMenuClicked)="openMenu()">
+        </app-class-grades>
+        <app-grade-detail [style.display]="getGradesDisplay()"
+                          [grade]="selectedGrade"
+                          (closeGradeDetail)="closeGradeDetails()">
+        </app-grade-detail>
     </div>
 </div>

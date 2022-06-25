@@ -1,0 +1,33 @@
+<div class="grade-detail-container">
+    <div class="header">
+        <div class="header-container">
+            <h1 style="margin: 0">{{grade?.name}}</h1>
+        </div>
+        <div class="header-container" style="justify-content: end;">
+            <span id="mark">{{grade?.mark}}</span>
+            <button mat-icon-button color="primary" (click)="close()">
+                <mat-icon>
+                    <span class="material-icons-outlined">close</span>
+                </mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="icon-data-container">
+        <div class="icon-data">
+            <span>{{grade?.date | date: 'dd.MM.yyyy'}}</span>
+            <mat-icon>calendar_month</mat-icon>
+        </div>
+        <div class="icon-data">
+            <span style="font-size: 16px; font-weight: 600">{{grade?.weight}}</span>
+            <mat-icon>scale</mat-icon>
+        </div>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <span class="data-header">{{"grades.desc" | translate}}</span>
+        <span class="data-value">{{grade?.description}}</span>
+    </div>
+    <div>
+        <span class="data-header">{{"grades.note" | translate}}</span>
+        <span class="data-value">{{grade?.note}}</span>
+    </div>
+</div>
