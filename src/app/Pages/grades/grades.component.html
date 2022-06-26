@@ -1,0 +1,11 @@
+<div [ngSwitch]="currentUserRole">
+    <div *ngSwitchCase="'STUDENT'">
+        <app-grades-student-view></app-grades-student-view>
+    </div>
+    <div *ngSwitchCase="'PARENT'">
+        <app-grades-parent-view></app-grades-parent-view>
+    </div>
+    <div *ngSwitchDefault>
+        <app-grades-teacher-view></app-grades-teacher-view>
+    </div>
+</div>

@@ -17,7 +17,9 @@
         "schoolInfos":"School Infos"
     },
     "grades":{
-        "grades":"Grades"
+        "grades":"Grades",
+        "desc": "Description",
+        "note": "Note"
     },
     "timetable":{
         "timetable":"Timetable",

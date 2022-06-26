@@ -4,4 +4,5 @@ export const endpoints = {
     UserProfile: 'user/profile',
     ChangePassword: 'user/password',
     UserDarkTheme: 'user/darkTheme',
+    studentGrade: 'grade/student',
 }

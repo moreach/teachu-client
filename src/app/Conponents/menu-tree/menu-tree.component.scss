@@ -3,6 +3,9 @@
 .menu-tree {
   padding: 15px;
   overflow-y: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 
   .menu-tree-item {
     cursor: pointer;
@@ -10,13 +13,19 @@
     height: 50px;
     width: 100%;
 
-    border-radius: 5px;
-    transition: background-color 0.3s ease-out;
+    border-radius: 10px;
+    border: 5px solid transparent;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    transition: border 0.5s ease-out;
     color: var(--teachu-black);
   }
 
   .menu-tree-item:hover {
-    background-color: var(--teachu-grey-darker);
+    //background-color: var(--teachu-grey-darker);
+    border: 5px solid var(--teachu-grey-darker);
   }
 
   .menu-tree-indented-leave {
