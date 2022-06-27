@@ -1,0 +1,13 @@
+<div class="parent-child-preview-container">
+    <app-profile-pic [height]="40"
+                     [width]="40"
+                     [profileImage]="childDataDTO?.profileImage"
+                     [enableMoveToProfile]="false"></app-profile-pic>
+    <span>{{childDataDTO?.firstName}}</span>
+    <div class="grade-container">
+        <div *ngFor="let grade of currentOverallAverages | keyvalue">
+            <span style="margin-right: 5px">{{grade.key}}:</span>
+            <strong>{{grade.value}}</strong>
+        </div>
+    </div>
+</div>

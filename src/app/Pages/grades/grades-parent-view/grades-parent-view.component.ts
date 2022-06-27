@@ -1,15 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {ChildDataDTO} from "../../../DTOs/ChildDataDTO";
+import {SemesterDTO} from "../../../DTOs/grades/SemesterDTO";
 
 @Component({
-  selector: 'app-grades-parent-view',
-  templateUrl: './grades-parent-view.component.html',
-  styleUrls: ['./grades-parent-view.component.scss']
+    selector: 'app-grades-parent-view',
+    templateUrl: './grades-parent-view.component.html',
+    styleUrls: ['./grades-parent-view.component.scss']
 })
-export class GradesParentViewComponent implements OnInit {
+export class GradesParentViewComponent {
 
-  constructor() { }
+    childrenMarks: ChildDataDTO[] = [];
+    loaded: boolean = false;
 
-  ngOnInit(): void {
-  }
+    constructor() { }
+
+    @Input() set childrenData(childrenData: ChildDataDTO[]) {
+        this.childrenMarks = childrenData;
+        // noinspection SuspiciousTypeOfGuard (this is a hack to make the component work ):)
+        this.loaded = this.childrenMarks instanceof Array;
+    }
+
+    getChildSemesters(child: ChildDataDTO): SemesterDTO[] {
+        return child.marks;
+    }
 
 }

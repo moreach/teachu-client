@@ -1,0 +1,32 @@
+@import 'src/styles.scss';
+
+.parent-child-preview-container{
+    display: grid;
+    grid-template-columns: 20% 35% 45%;
+    grid-template-rows: 60px;
+    align-items: center;
+    justify-items: center;
+
+    margin: 10px;
+    border-radius: 5px;
+    background-color: var(--teachu-primary-brightest);
+    color: var(--teachu-primary);
+
+    .grade-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .grade-container{
+        grid-column: 1 / span 2;
+    }
+
+    .parent-child-preview-container{
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 60px 60px;
+    }
+}

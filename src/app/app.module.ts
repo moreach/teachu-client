@@ -48,8 +48,8 @@ import { GradesParentViewComponent } from './Pages/grades/grades-parent-view/gra
 import { RecentExamsComponent } from './Conponents/grades/recent-exams/recent-exams.component';
 import { ClassGradesComponent } from './Conponents/grades/class-grades/class-grades.component';
 import { GradeDetailComponent } from './Conponents/grades/grade-detail/grade-detail.component';
-
 import { LessonDetailsComponent } from './Pages/timetable/lesson-details/lesson-details.component';
+import { ParentChildPreviewComponent } from './Conponents/grades/parent-child-preview/parent-child-preview.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -94,6 +94,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         ClassGradesComponent,
         GradeDetailComponent,
         LessonDetailsComponent,
+        ParentChildPreviewComponent,
+        ParentChildPreviewComponent,
     ],
     imports: [
         BrowserModule,

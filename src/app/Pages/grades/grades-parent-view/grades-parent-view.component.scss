@@ -1,0 +1,6 @@
+//FIXME: this mat css class has to be like this in the rendered output, but mat ignores it
+// or find an other way to solve the scrolling problem in small height views
+.mat-tab-body-content{
+    height: max-content;
+    overflow: hidden;
+}
