@@ -1,15 +1,13 @@
 @import 'src/styles.scss';
 
 .parent-child-preview-container{
-    display: grid;
-    grid-template-columns: 20% 35% 45%;
-    grid-template-rows: 60px;
+    display: flex;
     align-items: center;
     justify-items: center;
+    
+    margin: 20px 0;
+    gap: 20px;
 
-    margin: 10px;
-    border-radius: 5px;
-    background-color: var(--teachu-primary-brightest);
     color: var(--teachu-primary);
 
     .grade-container{
