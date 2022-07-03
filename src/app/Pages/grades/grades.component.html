@@ -1,11 +1,6 @@
-<div [ngSwitch]="currentUserRole">
-    <div *ngSwitchCase="'STUDENT'">
-        <app-grades-student-view [semesters]="data"></app-grades-student-view>
-    </div>
-    <div *ngSwitchCase="'PARENT'">
-        <app-grades-parent-view [childrenData]="data"></app-grades-parent-view>
-    </div>
-    <div *ngSwitchDefault>
-        <app-grades-teacher-view></app-grades-teacher-view>
-    </div>
-</div>
+<ng-container>
+    <app-grades-student-view *ngIf="currentUserRole === 'STUDENT' else parentView" [semesters]="data"></app-grades-student-view>
+    <ng-template #parentView>
+        <app-parent-child-preview [childData]="data"></app-parent-child-preview>
+    </ng-template>
+</ng-container>

@@ -43,7 +43,6 @@ import { PrivateChatDialogComponent } from './Pages/chat/private-chat-dialog/pri
 import { AbsencesComponent } from './Pages/absences/absences.component';
 import { SchoolInfosComponent } from './Pages/school-infos/school-infos.component';
 import {GradesStudentViewComponent} from "./Pages/grades/grades-student-view/grades-student-view.component";
-import { GradesTeacherViewComponent } from './Pages/grades/grades-teacher-view/grades-teacher-view.component';
 import { GradesParentViewComponent } from './Pages/grades/grades-parent-view/grades-parent-view.component';
 import { RecentExamsComponent } from './Conponents/grades/recent-exams/recent-exams.component';
 import { ClassGradesComponent } from './Conponents/grades/class-grades/class-grades.component';
@@ -81,7 +80,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         ReadonlyFieldComponent,
         ChangePasswordDialogComponent,
         GradesStudentViewComponent,
-        GradesTeacherViewComponent,
         GradesParentViewComponent,
         ChatOverviewComponent,
         ChatConversationComponent,

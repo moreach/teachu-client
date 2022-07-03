@@ -44,9 +44,6 @@ export class GradesComponent implements OnInit {
                             }
                         });
                     break;
-                case "TEACHER":
-                    console.warn("Teacher grades are not implemented yet");
-                    break;
             }
         });
 
