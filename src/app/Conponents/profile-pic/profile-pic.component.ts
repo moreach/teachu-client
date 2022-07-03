@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {UserDTO} from "../../DTOs/UserDTO";
 import {Router} from "@angular/router";
 import {appRoutes} from "../../Config/appRoutes";
 
@@ -12,19 +11,19 @@ export class ProfilePicComponent {
 
     @Input() width: number = 60;
     @Input() height: number = 60;
-    @Input() user: UserDTO | undefined;
+    @Input() profileImage: string | undefined;
+    @Input() enableMoveToProfile: boolean = true;
 
     constructor(private router: Router) { }
 
     navigateToProfile() {
-        this.router.navigate([appRoutes.App, appRoutes.UserSettings]).then();
+        if(this.enableMoveToProfile)
+            this.router.navigate([appRoutes.App, appRoutes.UserSettings]).then();
     }
 
     getProfilePicUrl(): string {
-        if (this.user) {
-            let picUrl: string = this.user.profileImage;
-            if(!!picUrl)
-                return picUrl;
+        if (!!this.profileImage) {
+            return this.profileImage;
         }
         return "assets/images/default-profile-image.jpg";
     }

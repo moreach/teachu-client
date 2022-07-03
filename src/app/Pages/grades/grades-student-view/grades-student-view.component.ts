@@ -1,7 +1,6 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {SemesterDTO} from "../../../DTOs/grades/SemesterDTO";
 import {ApiService} from "../../../Framework/API/api.service";
-import {endpoints} from "../../../Config/endpoints";
 import {MenuTreeDTO, MenuTreeItemDTO} from "../../../DTOs/MenuTreeDTO";
 import {GradeDTO} from "../../../DTOs/grades/GradeDTO";
 import {SchoolClassDTO} from "../../../DTOs/grades/SchoolClassDTO";
@@ -41,13 +40,14 @@ export class GradesStudentViewComponent implements OnInit {
 
     ngOnInit(): void {
         this.onResize();
+    }
 
-        this.api.callApi<any>(endpoints.studentGrade, {}, 'GET')
-            .subscribe(request => {
-                this.allSemesterDTOs = request.semesters as SemesterDTO[];
-                this.examMenuTree = this.grades.generateMenuTree(this.allSemesterDTOs);
-                this.lastExams = this.grades.getLastExams(this.allSemesterDTOs, this.RECENT_EXAMS_AMOUNT);
-            });
+    @Input() set semesters(semesterDTOs: SemesterDTO[]) {
+        this.allSemesterDTOs = semesterDTOs as SemesterDTO[];
+        if(!!this.allSemesterDTOs){
+            this.examMenuTree = this.grades.generateMenuTree(this.allSemesterDTOs);
+            this.lastExams = this.grades.getLastExams(this.allSemesterDTOs, this.RECENT_EXAMS_AMOUNT);
+        }
     }
 
     @HostListener("window:resize", [])

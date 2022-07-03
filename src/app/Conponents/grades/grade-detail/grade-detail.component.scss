@@ -21,25 +21,23 @@
     }
 
     .data-header {
-        font-size: 13px;
+        font-size: 15px;
         font-style: italic;
     }
 
     .data-value {
-        font-size: 15px;
+        font-size: 18px;
         display: block;
         padding: 10px;
-        border: solid 3px var(--teachu-grey);
-        border-radius: 5px;
     }
 
     .icon-data-container{
-        margin: 10px;
+        margin: 10px 0;
 
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
-        justify-content: space-around;
+        justify-content: flex-start;
         align-items: center;
 
         .icon-data{

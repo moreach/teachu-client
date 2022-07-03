@@ -11,6 +11,16 @@ export class GradeService {
     readonly CLASS_ICON: string = "error";
     readonly SUBJECT_ICON: string = "error";
 
+    getClassAveragesAsString(semester: SemesterDTO): Map<string, number> {
+        let classAverages: Map<string, number> = new Map<string, number>();
+
+        for (let schoolClass of semester.schoolClasses) {
+            classAverages.set(schoolClass.schoolClass, Math.round(schoolClass.averageMark * 100) / 100);
+        }
+
+        return classAverages;
+    }
+
     getLastExams(semesters: SemesterDTO[], amount?: number | undefined): GradeDTO[]{
         let exams: GradeDTO[] = [];
         for (let semester of semesters) {
