@@ -13,6 +13,7 @@ import {UserSettingsComponent} from "./Pages/user-settings/user-settings.compone
 import { SchoolInfosComponent } from './Pages/school-infos/school-infos.component';
 import { AbsencesComponent } from './Pages/absences/absences.component';
 import { LessonDetailsComponent } from './Pages/timetable/lesson-details/lesson-details.component';
+import { ClasslistComponent } from './Pages/classlist/classlist.component';
 
 const routes: Routes = [
   { path: '', redirectTo: `/${appRoutes.Login}`, pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: appRoutes.Dashboard, component: DashboardComponent },
       { path: appRoutes.SchoolInfos, component: SchoolInfosComponent },
       { path: appRoutes.Timetable, component: TimetableComponent },
+      { path: appRoutes.Classlist, component: ClasslistComponent },
       { path: `${appRoutes.Timetable}/:${appRoutes.LessonId}`, component: LessonDetailsComponent },
       { path: appRoutes.Grades, component: GradesComponent },
       { path: appRoutes.Absences, component: AbsencesComponent },

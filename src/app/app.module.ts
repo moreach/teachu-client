@@ -49,6 +49,8 @@ import { ClassGradesComponent } from './Conponents/grades/class-grades/class-gra
 import { GradeDetailComponent } from './Conponents/grades/grade-detail/grade-detail.component';
 import { LessonDetailsComponent } from './Pages/timetable/lesson-details/lesson-details.component';
 import { ParentChildPreviewComponent } from './Conponents/grades/parent-child-preview/parent-child-preview.component';
+import { ClasslistComponent } from './Pages/classlist/classlist.component';
+import { ClasslistListComponent } from './Pages/classlist/classlist-list/classlist-list.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -94,6 +96,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         LessonDetailsComponent,
         ParentChildPreviewComponent,
         ParentChildPreviewComponent,
+        ClasslistComponent,
+        ClasslistListComponent,
     ],
     imports: [
         BrowserModule,

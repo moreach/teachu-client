@@ -5,5 +5,6 @@ export const endpoints = {
     ChangePassword: 'user/password',
     UserDarkTheme: 'user/darkTheme',
     studentGrade: 'grade/student',
+    ClassList: 'classlist',
     parentChildren: 'child',
 }

@@ -27,6 +27,23 @@
         "calendar":"Calendar",
         "weekFrom":"Week from"
     },
+    "classlist":{
+        "classlist":"Classlist",
+        "class":"Class",
+        "teachers":"Teachers",
+        "firstName":"Firstname",
+        "lastName":"Lastname",
+        "phone":"Phone",
+        "birthday":"Birthday",
+        "sex":"Sex",
+        "postalCode":"Postal Code",
+        "city":"City",
+        "street":"Street",
+        "nameParent1":"Name Parent 1",
+        "phoneParent1":"Phone Parent 1",
+        "nameParent2":"Name Parent 2",
+        "phoneParent2":"Phone Parent 2"
+    },
     "absences":{
         "absences":"Absences"
     },

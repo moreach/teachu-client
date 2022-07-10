@@ -1,0 +1,17 @@
+<h2>{{ isTeacher ? ('classlist.teachers' | translate) : (('classlist.class' | translate) + ' ' + _class!.className + ' (' + _class!.teacherName + ')' ) }}</h2>
+<div class="data-row header">
+    <div></div>
+    <div (click)="sortBy('firstName')">{{ 'classlist.firstName' | translate }}</div>
+    <div (click)="sortBy('lastName')">{{ 'classlist.lastName' | translate }}</div>
+    <div (click)="sortBy('phone')">{{ 'classlist.phone' | translate }}</div>
+</div>
+<mat-divider></mat-divider>
+<div *ngFor="let person of getData()">
+    <div class="data-row">
+        <img [src]="person.profileImage" class="image">
+        <div class="text">{{ person.firstName }}</div>
+        <div class="text">{{ person.lastName }}</div>
+        <div class="text">{{ person.phone }}</div>
+    </div>
+    <mat-divider></mat-divider>
+</div>
