@@ -9,6 +9,7 @@
     margin-bottom: 4px;
     display: grid;
     grid-template-columns: 80px 1fr 1fr 1fr;
+    cursor: pointer;
 }
 h2 {
     margin-bottom: 0px;
@@ -18,5 +19,4 @@ h2 {
 }
 .header {
     font-weight: bold;
-    cursor: pointer;
 }

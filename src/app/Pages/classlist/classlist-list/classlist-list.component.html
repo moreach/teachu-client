@@ -7,7 +7,7 @@
 </div>
 <mat-divider></mat-divider>
 <div *ngFor="let person of getData()">
-    <div class="data-row">
+    <div (click)="openDetail(person, isTeacher)" class="data-row">
         <img [src]="person.profileImage" class="image">
         <div class="text">{{ person.firstName }}</div>
         <div class="text">{{ person.lastName }}</div>

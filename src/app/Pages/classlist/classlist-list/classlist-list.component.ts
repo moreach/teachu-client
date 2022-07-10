@@ -1,7 +1,9 @@
 import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ClassListClassDTO } from 'src/app/DTOs/ClassListClassDTO';
 import { ClassListStudentDTO } from 'src/app/DTOs/ClassListStudentDTO';
 import { ClassListTeacherDTO } from 'src/app/DTOs/ClassListTeacherDTO';
+import { ClasslistDetailComponent } from '../classlist-detail/classlist-detail.component';
 
 @Component({
   selector: 'app-classlist-list',
@@ -24,7 +26,9 @@ export class ClasslistListComponent {
   }
   @Input() isTeacher: boolean = false;
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog,
+  ) { }
 
   getData(): ClassListStudentDTO[] | ClassListTeacherDTO[] {
     return this.isTeacher ? this._teachers : this._students;
@@ -65,5 +69,15 @@ export class ClasslistListComponent {
       return 0;
     });
     return data;
+  }
+
+  openDetail(person: ClassListStudentDTO | ClassListTeacherDTO, isTeacher: boolean) {
+    this.dialog.open(ClasslistDetailComponent, {
+      data: {
+        person,
+        isTeacher
+      },
+      width: '400px',
+    });
   }
 }

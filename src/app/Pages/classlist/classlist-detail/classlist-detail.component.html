@@ -1,0 +1,19 @@
+<mat-dialog-content>
+    <div *ngIf="getData() as data" class="dialog">
+        <div class="image-wrapper">
+            <img [src]="data.person.profileImage" class="image">
+        </div>
+        <app-readonly-field [label]="'classlist.firstName' | translate" [value]="data.person.firstName"></app-readonly-field>
+        <app-readonly-field [label]="'classlist.lastName' | translate" [value]="data.person.lastName"></app-readonly-field>
+        <app-readonly-field *ngIf="!data.isTeacher" [label]="'classlist.birthday' | translate" [value]="data.person.birthday | date: 'dd.MM.yyyy'"></app-readonly-field>
+        <app-readonly-field [label]="'classlist.sex' | translate" [value]="sexCaption(data.person.sex) | translate"></app-readonly-field>
+        <app-readonly-field [label]="'classlist.postalCode' | translate" [value]="data.person.postalCode"></app-readonly-field>
+        <app-readonly-field [label]="'classlist.city' | translate" [value]="data.person.city"></app-readonly-field>
+        <app-readonly-field [label]="'classlist.street' | translate" [value]="data.person.street"></app-readonly-field>
+        <app-readonly-field [label]="'classlist.phone' | translate" [value]="data.person.phone"></app-readonly-field>
+        <app-readonly-field *ngIf="!data.isTeacher" [label]="'classlist.nameParent1' | translate" [value]="data.person.nameParent1"></app-readonly-field>
+        <app-readonly-field *ngIf="!data.isTeacher" [label]="'classlist.phoneParent1' | translate" [value]="data.person.phoneParent1"></app-readonly-field>
+        <app-readonly-field *ngIf="!data.isTeacher" [label]="'classlist.nameParent2' | translate" [value]="data.person.nameParent2"></app-readonly-field>
+        <app-readonly-field *ngIf="!data.isTeacher" [label]="'classlist.phoneParent2' | translate" [value]="data.person.phoneParent2"></app-readonly-field>
+    </div>
+</mat-dialog-content>

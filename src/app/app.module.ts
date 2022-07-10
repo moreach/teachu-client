@@ -51,6 +51,7 @@ import { LessonDetailsComponent } from './Pages/timetable/lesson-details/lesson-
 import { ParentChildPreviewComponent } from './Conponents/grades/parent-child-preview/parent-child-preview.component';
 import { ClasslistComponent } from './Pages/classlist/classlist.component';
 import { ClasslistListComponent } from './Pages/classlist/classlist-list/classlist-list.component';
+import { ClasslistDetailComponent } from './Pages/classlist/classlist-detail/classlist-detail.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -98,6 +99,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ParentChildPreviewComponent,
         ClasslistComponent,
         ClasslistListComponent,
+        ClasslistDetailComponent,
     ],
     imports: [
         BrowserModule,
