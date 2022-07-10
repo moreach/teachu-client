@@ -16,7 +16,7 @@ export class ChatService {
   constructor() { }
 
   getChatOverview$(): Observable<ChatOverviewDTO[]> {
-    // todo implement from backend endpoint with websocket
+    // todo implement from backend endpoint
     const mockData = [
       {
         chatId: '101',
@@ -59,7 +59,7 @@ export class ChatService {
   }
 
   getChatConversation$(chatId: string): Observable<ChatConversationDTO> {
-    // todo implement from backend endpoint with websocket - mockdata for group chat Mathinachhilf
+    // todo implement from backend endpoint
     const mockData = {
       info: {
         chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
@@ -140,7 +140,7 @@ export class ChatService {
   }
 
   getChatConversationInfo$(chatId: string): Observable<ChatConversationInfoDTO> {
-    // todo implement from backend endpoint with websocket
+    // todo implement from backend endpoint
     return this.getChatConversation$(chatId).pipe(
       map(chatConversation => chatConversation.info)
     );

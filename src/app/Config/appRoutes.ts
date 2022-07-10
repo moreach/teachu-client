@@ -4,6 +4,7 @@ export const appRoutes = {
     App: 'app',
     Chat: 'chat',
     ChatId: 'chatId',
+    Classlist: 'classlist',
     ConversationInfo: 'info',
     Dashboard: 'dashboard',
     Grades: 'grades',

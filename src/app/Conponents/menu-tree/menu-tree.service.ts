@@ -33,6 +33,12 @@ export class MenuTreeService {
                     url: "/app/timetable"
                 },
                 {
+                    icon: "list",
+                    leave: true,
+                    titleTranslationKey: "classlist.classlist",
+                    url: "/app/classlist",
+                },
+                {
                     icon: "grade",
                     leave: true,
                     titleTranslationKey: "grades.grades",

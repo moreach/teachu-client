@@ -1,0 +1,4 @@
+<div *ngIf="classList$ | async as classlist" class="page">
+    <app-classlist-list *ngFor="let class of classlist.classes" [class]="class"></app-classlist-list>
+    <app-classlist-list [isTeacher]="true" [teachers]="classlist.teachers"></app-classlist-list>
+</div>

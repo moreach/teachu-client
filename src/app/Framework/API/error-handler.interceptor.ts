@@ -38,14 +38,14 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
 
     return next.handle(request).pipe(
       catchError(error => {
-        if (this.tokenService.isExpired() || (error.url as string).split('/').some(u => u === endpoints.Login)) {
+        if (this.tokenService.isExpired()) {
           this.tokenService.removeToken();
           this.tokenService.removeRefreshToken();
+          this.tokenService.removeExpired();
           this.errorHandler.redirectToLogin();
         }
-
         if (error.status === 401) {
-          return this.api.callApi<TokenDTO>(endpoints.Login,  {
+          return this.api.callApi<TokenDTO>(endpoints.Login, {
             refresh: this.tokenService.getRefreshToken(),
           } as TokenDTO, 'PUT').pipe(
             tap(token => {
@@ -62,6 +62,6 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
           });
         }
       }),
-    )
+    );
   }
 }

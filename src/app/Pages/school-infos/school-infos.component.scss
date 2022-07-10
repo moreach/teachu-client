@@ -1,0 +1,28 @@
+.page {
+    display: grid;
+    gap: 60px;
+}
+.width-3 {
+    grid-template-columns: 300px 300px 300px;
+}
+.width-2 {
+    grid-template-columns: 300px 300px;
+}
+.width-1 {
+    grid-template-columns: 300px;
+}
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.image {
+    width: 300px;
+}
+.creator {
+    font-weight: bold;
+}
+.title {
+    font-weight: bold;
+    font-size: 20px;
+}
