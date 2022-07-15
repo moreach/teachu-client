@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { SchoolInfoDTO } from 'src/app/DTOs/SchoolInfoDTO';
 import { SchoolInfosDTO } from 'src/app/DTOs/SchoolInfosDTO';
 import { SchoolInfosService } from './school-infos.service';
 
@@ -23,6 +24,18 @@ export class SchoolInfosComponent {
   @HostListener("window:resize", [])
   onResize() {
     this.setColumns();
+  }
+
+  column1(infos: SchoolInfoDTO[]) {
+    return infos.filter((_, i) => i % this.columns === 0);
+  }
+
+  column2(infos: SchoolInfoDTO[]) {
+    return infos.filter((_, i) => i % this.columns === 1);
+  }
+
+  column3(infos: SchoolInfoDTO[]) {
+    return infos.filter((_, i) => i % this.columns === 2);
   }
 
   setColumns() {

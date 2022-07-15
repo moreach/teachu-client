@@ -1,8 +1,41 @@
 <div *ngIf="schoolInfos$ | async as schoolInfos" [ngClass]="{ 'page': true, 'width-3': columns === 3, 'width-2': columns === 2, 'width-1': columns === 1 }">
-    <div *ngFor="let info of schoolInfos.schoolInfos" class="info">
-        <div class="creator">{{ info.creatorName + ': ' + (info.date | date: 'dd.MM.yyyy') }}</div>
-        <div class="title">{{ info.title }}</div>
-        <div>{{ info.text }}</div>
-        <img *ngIf="info.image" [src]="info.image" class="image">
+    <div>
+        <div *ngFor="let info of column1(schoolInfos.schoolInfos)" [ngClass]="{ 'info': true, 'important': info.important }">
+            <div class="header">
+                <div class="text">
+                    <div class="creator">{{ info.creatorName + ': ' + (info.date | date: 'dd.MM.yyyy') }}</div>
+                    <div class="title">{{ info.title }}</div>
+                </div>
+                <mat-icon *ngIf="info.pinned" class="mat-icon">bookmark</mat-icon>
+            </div>        
+            <div>{{ info.text }}</div>
+            <img *ngIf="info.image" [src]="info.image" class="image">
+        </div>
+    </div>
+    <div *ngIf="column2(schoolInfos.schoolInfos) !== []">
+        <div *ngFor="let info of column2(schoolInfos.schoolInfos)" [ngClass]="{ 'info': true, 'important': info.important }">
+            <div class="header">
+                <div class="text">
+                    <div class="creator">{{ info.creatorName + ': ' + (info.date | date: 'dd.MM.yyyy') }}</div>
+                    <div class="title">{{ info.title }}</div>
+                </div>
+                <mat-icon *ngIf="info.pinned" class="mat-icon">bookmark</mat-icon>
+            </div>        
+            <div>{{ info.text }}</div>
+            <img *ngIf="info.image" [src]="info.image" class="image">
+        </div>
+    </div>
+    <div *ngIf="column3(schoolInfos.schoolInfos) !== []">
+        <div *ngFor="let info of column3(schoolInfos.schoolInfos)" [ngClass]="{ 'info': true, 'important': info.important }">
+            <div class="header">
+                <div class="text">
+                    <div class="creator">{{ info.creatorName + ': ' + (info.date | date: 'dd.MM.yyyy') }}</div>
+                    <div class="title">{{ info.title }}</div>
+                </div>
+                <mat-icon *ngIf="info.pinned" class="mat-icon">bookmark</mat-icon>
+            </div>        
+            <div>{{ info.text }}</div>
+            <img *ngIf="info.image" [src]="info.image" class="image">
+        </div>
     </div>
 </div>
