@@ -38,6 +38,7 @@ export class SchoolInfosService {
           ...mockSchoolInfo,
           pinned: false,
           important: false,
+          text: mockSchoolInfo.text + mockSchoolInfo.text,
         }, {
           ...mockSchoolInfo,
           pinned: false,
@@ -50,7 +51,7 @@ export class SchoolInfosService {
         }, {
           ...mockSchoolInfo,
           pinned: false,
-          important: false,
+          text: mockSchoolInfo.text + mockSchoolInfo.text,
         }, {
           ...mockSchoolInfo,
           pinned: false,
