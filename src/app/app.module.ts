@@ -52,6 +52,7 @@ import { ParentChildPreviewComponent } from './Conponents/grades/parent-child-pr
 import { ClasslistComponent } from './Pages/classlist/classlist.component';
 import { ClasslistListComponent } from './Pages/classlist/classlist-list/classlist-list.component';
 import { ClasslistDetailComponent } from './Pages/classlist/classlist-detail/classlist-detail.component';
+import { ChooseStudentDialogComponent } from './Pages/login/choose-student-dialog/choose-student-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -100,6 +101,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ClasslistComponent,
         ClasslistListComponent,
         ClasslistDetailComponent,
+        ChooseStudentDialogComponent,
     ],
     imports: [
         BrowserModule,
