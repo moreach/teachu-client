@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SchoolInfoDTO } from 'src/app/DTOs/SchoolInfoDTO';
-import { SchoolInfosDTO } from 'src/app/DTOs/SchoolInfosDTO';
+import { SchoolInfoDTO } from 'src/app/DTOs/xx_old/SchoolInfoDTO';
+import { SchoolInfosDTO } from 'src/app/DTOs/xx_old/SchoolInfosDTO';
 import { SchoolInfosService } from './school-infos.service';
 
 @Component({

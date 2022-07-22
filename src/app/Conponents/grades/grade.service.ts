@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {SemesterDTO} from "../../DTOs/grades/SemesterDTO";
-import {GradeDTO} from "../../DTOs/grades/GradeDTO";
-import {MenuTreeDTO, MenuTreeItemDTO} from "../../DTOs/MenuTreeDTO";
+import {SemesterDTO} from "../../DTOs/old_grades/SemesterDTO";
+import {GradeDTO} from "../../DTOs/old_grades/GradeDTO";
+import { MenuTreeDTO, MenuTreeItemDTO } from 'src/app/DTOs/xx_old/MenuTreeDTO';
 
 @Injectable({
   providedIn: 'root'

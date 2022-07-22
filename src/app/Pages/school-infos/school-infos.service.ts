@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { SchoolInfoDTO } from 'src/app/DTOs/SchoolInfoDTO';
-import { SchoolInfosDTO } from 'src/app/DTOs/SchoolInfosDTO';
+import { SchoolInfoDTO } from 'src/app/DTOs/xx_old/SchoolInfoDTO';
+import { SchoolInfosDTO } from 'src/app/DTOs/xx_old/SchoolInfosDTO';
 import { ApiService } from 'src/app/Framework/API/api.service';
 
 @Injectable({

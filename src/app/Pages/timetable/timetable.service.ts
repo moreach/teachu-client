@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { LessonDTO } from 'src/app/DTOs/LessonDTO';
-import { LessonInfoDTO } from 'src/app/DTOs/LessonInfoDTO';
+import { LessonDTO } from 'src/app/DTOs/xx_old/LessonDTO';
+import { LessonInfoDTO } from 'src/app/DTOs/xx_old/LessonInfoDTO';
 import { compareDates } from 'src/app/Framework/Helpers/DateHelpers';
 
 @Injectable({

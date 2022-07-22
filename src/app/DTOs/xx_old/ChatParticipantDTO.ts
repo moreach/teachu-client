@@ -1,4 +1,4 @@
-import { Role } from "../Enums/Role";
+import { Role } from "./Enums/old_Role";
 
 export interface ChatParticipantDTO {
     name: string | null; // null if is user self

@@ -1,0 +1,1 @@
+export type UserEventState = 'pending' | 'excused' | 'unexcused';

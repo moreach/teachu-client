@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {SubjectData} from "../../../Pages/grades/grades-student-view/grades-student-view.component";
-import {GradeDTO} from "../../../DTOs/grades/GradeDTO";
+import {GradeDTO} from "../../../DTOs/old_grades/GradeDTO";
 
 @Component({
     selector: 'app-class-grades',

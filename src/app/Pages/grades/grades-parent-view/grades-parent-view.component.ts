@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {ChildDataDTO} from "../../../DTOs/ChildDataDTO";
-import {SemesterDTO} from "../../../DTOs/grades/SemesterDTO";
+import { ChildDataDTO } from 'src/app/DTOs/xx_old/ChildDataDTO';
+import {SemesterDTO} from "../../../DTOs/old_grades/SemesterDTO";
 
 @Component({
     selector: 'app-grades-parent-view',

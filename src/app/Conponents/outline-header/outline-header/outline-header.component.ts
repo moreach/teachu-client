@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, map, Observable, startWith, distinctUntilChanged } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
-import {UserDTO} from "../../../DTOs/UserDTO";
+import { UserDTO } from 'src/app/DTOs/xx_old/UserDTO';
 
 @Component({
     selector: 'app-outline-header',

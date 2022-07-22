@@ -1,5 +1,5 @@
-import {Sex} from "../Enums/Sex";
-import {SemesterDTO} from "./grades/SemesterDTO";
+import { SemesterDTO } from "../old_grades/SemesterDTO";
+import { Sex } from "./Enums/old_Sex";
 
 export interface ChildDataDTO {
     email: string;

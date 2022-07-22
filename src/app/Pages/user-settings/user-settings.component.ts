@@ -1,13 +1,13 @@
 import {Component} from "@angular/core";
 import {FormBuilder, Validators} from "@angular/forms";
 import {FormGroupTyped} from "../../Material/types";
-import {UserDTO} from "../../DTOs/UserDTO";
 import { DarkThemeService } from "src/app/Framework/dark-theme/dark-theme.service";
-import { SEXS } from "src/app/Enums/Sex";
-import { ChangeProfileDTO } from "src/app/DTOs/ChangeProfileDTO";
+import { SEXS } from "src/app/DTOs/xx_old/Enums/old_Sex";
 import { MatDialog } from "@angular/material/dialog";
 import { ChangePasswordDialogComponent } from "./change-password-dialog/change-password-dialog.component";
 import { UserService } from "./user.service";
+import { ChangeProfileDTO } from "src/app/DTOs/xx_old/ChangeProfileDTO";
+import { UserDTO } from "src/app/DTOs/xx_old/UserDTO";
 
 @Component({
     selector: "user-settings",

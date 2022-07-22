@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map, switchMap, of } from 'rxjs';
-import { BreadcrumbDTO } from 'src/app/DTOs/BreadcrumbDTO';
+import { BreadcrumbDTO } from 'src/app/DTOs/xx_old/BreadcrumbDTO';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MenuTreeItemDTO} from "../../../DTOs/MenuTreeDTO";
 import {Router} from "@angular/router";
+import { MenuTreeItemDTO } from 'src/app/DTOs/xx_old/MenuTreeDTO';
 
 @Component({
     selector: 'app-menu-leave',

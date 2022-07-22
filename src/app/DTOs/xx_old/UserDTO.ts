@@ -1,6 +1,6 @@
-import { Language } from "../Enums/Language";
-import { Role } from "../Enums/Role";
-import { Sex } from "../Enums/Sex";
+import { Language } from "./Enums/old_Language";
+import { Role } from "./Enums/old_Role";
+import { Sex } from "./Enums/old_Sex";
 
 export interface UserDTO {
     email: string;

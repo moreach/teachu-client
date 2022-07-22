@@ -1,4 +1,4 @@
-import { ChatType } from "../Enums/ChatType";
+import { ChatType } from "./Enums/old_ChatType";
 
 export interface ChatOverviewDTO {
     chatId: string;

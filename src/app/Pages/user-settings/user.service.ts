@@ -3,8 +3,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Observable, map, filter, startWith, distinctUntilChanged } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { endpoints } from 'src/app/Config/endpoints';
-import { ChangeProfileDTO } from 'src/app/DTOs/ChangeProfileDTO';
-import { UserDTO } from 'src/app/DTOs/UserDTO';
+import { ChangeProfileDTO } from 'src/app/DTOs/xx_old/ChangeProfileDTO';
+import { UserDTO } from 'src/app/DTOs/xx_old/UserDTO';
 import { ApiService } from 'src/app/Framework/API/api.service';
 
 @Injectable({

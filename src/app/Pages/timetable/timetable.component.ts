@@ -3,8 +3,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
-import { LessonDTO } from 'src/app/DTOs/LessonDTO';
-import { LessonInfoDTO } from 'src/app/DTOs/LessonInfoDTO';
+import { LessonDTO } from 'src/app/DTOs/xx_old/LessonDTO';
+import { LessonInfoDTO } from 'src/app/DTOs/xx_old/LessonInfoDTO';
 import { addDays, equalDates, getFirstDayOfWeek, getLastDayOfWeek } from 'src/app/Framework/Helpers/DateHelpers';
 import { TimetableService } from './timetable.service';
 

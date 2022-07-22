@@ -1,5 +1,5 @@
-import { Role } from "../Enums/Role";
-import { Sex } from "../Enums/Sex";
+import { Role } from "../Enums/old_Role";
+import { Sex } from "../Enums/old_Sex";
 
 export interface UserProfileDTO {
     email: string;

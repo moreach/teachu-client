@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
-import { BreadcrumbDTO } from 'src/app/DTOs/BreadcrumbDTO';
+import { BreadcrumbDTO } from 'src/app/DTOs/xx_old/BreadcrumbDTO';
 import { BreadcrumbsService } from './breadcrumbs.service';
 
 @Component({

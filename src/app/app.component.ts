@@ -3,9 +3,9 @@ import {LanguagesService} from "./Framework/Languages/languages.service";
 import {DarkThemeService} from "./Framework/dark-theme/dark-theme.service";
 import { UserService } from "./Pages/user-settings/user.service";
 import { Observable, of, startWith, switchMap } from "rxjs";
-import { UserDTO } from "./DTOs/UserDTO";
-import {MenuTreeDTO} from "./DTOs/MenuTreeDTO";
 import {MenuTreeService} from "./Conponents/menu-tree/menu-tree.service";
+import { MenuTreeDTO } from "./DTOs/xx_old/MenuTreeDTO";
+import { UserDTO } from "./DTOs/xx_old/UserDTO";
 
 const WINDOW_WIDTH_BREAKPOINT: number = 1000;
 
