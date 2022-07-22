@@ -1,0 +1,1 @@
+export type UserSex = 'male' | 'female' | 'other';

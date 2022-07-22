@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Sex, SEXS } from 'src/app/Enums/Sex';
+import { Sex, SEXS } from 'src/app/DTOs/xx_old/Enums/old_Sex';
 
 @Component({
   selector: 'app-classlist-detail',

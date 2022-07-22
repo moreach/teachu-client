@@ -1,0 +1,1 @@
+export type UserLanguage = 'german' | 'english' | 'french';

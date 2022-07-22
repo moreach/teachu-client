@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ClassListClassDTO } from 'src/app/DTOs/ClassListClassDTO';
-import { ClassListStudentDTO } from 'src/app/DTOs/ClassListStudentDTO';
-import { ClassListTeacherDTO } from 'src/app/DTOs/ClassListTeacherDTO';
+import { ClassListClassDTO } from 'src/app/DTOs/xx_old/ClassListClassDTO';
+import { ClassListStudentDTO } from 'src/app/DTOs/xx_old/ClassListStudentDTO';
+import { ClassListTeacherDTO } from 'src/app/DTOs/xx_old/ClassListTeacherDTO';
 import { ClasslistDetailComponent } from '../classlist-detail/classlist-detail.component';
 
 @Component({

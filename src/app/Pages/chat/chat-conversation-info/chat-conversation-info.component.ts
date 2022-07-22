@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
-import { ChatConversationInfoDTO } from 'src/app/DTOs/ChatConversationInfoDTO';
-import { ChatSaveGroupDTO } from 'src/app/DTOs/ChatSaveGroupDTO';
+import { ChatConversationInfoDTO } from 'src/app/DTOs/xx_old/ChatConversationInfoDTO';
+import { ChatSaveGroupDTO } from 'src/app/DTOs/xx_old/ChatSaveGroupDTO';
 import { ChatService } from '../chat.service';
 import { GroupChatDialogComponent } from '../group-chat-dialog/group-chat-dialog.component';
 

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {ChildDataDTO} from "../../../DTOs/ChildDataDTO";
+import { ChildDataDTO } from 'src/app/DTOs/xx_old/ChildDataDTO';
 import {GradeService} from "../grade.service";
 
 @Component({

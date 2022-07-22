@@ -1,4 +1,4 @@
-import { Sex } from "../Enums/Sex";
+import { Sex } from "./Enums/old_Sex";
 
 export interface ClassListStudentDTO {
     profileImage: string;

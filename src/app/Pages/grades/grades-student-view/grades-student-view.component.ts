@@ -1,11 +1,11 @@
 import {Component, HostListener, Input, OnInit} from '@angular/core';
-import {SemesterDTO} from "../../../DTOs/grades/SemesterDTO";
+import {SemesterDTO} from "../../../DTOs/old_grades/SemesterDTO";
 import {ApiService} from "../../../Framework/API/api.service";
-import {MenuTreeDTO, MenuTreeItemDTO} from "../../../DTOs/MenuTreeDTO";
-import {GradeDTO} from "../../../DTOs/grades/GradeDTO";
-import {SchoolClassDTO} from "../../../DTOs/grades/SchoolClassDTO";
-import {SubjectDTO} from "../../../DTOs/grades/SubjectDTO";
+import {GradeDTO} from "../../../DTOs/old_grades/GradeDTO";
+import {SchoolClassDTO} from "../../../DTOs/old_grades/SchoolClassDTO";
+import {SubjectDTO} from "../../../DTOs/old_grades/SubjectDTO";
 import {GradeService} from "../../../Conponents/grades/grade.service";
+import { MenuTreeDTO, MenuTreeItemDTO } from 'src/app/DTOs/xx_old/MenuTreeDTO';
 
 export interface SubjectData {
     semester: SemesterDTO;

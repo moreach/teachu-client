@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Role} from "../../Enums/Role";
+import {Role} from "../../DTOs/xx_old/Enums/old_Role";
 import {UserService} from "../user-settings/user.service";
 import {endpoints} from "../../Config/endpoints";
 import {ApiService} from "../../Framework/API/api.service";
-import {ChildDTO} from "../../DTOs/ChildDTO";
-import {ChildDataDTO} from "../../DTOs/ChildDataDTO";
+import { ChildDataDTO } from 'src/app/DTOs/xx_old/ChildDataDTO';
+import { ChildDTO } from 'src/app/DTOs/xx_old/ChildDTO';
 
 @Component({
     selector: 'app-grades',

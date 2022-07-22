@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
-import { ChatConversationDTO } from 'src/app/DTOs/ChatConversationDTO';
-import { ChatConversationInfoDTO } from 'src/app/DTOs/ChatConversationInfoDTO';
-import { ChatMessageDTO } from 'src/app/DTOs/ChatMessageDTO';
-import { ChatSaveGroupDTO } from 'src/app/DTOs/ChatSaveGroupDTO';
-import { ChatOverviewDTO } from 'src/app/DTOs/ChatOverviewDTO';
-import { ChatUserDTO } from 'src/app/DTOs/ChatUserDTO';
+import { ChatConversationDTO } from 'src/app/DTOs/xx_old/ChatConversationDTO';
+import { ChatConversationInfoDTO } from 'src/app/DTOs/xx_old/ChatConversationInfoDTO';
+import { ChatMessageDTO } from 'src/app/DTOs/xx_old/ChatMessageDTO';
+import { ChatOverviewDTO } from 'src/app/DTOs/xx_old/ChatOverviewDTO';
+import { ChatSaveGroupDTO } from 'src/app/DTOs/xx_old/ChatSaveGroupDTO';
+import { ChatUserDTO } from 'src/app/DTOs/xx_old/ChatUserDTO';
 import { addMinutes } from 'src/app/Framework/Helpers/DateHelpers';
 
 @Injectable({

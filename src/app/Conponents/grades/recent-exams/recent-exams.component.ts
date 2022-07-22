@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {SemesterDTO} from "../../../DTOs/grades/SemesterDTO";
-import {GradeDTO} from "../../../DTOs/grades/GradeDTO";
+import {SemesterDTO} from "../../../DTOs/old_grades/SemesterDTO";
+import {GradeDTO} from "../../../DTOs/old_grades/GradeDTO";
 import {GradeService} from "../grade.service";
 
 @Component({

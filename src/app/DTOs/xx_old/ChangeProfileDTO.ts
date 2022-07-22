@@ -1,4 +1,4 @@
-import { Language } from "../Enums/Language";
+import { Language } from "./Enums/old_Language";
 
 export interface ChangeProfileDTO {
     language: Language;
