@@ -50,7 +50,7 @@ export class UserSettingsComponent {
                 darkTheme: user.darkTheme,
                 language: user.language,
                 phone: user.phone,
-                profileImage: user.profileImage,
+                profileImage: user.imageId,
             };
             this.isLoading = false;
         });

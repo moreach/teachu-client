@@ -15,5 +15,5 @@ export interface UserDTO {
     postalCode: string;
     street: string;
     phone: string;
-    profileImage: string;
+    imageId: string;
 }

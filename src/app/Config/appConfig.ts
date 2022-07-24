@@ -1,5 +1,5 @@
 export const appConfig = {
-    API_HEADER_AUTHORIZATION: 'auth',
+    API_HEADER_AUTHORIZATION: 'access',
     APPLICATION_DARK_THEME: 'dark-theme',
     APPLICATION_TOKEN: 'teachu-token',
     APPLICATION_REFRESH_TOKEN: 'teachu-refresh-token',
