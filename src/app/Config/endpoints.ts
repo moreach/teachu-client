@@ -1,5 +1,5 @@
 export const endpoints = {
-    Login: 'auth',
+    Login: 'authentication',
     User: 'user',
     UserProfile: 'user/profile',
     ChangePassword: 'user/password',

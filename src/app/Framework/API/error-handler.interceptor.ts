@@ -51,7 +51,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
             tap(token => {
               this.tokenService.setToken(token.access);
               this.tokenService.setRefreshToken(token.refresh);
-              this.tokenService.setExpired(token.refreshExpires);
+              this.tokenService.setExpired(token.accessExpires);
             }),
             switchMap(token => next.handle(this.cloneRequest(request, token.access))),
           );

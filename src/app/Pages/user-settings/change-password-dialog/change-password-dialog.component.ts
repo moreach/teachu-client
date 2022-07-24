@@ -53,7 +53,7 @@ export class ChangePasswordDialogComponent {
       this.close();
       this.tokenService.setToken(token.access);
       this.tokenService.setRefreshToken(token.refresh);
-      this.tokenService.setExpired(token.refreshExpires);
+      this.tokenService.setExpired(token.accessExpires);
     });
   }
 
