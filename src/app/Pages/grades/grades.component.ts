@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Role} from "../../DTOs/xx_old/Enums/old_Role";
 import {UserService} from "../user-settings/user.service";
 import {endpoints} from "../../Config/endpoints";
 import {ApiService} from "../../Framework/API/api.service";
-import { ChildDataDTO } from 'src/app/DTOs/xx_old/ChildDataDTO';
-import { ChildDTO } from 'src/app/DTOs/xx_old/ChildDTO';
+import {UserRole} from "../../DTOs/User/UserRole";
+import {GradeSemesterDTO} from "../../DTOs/Grade/GradeDTOs";
 
 @Component({
     selector: 'app-grades',
@@ -13,7 +12,7 @@ import { ChildDTO } from 'src/app/DTOs/xx_old/ChildDTO';
 })
 export class GradesComponent implements OnInit {
 
-    currentUserRole!: Role;
+    currentUserRole!: UserRole;
     data: any = {};
 
     constructor(
@@ -26,26 +25,26 @@ export class GradesComponent implements OnInit {
             this.currentUserRole = user.role;
 
             switch (this.currentUserRole) {
-                case "STUDENT":
-                    this.api.callApi<any>(endpoints.studentGrade, {}, 'GET')
-                        .subscribe((response) => { this.data = response.semesters });
+                case "student":
+                    this.api.callApi<GradeSemesterDTO>(endpoints.grades, {}, 'GET')
+                        .subscribe((grades) => this.data = grades);
                     break;
-                case "PARENT":
-                    this.api.callApi<any>(endpoints.parentChildren, {}, 'GET')
-                        .subscribe((response) => {
-                            let childrenMarks: ChildDataDTO[] = [];
-
-                            for (let child of (response.children as ChildDTO[])) {
-                                this.api.callApi<any>(`${endpoints.parentChildren}/${child.id}`, {}, 'GET')
-                                    .subscribe(childGrades => {
-                                        childrenMarks.push(childGrades);
-                                        this.data = childrenMarks;
-                                    });
-                            }
-                        });
-                    break;
+                // TODO: implementation of parent is still under construction
+                // case "parent":
+                //     this.api.callApi<any>(endpoints.parentChildren, {}, 'GET')
+                //         .subscribe((response) => {
+                //             let childrenMarks: ChildDataDTO[] = [];
+                //
+                //             for (let child of (response.children as ChildDTO[])) {
+                //                 this.api.callApi<any>(`${endpoints.parentChildren}/${child.id}`, {}, 'GET')
+                //                     .subscribe(childGrades => {
+                //                         childrenMarks.push(childGrades);
+                //                         this.data = childrenMarks;
+                //                     });
+                //             }
+                //         });
+                //     break;
             }
         });
-
     }
 }

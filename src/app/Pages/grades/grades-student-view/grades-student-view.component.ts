@@ -1,16 +1,13 @@
 import {Component, HostListener, Input, OnInit} from '@angular/core';
-import {SemesterDTO} from "../../../DTOs/old_grades/SemesterDTO";
-import {ApiService} from "../../../Framework/API/api.service";
-import {GradeDTO} from "../../../DTOs/old_grades/GradeDTO";
-import {SchoolClassDTO} from "../../../DTOs/old_grades/SchoolClassDTO";
-import {SubjectDTO} from "../../../DTOs/old_grades/SubjectDTO";
 import {GradeService} from "../../../Conponents/grades/grade.service";
 import { MenuTreeDTO, MenuTreeItemDTO } from 'src/app/DTOs/xx_old/MenuTreeDTO';
+import {GradeClassDTO, GradeDTO, GradeSemesterDTO, GradeSubjectDTO} from "../../../DTOs/Grade/GradeDTOs";
+import {ApiService} from "../../../Framework/API/api.service";
 
 export interface SubjectData {
-    semester: SemesterDTO;
-    schoolClass: SchoolClassDTO;
-    subject: SubjectDTO;
+    semester: GradeSemesterDTO;
+    schoolClass: GradeClassDTO;
+    subject: GradeSubjectDTO;
 }
 
 @Component({
@@ -22,7 +19,7 @@ export class GradesStudentViewComponent implements OnInit {
     readonly MENU_BREAKPOINT_PX: number = 720;
     readonly RECENT_EXAMS_AMOUNT: number = 4;
 
-    allSemesterDTOs: SemesterDTO[] = [];
+    allSemesterDTOs: GradeSemesterDTO[] = [];
     examMenuTree: MenuTreeDTO = { tree: [] };
     lastExams: GradeDTO[] = [];
 
@@ -35,18 +32,18 @@ export class GradesStudentViewComponent implements OnInit {
 
     constructor(
         private api: ApiService,
-        private grades: GradeService,
+        private gradeService: GradeService,
     ) { }
 
     ngOnInit(): void {
         this.onResize();
     }
 
-    @Input() set semesters(semesterDTOs: SemesterDTO[]) {
-        this.allSemesterDTOs = semesterDTOs as SemesterDTO[];
-        if(!!this.allSemesterDTOs){
-            this.examMenuTree = this.grades.generateMenuTree(this.allSemesterDTOs);
-            this.lastExams = this.grades.getLastExams(this.allSemesterDTOs, this.RECENT_EXAMS_AMOUNT);
+    @Input() set grades(gradeDTO: GradeSemesterDTO[]) {
+        this.allSemesterDTOs = gradeDTO as GradeSemesterDTO[];
+        if(!!this.allSemesterDTOs && this.allSemesterDTOs.length > 0){
+            this.examMenuTree = this.gradeService.generateMenuTree(this.allSemesterDTOs);
+            this.lastExams = this.gradeService.getLastExams(this.allSemesterDTOs, this.RECENT_EXAMS_AMOUNT);
         }
     }
 

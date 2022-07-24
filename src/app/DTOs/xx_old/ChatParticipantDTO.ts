@@ -1,9 +1,9 @@
-import { Role } from "./Enums/old_Role";
+import { UserRole } from "../User/UserRole";
 
 export interface ChatParticipantDTO {
     name: string | null; // null if is user self
     userId: string; // null if is user self
     image: string;
-    role: Role;
+    role: UserRole;
     isAdmin: boolean;
 }

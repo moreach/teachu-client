@@ -4,7 +4,7 @@ export const endpoints = {
     UserProfile: 'user/profile',
     ChangePassword: 'user/password',
     UserDarkTheme: 'user/darkTheme',
-    studentGrade: 'grade/student',
+    grades: 'grade',
     ClassList: 'classlist',
     parentChildren: 'child',
 }

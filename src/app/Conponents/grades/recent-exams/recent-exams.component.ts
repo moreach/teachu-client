@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {SemesterDTO} from "../../../DTOs/old_grades/SemesterDTO";
-import {GradeDTO} from "../../../DTOs/old_grades/GradeDTO";
 import {GradeService} from "../grade.service";
+import {GradeDTO, GradeSemesterDTO} from "../../../DTOs/Grade/GradeDTOs";
 
 @Component({
     selector: 'app-recent-exams',
@@ -18,8 +17,9 @@ export class RecentExamsComponent {
         private grades: GradeService,
     ) { }
 
-    @Input() set semesterData(semesterData: SemesterDTO[]) {
-        this.recentExams = this.grades.getLastExams(semesterData, this.amount);
+    @Input() set semesterData(semesterData: GradeSemesterDTO[]) {
+        if(semesterData.length > 0)
+            this.recentExams = this.grades.getLastExams(semesterData, this.amount);
     }
 
     examClicked(grade: GradeDTO): void {

@@ -7,14 +7,14 @@
                 </mat-icon>
             </button>
             <mat-icon id="semester-icon">{{SEMESTER_ICON}}</mat-icon>
-            <span id="semester-text">{{selectedSubject?.semester?.semesterName}}</span>
+            <span id="semester-text">{{selectedSubject?.semester?.name}}</span>
             <mat-icon id="class-icon">{{CLASS_ICON}}</mat-icon>
-            <span id="class-text">{{selectedSubject?.schoolClass?.schoolClass}} </span>
+            <span id="class-text">{{selectedSubject?.schoolClass?.name}} </span>
             <mat-icon id="subject-icon">{{SUBJECT_ICON}}</mat-icon>
-            <span id="subject-text">{{selectedSubject?.subject?.subjectName}}</span>
+            <span id="subject-text">{{selectedSubject?.subject?.name}}</span>
         </div>
         <div class="class-grades-header-items" style="justify-content: end">
-            <span class="subject-average">⌀ {{getRoundedMark(selectedSubject?.subject?.averageMark)}}</span>
+            <span class="subject-average">⌀ {{getRoundedMark(selectedSubject?.subject?.average)}}</span>
         </div>
     </div>
     <div class="grade-row" *ngFor="let grade of selectedSubject?.subject?.grades" (click)="selectGrade(grade)">

@@ -3,7 +3,7 @@
         <mat-tab *ngFor="let childMarks of childrenMarks"
                  label="{{childMarks.firstName}}">
             <app-parent-child-preview [childData]="childMarks"></app-parent-child-preview>
-            <app-grades-student-view [semesters]="getChildSemesters(childMarks)"></app-grades-student-view>
+            <app-grades-student-view [grades]="getChildSemesters(childMarks)"></app-grades-student-view>
         </mat-tab>
     </mat-tab-group>
 </ng-container>

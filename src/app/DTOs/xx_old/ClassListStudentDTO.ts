@@ -1,11 +1,11 @@
-import { Sex } from "./Enums/old_Sex";
+import { UserSex } from "../User/UserSex";
 
 export interface ClassListStudentDTO {
     profileImage: string;
     firstName: string;
     lastName: string;
     birthday: Date;
-    sex: Sex;
+    sex: UserSex;
     postalCode: string;
     city: string;
     street: string;

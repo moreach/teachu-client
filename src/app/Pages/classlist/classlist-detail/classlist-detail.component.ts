@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Sex, SEXS } from 'src/app/DTOs/xx_old/Enums/old_Sex';
+import { UserSex, SEXS } from 'src/app/DTOs/User/UserSex';
 
 @Component({
   selector: 'app-classlist-detail',
@@ -17,7 +17,7 @@ export class ClasslistDetailComponent {
     return this.data;
   }
 
-  sexCaption(sex: Sex) {
+  sexCaption(sex: UserSex) {
     return SEXS.find(s => s.value === sex)?.key ?? '';
   }
 }

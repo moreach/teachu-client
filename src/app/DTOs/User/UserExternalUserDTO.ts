@@ -1,12 +1,12 @@
-import { Role } from "src/app/DTOs/xx_old/Enums/old_Role";
-import { Sex } from "src/app/DTOs/xx_old/Enums/old_Sex";
+import { UserRole } from "src/app/DTOs/User/UserRole";
+import { UserSex } from "src/app/DTOs/User/UserSex";
 
 export interface UserExternalUserDTO {
     email: string;
-    role: Role;
+    role: UserRole;
     firstName: string;
     lastName: string;
     birthday: Date;
-    sex: Sex;
+    sex: UserSex;
     city: string
 }

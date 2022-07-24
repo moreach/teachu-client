@@ -1,1 +1,0 @@
-export type Role = 'PARENT' | 'STUDENT' | 'TEACHER' | 'ADMIN';

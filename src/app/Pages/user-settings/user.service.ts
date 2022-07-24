@@ -4,8 +4,8 @@ import { Observable, map, filter, startWith, distinctUntilChanged } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { endpoints } from 'src/app/Config/endpoints';
 import { ChangeProfileDTO } from 'src/app/DTOs/xx_old/ChangeProfileDTO';
-import { UserDTO } from 'src/app/DTOs/xx_old/UserDTO';
 import { ApiService } from 'src/app/Framework/API/api.service';
+import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,8 @@ export class UserService {
     private apiService: ApiService,
   ) { }
 
-  getCurrentUser$(): Observable<UserDTO> {
-    return this.apiService.callApi<UserDTO>(endpoints.User, {}, 'GET');
+  getCurrentUser$(): Observable<UserOwnDTO> {
+    return this.apiService.callApi<UserOwnDTO>(endpoints.User, {}, 'GET');
   }
 
   saveUser$(formValue: ChangeProfileDTO) {

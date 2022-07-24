@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import { ChildDataDTO } from 'src/app/DTOs/xx_old/ChildDataDTO';
-import {SemesterDTO} from "../../../DTOs/old_grades/SemesterDTO";
+import {GradeSemesterDTO} from "../../../DTOs/Grade/GradeDTOs";
 
 @Component({
     selector: 'app-grades-parent-view',
@@ -20,7 +20,7 @@ export class GradesParentViewComponent {
         this.loaded = this.childrenMarks instanceof Array;
     }
 
-    getChildSemesters(child: ChildDataDTO): SemesterDTO[] {
+    getChildSemesters(child: ChildDataDTO): GradeSemesterDTO[] {
         return child.marks;
     }
 
