@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import { MenuTreeItemDTO } from 'src/app/DTOs/xx_old/MenuTreeDTO';
+import { MenuTreeItemDTO } from 'src/app/DTOs/Menu/MenuTreeDTO';
 
 @Component({
     selector: 'app-menu-node',

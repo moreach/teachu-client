@@ -31,3 +31,9 @@ export interface GradeDTO {
     weight: number;
     mark: number;
 }
+
+export interface SubjectData {
+    semester: GradeSemesterDTO;
+    schoolClass: GradeClassDTO;
+    subject: GradeSubjectDTO;
+}

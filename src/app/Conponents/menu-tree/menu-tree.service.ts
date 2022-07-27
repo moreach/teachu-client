@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import { Observable, of } from "rxjs";
-import { MenuTreeDTO } from "src/app/DTOs/xx_old/MenuTreeDTO";
+import { MenuTreeDTO } from "src/app/DTOs/Menu/MenuTreeDTO";
 
 @Injectable({
     providedIn: 'root'

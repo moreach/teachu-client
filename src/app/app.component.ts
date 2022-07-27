@@ -4,7 +4,7 @@ import {DarkThemeService} from "./Framework/dark-theme/dark-theme.service";
 import { UserService } from "./Pages/user-settings/user.service";
 import { Observable } from "rxjs";
 import {MenuTreeService} from "./Conponents/menu-tree/menu-tree.service";
-import { MenuTreeDTO } from "./DTOs/xx_old/MenuTreeDTO";
+import { MenuTreeDTO } from "./DTOs/Menu/MenuTreeDTO";
 import {UserOwnDTO} from "./DTOs/User/UserOwnDTO";
 import {ParentService} from "./Framework/API/parent.service";
 

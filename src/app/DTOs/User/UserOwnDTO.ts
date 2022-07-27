@@ -1,4 +1,4 @@
-import { Language } from "src/app/DTOs/xx_old/Enums/old_Language";
+import { Language } from "src/app/DTOs/Enums/Language";
 import { UserRole } from "src/app/DTOs/User/UserRole";
 import { UserSex } from "src/app/DTOs/User/UserSex";
 

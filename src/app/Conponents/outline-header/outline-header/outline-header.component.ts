@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, map, Observable, startWith, distinctUntilChanged } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
-import { UserDTO } from 'src/app/DTOs/xx_old/UserDTO';
+import {UserOwnDTO} from "../../../DTOs/User/UserOwnDTO";
 
 @Component({
     selector: 'app-outline-header',
@@ -11,7 +11,7 @@ import { UserDTO } from 'src/app/DTOs/xx_old/UserDTO';
 })
 export class OutlineHeaderComponent{
 
-    @Input() currentUser: UserDTO | undefined;
+    @Input() currentUser: UserOwnDTO | undefined;
     @Input() menuToggleIcon: string = "menu";
     @Input() menuClosed: boolean = false;
     @Output() menuClosedChange: EventEmitter<boolean> = new EventEmitter();

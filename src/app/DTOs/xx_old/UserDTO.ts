@@ -1,4 +1,4 @@
-import { Language } from "./Enums/old_Language";
+import { Language } from "../Enums/Language";
 import { UserRole } from "../User/UserRole";
 import { UserSex } from "../User/UserSex";
 

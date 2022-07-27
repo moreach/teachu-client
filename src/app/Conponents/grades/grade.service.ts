@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MenuTreeDTO, MenuTreeItemDTO } from 'src/app/DTOs/xx_old/MenuTreeDTO';
+import { MenuTreeDTO, MenuTreeItemDTO } from 'src/app/DTOs/Menu/MenuTreeDTO';
 import {GradeDTO, GradeSemesterDTO} from "../../DTOs/Grade/GradeDTOs";
 
 @Injectable({
@@ -9,16 +9,6 @@ export class GradeService {
     readonly SEMESTER_ICON: string = "home";
     readonly CLASS_ICON: string = "error";
     readonly SUBJECT_ICON: string = "error";
-
-    getClassAveragesAsString(semester: GradeSemesterDTO): Map<string, number> {
-        let classAverages: Map<string, number> = new Map<string, number>();
-
-        for (let schoolClass of semester.classes) {
-            classAverages.set(schoolClass.name, Math.round(schoolClass.average * 100) / 100);
-        }
-
-        return classAverages;
-    }
 
     getLastExams(semesters: GradeSemesterDTO[], amount?: number | undefined): GradeDTO[]{
         let exams: GradeDTO[] = [];
