@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -18,6 +18,7 @@ export class ApiService {
   }
 
   private buildRequest(endpoint: string, payload: any, method: HttpMethods) {
+    if(!environment.IS_PROD) console.log("api - sending request: ", endpoint, method, payload)
     const requestEndpoint = `${environment.URL_API}${endpoint}`;
 
     let request: any;

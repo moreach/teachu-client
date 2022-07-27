@@ -12,17 +12,21 @@ import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
 })
 export class UserService {
 
+  private currentUser: Observable<UserOwnDTO> | undefined;
+
   constructor(
     private router: Router,
     private apiService: ApiService,
   ) { }
 
   getCurrentUser$(): Observable<UserOwnDTO> {
-    return this.apiService.callApi<UserOwnDTO>(endpoints.User, {}, 'GET');
+    if(this.currentUser) return this.currentUser;
+    this.currentUser = this.apiService.callApi<UserOwnDTO>(endpoints.User, {}, 'GET');
+    return this.currentUser;
   }
 
   saveUser$(formValue: ChangeProfileDTO) {
-    return this.apiService.callApi(endpoints.UserProfile, formValue, "PUT");
+    return this.apiService.callApi(endpoints.User, formValue, "PUT");
   };
 
   isSignedIn$(): Observable<boolean>  {

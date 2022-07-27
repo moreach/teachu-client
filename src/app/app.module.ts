@@ -53,6 +53,8 @@ import { ClasslistComponent } from './Pages/classlist/classlist.component';
 import { ClasslistListComponent } from './Pages/classlist/classlist-list/classlist-list.component';
 import { ClasslistDetailComponent } from './Pages/classlist/classlist-detail/classlist-detail.component';
 import { ChooseStudentDialogComponent } from './Pages/login/choose-student-dialog/choose-student-dialog.component';
+import { ParentChildSelectorComponent } from './Conponents/parent-child-selector/parent-child-selector.component';
+import {ParentService} from "./Framework/API/parent.service";
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -102,6 +104,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ClasslistListComponent,
         ClasslistDetailComponent,
         ChooseStudentDialogComponent,
+        ParentChildSelectorComponent,
     ],
     imports: [
         BrowserModule,
@@ -133,6 +136,11 @@ export function HttpLoaderFactory(http: HttpClient) {
         {
             provide: HTTP_INTERCEPTORS,
             useClass: ErrorHandlerInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ParentService,
             multi: true
         },
         {

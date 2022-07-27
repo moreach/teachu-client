@@ -16,6 +16,9 @@ import { TokenService } from './token.service';
 @Injectable()
 export class ErrorHandlerInterceptor implements HttpInterceptor {
 
+  /** to avoid endless loop on 401 errors that come from other things than the auth system */
+  private unauthorizedCount: number = 0;
+
   constructor(
     private api: ApiService,
     private errorHandler: ErrorHandlingService,
@@ -44,7 +47,8 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
           this.tokenService.removeExpired();
           this.errorHandler.redirectToLogin();
         }
-        if (error.status === 401) {
+        if (error.status === 401 && this.unauthorizedCount < appConfig.UNAUTHORIZED_ERROR_RETRY_COUNT) {
+          this.unauthorizedCount++;
           return this.api.callApi<TokenDTO>(endpoints.Login, {
             refresh: this.tokenService.getRefreshToken(),
           } as TokenDTO, 'PUT').pipe(
