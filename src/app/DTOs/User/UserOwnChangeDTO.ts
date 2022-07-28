@@ -1,4 +1,4 @@
-import { Language } from "src/app/DTOs/xx_old/Enums/old_Language";
+import { Language } from "src/app/DTOs/Enums/Language";
 
 export interface UserOwnChangeDTO {
     language: Language;

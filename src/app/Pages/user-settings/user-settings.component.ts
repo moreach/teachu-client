@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 import {FormBuilder, Validators} from "@angular/forms";
 import {FormGroupTyped} from "../../Material/types";
 import { DarkThemeService } from "src/app/Framework/dark-theme/dark-theme.service";
-import { SEXS } from "src/app/DTOs/xx_old/Enums/old_Sex";
+import { SEXS } from "src/app/DTOs/User/UserSex";
 import { MatDialog } from "@angular/material/dialog";
 import { ChangePasswordDialogComponent } from "./change-password-dialog/change-password-dialog.component";
 import { UserService } from "./user.service";
@@ -50,7 +50,7 @@ export class UserSettingsComponent {
                 darkTheme: user.darkTheme,
                 language: user.language,
                 phone: user.phone,
-                profileImage: user.profileImage,
+                profileImage: user.imageId,
             };
             this.isLoading = false;
         });

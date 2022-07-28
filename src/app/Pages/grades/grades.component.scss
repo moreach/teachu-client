@@ -1,0 +1,24 @@
+.student-view-container{;
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    grid-template-rows: 150px auto;
+    grid-template-columns: auto;
+
+    .student-content-collapsed {
+        display: block;
+    }
+
+    @media (max-width: 720px) {
+        .student-content{
+            display: block !important;
+        }
+    }
+
+    .student-content {
+        display: inline-grid;
+        grid-template-columns: clamp(250px, 25%, 300px) auto;
+        grid-template-rows: auto;
+    }
+}

@@ -42,17 +42,16 @@ import { GroupChatDialogComponent } from './Pages/chat/group-chat-dialog/group-c
 import { PrivateChatDialogComponent } from './Pages/chat/private-chat-dialog/private-chat-dialog.component';
 import { AbsencesComponent } from './Pages/absences/absences.component';
 import { SchoolInfosComponent } from './Pages/school-infos/school-infos.component';
-import {GradesStudentViewComponent} from "./Pages/grades/grades-student-view/grades-student-view.component";
-import { GradesParentViewComponent } from './Pages/grades/grades-parent-view/grades-parent-view.component';
 import { RecentExamsComponent } from './Conponents/grades/recent-exams/recent-exams.component';
 import { ClassGradesComponent } from './Conponents/grades/class-grades/class-grades.component';
 import { GradeDetailComponent } from './Conponents/grades/grade-detail/grade-detail.component';
 import { LessonDetailsComponent } from './Pages/timetable/lesson-details/lesson-details.component';
-import { ParentChildPreviewComponent } from './Conponents/grades/parent-child-preview/parent-child-preview.component';
 import { ClasslistComponent } from './Pages/classlist/classlist.component';
 import { ClasslistListComponent } from './Pages/classlist/classlist-list/classlist-list.component';
 import { ClasslistDetailComponent } from './Pages/classlist/classlist-detail/classlist-detail.component';
 import { ChooseStudentDialogComponent } from './Pages/login/choose-student-dialog/choose-student-dialog.component';
+import { ParentChildSelectorComponent } from './Conponents/parent-child-selector/parent-child-selector.component';
+import {ParentService} from "./Framework/API/parent.service";
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -83,8 +82,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         GradesComponent,
         ReadonlyFieldComponent,
         ChangePasswordDialogComponent,
-        GradesStudentViewComponent,
-        GradesParentViewComponent,
         ChatOverviewComponent,
         ChatConversationComponent,
         ChatConversationInfoComponent,
@@ -96,12 +93,11 @@ export function HttpLoaderFactory(http: HttpClient) {
         ClassGradesComponent,
         GradeDetailComponent,
         LessonDetailsComponent,
-        ParentChildPreviewComponent,
-        ParentChildPreviewComponent,
         ClasslistComponent,
         ClasslistListComponent,
         ClasslistDetailComponent,
         ChooseStudentDialogComponent,
+        ParentChildSelectorComponent,
     ],
     imports: [
         BrowserModule,
@@ -133,6 +129,11 @@ export function HttpLoaderFactory(http: HttpClient) {
         {
             provide: HTTP_INTERCEPTORS,
             useClass: ErrorHandlerInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ParentService,
             multi: true
         },
         {

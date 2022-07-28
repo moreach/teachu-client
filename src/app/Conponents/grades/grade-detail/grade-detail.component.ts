@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {GradeDTO} from "../../../DTOs/old_grades/GradeDTO";
+import {GradeDTO} from "../../../DTOs/Grade/GradeDTOs";
 
 @Component({
     selector: 'app-grade-detail',

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import { MenuTreeDTO, MenuTreeItemDTO } from 'src/app/DTOs/xx_old/MenuTreeDTO';
+import { MenuTreeDTO, MenuTreeItemDTO } from 'src/app/DTOs/Menu/MenuTreeDTO';
 
 @Component({
     selector: 'app-menu-tree',

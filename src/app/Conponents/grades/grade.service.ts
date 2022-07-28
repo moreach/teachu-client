@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {SemesterDTO} from "../../DTOs/old_grades/SemesterDTO";
-import {GradeDTO} from "../../DTOs/old_grades/GradeDTO";
-import { MenuTreeDTO, MenuTreeItemDTO } from 'src/app/DTOs/xx_old/MenuTreeDTO';
+import { MenuTreeDTO, MenuTreeItemDTO } from 'src/app/DTOs/Menu/MenuTreeDTO';
+import {GradeDTO, GradeSemesterDTO} from "../../DTOs/Grade/GradeDTOs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,20 +10,10 @@ export class GradeService {
     readonly CLASS_ICON: string = "error";
     readonly SUBJECT_ICON: string = "error";
 
-    getClassAveragesAsString(semester: SemesterDTO): Map<string, number> {
-        let classAverages: Map<string, number> = new Map<string, number>();
-
-        for (let schoolClass of semester.schoolClasses) {
-            classAverages.set(schoolClass.schoolClass, Math.round(schoolClass.averageMark * 100) / 100);
-        }
-
-        return classAverages;
-    }
-
-    getLastExams(semesters: SemesterDTO[], amount?: number | undefined): GradeDTO[]{
+    getLastExams(semesters: GradeSemesterDTO[], amount?: number | undefined): GradeDTO[]{
         let exams: GradeDTO[] = [];
         for (let semester of semesters) {
-            for (let schoolClass of semester.schoolClasses) {
+            for (let schoolClass of semester.classes) {
                 for (let subject of schoolClass.subjects) {
                     for (let grade of subject.grades) {
                         exams.push(grade);
@@ -33,27 +22,27 @@ export class GradeService {
             }
         }
 
-        exams.sort((a, b) => b.date - a.date);
+        exams.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
         amount = amount || exams.length;
         return exams.slice(0, amount);
     }
 
-    generateMenuTree(semesters: SemesterDTO[]): MenuTreeDTO {
+    generateMenuTree(semesters: GradeSemesterDTO[]): MenuTreeDTO {
         let menuTreeItems: MenuTreeItemDTO[] = [];
 
         for (let semester of semesters) {
             let semesterLeave: MenuTreeItemDTO = {
                 icon: this.SEMESTER_ICON,
                 leave: false,
-                translatedTitle: semester.semesterName,
+                translatedTitle: semester.name,
                 children: []
             };
 
-            for (let schoolClass of semester.schoolClasses) {
+            for (let schoolClass of semester.classes) {
                 let schoolClassLeave: MenuTreeItemDTO = {
                     icon: this.CLASS_ICON,
                     leave: false,
-                    translatedTitle: schoolClass.schoolClass,
+                    translatedTitle: schoolClass.name,
                     children: []
                 };
 
@@ -61,7 +50,7 @@ export class GradeService {
                     let subjectLeave: MenuTreeItemDTO = {
                         icon: this.SUBJECT_ICON,
                         leave: true,
-                        translatedTitle: subject.subjectName,
+                        translatedTitle: subject.name,
                         data: { semester, schoolClass, subject }
                     };
                     schoolClassLeave.children!.push(subjectLeave);

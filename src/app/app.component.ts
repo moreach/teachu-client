@@ -2,10 +2,11 @@ import {AfterViewInit, Component, HostListener} from "@angular/core";
 import {LanguagesService} from "./Framework/Languages/languages.service";
 import {DarkThemeService} from "./Framework/dark-theme/dark-theme.service";
 import { UserService } from "./Pages/user-settings/user.service";
-import { Observable, of, startWith, switchMap } from "rxjs";
+import { Observable } from "rxjs";
 import {MenuTreeService} from "./Conponents/menu-tree/menu-tree.service";
-import { MenuTreeDTO } from "./DTOs/xx_old/MenuTreeDTO";
-import { UserDTO } from "./DTOs/xx_old/UserDTO";
+import { MenuTreeDTO } from "./DTOs/Menu/MenuTreeDTO";
+import {UserOwnDTO} from "./DTOs/User/UserOwnDTO";
+import {ParentService} from "./Framework/API/parent.service";
 
 const WINDOW_WIDTH_BREAKPOINT: number = 1000;
 
@@ -20,13 +21,15 @@ export class AppComponent implements AfterViewInit {
     menuClosed: boolean = false;
     menuTree$: Observable<MenuTreeDTO>;
     isSignedIn$: Observable<boolean>;
-    currentUser$: Observable<UserDTO | undefined>;
+    currentUser$: Observable<UserOwnDTO | undefined>;
+    isParent: boolean = false;
 
     constructor (
         private languageService: LanguagesService,
         private darkTheme: DarkThemeService,
         private userService: UserService,
         private menuTreeService: MenuTreeService,
+        private parentService: ParentService,
     ) {
         this.languageService.setLanguageOnStartup();
         this.darkTheme.isDarkTheme$.asObservable().subscribe((isDarkTheme) => {
@@ -34,16 +37,22 @@ export class AppComponent implements AfterViewInit {
         });
         this.onResize();
         this.isSignedIn$ = this.userService.isSignedIn$();
-        this.currentUser$ = this.isSignedIn$.pipe(
-            startWith(false),
-            switchMap(isSignedIn => {
-                if (isSignedIn) {
-                    return this.userService.getCurrentUser$()
-                } else {
-                    return of(undefined)
-                }
+        this.currentUser$ = new Observable<UserOwnDTO | undefined>(subscriber => {
+            this.userService.isSignedIn$().subscribe(signedIn => {
+                if(signedIn){
+                    this.userService.getCurrentUser$().subscribe(user => {
+                        const parent = user.role === 'parent';
+                        if(parent){
+                            this.parentService.selectAStudent();
+                            this.isParent = parent;
+                        }
+                        subscriber.next(user);
+                    });
+                } else subscriber.next(undefined);
             })
-        );
+        });
+
+
 
         this.menuTree$ = this.menuTreeService.getMenuTree$();
     }

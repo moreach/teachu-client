@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { endpoints } from 'src/app/Config/endpoints';
 import { PasswordChangeDTO } from 'src/app/DTOs/xx_old/PasswordChangeDTO';
-import { TokenDTO } from 'src/app/DTOs/xx_old/TokenDTO';
+import { TokenDTO } from 'src/app/DTOs/Authentication/TokenDTO';
 import { ApiService } from 'src/app/Framework/API/api.service';
 import { FormGroupTyped } from 'src/app/Material/types';
 import { TokenService } from 'src/app/Framework/API/token.service';
@@ -53,7 +53,7 @@ export class ChangePasswordDialogComponent {
       this.close();
       this.tokenService.setToken(token.access);
       this.tokenService.setRefreshToken(token.refresh);
-      this.tokenService.setExpired(token.refreshExpires);
+      this.tokenService.setExpired(token.accessExpires);
     });
   }
 

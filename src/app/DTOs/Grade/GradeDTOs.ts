@@ -1,6 +1,6 @@
 import { UserExternalUserDTO } from "../User/UserExternalUserDTO";
 
-export interface GradeDTO {
+export interface GradeSemesterDTO {
     id: string;
     name: string;
     from: Date;
@@ -21,13 +21,19 @@ export interface GradeSubjectDTO {
     name: string;
     classTeacher: UserExternalUserDTO;
     average: number;
-    grades: GradeGradeDTO[];
+    grades: GradeDTO[];
 }
 
-export interface GradeGradeDTO {
+export interface GradeDTO {
     name: string;
     description: string;
     date: Date;
     weight: number;
     mark: number;
+}
+
+export interface SubjectData {
+    semester: GradeSemesterDTO;
+    schoolClass: GradeClassDTO;
+    subject: GradeSubjectDTO;
 }

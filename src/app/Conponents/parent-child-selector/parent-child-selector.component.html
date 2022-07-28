@@ -1,0 +1,8 @@
+<mat-form-field *ngIf="children" style="padding: 0 20px; width: 100%;">
+    <mat-label>{{"outline.selectedStudent" | translate}}</mat-label>
+    <mat-select [(value)]="selectedChild">
+        <mat-option *ngFor="let child of children" [value]="child">
+            {{child.student.firstName}} {{child.student.lastName}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

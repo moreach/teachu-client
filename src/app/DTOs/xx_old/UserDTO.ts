@@ -1,19 +1,19 @@
-import { Language } from "./Enums/old_Language";
-import { Role } from "./Enums/old_Role";
-import { Sex } from "./Enums/old_Sex";
+import { Language } from "../Enums/Language";
+import { UserRole } from "../User/UserRole";
+import { UserSex } from "../User/UserSex";
 
 export interface UserDTO {
     email: string;
-    role: Role;
+    role: UserRole;
     firstName: string;
     lastName: string;
     birthday: Date;
-    sex: Sex;
+    sex: UserSex;
     language: Language;
     darkTheme: boolean;
     city: string;
     postalCode: string;
     street: string;
     phone: string;
-    profileImage: string;
+    imageId: string;
 }

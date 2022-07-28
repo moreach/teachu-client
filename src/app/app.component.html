@@ -18,12 +18,14 @@
                     <app-outline-nav-header [(menuClosed)]="menuClosed" [menuToggleIcon]="'close'"> </app-outline-nav-header>
                 </div>
                 <div>
+                    <app-parent-child-selector *ngIf="isParent" class="parent-child-selector"></app-parent-child-selector>
                     <app-menu-tree [treeData]="(menuTree$ | async)!" [indentationWidth]="20" (leaveClickedEvent)="toggleMenu()"></app-menu-tree>
                 </div>
             </div>
         </div>
 
         <div *ngIf="bigWindow" class="nav">
+            <app-parent-child-selector *ngIf="isParent" class="parent-child-selector"></app-parent-child-selector>
             <app-menu-tree [treeData]="(menuTree$ | async)!" [indentationWidth]="20"></app-menu-tree>
         </div>
 
