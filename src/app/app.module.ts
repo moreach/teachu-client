@@ -52,7 +52,7 @@ import { ClasslistDetailComponent } from './Pages/classlist/classlist-detail/cla
 import { ChooseStudentDialogComponent } from './Pages/login/choose-student-dialog/choose-student-dialog.component';
 import { ParentChildSelectorComponent } from './Conponents/parent-child-selector/parent-child-selector.component';
 import {ParentService} from "./Framework/API/parent.service";
-import { ImageComponent } from './Framework/image/image/image.component';
+import { ImageComponent } from './Framework/image/image.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');

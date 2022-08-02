@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, ViewChild} from '@angular/core';
-import {ApiService} from "../../API/api.service";
-import {endpoints} from "../../../Config/endpoints";
+import {ApiService} from "../API/api.service";
+import {endpoints} from "../../Config/endpoints";
 
 @Component({
     selector: 'app-image[imageId]',
