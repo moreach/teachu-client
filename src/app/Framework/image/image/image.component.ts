@@ -4,7 +4,8 @@ import {endpoints} from "../../../Config/endpoints";
 
 @Component({
     selector: 'app-image[imageId]',
-    templateUrl: './image.component.html'
+    templateUrl: './image.component.html',
+    styleUrls: ['image.component.scss']
 })
 export class ImageComponent {
 

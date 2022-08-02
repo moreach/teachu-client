@@ -65,10 +65,7 @@ export class UserSettingsComponent implements OnInit{
             console.log(this.uploadedProfileImage)
 
             if(this.uploadedProfileImage)
-                this.userService.saveProfileImage$(this.uploadedProfileImage).subscribe(r => {
-                    alert(r)
-                    location.reload()
-                });
+                this.userService.saveProfileImage$(this.uploadedProfileImage).subscribe(_ => location.reload());
         });
     }
 
