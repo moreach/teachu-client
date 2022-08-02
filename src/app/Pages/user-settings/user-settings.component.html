@@ -13,7 +13,7 @@
         <input matInput [placeholder]="'userSettings.phone' | translate" formControlName="phone">
     </mat-form-field>
     <mat-form-field>
-        <ngx-mat-file-input [placeholder]="'userSettings.profileImage' | translate" formControlName="profileImage" accept=".png, .jpg">
+        <ngx-mat-file-input [placeholder]="'userSettings.profileImage' | translate" [formControl]="profileImageControl" multiple="false" accept=".png, .jpg">
         </ngx-mat-file-input>
         <mat-icon matSuffix aria-hidden="false">attach_file</mat-icon>
     </mat-form-field>

@@ -29,6 +29,12 @@ export class UserService {
     return this.apiService.callApi(endpoints.User, formValue, "PUT");
   };
 
+  saveProfileImage$(image: File): Observable<any>{
+      const formData: FormData = new FormData();
+      formData.append("file", image)
+      return this.apiService.callApi(endpoints.User, formData, 'POST');
+  }
+
   isSignedIn$(): Observable<boolean>  {
     return this.router.events.pipe(
         filter(event => event instanceof NavigationEnd),
