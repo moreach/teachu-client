@@ -67,8 +67,10 @@
         "leaveChat":"Leave Chat",
         "editChat":"Edit Chat"
     },
-    "userSettings":{
+    "userSettings": {
         "userSettings":"Settings",
+        "userData": "Your Data",
+        "preferences": "Preferences",
         "email":"E-Mail Address",
         "changePassword":"Change Password",
         "firstName":"Firstname",
@@ -86,7 +88,8 @@
         "profileImage":"Profile Image",
         "passwordOld":"Old Password",
         "passwordNew":"New Password",
-        "passwordConfirm":"Repeat New Password"
+        "passwordConfirm":"Repeat New Password",
+        "phoneSaved": "Phone number saved"
     },
     "errorBackend":{
         "unknownError_title":"Unknown Error",

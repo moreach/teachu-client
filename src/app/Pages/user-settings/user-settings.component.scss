@@ -1,6 +1,40 @@
-form {
+@import 'src/styles.scss';
+
+.settings-container{
     display: grid;
-    grid-template-columns: 1fr;
-    max-width: 400px;
-    gap: 16px;
+    grid-template-columns: 33% 33% 33%;
+    justify-items: center;
+
+    #preferences{
+        max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .user-data{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+#savedIcon{
+    color: var(--teachu-accent);
+}
+
+@media (max-width: 800px) {
+    .settings-container{
+        grid-template-columns: 50% 50%;
+        gap: 80px 0;
+    }
+}
+
+@media (max-width: 550px) {
+    .settings-container{
+        grid-template-columns: 100%;
+        gap: 80px 0;
+    }
 }

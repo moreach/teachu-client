@@ -26,7 +26,10 @@ export class UserService {
   }
 
   saveUser$(formValue: ChangeProfileDTO) {
-    return this.apiService.callApi(endpoints.User, formValue, "PUT");
+    return this.apiService.callApi(endpoints.User, formValue, "PUT").subscribe(() => {
+      this.currentUser = undefined;
+      this.getCurrentUser$();
+    });
   };
 
   saveProfileImage$(image: File): Observable<any>{

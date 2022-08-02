@@ -34,7 +34,6 @@ import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { TimetableComponent } from './Pages/timetable/timetable.component';
 import { GradesComponent } from './Pages/grades/grades.component';
 import { ReadonlyFieldComponent } from './Conponents/readonly-field/readonly-field.component';
-import { ChangePasswordDialogComponent } from './Pages/user-settings/change-password-dialog/change-password-dialog.component';
 import { ChatOverviewComponent } from './Pages/chat/chat-overview/chat-overview.component';
 import { ChatConversationComponent } from './Pages/chat/chat-conversation/chat-conversation.component';
 import { ChatConversationInfoComponent } from './Pages/chat/chat-conversation-info/chat-conversation-info.component';
@@ -53,6 +52,7 @@ import { ChooseStudentDialogComponent } from './Pages/login/choose-student-dialo
 import { ParentChildSelectorComponent } from './Conponents/parent-child-selector/parent-child-selector.component';
 import {ParentService} from "./Framework/API/parent.service";
 import { ImageComponent } from './Framework/image/image.component';
+import { ChangePasswordComponent } from './Conponents/change-password/change-password.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -82,7 +82,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         TimetableComponent,
         GradesComponent,
         ReadonlyFieldComponent,
-        ChangePasswordDialogComponent,
         ChatOverviewComponent,
         ChatConversationComponent,
         ChatConversationInfoComponent,
@@ -100,6 +99,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ChooseStudentDialogComponent,
         ParentChildSelectorComponent,
         ImageComponent,
+        ChangePasswordComponent,
     ],
     imports: [
         BrowserModule,
