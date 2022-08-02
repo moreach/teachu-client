@@ -21,10 +21,10 @@ export class ProfilePicComponent {
             this.router.navigate([appRoutes.App, appRoutes.UserSettings]).then();
     }
 
-    getProfilePicUrl(): string {
+    getProfilePicId(): string {
         if (!!this.profileImage) {
             return this.profileImage;
         }
-        return "assets/images/default-profile-image.jpg";
+        return "";
     }
 }

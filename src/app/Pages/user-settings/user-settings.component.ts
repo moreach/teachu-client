@@ -1,24 +1,24 @@
-import {Component} from "@angular/core";
-import {FormBuilder, Validators} from "@angular/forms";
+import {Component, OnInit} from "@angular/core";
+import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {FormGroupTyped} from "../../Material/types";
 import { DarkThemeService } from "src/app/Framework/dark-theme/dark-theme.service";
-import { SEXS } from "src/app/DTOs/User/UserSex";
 import { MatDialog } from "@angular/material/dialog";
 import { ChangePasswordDialogComponent } from "./change-password-dialog/change-password-dialog.component";
 import { UserService } from "./user.service";
 import { ChangeProfileDTO } from "src/app/DTOs/xx_old/ChangeProfileDTO";
-import { UserDTO } from "src/app/DTOs/xx_old/UserDTO";
+import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
 
 @Component({
     selector: "user-settings",
     templateUrl: "./user-settings.component.html",
     styleUrls: ["./user-settings.component.scss"]
 })
-export class UserSettingsComponent {
-    userForm: FormGroupTyped<UserDTO>;
-    sexs = SEXS;
+export class UserSettingsComponent implements OnInit{
+    userForm: FormGroupTyped<UserOwnDTO>;
     isLoading: boolean = true;
     prevUser: ChangeProfileDTO | undefined;
+    profileImageControl: FormControl;
+    uploadedProfileImage: File | undefined;
 
     constructor(
       private builder: FormBuilder,
@@ -38,14 +38,13 @@ export class UserSettingsComponent {
             postalCode: '',
             street: '',
             phone: ["", Validators.required],
-            profileImage: ["", Validators.required],
-        }) as FormGroupTyped<UserDTO>;
+        }) as FormGroupTyped<UserOwnDTO>;
         this.userService.getCurrentUser$().subscribe((user) => {
             this.darkTheme.setDarkTheme(user.darkTheme);
             this.userForm.patchValue({
                 ...user,
                 birthday: new Date(user.birthday),
-            } as UserDTO);
+            } as UserOwnDTO);
             this.prevUser = {
                 darkTheme: user.darkTheme,
                 language: user.language,
@@ -54,16 +53,29 @@ export class UserSettingsComponent {
             };
             this.isLoading = false;
         });
+
+        this.profileImageControl = new FormControl(this.uploadedProfileImage, [
+            Validators.required,
+        ]);
     }
 
-    saveUser(form: FormGroupTyped<UserDTO>) {
-        // todo fix profile image with new component
+    ngOnInit() {
+        this.profileImageControl.valueChanges.subscribe(file => {
+            this.uploadedProfileImage = file.files[0];
+            console.log(this.uploadedProfileImage)
+
+            if(this.uploadedProfileImage)
+                this.userService.saveProfileImage$(this.uploadedProfileImage).subscribe(_ => location.reload());
+        });
+    }
+
+    saveUser(form: FormGroupTyped<UserOwnDTO>) {
         this.isLoading = true;
         const formValue = {
             language: form.value.language,
             darkTheme: form.value.darkTheme,
             phone: form.value.phone,
-            profileImage: 'chömmer d Vorarbet vom Micha is Backend merge?'
+            profileImage: form.value.imageId
         } as ChangeProfileDTO;
         this.prevUser = formValue;
         this.userService.saveUser$(formValue).subscribe(_ => this.isLoading = false);
