@@ -13,6 +13,9 @@ export class ImageComponent {
 
     @Input() secure: boolean = true;
     @Input() imageStyle: string = "";
+    @Input() round: boolean = false;
+    @Input() size: number | undefined;
+
     image: any = "assets/images/default-profile-image.jpg";
     private _imageId: string = "assets/images/default-profile-image.jpg";
 
@@ -37,5 +40,11 @@ export class ImageComponent {
                 this.fileReader.readAsDataURL(imageBlob);
             });
         }
+    }
+
+    get style() {
+        return this.imageStyle
+            + (this.round ? " border-radius: 50%; object-fit: cover;" : "")
+            + (!!this.size ? ` width: ${this.size}px; height: ${this.size}px;` : "");
     }
 }

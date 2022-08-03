@@ -11,7 +11,7 @@
 <mat-divider></mat-divider>
 <div *ngFor="let person of _people">
     <div class="data-row" (click)="openDetail(person)">
-        <app-image [imageStyle]="'border-radius: 50%; width: 48px; height: 48px; object-fit: cover;'" [imageId]="person.imageId" ></app-image>
+        <app-image [round]="true" [size]="48" [imageId]="person.imageId" ></app-image>
         <div class="text">{{ person.firstName }}</div>
         <div class="text">{{ person.lastName }}</div>
         <div class="text">{{ person.birthday | date: 'dd.MM.yyyy' }}</div>
