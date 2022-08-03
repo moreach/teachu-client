@@ -1,10 +1,11 @@
 import { KeyValue } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
-import { TimetableDayDTO } from 'src/app/DTOs/Timetable/TimetableDayDTO';
+import { TimetableDayDTO, TimetableLessonDTO } from 'src/app/DTOs/Timetable/TimetableDayDTO';
 import { TimetableLayoutDTO } from 'src/app/DTOs/Timetable/TimetableLayoutDTO';
 import { addDays, equalDates, getFirstDayOfWeek, getLastDayOfWeek } from 'src/app/Framework/Helpers/DateHelpers';
+import { LessonDetailsComponent } from './lesson-details/lesson-details.component';
 import { TimetableService } from './timetable.service';
 
 @Component({
@@ -29,7 +30,7 @@ export class TimetableComponent implements OnInit {
 
   constructor(
     private timetableService: TimetableService,
-    private router: Router,
+    private dialog: MatDialog,
   ) { 
     this.dates$ = combineLatest([
       this.relevantDate$,
@@ -70,10 +71,14 @@ export class TimetableComponent implements OnInit {
     return this.timetableService.getTimetable$(start, end);
   }
 
-  getCorrespondingLesson(day: any[], date: Date, lessonId: string): TimetableDayDTO | undefined {
-    // const filtered = lessons.filter(l => equalDates(l.date, date) && l. === lessonNumber);
-    // return filtered === [] ? undefined : filtered[0];
-    return undefined;
+  getCorrespondingLesson(days: TimetableDayDTO[], date: Date, timetableId: string): TimetableLessonDTO | undefined {
+    const filteredDays = days.filter(d => equalDates(d.date, date));
+    if (filteredDays.length === 0) {
+      return undefined;
+    }
+    const lessons = filteredDays[0].lessons;
+    const matchingLesson = lessons.filter(l => l.timetableId === timetableId);
+    return matchingLesson.length === 0 ? undefined : matchingLesson[0];
   }
 
   getLessonsInfo$(): Observable<TimetableLayoutDTO[]> {
@@ -89,27 +94,33 @@ export class TimetableComponent implements OnInit {
     return equalDates(date, new Date());
   }
 
-  getColor(lesson: any, allLessons: any[]): string {
+  getColor(lesson: TimetableLessonDTO, allLessons: TimetableDayDTO[]): string {
     const colors = ['primary', 'accent', 'warn', 'secondary'];
     let color = 0;
-    for (let l of allLessons) {
-      if (!this.classToColor.some(cc => cc.key === l.class)) {
+    const lessons = allLessons.flatMap(d => d.lessons);
+    for (let l of lessons) {
+      if (!this.classToColor.some(cc => cc.key === l.schoolClass)) {
         this.classToColor.push({
-          key: l.class,
+          key: l.schoolClass,
           value: `var(--teachu-${colors[color % colors.length]})`
         });
         color++;
       }
     }
-    return this.classToColor.find(cc => cc.key === lesson.class)?.value ?? `var(--teachu-${colors[0]})`;
+    return this.classToColor.find(cc => cc.key === lesson.schoolClass)?.value ?? `var(--teachu-${colors[0]})`;
   }
 
   getFontColor(background: string): string {
     return (background === 'var(--teachu-primary)') ? 'var(--teachu-white)' : 'var(--teachu-black)';
   }
 
-  openDetails(lesson: any) {
-    // todo change to dialog
-    // this.router.navigate([`${appRoutes.App}/${appRoutes.Timetable}/${lesson.lessonId}`])
+  openDetails(lesson: TimetableLessonDTO, days: TimetableDayDTO[]) {
+    const day = days.find(d => equalDates(d.date, this.relevantDate$.value));
+    this.dialog.open(LessonDetailsComponent, {
+      data: {
+        lesson,
+        day
+      }
+    });
   }
 }
