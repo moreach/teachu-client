@@ -1,0 +1,1 @@
+export type SchoolClassEventType = 'trip' | 'school';

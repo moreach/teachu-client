@@ -3,7 +3,7 @@
     <app-readonly-field [label]="'userSettings.firstName' | translate" [value]="userForm.value.firstName"></app-readonly-field>
     <app-readonly-field [label]="'userSettings.lastName' | translate" [value]="userForm.value.lastName"></app-readonly-field>
     <app-readonly-field [label]="'userSettings.birthday' | translate" [value]="userForm.value.birthday | date:'dd.MM.yyyy'"></app-readonly-field>
-    <app-readonly-field [label]="'userSettings.sex' | translate" [value]="userForm.value.sex"></app-readonly-field>
+    <app-readonly-field [label]="'userSettings.sex' | translate" [value]="('Sex.' + userForm.value.sex) | translate"></app-readonly-field>
     <app-readonly-field [label]="'userSettings.city' | translate" [value]="userForm.value.city"></app-readonly-field>
     <app-readonly-field [label]="'userSettings.postalCode' | translate" [value]="userForm.value.postalCode"></app-readonly-field>
     <app-readonly-field [label]="'userSettings.street' | translate" [value]="userForm.value.street"></app-readonly-field>
@@ -13,6 +13,7 @@
         <input matInput [placeholder]="'userSettings.phone' | translate" formControlName="phone">
     </mat-form-field>
     <mat-form-field>
+        <!-- TODO: display existing file or change to button -->
         <ngx-mat-file-input [placeholder]="'userSettings.profileImage' | translate" [formControl]="profileImageControl" multiple="false" accept=".png, .jpg">
         </ngx-mat-file-input>
         <mat-icon matSuffix aria-hidden="false">attach_file</mat-icon>

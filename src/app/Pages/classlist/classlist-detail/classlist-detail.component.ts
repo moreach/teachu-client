@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ClassListStudentDTO } from 'src/app/DTOs/ClassList/ClassListDTO';
 import { UserSex, SEXS } from 'src/app/DTOs/User/UserSex';
 
 @Component({
@@ -14,7 +15,7 @@ export class ClasslistDetailComponent {
   ) { }
 
   getData() {
-    return this.data;
+    return this.data.person as any as ClassListStudentDTO;
   }
 
   sexCaption(sex: UserSex) {

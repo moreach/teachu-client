@@ -25,7 +25,7 @@
             <div class="chat-middle-section">
                 <div>
                     <div class="chat-title">{{ chat.chatName }}</div>
-                    <div *ngIf="chat.chatType === 'GROUP'; else private" class="chat-last-msg">
+                    <div *ngIf="chat.chatType === 'group'; else private" class="chat-last-msg">
                         {{ chat.lastMessageFrom ?? ('chat.you' | translate) }}: <i>{{ chat.lastMessage }}</i>
                     </div>
                     <ng-template #private>

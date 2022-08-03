@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { appRoutes } from 'src/app/Config/appRoutes';
-import { TimetableService } from '../timetable.service';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TimetableDayDTO, TimetableLessonDTO } from 'src/app/DTOs/Timetable/TimetableDayDTO';
 
 @Component({
   selector: 'app-lesson-details',
@@ -11,13 +9,14 @@ import { TimetableService } from '../timetable.service';
 })
 export class LessonDetailsComponent {
 
-  lessonDetails$: Observable<string>;
-
   constructor(
-    private timetableService: TimetableService,
-    private activatedRoute: ActivatedRoute,
-  ) {
-    const lessonId = this.activatedRoute.snapshot.paramMap.get(appRoutes.LessonId) ?? '';
-    this.lessonDetails$ = this.timetableService.getLessonDetails$(lessonId);
+    @Inject(MAT_DIALOG_DATA) private data: any
+  ) { }
+
+  getData() {
+    return {
+      lesson: this.data.lesson as any as TimetableLessonDTO,
+      day: this.data.day as any as TimetableDayDTO
+    };
   }
 }

@@ -5,8 +5,8 @@ import { DarkThemeService } from "src/app/Framework/dark-theme/dark-theme.servic
 import { MatDialog } from "@angular/material/dialog";
 import { ChangePasswordDialogComponent } from "./change-password-dialog/change-password-dialog.component";
 import { UserService } from "./user.service";
-import { ChangeProfileDTO } from "src/app/DTOs/xx_old/ChangeProfileDTO";
 import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
+import { UserOwnChangeDTO } from "src/app/DTOs/User/UserOwnChangeDTO";
 
 @Component({
     selector: "user-settings",
@@ -16,7 +16,7 @@ import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
 export class UserSettingsComponent implements OnInit{
     userForm: FormGroupTyped<UserOwnDTO>;
     isLoading: boolean = true;
-    prevUser: ChangeProfileDTO | undefined;
+    prevUser: UserOwnChangeDTO | undefined;
     profileImageControl: FormControl;
     uploadedProfileImage: File | undefined;
 
@@ -49,7 +49,6 @@ export class UserSettingsComponent implements OnInit{
                 darkTheme: user.darkTheme,
                 language: user.language,
                 phone: user.phone,
-                profileImage: user.imageId,
             };
             this.isLoading = false;
         });
@@ -75,8 +74,7 @@ export class UserSettingsComponent implements OnInit{
             language: form.value.language,
             darkTheme: form.value.darkTheme,
             phone: form.value.phone,
-            profileImage: form.value.imageId
-        } as ChangeProfileDTO;
+        } as UserOwnChangeDTO;
         this.prevUser = formValue;
         this.userService.saveUser$(formValue).subscribe(_ => this.isLoading = false);
     }
@@ -86,12 +84,11 @@ export class UserSettingsComponent implements OnInit{
     }
 
     changeDarkTheme(isDarkTheme: boolean) {
-        // todo fix in backend
         this.darkTheme.setDarkTheme(isDarkTheme);
         const formValue = {
             ...this.prevUser,
             darkTheme: isDarkTheme,
-        } as ChangeProfileDTO;
+        } as UserOwnChangeDTO;
         this.prevUser = formValue;
         this.userService.saveUser$(formValue).subscribe();
     }

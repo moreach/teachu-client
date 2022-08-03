@@ -1,8 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ClassListClassDTO } from 'src/app/DTOs/xx_old/ClassListClassDTO';
-import { ClassListStudentDTO } from 'src/app/DTOs/xx_old/ClassListStudentDTO';
-import { ClassListTeacherDTO } from 'src/app/DTOs/xx_old/ClassListTeacherDTO';
+import { ClassListStudentDTO, ClassListTeacherDTO } from 'src/app/DTOs/ClassList/ClassListDTO';
 import { ClasslistDetailComponent } from '../classlist-detail/classlist-detail.component';
 
 @Component({
@@ -12,31 +10,24 @@ import { ClasslistDetailComponent } from '../classlist-detail/classlist-detail.c
 })
 export class ClasslistListComponent {
 
-  _class: ClassListClassDTO | undefined = undefined;
-  _students: ClassListStudentDTO[] = [];
-  _teachers: ClassListTeacherDTO[] = [];
+  _people: ClassListStudentDTO[] | ClassListTeacherDTO[] = [];
+  @Input() set people (p: ClassListStudentDTO[] | ClassListTeacherDTO[]){
+    this._people = this.sortBasis(p);
+  };
+
+  @Input() isTeacher: boolean = false;
+  @Input() className: string = '';
+  @Input() teacherName: string = '';
+
   isReversed: boolean = false;
   sortKey: string = '';
-  @Input() set class(c: ClassListClassDTO) {
-    this._class = c;
-    this._students = c.students;
-  }
-  @Input() set teachers(t: ClassListTeacherDTO[]) {
-    this._teachers = t;
-  }
-  @Input() isTeacher: boolean = false;
 
   constructor(
     private dialog: MatDialog,
   ) { }
 
-  getData(): ClassListStudentDTO[] | ClassListTeacherDTO[] {
-    return this.isTeacher ? this._teachers : this._students;
-  }
-
-  sortBasis() {
-    const data = this.getData();
-    data.sort((a, b) => {
+  sortBasis(p: ClassListStudentDTO[] | ClassListTeacherDTO[]) {
+    p.sort((a, b) => {
       if (a.lastName < b.lastName) {
         return -1;
       }
@@ -51,14 +42,14 @@ export class ClasslistListComponent {
       }
       return 0;
     });
-    return data;
+    return p;
   }
 
   sortBy(key: string) {
     this.isReversed = this.sortKey === key ? !this.isReversed : false;
     this.sortKey = key;
     const multiplier = this.isReversed ? -1 : 1;
-    const data = this.sortBasis();
+    const data = this._people;
     data.sort((a, b) => {
       if ((a as any)[key] < (b as any)[key]) {
         return -1 * multiplier;
@@ -68,14 +59,13 @@ export class ClasslistListComponent {
       }
       return 0;
     });
-    return data;
+    this._people = data;
   }
 
-  openDetail(person: ClassListStudentDTO | ClassListTeacherDTO, isTeacher: boolean) {
+  openDetail(person: ClassListStudentDTO | ClassListTeacherDTO) {
     this.dialog.open(ClasslistDetailComponent, {
       data: {
-        person,
-        isTeacher
+        person
       },
       width: '400px',
     });

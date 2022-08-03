@@ -1,17 +1,24 @@
-<h2>{{ isTeacher ? ('classlist.teachers' | translate) : (('classlist.class' | translate) + ' ' + _class!.className + ' (' + _class!.teacherName + ')' ) }}</h2>
+<h2>{{ isTeacher ? (('classlist.teachers' | translate) + ' ' + className) : (('classlist.class' | translate) + ' ' + className + ' (' + teacherName + ')') }}</h2>
 <div class="data-row header">
     <div></div>
     <div (click)="sortBy('firstName')">{{ 'classlist.firstName' | translate }}</div>
     <div (click)="sortBy('lastName')">{{ 'classlist.lastName' | translate }}</div>
-    <div (click)="sortBy('phone')">{{ 'classlist.phone' | translate }}</div>
+    <div (click)="sortBy('birthday')">{{ 'classlist.birthday' | translate }}</div>
+    <div (click)="sortBy('email')">{{ 'classlist.email' | translate }}</div>
+    <div (click)="sortBy('sex')">{{ 'classlist.sex' | translate }}</div>
+    <div (click)="sortBy('city')">{{ 'classlist.city' | translate }}</div>
 </div>
 <mat-divider></mat-divider>
-<div *ngFor="let person of getData()">
-    <div (click)="openDetail(person, isTeacher)" class="data-row">
-        <img [src]="person.profileImage" class="image">
+<div *ngFor="let person of _people">
+    <div class="data-row" (click)="openDetail(person)">
+        <app-image [round]="true" [size]="48" [imageId]="person.imageId" ></app-image>
         <div class="text">{{ person.firstName }}</div>
         <div class="text">{{ person.lastName }}</div>
-        <div class="text">{{ person.phone }}</div>
+        <div class="text">{{ person.birthday | date: 'dd.MM.yyyy' }}</div>
+        <div class="text">{{ person.email }}</div>
+        <div class="text">{{ ('Sex.' + person.sex) | translate }}</div>
+        <div class="text">{{ person.city }}</div>
     </div>
     <mat-divider></mat-divider>
 </div>
+<div class="end"></div>

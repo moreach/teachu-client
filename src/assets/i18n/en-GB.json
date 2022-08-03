@@ -36,16 +36,10 @@
         "teachers":"Teachers",
         "firstName":"Firstname",
         "lastName":"Lastname",
-        "phone":"Phone",
         "birthday":"Birthday",
         "sex":"Sex",
-        "postalCode":"Postal Code",
         "city":"City",
-        "street":"Street",
-        "nameParent1":"Name Parent 1",
-        "phoneParent1":"Phone Parent 1",
-        "nameParent2":"Name Parent 2",
-        "phoneParent2":"Phone Parent 2"
+        "email":"Mail"
     },
     "absences":{
         "absences":"Absences"
@@ -89,8 +83,17 @@
         "passwordConfirm":"Repeat New Password"
     },
     "errorBackend":{
-        "unknownError_title":"Unknown Error",
-        "unknownError":"Unknown Error Occured"
+        "errorOccured":"Error Occured",
+        "unknownError":"Unknown Error Occured",
+        "InvalidPasswordempty":"Password empty",
+        "InvalidPasswordlessthen8characters":"Password is less than 8 characters",
+        "InvalidPasswordnouppercasecharacter":"Password contains no uppercase character",
+        "InvalidPasswordnolowercasecharacter":"Password contains no lowercase character",
+        "InvalidPasswordnonumber":"Password contains no number",
+        "InvalidEmailinvalid":"Invalid Email",
+        "InvalidImageisempty":"Image is empty",
+        "InvalidImagetypeisunsupportedpleaseusepngorjpeg":"Image-Type is not supported. Please use png or jpeg instead.",
+        "InvalidPasswordorEmailisincorrect":"Email or Password is incorrect"
     },
     "errorHandling":{
         "errorOccured":"Error Occured",
@@ -119,5 +122,10 @@
         "thai":"Thai",
         "turkish":"Turkish",
         "vietnamese":"Vietnamese"
+    },
+    "Sex":{
+        "male":"Male",
+        "female":"Female",
+        "other":"Other"
     }
 }

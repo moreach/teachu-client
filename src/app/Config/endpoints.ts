@@ -3,11 +3,12 @@ export const endpoints = {
     SchoolInfo: 'schoolinfo',
     Parent: 'parent',
     Login: 'authentication',
-    ChangePassword: 'user/password',
+    ChangePassword: 'authentication/password',
     Search: 'search',
     User: 'user',
     Grade: 'grade',
     Timetable: 'timetable',
+    TimetableLayout: 'timetable/layout',
     Absence: 'absence',
     Image: 'image',
 }

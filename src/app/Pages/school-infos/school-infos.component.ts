@@ -1,7 +1,6 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SchoolInfoDTO } from 'src/app/DTOs/xx_old/SchoolInfoDTO';
-import { SchoolInfosDTO } from 'src/app/DTOs/xx_old/SchoolInfosDTO';
+import { SchoolInfoDTO } from 'src/app/DTOs/SchoolInfo/SchoolInfoDTO';
 import { SchoolInfosService } from './school-infos.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { SchoolInfosService } from './school-infos.service';
 })
 export class SchoolInfosComponent {
 
-  schoolInfos$: Observable<SchoolInfosDTO>;
+  schoolInfos$: Observable<SchoolInfoDTO[]>;
   columns = 3;
   
   constructor(
@@ -26,15 +25,15 @@ export class SchoolInfosComponent {
     this.setColumns();
   }
 
-  column1(infos: SchoolInfoDTO[]) {
+  column1(infos: SchoolInfoDTO[]): SchoolInfoDTO[] {
     return infos.filter((_, i) => i % this.columns === 0);
   }
 
-  column2(infos: SchoolInfoDTO[]) {
+  column2(infos: SchoolInfoDTO[]): SchoolInfoDTO[] {
     return infos.filter((_, i) => i % this.columns === 1);
   }
 
-  column3(infos: SchoolInfoDTO[]) {
+  column3(infos: SchoolInfoDTO[]): SchoolInfoDTO[] {
     return infos.filter((_, i) => i % this.columns === 2);
   }
 
