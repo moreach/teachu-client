@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ClassListDTO } from 'src/app/DTOs/xx_old/ClassListDTO';
+import { ClassListDTO } from 'src/app/DTOs/ClassList/ClassListDTO';
 import { ClasslistService } from './classlist.service';
 
 @Component({
@@ -17,5 +17,4 @@ export class ClasslistComponent {
   ) { 
     this.classList$ = this.classListService.getClasslist();
   }
-
 }
