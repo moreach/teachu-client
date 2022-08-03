@@ -8,6 +8,7 @@ export const endpoints = {
     User: 'user',
     Grade: 'grade',
     Timetable: 'timetable',
+    TimetableLayout: 'timetable/layout',
     Absence: 'absence',
     Image: 'image',
 }

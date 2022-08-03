@@ -12,23 +12,25 @@
 </div>
 <div *ngIf="getLessons$() | async as lessons" [ngClass]="{ calendar: true, week: (isWeekView$ | async) }">
     <div *ngIf="getLessonsInfo$() | async as hours">
-        <div class="block date"></div>
-        <div *ngFor="let hour of hours" class="block hour">
-            {{ hour.start }} - {{ hour.end }}
-        </div>
-    </div>
-    <div *ngFor="let day of (dates$ | async)" class="day hours">
-        <div class="block date">
-            <div [ngClass]="{ today: isToday(day), dateInfo: true }">
-                {{ day | date: 'dd.MM.yyyy' }}
+        <div>
+            <div class="block date"></div>
+            <div *ngFor="let hour of hours" class="block hour">
+                {{ hour.start }} - {{ hour.end }}
             </div>
         </div>
-        <div *ngFor="let hour of hours" class="block hour">
-            <div *ngIf="getCorrespondingLesson(lessons, day, hour.lessonNumber) as lesson" class="lesson" [ngStyle]="{ 'background-color': getColor(lesson, lessons), 'color': getFontColor(getColor(lesson, lessons)) }"
-            [matTooltip]="lesson.class + ' - ' + lesson.room + ' - ' + lesson.teacher" matTooltipPosition="right"
-            (click)="openDetails(lesson)">
-                {{ lesson.subject }}
+        <div *ngFor="let day of (dates$ | async)" class="day hours">
+            <div class="block date">
+                <div [ngClass]="{ today: isToday(day), dateInfo: true }">
+                    {{ day | date: 'dd.MM.yyyy' }}
+                </div>
+            </div>
+            <div *ngFor="let hour of hours" class="block hour">
+                <!-- <div *ngIf="getCorrespondingLesson(lessons, day, hour.timetableId) as lesson" class="lesson" [ngStyle]="{ 'background-color': getColor(lesson, lessons), 'color': getFontColor(getColor(lesson, lessons)) }"
+                [matTooltip]="lesson.lessons + ' - ' + lesson.room + ' - ' + lesson.teacher" matTooltipPosition="right"
+                (click)="openDetails(lesson)">
+                    {{ lesson.subject }}
+                </div> -->
             </div>
         </div>
-    </div>
+    </div>    
 </div>
