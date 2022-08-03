@@ -18,5 +18,6 @@ export interface SchoolInfoCreatorDTO {
     lastName: string;
     birthday: Date;
     sex: UserSex;
-    city: string
+    city: string;
+    imageId: string;
 }

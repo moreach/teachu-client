@@ -1,4 +1,4 @@
-<h2>{{ isTeacher ? ('classlist.teachers' | translate) : (('classlist.class' | translate) + ' ' + className + ' (' + teacherName + ')' ) }}</h2>
+<h2>{{ isTeacher ? (('classlist.teachers' | translate) + ' ' + className) : (('classlist.class' | translate) + ' ' + className + ' (' + teacherName + ')') }}</h2>
 <div class="data-row header">
     <div></div>
     <div (click)="sortBy('firstName')">{{ 'classlist.firstName' | translate }}</div>
@@ -21,3 +21,4 @@
     </div>
     <mat-divider></mat-divider>
 </div>
+<div class="end"></div>

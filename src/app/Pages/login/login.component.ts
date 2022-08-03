@@ -5,6 +5,7 @@ import { appRoutes } from 'src/app/Config/appRoutes';
 import { endpoints } from 'src/app/Config/endpoints';
 import { LoginDTO } from 'src/app/DTOs/Authentication/LoginDTO';
 import { TokenDTO } from 'src/app/DTOs/Authentication/TokenDTO';
+import { UserOwnDTO } from 'src/app/DTOs/User/UserOwnDTO';
 import { ApiService } from 'src/app/Framework/API/api.service';
 import { ErrorHandlingService } from 'src/app/Framework/API/error-handling.service';
 import { TokenService } from 'src/app/Framework/API/token.service';
@@ -61,7 +62,10 @@ export class LoginComponent {
       this.tokenService.setToken(token.access);
       this.tokenService.setRefreshToken(token.refresh);
       this.tokenService.setExpired(token.accessExpires);
-      this.router.navigate([appRoutes.App, appRoutes.Dashboard]);
+      this.api.callApi<UserOwnDTO>(endpoints.User, { }, 'GET').subscribe(user => {
+        this.darkThemeService.setDarkTheme(user.darkTheme);
+        this.router.navigate([appRoutes.App, appRoutes.Dashboard]);
+      });
     });
   }
 }

@@ -10,7 +10,7 @@ import { ClasslistService } from './classlist.service';
 })
 export class ClasslistComponent {
 
-  classList$: Observable<ClassListDTO>;
+  classList$: Observable<ClassListDTO[]>;
 
   constructor(
     private classListService: ClasslistService,

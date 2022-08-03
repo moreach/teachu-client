@@ -38,7 +38,8 @@
         "lastName":"Lastname",
         "birthday":"Birthday",
         "sex":"Sex",
-        "city":"City"
+        "city":"City",
+        "email":"Mail"
     },
     "absences":{
         "absences":"Absences"
@@ -82,8 +83,17 @@
         "passwordConfirm":"Repeat New Password"
     },
     "errorBackend":{
-        "unknownError_title":"Unknown Error",
-        "unknownError":"Unknown Error Occured"
+        "errorOccured":"Error Occured",
+        "unknownError":"Unknown Error Occured",
+        "InvalidPasswordempty":"Password empty",
+        "InvalidPasswordlessthen8characters":"Password is less than 8 characters",
+        "InvalidPasswordnouppercasecharacter":"Password contains no uppercase character",
+        "InvalidPasswordnolowercasecharacter":"Password contains no lowercase character",
+        "InvalidPasswordnonumber":"Password contains no number",
+        "InvalidEmailinvalid":"Invalid Email",
+        "InvalidImageisempty":"Image is empty",
+        "InvalidImagetypeisunsupportedpleaseusepngorjpeg":"Image-Type is not supported. Please use png or jpeg instead.",
+        "InvalidPasswordorEmailisincorrect":"Email or Password is incorrect"
     },
     "errorHandling":{
         "errorOccured":"Error Occured",
