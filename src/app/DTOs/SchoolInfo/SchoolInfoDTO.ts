@@ -8,6 +8,7 @@ export interface SchoolInfoDTO {
     pinned: boolean;
     date: Date;
     creator: SchoolInfoCreatorDTO;
+    imageId: string;
 }
 
 export interface SchoolInfoCreatorDTO {
