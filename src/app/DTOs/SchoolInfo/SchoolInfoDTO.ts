@@ -8,6 +8,7 @@ export interface SchoolInfoDTO {
     pinned: boolean;
     date: Date;
     creator: SchoolInfoCreatorDTO;
+    imageId: string;
 }
 
 export interface SchoolInfoCreatorDTO {
@@ -17,5 +18,6 @@ export interface SchoolInfoCreatorDTO {
     lastName: string;
     birthday: Date;
     sex: UserSex;
-    city: string
+    city: string;
+    imageId: string;
 }

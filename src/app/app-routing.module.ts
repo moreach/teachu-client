@@ -12,7 +12,6 @@ import { TimetableComponent } from './Pages/timetable/timetable.component';
 import {UserSettingsComponent} from "./Pages/user-settings/user-settings.component";
 import { SchoolInfosComponent } from './Pages/school-infos/school-infos.component';
 import { AbsencesComponent } from './Pages/absences/absences.component';
-import { LessonDetailsComponent } from './Pages/timetable/lesson-details/lesson-details.component';
 import { ClasslistComponent } from './Pages/classlist/classlist.component';
 
 const routes: Routes = [
@@ -27,7 +26,6 @@ const routes: Routes = [
       { path: appRoutes.SchoolInfos, component: SchoolInfosComponent },
       { path: appRoutes.Timetable, component: TimetableComponent },
       { path: appRoutes.Classlist, component: ClasslistComponent },
-      { path: `${appRoutes.Timetable}/:${appRoutes.LessonId}`, component: LessonDetailsComponent },
       { path: appRoutes.Grades, component: GradesComponent },
       { path: appRoutes.Absences, component: AbsencesComponent },
       { path: appRoutes.Chat, component: ChatOverviewComponent, pathMatch: 'full' },

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { combineLatest, map, Observable, startWith } from 'rxjs';
-import { ChatUserDTO } from 'src/app/DTOs/xx_old/ChatUserDTO';
+import { ChatUserDTO } from 'src/app/DTOs/Chat/ChatUserDTO';
 import { ChatService } from '../chat.service';
 
 @Component({

@@ -16,6 +16,7 @@ export interface ClassListTeacherDTO {
     birthday: Date;
     sex: UserSex;
     city: string;
+    imageId: string;
 }
 
 export interface ClassListStudentDTO {
@@ -26,4 +27,5 @@ export interface ClassListStudentDTO {
     birthday: Date;
     sex: UserSex;
     city: string;
+    imageId: string;
 }

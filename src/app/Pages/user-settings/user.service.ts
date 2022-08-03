@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Observable, map, filter, startWith, distinctUntilChanged } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { endpoints } from 'src/app/Config/endpoints';
-import { ChangeProfileDTO } from 'src/app/DTOs/xx_old/ChangeProfileDTO';
+import { UserOwnChangeDTO } from 'src/app/DTOs/User/UserOwnChangeDTO';
 import { ApiService } from 'src/app/Framework/API/api.service';
 import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
 
@@ -25,7 +25,7 @@ export class UserService {
     return this.currentUser;
   }
 
-  saveUser$(formValue: ChangeProfileDTO) {
+  saveUser$(formValue: UserOwnChangeDTO) {
     return this.apiService.callApi(endpoints.User, formValue, "PUT").subscribe(() => {
       this.currentUser = undefined;
       this.getCurrentUser$();

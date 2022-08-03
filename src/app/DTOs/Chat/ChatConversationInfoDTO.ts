@@ -1,5 +1,5 @@
+import { ChatType } from "../Enums/ChatType";
 import { ChatParticipantDTO } from "./ChatParticipantDTO";
-import { ChatType } from "./Enums/old_ChatType";
 
 export interface ChatConversationInfoDTO {
     chatName: string;

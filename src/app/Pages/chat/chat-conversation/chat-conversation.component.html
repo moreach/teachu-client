@@ -1,10 +1,10 @@
 <div *ngIf="conversation$ | async as conversation" class="page">
-    <div (click)="openSettings(conversation)" [ngClass]="{ 'chat-info': true, 'pointer': conversation.info.chatType === 'GROUP' }">
+    <div (click)="openSettings(conversation)" [ngClass]="{ 'chat-info': true, 'pointer': conversation.info.chatType === 'group' }">
         <img [src]="conversation.info.chatImage" class="chat-image">
         <div class="chat-info-detail">
             <div>
                 <div class="chat-title">{{ conversation.info.chatName }}</div>
-                <div *ngIf="conversation.info.chatType === 'GROUP'">
+                <div *ngIf="conversation.info.chatType === 'group'">
                     {{ formatParticipants(conversation.info.participants) }}
                 </div>
             </div>

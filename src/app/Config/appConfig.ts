@@ -7,5 +7,4 @@ export const appConfig = {
     APPLICATION_EXPIRES: 'teachu-expires',
     APPLICATION_LANGUAGE: 'teachu-language',
     APPLICATION_SELECTED_STUDENT: 'selected-student',
-    BACKEND_ERROR_TITLE_SUFFIX:'_title',
 }

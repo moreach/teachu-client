@@ -15,7 +15,6 @@ import {ErrorHandlerInterceptor} from './Framework/API/error-handler.interceptor
 import {LoginComponent} from './Pages/login/login.component';
 import {CustomToastyComponent} from './Framework/custom-toasty/custom-toasty.component';
 import {ToastrModule} from 'ngx-toastr';
-import {BreadcrumbsComponent} from './Framework/breadcrumbs/breadcrumbs.component';
 import {LanguageLookupComponent} from './Framework/Languages/language-lookup.component';
 import {TextEditorComponent} from './Framework/text-editor/text-editor.component';
 import {TextEditorActionBarComponent} from './Framework/text-editor/text-editor-action-bar.component';
@@ -66,7 +65,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         LoginComponent,
         CustomToastyComponent,
         LanguageLookupComponent,
-        BreadcrumbsComponent,
         TextEditorComponent,
         TextEditorActionBarComponent,
         UserSettingsComponent,

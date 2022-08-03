@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { NEVER, Observable } from 'rxjs';
-import { appConfig } from 'src/app/Config/appConfig';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { environment } from 'src/environments/environment';
 import { ErrorHandlingDialogComponent } from '../error-handling-dialog/error-handling-dialog.component';
+import { removeEmptyAndSpecialChars } from '../Helpers/StringHelpers';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +26,9 @@ export class ErrorHandlingService {
       });
       return ref.afterClosed();
     } else {
-      const error = 'errorBackend.' + (data.error?.error?.error ?? 'unknownError');
-      this.displayToastError(error + appConfig.BACKEND_ERROR_TITLE_SUFFIX, error);
+      const errorRaw = data.error?.error?.error;
+      const error = !!errorRaw ? 'errorBackend.' + removeEmptyAndSpecialChars(errorRaw) : 'errorBackend.unknownError';
+      this.displayToastError('errorBackend.errorOccured', error);
       return NEVER;
     }    
   }

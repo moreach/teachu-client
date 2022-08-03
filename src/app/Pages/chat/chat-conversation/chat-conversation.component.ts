@@ -3,8 +3,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
-import { ChatConversationDTO } from 'src/app/DTOs/xx_old/ChatConversationDTO';
-import { ChatParticipantDTO } from 'src/app/DTOs/xx_old/ChatParticipantDTO';
+import { ChatConversationDTO } from 'src/app/DTOs/Chat/ChatConversationDTO';
+import { ChatParticipantDTO } from 'src/app/DTOs/Chat/ChatParticipantDTO';
 import { isToday } from 'src/app/Framework/Helpers/DateHelpers';
 import { truncateToMaxChars } from 'src/app/Framework/Helpers/StringHelpers';
 import { ChatService } from '../chat.service';
@@ -41,7 +41,7 @@ export class ChatConversationComponent implements OnInit {
   }
 
   openSettings(conversation: ChatConversationDTO) {
-    if (conversation.info.chatType === 'GROUP') {
+    if (conversation.info.chatType === 'group') {
       this.router.navigate([`${appRoutes.App}/${appRoutes.Chat}/${this.chatId}/${appRoutes.ConversationInfo}`]);
     }
   }

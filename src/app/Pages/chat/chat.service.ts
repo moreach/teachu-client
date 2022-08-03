@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
-import { ChatConversationDTO } from 'src/app/DTOs/xx_old/ChatConversationDTO';
-import { ChatConversationInfoDTO } from 'src/app/DTOs/xx_old/ChatConversationInfoDTO';
-import { ChatMessageDTO } from 'src/app/DTOs/xx_old/ChatMessageDTO';
-import { ChatOverviewDTO } from 'src/app/DTOs/xx_old/ChatOverviewDTO';
-import { ChatSaveGroupDTO } from 'src/app/DTOs/xx_old/ChatSaveGroupDTO';
-import { ChatUserDTO } from 'src/app/DTOs/xx_old/ChatUserDTO';
+import { ChatConversationDTO } from 'src/app/DTOs/Chat/ChatConversationDTO';
+import { ChatConversationInfoDTO } from 'src/app/DTOs/Chat/ChatConversationInfoDTO';
+import { ChatMessageDTO } from 'src/app/DTOs/Chat/ChatMessageDTO';
+import { ChatOverviewDTO } from 'src/app/DTOs/Chat/ChatOverviewDTO';
+import { ChatSaveGroupDTO } from 'src/app/DTOs/Chat/ChatSaveGroupDTO';
+import { ChatUserDTO } from 'src/app/DTOs/Chat/ChatUserDTO';
 import { addMinutes } from 'src/app/Framework/Helpers/DateHelpers';
 
 @Injectable({
@@ -21,7 +21,7 @@ export class ChatService {
       {
         chatId: '101',
         chatName: 'Mathinachhilf',
-        chatType: 'GROUP',
+        chatType: 'group',
         chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
         lastMessage: 'Hello',
         lastMessageFrom: 'Oliver Umbricht',
@@ -30,7 +30,7 @@ export class ChatService {
       {
         chatId: '102',
         chatName: 'Chat 2',
-        chatType: 'GROUP',
+        chatType: 'group',
         chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
         lastMessage: 'Last message Chat 2',
         lastMessageFrom: null,
@@ -39,7 +39,7 @@ export class ChatService {
       {
         chatId: '103',
         chatName: 'Micha Schweizer',
-        chatType: 'PRIVATE',
+        chatType: 'private',
         chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
         lastMessage: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s',
         lastMessageFrom: 'Micha Schweizer',
@@ -48,7 +48,7 @@ export class ChatService {
       {
         chatId: '104',
         chatName: 'Jonas Hauser',
-        chatType: 'PRIVATE',
+        chatType: 'private',
         chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
         lastMessage: 'Last message Chat Jonas',
         lastMessageFrom: null,
@@ -64,25 +64,25 @@ export class ChatService {
       info: {
         chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
         chatName: 'Mathinachhilf',
-        chatType: 'GROUP',
+        chatType: 'group',
         isUserAdmin: true,
         participants: [{
           name: null,
           userId: null,
           image: 'https://www.w3schools.com/howto/img_avatar.png',
-          role: 'STUDENT',
+          role: 'student',
           isAdmin: true
         }, {
           name: 'Oliver Andreas Umbricht',
           userId: '201',
           image: 'https://www.w3schools.com/howto/img_avatar.png',
-          role: 'STUDENT',
+          role: 'student',
           isAdmin: false
         }, {
           name: 'Felix Winzenried',
           userId: '202',
           image: 'https://www.w3schools.com/howto/img_avatar.png',
-          role: 'STUDENT',
+          role: 'student',
           isAdmin: false
         }, {
           name: 'Stefano La Rosa',
@@ -100,7 +100,7 @@ export class ChatService {
           name: 'Flurin Jan Bruppacher',
           userId: '208',
           image: 'https://www.w3schools.com/howto/img_avatar.png',
-          role: 'STUDENT',
+          role: 'student',
           isAdmin: false
         }],
       } as ChatConversationInfoDTO,
