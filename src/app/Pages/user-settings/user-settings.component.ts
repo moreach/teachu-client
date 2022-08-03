@@ -5,7 +5,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { UserService } from "./user.service";
 import {debounceTime, skip, Subject, switchMap, takeUntil} from "rxjs";
 import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
-import {ChangeProfileDTO} from "../../DTOs/xx_old/ChangeProfileDTO";
+import {UserOwnChangeDTO} from "../../DTOs/User/UserOwnChangeDTO";
 
 @Component({
     selector: "user-settings",
@@ -79,7 +79,7 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
 
     saveUser(){
         if(this.user) {
-            const userChanges: ChangeProfileDTO = {
+            const userChanges: UserOwnChangeDTO = {
                 language: this.user.language,
                 darkTheme: this.user.darkTheme,
                 phone: this.user.phone,
