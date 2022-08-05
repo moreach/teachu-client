@@ -56,7 +56,6 @@ export class UserService {
               },
               error: (e) => {
                   currentProgress = 0;
-                  console.log(e)
                   if(e.error.error) currentMessage = e.error.error;
                   else currentMessage = "File upload failed";
                   obs.error({ message: currentMessage, progress: currentProgress })

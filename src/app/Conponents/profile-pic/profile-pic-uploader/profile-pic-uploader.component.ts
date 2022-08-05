@@ -33,18 +33,13 @@ export class ProfilePicUploaderComponent {
         let files: FileList = event.target.files;
         if(files[0]){
             this.userService.saveProfileImage$(files[0]).subscribe({
-                next: (res: FileUploadResponse) => {
-                    console.log(res)
-                    this.update(res.progress, res.message)
-                },
+                next: (res: FileUploadResponse) => this.update(res.progress, res.message),
                 error: (err) => {
                     this.hasError = true;
-                    console.log(err)
                     this.update(err.progress, err.message);
                 },
                 complete: () => {
                     this.progress = 100;
-                    console.log("done")
                     this.done.emit()
                 }
             });
