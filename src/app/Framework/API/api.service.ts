@@ -11,14 +11,14 @@ export class ApiService {
     private http: HttpClient,
   ) { }
 
-  callApi<T>(endpoint: string, payload: any, method: HttpMethods) {
-    const request = this.buildRequest(endpoint, payload, method);
+  callApi<T>(endpoint: string, payload: any, method: HttpMethods, options?: any) {
+    const request = this.buildRequest(endpoint, payload, method, options);
 
     return request as Observable<T>;
   }
 
-  private buildRequest(endpoint: string, payload: any, method: HttpMethods) {
-    if(!environment.IS_PROD) console.log("api - sending request: ", endpoint, method, payload)
+  private buildRequest(endpoint: string, payload: any, method: HttpMethods, options?: any) {
+    if(!environment.IS_PROD) console.log("api - sending request: ", endpoint, method, payload, options)
     const requestEndpoint = `${environment.URL_API}${endpoint}`;
 
     let request: any;
@@ -27,10 +27,10 @@ export class ApiService {
         request = this.http.get(requestEndpoint, payload);
         break;
       case 'POST':
-        request = this.http.post(requestEndpoint, payload);
+        request = this.http.post(requestEndpoint, payload, options);
         break;
       case 'PUT':
-        request = this.http.put(requestEndpoint, payload);
+        request = this.http.put(requestEndpoint, payload, options);
         break;
       case 'DELETE':
         request = this.http.delete(requestEndpoint, {

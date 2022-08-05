@@ -80,6 +80,7 @@
         "street":"Street",
         "phone":"Phone",
         "profileImage":"Profile Image",
+        "upload": "Upload new",
         "passwordOld":"Old Password",
         "passwordNew":"New Password",
         "passwordConfirm":"Repeat New Password",

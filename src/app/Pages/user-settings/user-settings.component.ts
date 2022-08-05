@@ -13,6 +13,7 @@ import {UserOwnChangeDTO} from "../../DTOs/User/UserOwnChangeDTO";
     styleUrls: ["./user-settings.component.scss"]
 })
 export class UserSettingsComponent implements OnInit, OnDestroy{
+    private readonly DEBOUNCE_TIME: number = 2000; // in ms
     private unsubscribe = new Subject<void>()
 
     user: UserOwnDTO | undefined;
@@ -23,6 +24,7 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
     profileImageControl: FormControl;
     private uploadedProfileImage: File | undefined;
     private phoneSavedTimeout: number | undefined;
+    private darkThemeSubject: Subject<boolean> = new Subject<boolean>();
 
     constructor(
       private builder: FormBuilder,
@@ -46,21 +48,18 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
     ngOnInit() {
         this.phoneNumberControl.valueChanges.pipe(
             skip(1), // skip the first because this change is when the user loaded
-            debounceTime(2000),
+            debounceTime(this.DEBOUNCE_TIME),
             switchMap(value => this.savePhoneNumber(value)),
             takeUntil(this.unsubscribe)
         ).subscribe(() => { });
 
-        this.profileImageControl.valueChanges.subscribe(file => {
-            this.uploadedProfileImage = file.files[0];
-
-            //TODO validate file size and type
-            if(this.uploadedProfileImage)
-                this.userService.saveProfileImage$(this.uploadedProfileImage).subscribe(_ => location.reload());
-        });
+        this.darkThemeSubject.asObservable().pipe(
+            debounceTime(this.DEBOUNCE_TIME),
+            switchMap(async (value) => this.saveDarkTheme(value)),
+            takeUntil(this.unsubscribe)
+        ).subscribe(() => { });
     }
 
-    // TODO check whether changing the password really resets the user
     savePhoneNumber(newNumber: string): string{
         this.user!.phone = newNumber;
         this.saveUser();
@@ -69,12 +68,20 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
         return newNumber;
     }
 
-    // TODO implement some delay so that spamming does not send 100 requests
-    toggleDarkMode(){
+    toggleDarkTheme(){
         this.darkTheme = !this.darkTheme;
-        this.user!.darkTheme = this.darkTheme;
+        this.darkThemeSubject.next(this.darkTheme);
         this.darkThemeService.setDarkTheme(this.darkTheme);
+    }
+
+    private saveDarkTheme(darkTheme: boolean): boolean {
+        this.user!.darkTheme = darkTheme;
         this.saveUser();
+        return darkTheme;
+    }
+
+    profileImageUploaded(){
+        location.reload();
     }
 
     saveUser(){

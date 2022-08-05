@@ -1,0 +1,49 @@
+@import 'src/styles.scss';
+
+.material-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-label-error {
+    color: var(--teachu-warn) !important;
+    font-weight: bold;
+}
+
+.upload-container{
+    cursor: pointer;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    background-color: var(--teachu-accent);
+    border-radius: 0.4rem;
+
+    transition: background 0.3s ease-out;
+}
+
+.upload-container:hover{
+    background-color: var(--teachu-accent-hover);
+}
+
+.upload-container:active{
+    background-color: var(--teachu-accent-click);
+}
+
+.upload-label{
+    font-size: 0.8rem;
+    color: var(--teachu-black);
+    transition: color 0.3s ease-out;
+}
+
+.upload-text{
+    color: var(--teachu-primary);
+    font-size: 1rem;
+
+    margin-left: 5px;
+}

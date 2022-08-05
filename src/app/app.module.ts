@@ -52,6 +52,9 @@ import { ParentChildSelectorComponent } from './Conponents/parent-child-selector
 import {ParentService} from "./Framework/API/parent.service";
 import { ImageComponent } from './Framework/image/image.component';
 import { ChangePasswordComponent } from './Conponents/change-password/change-password.component';
+import {
+    ProfilePicUploaderComponent
+} from "./Conponents/profile-pic/profile-pic-uploader/profile-pic-uploader.component";
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -98,6 +101,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ParentChildSelectorComponent,
         ImageComponent,
         ChangePasswordComponent,
+        ProfilePicUploaderComponent,
     ],
     imports: [
         BrowserModule,
