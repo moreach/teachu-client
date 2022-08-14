@@ -12,6 +12,8 @@ export interface FileUploadResponse{
     styleUrls: ['./profile-pic-uploader.component.scss']
 })
 export class ProfilePicUploaderComponent {
+    private readonly SUPPORTED_IMAGE_TYPES: string[] = ["image/png", "image/jpeg"];
+    private readonly ONE_MB: number = 1048576;
 
     @Input() buttonText: string = "Upload";
     @Input() buttonLabel: string = "";
@@ -26,13 +28,21 @@ export class ProfilePicUploaderComponent {
         private userService: UserService,
     ) { }
 
-    //TODO validate file size and type & test error handling
-    uploadFile(event: any){
+    uploadProfileImage(event: any){
         this.hasError = false;
-        console.log(event)
-        let files: FileList = event.target.files;
-        if(files[0]){
-            this.userService.saveProfileImage$(files[0]).subscribe({
+
+        const image: File = event.target.files[0];
+        if(!image){
+            this.buttonLabel = "userSettings.profileImage.validation.notFound";
+            this.hasError = true;
+        }else if(!this.SUPPORTED_IMAGE_TYPES.includes(image.type)){
+            this.buttonLabel = "userSettings.profileImage.validation.notSupportedType";
+            this.hasError = true;
+        }else if(image.size >= this.ONE_MB){
+            this.buttonLabel = "userSettings.profileImage.validation.toBig";
+            this.hasError = true;
+        }else{
+            this.userService.saveProfileImage$(image).subscribe({
                 next: (res: FileUploadResponse) => this.update(res.progress, res.message),
                 error: (err) => {
                     this.hasError = true;

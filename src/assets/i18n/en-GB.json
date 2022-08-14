@@ -79,7 +79,14 @@
         "postalCode":"Postal Code",
         "street":"Street",
         "phone":"Phone",
-        "profileImage":"Profile Image",
+        "profileImage": {
+          "profileImage": "Profile Image",
+          "validation": {
+            "notFound": "No image provided",
+            "notSupportedType": "Image type has to be png or jpeg",
+            "toBig": "Image can't be bigger than 1 MB"
+          }
+        },
         "upload": "Upload new",
         "passwordOld":"Old Password",
         "passwordNew":"New Password",
