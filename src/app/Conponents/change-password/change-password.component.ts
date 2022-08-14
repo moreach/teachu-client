@@ -6,6 +6,7 @@ import {TokenService} from "../../Framework/API/token.service";
 import {TokenDTO} from "../../DTOs/Authentication/TokenDTO";
 import {endpoints} from "../../Config/endpoints";
 import {AuthenticationChangePasswordInputDTO} from "../../DTOs/Authentication/AuthenticationChangePasswordInputDTO";
+import {catchError} from "rxjs";
 
 @Component({
   selector: 'app-change-password',
@@ -14,7 +15,7 @@ import {AuthenticationChangePasswordInputDTO} from "../../DTOs/Authentication/Au
 })
 export class ChangePasswordComponent {
     formGroup: FormGroupTyped<AuthenticationChangePasswordInputDTO & { passwordConfirm: string }>;
-    isSaving: boolean = false;
+    errorMessage: string = "";
 
     constructor(
         private formBuilder: FormBuilder,
@@ -29,28 +30,53 @@ export class ChangePasswordComponent {
         }, {
             validator: (group: FormGroupTyped<AuthenticationChangePasswordInputDTO & { passwordConfirm: string }>) => {
                 if (group.value.newPassword !== group.value.passwordConfirm) {
+                    this.errorMessage = "New passwords aren't the same.";
                     return {
                         passwordNotMatch: true,
                     };
-                }
+                } else this.errorMessage = "";
                 return null;
             }
         }) as FormGroupTyped<AuthenticationChangePasswordInputDTO & { passwordConfirm: string }>;
     }
 
-    save() {  // FIXME
-        this.isSaving = true;
+    save() {
         const value = {
             email: this.formGroup.value.email,
             oldPassword: this.formGroup.value.oldPassword,
             newPassword: this.formGroup.value.newPassword,
         } as AuthenticationChangePasswordInputDTO;
-        this.apiService.callApi<TokenDTO>(endpoints.ChangePassword, value, "PUT").subscribe(token => {
-            this.isSaving = false;
-            this.tokenService.setToken(token.access);
-            this.tokenService.setRefreshToken(token.refresh);
-            this.tokenService.setExpired(token.accessExpires);
-        });
+
+        const validationError = this.validatePassword(value.newPassword);
+        if(!validationError) {
+            // TODO: find a way to disable the error interceptor for only this request
+            this.apiService.callApi<TokenDTO>(endpoints.ChangePassword, value, "PUT").pipe(
+                catchError(() => this.errorMessage = "userSettings.passwordValidation.wrongCurrent")
+            ).subscribe(res => {
+                const token: TokenDTO = res as TokenDTO;
+                this.tokenService.setToken(token.access);
+                this.tokenService.setRefreshToken(token.refresh);
+                this.tokenService.setExpired(token.accessExpires);
+            });
+        } else this.errorMessage = validationError;
     }
 
+    private validatePassword(password: string): string { // same as backend validation
+        // min 8 digits - one uppercase - one number - one lowercase
+        const atLeastOneNumber: RegExp = new RegExp("^(?=.*\\d).*$");
+        const atLeastOneUppercase: RegExp = new RegExp("^(?=.*[A-Z]).*$");
+        const atLeastOneLowercase: RegExp = new RegExp("^(?=.*[a-z]).*$");
+
+        if(password.length < 8)
+            return "userSettings.passwordValidation.toShort";
+        if(!atLeastOneNumber.test(password))
+            return "userSettings.passwordValidation.missingNumber";
+        if(!atLeastOneUppercase.test(password))
+            return "userSettings.passwordValidation.missingCapital";
+        if(!atLeastOneLowercase.test(password))
+            return "userSettings.passwordValidation.missingLow";
+
+
+        return "";
+    }
 }

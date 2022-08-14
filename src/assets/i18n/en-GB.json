@@ -84,7 +84,14 @@
         "passwordOld":"Old Password",
         "passwordNew":"New Password",
         "passwordConfirm":"Repeat New Password",
-        "phoneSaved": "Phone number saved"
+        "phoneSaved": "Phone number saved",
+        "passwordValidation": {
+          "toShort": "Password has to be at least 8 digits long",
+          "missingCapital": "Password has to contain one uppercase letter",
+          "missingLow": "Password has to contain one lowercase letter",
+          "missingNumber": "Password has to contain at least one  number",
+          "wrongCurrent": "E-Mail or Password wrong."
+        }
     },
     "errorBackend":{
         "errorOccured":"Error Occured",
