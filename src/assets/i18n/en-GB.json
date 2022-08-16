@@ -42,7 +42,16 @@
         "email":"Mail"
     },
     "absences":{
-        "absences":"Absences"
+        "absences":"Absences",
+        "state": {
+          "pending": "Pending",
+          "excused": "Excused",
+          "unexcused": "Unexcused"
+        },
+        "type": {
+          "sick": "Sick",
+          "holiday": "Holiday"
+        }
     },
     "chat":{
         "chat":"Chat",

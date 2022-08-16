@@ -55,6 +55,7 @@ import { ChangePasswordComponent } from './Conponents/change-password/change-pas
 import {
     ProfilePicUploaderComponent
 } from "./Conponents/profile-pic/profile-pic-uploader/profile-pic-uploader.component";
+import { TextBadgeComponent } from './Conponents/text-badge/text-badge.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -102,6 +103,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         ImageComponent,
         ChangePasswordComponent,
         ProfilePicUploaderComponent,
+        TextBadgeComponent,
     ],
     imports: [
         BrowserModule,

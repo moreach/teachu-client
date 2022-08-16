@@ -1,0 +1,62 @@
+@import 'src/styles/colors';
+
+.absence-container {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex: none;
+    flex-flow: column nowrap;
+
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+
+    .absence {
+        display: block;
+        box-sizing: border-box;
+        max-height: calc(100vh - 140px);
+
+        width: 100%;
+
+        scroll-snap-align: center;
+        flex: none;
+
+        .absence-body{
+            box-sizing: border-box;
+            display: block;
+            height: calc(100vh - 190px);
+
+            .title {
+                padding: 30px 0;
+
+                display: flex;
+                flex-flow: row wrap;
+                gap: 25px;
+                align-items: center;
+                justify-content: start;
+
+                h2{
+                    margin: 0;
+                }
+            }
+        }
+
+        .absence-footer{
+            height: 50px;
+
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column nowrap;
+            cursor: pointer;
+
+            .dot {
+                height: 10px;
+                width: 10px;
+                border-radius: 50%;
+                background-color: var(--teachu-grey-darker);
+            }
+        }
+    }
+}
