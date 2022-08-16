@@ -65,7 +65,6 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
         this.saveUser();
         this.showPhoneSaved = true;
         this.phoneSavedTimeout = setTimeout(() => this.showPhoneSaved = false, 3500);
-        this.unsubscribe.next();
         return newNumber;
     }
 
@@ -78,7 +77,6 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
     private saveDarkTheme(darkTheme: boolean): boolean {
         this.user!.darkTheme = darkTheme;
         this.saveUser();
-        this.unsubscribe.next();
         return darkTheme;
     }
 
@@ -98,6 +96,7 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
     }
 
     ngOnDestroy() {
+        this.unsubscribe.next();
         this.unsubscribe.complete();
     }
 }
