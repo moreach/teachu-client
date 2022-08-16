@@ -1,95 +1,102 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
-import {FormGroupTyped} from "../../Material/types";
 import { DarkThemeService } from "src/app/Framework/dark-theme/dark-theme.service";
 import { MatDialog } from "@angular/material/dialog";
-import { ChangePasswordDialogComponent } from "./change-password-dialog/change-password-dialog.component";
 import { UserService } from "./user.service";
+import {debounceTime, skip, Subject, switchMap, takeUntil} from "rxjs";
 import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
-import { UserOwnChangeDTO } from "src/app/DTOs/User/UserOwnChangeDTO";
+import {UserOwnChangeDTO} from "../../DTOs/User/UserOwnChangeDTO";
 
 @Component({
     selector: "user-settings",
     templateUrl: "./user-settings.component.html",
     styleUrls: ["./user-settings.component.scss"]
 })
-export class UserSettingsComponent implements OnInit{
-    userForm: FormGroupTyped<UserOwnDTO>;
-    isLoading: boolean = true;
-    prevUser: UserOwnChangeDTO | undefined;
+export class UserSettingsComponent implements OnInit, OnDestroy{
+    private readonly DEBOUNCE_TIME: number = 2000; // in ms
+    private unsubscribe = new Subject<void>()
+
+    user: UserOwnDTO | undefined;
+
+    showPhoneSaved: boolean = false;
+    darkTheme: boolean = true;
+    phoneNumberControl: FormControl;
     profileImageControl: FormControl;
-    uploadedProfileImage: File | undefined;
+    private uploadedProfileImage: File | undefined;
+    private phoneSavedTimeout: number | undefined;
+    private darkThemeSubject: Subject<boolean> = new Subject<boolean>();
 
     constructor(
       private builder: FormBuilder,
-      private darkTheme: DarkThemeService,
+      private darkThemeService: DarkThemeService,
       private dialog: MatDialog,
       private userService: UserService,
     ) {
-        this.userForm = this.builder.group({
-            email: '',
-            firstName: '',
-            lastName: '',
-            birthday: null,
-            sex: null,
-            language: null,
-            darkTheme: ["", Validators.required],
-            city: '',
-            postalCode: '',
-            street: '',
-            phone: ["", Validators.required],
-        }) as FormGroupTyped<UserOwnDTO>;
-        this.userService.getCurrentUser$().subscribe((user) => {
-            this.darkTheme.setDarkTheme(user.darkTheme);
-            this.userForm.patchValue({
-                ...user,
-                birthday: new Date(user.birthday),
-            } as UserOwnDTO);
-            this.prevUser = {
-                darkTheme: user.darkTheme,
-                language: user.language,
-                phone: user.phone,
-            };
-            this.isLoading = false;
-        });
-
+        this.phoneNumberControl = new FormControl('', [ Validators.required ]);
         this.profileImageControl = new FormControl(this.uploadedProfileImage, [
             Validators.required,
         ]);
-    }
 
-    ngOnInit() {
-        this.profileImageControl.valueChanges.subscribe(file => {
-            this.uploadedProfileImage = file.files[0];
-            console.log(this.uploadedProfileImage)
+        this.darkTheme = darkThemeService.getDarkTheme();
 
-            if(this.uploadedProfileImage)
-                this.userService.saveProfileImage$(this.uploadedProfileImage).subscribe(_ => location.reload());
+        userService.getCurrentUser$().subscribe(user => {
+            this.user = user;
+            this.phoneNumberControl.patchValue(user.phone);
         });
     }
 
-    saveUser(form: FormGroupTyped<UserOwnDTO>) {
-        this.isLoading = true;
-        const formValue = {
-            language: form.value.language,
-            darkTheme: form.value.darkTheme,
-            phone: form.value.phone,
-        } as UserOwnChangeDTO;
-        this.prevUser = formValue;
-        this.userService.saveUser$(formValue).subscribe(_ => this.isLoading = false);
+    ngOnInit() {
+        this.phoneNumberControl.valueChanges.pipe(
+            skip(1), // skip the first because this change is when the user loaded
+            debounceTime(this.DEBOUNCE_TIME),
+            switchMap(value => this.savePhoneNumber(value)),
+            takeUntil(this.unsubscribe)
+        ).subscribe(() => { });
+
+        this.darkThemeSubject.asObservable().pipe(
+            debounceTime(this.DEBOUNCE_TIME),
+            switchMap(async (value) => this.saveDarkTheme(value)),
+            takeUntil(this.unsubscribe)
+        ).subscribe(() => { });
     }
 
-    changePassword() {
-        this.dialog.open(ChangePasswordDialogComponent, { });
+    savePhoneNumber(newNumber: string): string{
+        this.user!.phone = newNumber;
+        this.saveUser();
+        this.showPhoneSaved = true;
+        this.phoneSavedTimeout = setTimeout(() => this.showPhoneSaved = false, 3500);
+        return newNumber;
     }
 
-    changeDarkTheme(isDarkTheme: boolean) {
-        this.darkTheme.setDarkTheme(isDarkTheme);
-        const formValue = {
-            ...this.prevUser,
-            darkTheme: isDarkTheme,
-        } as UserOwnChangeDTO;
-        this.prevUser = formValue;
-        this.userService.saveUser$(formValue).subscribe();
+    toggleDarkTheme(){
+        this.darkTheme = !this.darkTheme;
+        this.darkThemeSubject.next(this.darkTheme);
+        this.darkThemeService.setDarkTheme(this.darkTheme);
+    }
+
+    private saveDarkTheme(darkTheme: boolean): boolean {
+        this.user!.darkTheme = darkTheme;
+        this.saveUser();
+        return darkTheme;
+    }
+
+    profileImageUploaded(){
+        location.reload();
+    }
+
+    saveUser(){
+        if(this.user) {
+            const userChanges: UserOwnChangeDTO = {
+                language: this.user.language,
+                darkTheme: this.user.darkTheme,
+                phone: this.user.phone,
+            }
+            this.userService.saveUser$(userChanges);
+        }
+    }
+
+    ngOnDestroy() {
+        this.unsubscribe.next();
+        this.unsubscribe.complete();
     }
 }

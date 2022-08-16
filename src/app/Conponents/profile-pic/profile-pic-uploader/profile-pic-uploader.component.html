@@ -1,0 +1,19 @@
+<div style="width: 100%; height: 100%;">
+    <form enctype="multipart/form-data" style="width: 100%; height: 100%">
+        <input id="profilePicInput" type="file" (change)="uploadProfileImage($event)" name="uploadFile" style="display: none">
+        <label for="profilePicInput" class="upload-label">
+            <span [ngClass]="{'upload-label-error': hasError}"
+                  [style.max-width]="buttonWidth"
+                  style="display: block; word-break: break-word;"
+                  *ngIf="!!buttonLabel">
+                {{buttonLabel | translate}}
+            </span>
+            <div class="upload-container"
+                 [style.height]="buttonHeight"
+                 [style.width]="buttonWidth">
+                <mat-icon class="upload-text">upload</mat-icon>
+                <span class="upload-text" *ngIf="!!buttonText">{{buttonText | translate}}</span>
+            </div>
+        </label>
+    </form>
+</div>

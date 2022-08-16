@@ -61,8 +61,10 @@
         "leaveChat":"Leave Chat",
         "editChat":"Edit Chat"
     },
-    "userSettings":{
+    "userSettings": {
         "userSettings":"Settings",
+        "userData": "Your Data",
+        "preferences": "Preferences",
         "email":"E-Mail Address",
         "changePassword":"Change Password",
         "firstName":"Firstname",
@@ -77,10 +79,26 @@
         "postalCode":"Postal Code",
         "street":"Street",
         "phone":"Phone",
-        "profileImage":"Profile Image",
+        "profileImage": {
+          "profileImage": "Profile Image",
+          "validation": {
+            "notFound": "No image provided",
+            "notSupportedType": "Image type has to be png or jpeg",
+            "toBig": "Image can't be bigger than 1 MB"
+          }
+        },
+        "upload": "Upload new",
         "passwordOld":"Old Password",
         "passwordNew":"New Password",
-        "passwordConfirm":"Repeat New Password"
+        "passwordConfirm":"Repeat New Password",
+        "phoneSaved": "Phone number saved",
+        "passwordValidation": {
+          "toShort": "Password has to be at least 8 digits long",
+          "missingCapital": "Password has to contain one uppercase letter",
+          "missingLow": "Password has to contain one lowercase letter",
+          "missingNumber": "Password has to contain at least one  number",
+          "wrongCurrent": "E-Mail or Password wrong."
+        }
     },
     "errorBackend":{
         "errorOccured":"Error Occured",
