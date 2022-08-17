@@ -43,6 +43,7 @@
     },
     "absences":{
         "absences":"Absences",
+        "noAbsences": "Congratulations, you have zero absences",
         "state": {
           "pending": "Pending",
           "excused": "Excused",
