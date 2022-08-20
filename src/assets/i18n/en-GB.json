@@ -44,6 +44,14 @@
     "absences":{
         "absences":"Absences",
         "noAbsences": "Congratulations, you have zero absences",
+        "verify": "Verify absence",
+        "reject": "Reject absence",
+        "edit": "Edit absence",
+        "title": "Title",
+        "description": "Description",
+        "save": "Save changes",
+        "cancel": "Don't save",
+        "validationError": "Title has to have between 3 and 50 characters and description can't be longer than 500 characters",
         "state": {
           "pending": "Pending",
           "excused": "Excused",

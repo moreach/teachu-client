@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { AbsencesService } from './absences.service';
 import {AbsenceInfoDTO} from "../../DTOs/Absence/AbsenceInfoDTO";
-import {UserEventType} from "../../DTOs/Enums/UserEventType";
-import {UserEventState} from "../../DTOs/Enums/UserEventState";
+import {UserService} from "../user-settings/user.service";
 
 @Component({
     selector: 'app-absences',
@@ -11,17 +10,36 @@ import {UserEventState} from "../../DTOs/Enums/UserEventState";
 })
 export class AbsencesComponent implements OnInit{
     readonly ABSENCE_ELEMENT_ID_BASE: string = "absence-";
-    readonly STATE_TRANSLATION_BASE: string = "absences.state.";
-    readonly TYPE_TRANSLATION_BASE: string = "absences.type.";
 
-    absences: AbsenceInfoDTO[] = [];
+    absences: AbsenceInfoDTO[] | undefined;
+    isParent: boolean = false;
+    editMode: boolean = false;
 
     constructor(
-        private absencesService: AbsencesService,
+        private service: AbsencesService,
+        private userService: UserService,
     ) { }
 
     ngOnInit(): void {
-        this.absencesService.loadAbsences().subscribe(res => this.absences = res);
+        this.service.getAbsences$().subscribe(abs => this.absences = abs);
+        this.userService.getCurrentUser$()
+            .subscribe(user => this.isParent = user.role === "parent");
+    }
+
+    doneEditing(changedAbsence: AbsenceInfoDTO | undefined){
+        this.editMode = false;
+        if(changedAbsence && this.absences) {
+            if(this.isParent){
+                // changedAbsence.state = "verified"; TODO: wait for api implementation
+            }else changedAbsence.state = "pending";
+
+            const indexToChange: number = this.absences.findIndex(a => a.id === changedAbsence.id);
+
+            if(indexToChange === -1)
+                this.absences.push(changedAbsence);
+            else
+                this.absences[indexToChange] = changedAbsence;
+        }
     }
 
     scrollToNextAbsence(currentAbsence: number) {
@@ -31,47 +49,9 @@ export class AbsencesComponent implements OnInit{
         });
     }
 
-    isLastOfArray(index: number): boolean {
-        return index >= this.absences.length - 1;
-    }
-
-    getAbsenceTypeColor(type: UserEventType): "primary" | "accent" | "secondary" | "warn" {
-        switch (type){
-            case "holiday":
-                return "accent";
-            case "sick":
-                return "warn";
-        }
-    }
-
-    getAbsenceTypeIcon(type: UserEventType): string {
-        switch (type){
-            case "holiday":
-                return "houseboat";
-            case "sick":
-                return "sick";
-        }
-    }
-
-    getAbsenceStateColor(state: UserEventState): "primary" | "accent" | "secondary" | "warn" {
-        switch (state){
-            case "excused":
-                return "accent";
-            case "pending":
-                return "primary";
-            case "unexcused":
-                return "warn";
-        }
-    }
-
-    getAbsenceStateIcon(state: UserEventState): string {
-        switch (state){
-            case "excused":
-                return "done";
-            case "pending":
-                return "pending_actions";
-            case "unexcused":
-                return "block";
-        }
+    isLastOfMap(index: number): boolean {
+        if(this.absences)
+            return index >= this.absences.length - 1;
+        return false;
     }
 }

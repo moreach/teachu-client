@@ -22,23 +22,16 @@
         flex: none;
 
         .absence-body{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: flex-start;
+            align-content: flex-start;
+
             box-sizing: border-box;
-            display: block;
             height: calc(100vh - 190px);
+            width: 100%;
 
-            .title {
-                padding: 30px 0;
-
-                display: flex;
-                flex-flow: row wrap;
-                gap: 25px;
-                align-items: center;
-                justify-content: start;
-
-                h2{
-                    margin: 0;
-                }
-            }
+            max-width: 1000px;
         }
 
         .absence-footer{

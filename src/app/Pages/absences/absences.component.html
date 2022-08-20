@@ -1,21 +1,19 @@
-<ng-container *ngIf="absences.length > 0 else noAbsences">
+<ng-container *ngIf="absences && absences.length > 0 else noAbsences">
     <div class="absence-container">
         <div *ngFor="let absence of absences; index as i" [id]="ABSENCE_ELEMENT_ID_BASE + i" class="absence">
             <div class="absence-body">
-                <div class="title">
-                    <h2>{{absence.title}}</h2>
-
-                    <app-text-badge [text]="TYPE_TRANSLATION_BASE + absence.type | translate"
-                                    [color]="getAbsenceTypeColor(absence.type)"
-                                    [matIcon]="getAbsenceTypeIcon(absence.type)"></app-text-badge>
-                    <app-text-badge [text]="STATE_TRANSLATION_BASE + absence.state | translate"
-                                    [color]="getAbsenceStateColor(absence.state)"
-                                    [matIcon]="getAbsenceStateIcon(absence.state)"></app-text-badge>
-                </div>
-                <h4 style="font-style: italic">{{absence.description}}</h4>
+                <app-absence-visualisation *ngIf="!editMode"
+                                          [absence]="absence"
+                                          [isParent]="isParent"
+                                          (editAbsence)="editMode = true">
+                </app-absence-visualisation>
+                <app-absence-editor *ngIf="editMode"
+                                    (exit)="doneEditing($event)"
+                                    [absence]="absence">
+                </app-absence-editor>
             </div>
 
-            <div *ngIf="!isLastOfArray(i) else emptyAbsenceFooter" class="absence-footer" (click)="scrollToNextAbsence(i)">
+            <div *ngIf="!isLastOfMap(i) else emptyAbsenceFooter" class="absence-footer" (click)="scrollToNextAbsence(i)">
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="dot"></div>
@@ -27,7 +25,9 @@
     </div>
 </ng-container>
 <ng-template #noAbsences>
-    <div class="no-absence-container">
+<!--    ngIf is because i don't want to show the image just because the page is loading
+(maybe implement loader some time)-->
+    <div class="no-absence-container" *ngIf="absences">
         <h2>{{ "absences.noAbsences" | translate }}</h2>
         <img src="assets/images/two-people-dancing.svg" alt="🎉" />
     </div>
