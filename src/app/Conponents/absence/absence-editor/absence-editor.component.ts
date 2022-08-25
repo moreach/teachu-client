@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AbsenceInfoDTO} from "../../../DTOs/Absence/AbsenceInfoDTO";
 import {ApiService} from "../../../Framework/API/api.service";
-import {AbsencesService} from "../../../Pages/absences/absences.service";
+import {AbsenceEditDoneDTO, AbsencesService} from "../../../Pages/absences/absences.service";
 import {UserEventType} from "../../../DTOs/Enums/UserEventType";
 
 @Component({
@@ -10,7 +10,7 @@ import {UserEventType} from "../../../DTOs/Enums/UserEventType";
     styleUrls: ['./absence-editor.component.scss']
 })
 export class AbsenceEditorComponent implements OnInit{
-    @Output("exit") exitEvent: EventEmitter<AbsenceInfoDTO | undefined> = new EventEmitter<AbsenceInfoDTO | undefined>();
+    @Output("exit") exitEvent: EventEmitter<AbsenceEditDoneDTO> = new EventEmitter<AbsenceEditDoneDTO>();
     @Input() absence!: AbsenceInfoDTO;
     hasValidationError: boolean = false;
 
@@ -26,12 +26,18 @@ export class AbsenceEditorComponent implements OnInit{
     save() {
         this.validate();
         if(!this.hasValidationError){
-            this.service.saveAbsence(this.absence).subscribe(() => this.exitEvent.emit(this.absence));
+            this.service.saveAbsence(this.absence)
+                .then(doneDTO => this.exitEvent.emit(doneDTO))
+                .catch(() => console.error("can't save absence"));
         }
     }
 
     cancel(){
-        this.exitEvent.emit(undefined);
+        this.exitEvent.emit({
+            absence: this.absence,
+            new: this.absence.id === this.service.NEW_ABSENCE_ID,
+            canceled: true,
+        });
     }
 
     titleChange(changeEvent: any){

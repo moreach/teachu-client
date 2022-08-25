@@ -6,22 +6,46 @@ import {Observable} from "rxjs";
 import {UserEventType} from "../../DTOs/Enums/UserEventType";
 import {UserEventState} from "../../DTOs/Enums/UserEventState";
 
+export interface AbsenceEditDoneDTO{
+    absence: AbsenceInfoDTO;
+    new: boolean;
+    canceled: boolean;
+}
+
 @Injectable({
     providedIn: 'root'
 })
 export class AbsencesService{
     readonly STATE_TRANSLATION_BASE: string = "absences.state.";
     readonly TYPE_TRANSLATION_BASE: string = "absences.type.";
+    readonly NEW_ABSENCE_ID: string = "--new--";
 
-    // private absences: AbsenceInfoDTO[] | undefined;
     private absences: Observable<AbsenceInfoDTO[]> | undefined;
 
     constructor(
         private api: ApiService,
     ) { }
 
-    saveAbsence(absence: AbsenceInfoDTO): Observable<any> {
-        return this.api.callApi(endpoints.Absence + "/" + absence.id, absence, 'PUT');
+    saveAbsence(absence: AbsenceInfoDTO): Promise<AbsenceEditDoneDTO> {
+        const isNew: boolean = this.NEW_ABSENCE_ID === absence.id;
+        const responseDTO: AbsenceEditDoneDTO = {
+            absence: absence,
+            new: isNew,
+            canceled: false,
+        };
+
+        return new Promise<AbsenceEditDoneDTO>((resolve, reject) => {
+            let request;
+            if(isNew)
+                request = this.api.callApi(endpoints.Absence, absence, 'POST');
+            else
+                request = this.api.callApi(endpoints.Absence + "/" + absence.id, absence, 'PUT');
+
+            request.subscribe({
+                next: () => resolve(responseDTO),
+                error: () => reject(responseDTO)
+            });
+        });
     }
 
     getAbsences$(): Observable<AbsenceInfoDTO[]>{
