@@ -33,7 +33,7 @@
         <app-readonly-field [label]="'userSettings.firstName' | translate" [value]="user.firstName"></app-readonly-field>
         <app-readonly-field [label]="'userSettings.lastName' | translate" [value]="user.lastName"></app-readonly-field>
         <app-readonly-field [label]="'userSettings.birthday' | translate" [value]="user.birthday | date:'dd.MM.yyyy'"></app-readonly-field>
-        <app-readonly-field [label]="'userSettings.sex' | translate" [value]="'Sex.' + user.sex"></app-readonly-field>
+        <app-readonly-field [label]="'userSettings.sex' | translate" [value]="('Sex.' + user.sex) | translate"></app-readonly-field>
         <app-readonly-field [label]="'userSettings.city' | translate" [value]="user.city"></app-readonly-field>
         <app-readonly-field [label]="'userSettings.postalCode' | translate" [value]="user.postalCode"></app-readonly-field>
         <app-readonly-field [label]="'userSettings.street' | translate" [value]="user.street"></app-readonly-field>
