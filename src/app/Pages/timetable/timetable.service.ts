@@ -16,7 +16,13 @@ export class TimetableService {
   ) { }
 
   getTimetable$(from: Date, to: Date): Observable<TimetableDayDTO[]> {
-    return this.api.callApi<TimetableDayDTO[]>(endpoints.Timetable, { from, to }, 'GET');
+    const fromFormatted = `${from.getFullYear()}-${from.getMonth() + 1}-${from.getDate()}`;
+    const toFormatted = `${to.getFullYear()}-${to.getMonth() + 1}-${to.getDate()}`;
+    const value = {
+      from: fromFormatted,
+      to: toFormatted,
+    };
+    return this.api.callApi<TimetableDayDTO[]>(endpoints.Timetable, value, 'GET');
   }
 
   getLessonInfo$(): Observable<TimetableLayoutDTO[]> {

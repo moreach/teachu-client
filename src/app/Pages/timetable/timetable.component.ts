@@ -68,6 +68,7 @@ export class TimetableComponent implements OnInit {
   getLessons$(): Observable<TimetableDayDTO[]> {
     const start = this.isWeekView$.value ? getFirstDayOfWeek(this.relevantDate$.value) : this.relevantDate$.value;
     const end = this.isWeekView$.value ? getLastDayOfWeek(this.relevantDate$.value) : this.relevantDate$.value;
+    console.log(start, end);
     return this.timetableService.getTimetable$(start, end);
   }
 

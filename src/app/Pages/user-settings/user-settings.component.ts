@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import { DarkThemeService } from "src/app/Framework/dark-theme/dark-theme.service";
-import { MatDialog } from "@angular/material/dialog";
 import { UserService } from "./user.service";
-import {debounceTime, skip, Subject, switchMap, takeUntil, throttleTime} from "rxjs";
+import { skip, Subject, switchMap, takeUntil, throttleTime} from "rxjs";
 import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
 import {UserOwnChangeDTO} from "../../DTOs/User/UserOwnChangeDTO";
+import { GetLanguage } from "src/app/DTOs/Enums/Language";
 
 @Component({
     selector: "user-settings",
@@ -95,6 +95,13 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
                 phone: this.user.phone,
             }
             this.userService.saveUser$(userChanges);
+        }
+    }
+
+    saveLanguage(language: string) {
+        if (this.user) {
+            this.user!.language = GetLanguage(language);
+            this.saveUser();
         }
     }
 

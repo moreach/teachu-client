@@ -6,8 +6,7 @@
             <mat-icon *ngIf="!darkTheme">light_mode</mat-icon>
         </button>
 
-<!--        TODO: language changes aren't saved yet because currently only english in the UI-->
-        <app-language-lookup style="width: 100%"></app-language-lookup>
+        <app-language-lookup style="width: 100%" (languageChanged)="saveLanguage($event)"></app-language-lookup>
 
         <form id="phoneNumberForm">
             <mat-form-field>

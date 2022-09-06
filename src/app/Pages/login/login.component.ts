@@ -5,11 +5,13 @@ import { appRoutes } from 'src/app/Config/appRoutes';
 import { endpoints } from 'src/app/Config/endpoints';
 import { LoginDTO } from 'src/app/DTOs/Authentication/LoginDTO';
 import { TokenDTO } from 'src/app/DTOs/Authentication/TokenDTO';
+import { GetLanguageKey } from 'src/app/DTOs/Enums/Language';
 import { UserOwnDTO } from 'src/app/DTOs/User/UserOwnDTO';
 import { ApiService } from 'src/app/Framework/API/api.service';
 import { ErrorHandlingService } from 'src/app/Framework/API/error-handling.service';
 import { TokenService } from 'src/app/Framework/API/token.service';
 import { DarkThemeService } from 'src/app/Framework/dark-theme/dark-theme.service';
+import { LanguagesService } from 'src/app/Framework/Languages/languages.service';
 import { FormGroupTyped } from 'src/app/Material/types';
 
 @Component({
@@ -29,6 +31,7 @@ export class LoginComponent {
     private router: Router,
     private errorHandler: ErrorHandlingService,
     private darkThemeService: DarkThemeService,
+    private languageService: LanguagesService,
   ) {
     this.form = this.formBuilder.group({
       email: ['', Validators.email],
@@ -64,6 +67,9 @@ export class LoginComponent {
       this.tokenService.setExpired(token.accessExpires);
       this.api.callApi<UserOwnDTO>(endpoints.User, { }, 'GET').subscribe(user => {
         this.darkThemeService.setDarkTheme(user.darkTheme);
+        if (user.language) {
+          this.languageService.selectLanguage(GetLanguageKey(user.language));
+        }
         this.router.navigate([appRoutes.App, appRoutes.Dashboard]);
       });
     });
