@@ -1,6 +1,26 @@
 import { KeyValue } from "@angular/common";
 
-export type Language = 'german' | 'english' | 'french';
+export type Language =
+    'english' |
+    'arabic' |
+    'chinese' |
+    'danish' |
+    'dutch' |
+    'finnish' |
+    'french' |
+    'german' |
+    'hindi' |
+    'italian' |
+    'japanese' |
+    'korean' |
+    'polish' |
+    'portuguese' |
+    'russian' |
+    'spanish' |
+    'swedish' |
+    'thai' |
+    'turkish' |
+    'vietnamese';
 
 export const languages: KeyValue<string, string>[] = [
     { key: 'en-GB', value: 'languages.english' },
