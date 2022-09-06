@@ -13,6 +13,9 @@
     .day {
         border-left: 1px solid var(--teachu-black);
     }
+    .block.first-line {
+        height: 100px;
+    }
     .block {
         height: 64px;
         box-sizing: border-box;
@@ -26,24 +29,32 @@
     }
     .date,
     .hour,
-    .lesson,
-    .dateInfo {
+    .lesson-subject,
+    .event-info,
+    .dateInfo,
+    .lesson {
         display: flex;
         align-items: center;
         justify-content: center;
     }
     .lesson {
+        font-size: 12px;
         height: 100%;
         width: 100%;
         border-radius: 4px;
         font-size: 12px;
         text-align: center;
+        flex-direction: column;
         cursor: pointer;
+        padding-top: 4px;
+        gap: 4px;
     }
     .dateInfo {
         height: 100%;
         width: 100%;
         border-radius: 4px;
+        gap: 0;
+        flex-direction: column;
     }
     .today {
         background-color: var(--teachu-warn);
@@ -57,4 +68,22 @@
             background-color: var(--teachu-grey);
         }
     }
+}
+.block.hour.info {
+    display: grid;
+    grid-template-columns: 1fr;
+    div {
+        display: flex;
+        justify-content: center;
+    }
+}
+.block.hour.info .divider {
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+.pointer {
+    cursor: pointer;
+}
+.event-info-icon {
+    margin-top: 9px;
 }

@@ -1,1 +1,43 @@
-{{ getData() }}
+<h1>{{ 'timetable.details' | translate }}</h1>
+<div *ngIf="lesson">
+    <h2>{{ 'timetable.lesson' | translate }}</h2>
+    <app-readonly-field [label]="'timetable.schoolClass' | translate" [value]="lesson.schoolClass"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.subject' | translate" [value]="lesson.subject"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.teacher' | translate" [value]="lesson.teacher.firstName + ' ' + lesson.teacher.lastName"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.room' | translate" [value]="lesson.room"></app-readonly-field>
+</div>
+<mat-divider *ngIf="lesson && lesson.event" class="divider"></mat-divider>
+<div *ngIf="lesson && lesson.event">
+    <h2>{{ 'timetable.lessonEvent' | translate }}</h2>
+    <app-readonly-field [label]="'timetable.title' | translate" [value]="lesson.event.title"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.description' | translate" [value]="lesson.event.description"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.type' | translate" [value]="('LessonEventType.' + lesson.event.type) | translate"></app-readonly-field>
+</div>
+<mat-divider *ngIf="day && day.userEvent" class="divider"></mat-divider>
+<div *ngIf="day && day.userEvent">
+    <h2>{{ 'timetable.userEvent' | translate }}</h2>
+    <app-readonly-field [label]="'timetable.from' | translate" [value]="day.userEvent.from | date: 'dd.MM.yyyy HH:mm:ss'"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.to' | translate" [value]="day.userEvent.to | date: 'dd.MM.yyyy HH:mm:ss'"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.title' | translate" [value]="day.userEvent.title"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.description' | translate" [value]="day.userEvent.description"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.type' | translate" [value]="('UserEventType.' + day.userEvent.type) | translate"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.state' | translate" [value]="('UserEventState.' + day.userEvent.state) | translate"></app-readonly-field>
+</div>
+<mat-divider *ngIf="day && day.schoolClassEvent" class="divider"></mat-divider>
+<div *ngIf="day && day.schoolClassEvent">
+    <h2>{{ 'timetable.schoolClassEvent' | translate }}</h2>
+    <app-readonly-field [label]="'timetable.from' | translate" [value]="day.schoolClassEvent.from | date: 'dd.MM.yyyy HH:mm:ss'"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.to' | translate" [value]="day.schoolClassEvent.to | date: 'dd.MM.yyyy HH:mm:ss'"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.title' | translate" [value]="day.schoolClassEvent.title"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.description' | translate" [value]="day.schoolClassEvent.description"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.type' | translate" [value]="('SchoolClassEventType.' + day.schoolClassEvent.type) | translate"></app-readonly-field>
+</div>
+<mat-divider *ngIf="day && day.schoolEvent" class="divider"></mat-divider>
+<div *ngIf="day && day.schoolEvent">
+    <h2>{{ 'timetable.schoolEvent' | translate }}</h2>
+    <app-readonly-field [label]="'timetable.from' | translate" [value]="day.schoolClassEvent.from | date: 'dd.MM.yyyy HH:mm:ss'"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.to' | translate" [value]="day.schoolClassEvent.to | date: 'dd.MM.yyyy HH:mm:ss'"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.title' | translate" [value]="day.schoolClassEvent.title"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.description' | translate" [value]="day.schoolClassEvent.description"></app-readonly-field>
+    <app-readonly-field [label]="'timetable.type' | translate" [value]="('SchoolEventType.' + day.schoolEvent.type) | translate"></app-readonly-field>
+</div>

@@ -37,10 +37,17 @@ export class ApiService {
           body: payload
         });
         break;
+      case 'GETwithPARAMS':
+        let params = {};
+        if (method === 'GETwithPARAMS' && !!payload) {
+          params = payload;
+        }
+        request = this.http.get(requestEndpoint, { params });
+        break;
     }
 
     return request;
   }
 }
 
-export type HttpMethods = 'GET' | 'POST' | 'PUT' | 'DELETE';
+export type HttpMethods = 'GET' | 'GETwithPARAMS' | 'POST' | 'PUT' | 'DELETE';

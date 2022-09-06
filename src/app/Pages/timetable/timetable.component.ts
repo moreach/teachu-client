@@ -1,7 +1,7 @@
 import { KeyValue } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, merge, Observable, shareReplay, switchMap } from 'rxjs';
 import { TimetableDayDTO, TimetableLessonDTO } from 'src/app/DTOs/Timetable/TimetableDayDTO';
 import { TimetableLayoutDTO } from 'src/app/DTOs/Timetable/TimetableLayoutDTO';
 import { addDays, equalDates, getFirstDayOfWeek, getLastDayOfWeek } from 'src/app/Framework/Helpers/DateHelpers';
@@ -22,6 +22,8 @@ export class TimetableComponent implements OnInit {
   endDate$: Observable<Date>;
   classToColor: KeyValue<string, string>[] = [];
   VIEW_BREAK_POINT: number = 1100;
+  lessons$ = new BehaviorSubject<TimetableDayDTO[]>([]);
+  lessonsInfo$: Observable<TimetableLayoutDTO[]>;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -34,7 +36,7 @@ export class TimetableComponent implements OnInit {
   ) { 
     this.dates$ = combineLatest([
       this.relevantDate$,
-      this.isWeekView$
+      this.isWeekView$,
     ]).pipe(
       map(([relevantDate, isWeekView]) => {
         if (isWeekView) {
@@ -59,6 +61,14 @@ export class TimetableComponent implements OnInit {
     this.endDate$ = this.dates$.pipe(
       map(dates => dates[dates.length - 1])
     );
+
+    merge(
+      this.relevantDate$,
+      this.isWeekView$
+    ).pipe(
+      switchMap(_ => this.getLessons$()),
+    ).subscribe(lessons => this.lessons$.next(lessons));
+    this.lessonsInfo$ = this.timetableService.getLessonInfo$();
   }
 
   ngOnInit(): void {
@@ -68,22 +78,22 @@ export class TimetableComponent implements OnInit {
   getLessons$(): Observable<TimetableDayDTO[]> {
     const start = this.isWeekView$.value ? getFirstDayOfWeek(this.relevantDate$.value) : this.relevantDate$.value;
     const end = this.isWeekView$.value ? getLastDayOfWeek(this.relevantDate$.value) : this.relevantDate$.value;
-    console.log(start, end);
     return this.timetableService.getTimetable$(start, end);
   }
 
   getCorrespondingLesson(days: TimetableDayDTO[], date: Date, timetableId: string): TimetableLessonDTO | undefined {
-    const filteredDays = days.filter(d => equalDates(d.date, date));
+    console.log(days,date, timetableId);
+    const filteredDays = days.filter(d => {
+      let epochDate = new Date(0);
+      epochDate.setMilliseconds(d.date);
+      return equalDates(epochDate, date);
+    });
     if (filteredDays.length === 0) {
       return undefined;
     }
     const lessons = filteredDays[0].lessons;
     const matchingLesson = lessons.filter(l => l.timetableId === timetableId);
     return matchingLesson.length === 0 ? undefined : matchingLesson[0];
-  }
-
-  getLessonsInfo$(): Observable<TimetableLayoutDTO[]> {
-    return this.timetableService.getLessonInfo$();
   }
 
   changeRelevantDate(value: number) {
@@ -115,13 +125,30 @@ export class TimetableComponent implements OnInit {
     return (background === 'var(--teachu-primary)') ? 'var(--teachu-white)' : 'var(--teachu-black)';
   }
 
-  openDetails(lesson: TimetableLessonDTO, days: TimetableDayDTO[]) {
-    const day = days.find(d => equalDates(d.date, this.relevantDate$.value));
+  openDetails(lesson: TimetableLessonDTO | null, days: TimetableDayDTO[]) {
+    const day = days.find(d => {
+      let epochDate = new Date(0);
+      epochDate.setMilliseconds(d.date);
+      return equalDates(epochDate, this.relevantDate$.value);
+    });
     this.dialog.open(LessonDetailsComponent, {
       data: {
         lesson,
         day
       }
     });
+  }
+
+  getEventsOfDay(day: Date) {
+    const correspondingDay = this.lessons$.value.find(d => {
+      let epochDate = new Date(0);
+      epochDate.setMilliseconds(d.date);
+      return equalDates(epochDate, day);
+    });
+    if (correspondingDay === undefined) {
+      return [];
+    }
+    const events = [correspondingDay.userEvent?.title, correspondingDay.schoolClassEvent?.title, correspondingDay.schoolEvent?.title];
+    return events.filter(e => !!e);
   }
 }
