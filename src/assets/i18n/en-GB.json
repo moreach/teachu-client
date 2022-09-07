@@ -28,7 +28,23 @@
         "timetable":"Timetable",
         "day":"Day",
         "calendar":"Calendar",
-        "weekFrom":"Week from"
+        "weekFrom":"Week from",
+        "details":"Details",
+        "lesson":"Lesson",
+        "userEvent":"User Event",
+        "schoolEvent":"School Event",
+        "schoolClassEvent":"Class Event",
+        "lessonEvent":"Lesson Event",
+        "schoolClass":"Class",
+        "room":"Room",
+        "teacher":"Teacher",
+        "subject":"Subject",
+        "title":"Title",
+        "description":"Description",
+        "from":"From",
+        "to":"To",
+        "type":"Type",
+        "state":"State"
     },
     "classlist":{
         "classlist":"Classlist",
@@ -145,5 +161,28 @@
         "male":"Male",
         "female":"Female",
         "other":"Other"
+    },
+    "LessonEventType":{
+        "exam":"Exam",
+        "homework":"Homework",
+        "note":"Note"
+    },
+    "UserEventType":{
+        "sick":"Sick",
+        "holiday":"Holiday"
+    },
+    "UserEventState":{
+        "pending":"Pending",
+        "excused":"Excused",
+        "unexcused":"Unexcused"
+    },
+    "SchoolEventType":{
+        "holiday":"Holiday",
+        "activity":"Activity",
+        "note":"Note"
+    },
+    "SchoolClassEventType":{
+        "trip":"Trip",
+        "school":"School"
     }
 }

@@ -1,0 +1,149 @@
+{
+  "framework":{
+    "save":"Sauvegarder",
+    "close":"Fermer"
+  },
+  "login":{
+    "login":"Connexion",
+    "email":"Courrier électronique",
+    "password":"Mot de passe",
+    "wrong":"La connexion était incorrecte",
+    "logout":"Déconnexion"
+  },
+  "outline": {
+    "selectedStudent":"Étudiant sélectionné"
+  },
+  "dashboard":{
+    "dashboard":"Tableau de bord"
+  },
+  "schoolInfos":{
+    "schoolInfos":"Infos sur l'école"
+  },
+  "grades":{
+    "grades":"Notes",
+    "desc":" Description",
+    "note":" Note"
+  },
+  "timetable":{
+    "timetable":"Emploi du temps",
+    "day":"Jour",
+    "calendar":"Calendrier",
+    "weekFrom":"Semaine de"
+  },
+  "classlist":{
+    "classlist":"Liste des cours",
+    "class":"Classe",
+    "teachers":"Enseignants",
+    "firstName":"Prénom",
+    "lastName":"Nom de famille",
+    "birthday":"Anniversaire",
+    "sex":"Sexe",
+    "city":"Ville",
+    "email":"Mail"
+  },
+  "absences":{
+    "absences":"Absences"
+  },
+  "chat":{
+    "chat":"Chat",
+    "you":"Vous",
+    "leftTheChat":"A quitté le Chat",
+    "joinedTheChat":"Rejoint le Chat",
+    "privateChat":"Chat privé",
+    "groupChat":"Discussion de groupe",
+    "newGroupChat":"Nouvelle discussion de groupe",
+    "newPrivateChat":"Nouveau chat privé",
+    "chatName":"Nom du chat",
+    "chatImage":"Image du chat",
+    "user":"Utilisateur",
+    "users":"Utilisateurs",
+    "message":"Message",
+    "leaveChat":"Laisser le Chat",
+    "editChat":"Modifier le chat"
+  },
+  "userSettings": {
+    "userSettings":"Paramètres",
+    "userData":" Vos données",
+    "preferences":" Préférences",
+    "email":"Adresse e-mail",
+    "changePassword":"Changer le mot de passe",
+    "firstName":"Prénom",
+    "lastName":"Nom de famille",
+    "birthday":"Anniversaire",
+    "sex":"Sexe",
+    "sex_male":"Homme",
+    "sex_female":"Femme",
+    "sex_other":"Autre",
+    "darkTheme":"Thème foncé",
+    "city":"Ville",
+    "postalCode":"Code postal",
+    "street":"Rue",
+    "phone":"Téléphone",
+    "profileImage": {
+     "profileImage":" Image du profil",
+     "validation": {
+      "notFound":" Aucune image fournie",
+      "notSupportedType":" L'image doit être de type png ou jpeg.",
+      "toBig":" La taille de l'image ne doit pas dépasser 1 MB"
+     }
+    },
+    "upload":" Télécharger le nouveau",
+    "passwordOld":"Ancien mot de passe",
+    "passwordNew":"Nouveau mot de passe",
+    "passwordConfirm":"Répéter le nouveau mot de passe",
+    "phoneSaved":" Numéro de téléphone enregistré",
+    "passwordValidation": {
+     "toShort":" Le mot de passe doit comporter au moins 8 chiffres.",
+     "missingCapital":" Le mot de passe doit contenir une lettre majuscule.",
+     "missingLow":" Le mot de passe doit contenir une lettre minuscule",
+     "missingNumber":" Le mot de passe doit contenir au moins un chiffre",
+     "wrongCurrent":" Courriel ou mot de passe incorrect."
+    }
+  },
+  "errorBackend":{
+    "errorOccured":"Erreur survenue",
+    "unknownError":"Erreur inconnue survenue",
+    "InvalidPasswordempty":"Mot de passe vide",
+    "InvalidPasswordlessthen8characters":"Le mot de passe comporte moins de 8 caractères",
+    "InvalidPasswordnouppercasecharacter":"Le mot de passe ne contient aucun caractère majuscule",
+    "InvalidPasswordnolowercasecharacter":"Le mot de passe ne contient aucun caractère minuscule",
+    "InvalidPasswordnonumber":"Le mot de passe ne contient pas de chiffre",
+    "InvalidEmailinvalid":"Courriel invalide",
+    "InvalidImageisempty":"L'image est vide",
+    "InvalidImagetypeisunsupportedpleaseusepngorjpeg":"Le type d'image n'est pas pris en charge. Veuillez utiliser png ou jpeg à la place.",
+    "InvalidPasswordorEmailisincorrect":"L'adresse électronique ou le mot de passe est incorrect"
+  },
+  "errorHandling":{
+    "errorOccured":"Une erreur s'est produite",
+    "input":"Entrée",
+    "output":"Sortie"
+  },
+  "languages":{
+    "languages":"Langue",
+    "english":"Anglais",
+    "arabic":"Arabe",
+    "chinese":"Chinois",
+    "danish":"Danois",
+    "dutch":"Néerlandais",
+    "finnish":"finlandais",
+    "french":"Français",
+    "german":"Allemand",
+    "hindi":"Hindi",
+    "italian":"Italien",
+    "japanese":"Japonais",
+    "korean":"Coréen",
+    "polish":"Polonais",
+    "portuguese":"Portugais",
+    "russian":"Russe",
+    "spanish":"Espagnol",
+    "swedish":"Suédois",
+    "thai":"Thaïlandais",
+    "turkish":"Turc",
+    "vietnamese":"Vietnamien"
+  },
+  "Sex":{
+    "male":"Homme",
+    "female":"Femme",
+    "other":"Autre"
+  }
+}
