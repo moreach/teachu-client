@@ -44,7 +44,8 @@
         "from":"From",
         "to":"To",
         "type":"Type",
-        "state":"State"
+        "state":"State",
+        "noDetailsAvailable":"No details available"
     },
     "classlist":{
         "classlist":"Classlist",
