@@ -82,7 +82,6 @@ export class TimetableComponent implements OnInit {
   }
 
   getCorrespondingLesson(days: TimetableDayDTO[], date: Date, timetableId: string): TimetableLessonDTO | undefined {
-    console.log(days,date, timetableId);
     const filteredDays = days.filter(d => {
       let epochDate = new Date(0);
       epochDate.setMilliseconds(d.date);
@@ -125,16 +124,18 @@ export class TimetableComponent implements OnInit {
     return (background === 'var(--teachu-primary)') ? 'var(--teachu-white)' : 'var(--teachu-black)';
   }
 
-  openDetails(lesson: TimetableLessonDTO | null, days: TimetableDayDTO[]) {
+  openDetails(lesson: TimetableLessonDTO | null, date: Date, days: TimetableDayDTO[]) {
     const day = days.find(d => {
       let epochDate = new Date(0);
       epochDate.setMilliseconds(d.date);
-      return equalDates(epochDate, this.relevantDate$.value);
+      return equalDates(epochDate, date);
     });
     this.dialog.open(LessonDetailsComponent, {
       data: {
         lesson,
-        day
+        day,
+        date,
+        subject: lesson?.subject ?? '',
       }
     });
   }

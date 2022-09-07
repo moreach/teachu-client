@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,9 +12,17 @@ export class ApiService {
   ) { }
 
   callApi<T>(endpoint: string, payload: any, method: HttpMethods, options?: any) {
-    const request = this.buildRequest(endpoint, payload, method, options);
-
-    return request as Observable<T>;
+    const request = this.buildRequest(endpoint, payload, method, options) as Observable<T>;
+    return request.pipe(
+      map(request => {
+        if (request instanceof Blob) {
+          return request;
+        } else {
+          console.log('clear')
+          return this.cleanUpUtf8<T>(request);
+        }
+      }),
+    );
   }
 
   private buildRequest(endpoint: string, payload: any, method: HttpMethods, options?: any) {
@@ -47,6 +55,22 @@ export class ApiService {
     }
 
     return request;
+  }
+
+  private cleanUpUtf8<T>(object: T): T {
+    const replacer = (_: string, value: string) => typeof value !== 'string' ? value : value.replace('Ã¶', 'ö')
+                                                                                            .replace('Ã¤', 'ä')
+                                                                                            .replace('Ã¼', 'ü')
+                                                                                            .replace('ÃŸ', 'ß')
+                                                                                            .replace('Ã–', 'Ö')
+                                                                                            .replace('Ã„', 'Ä')
+                                                                                            .replace('Ãœ', 'Ü')
+                                                                                            .replace('Ã©', 'é')
+                                                                                            .replace('Ã¨', 'è')
+                                                                                            .replace('Ã´', 'ô')
+                                                                                            .replace('Ãª', 'ê')
+                                                                                            .replace('Ã§', 'ç');
+    return JSON.parse(JSON.stringify(object, replacer)) as T;
   }
 }
 
