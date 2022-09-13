@@ -1,0 +1,32 @@
+@import 'src/styles/colors';
+
+.title {
+    padding: 30px 0;
+
+    display: flex;
+    flex-flow: row wrap;
+    gap: 25px;
+    align-items: center;
+    justify-content: start;
+
+    width: 100%;
+}
+
+.input-text {
+    width: 100%;
+    height: auto;
+    min-height: 50px;
+    max-height: 150px;
+}
+
+.absence-editor-error {
+    color: var(--teachu-warn);
+}
+
+.absence-editor-controls{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}

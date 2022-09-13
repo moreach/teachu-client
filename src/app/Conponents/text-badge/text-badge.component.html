@@ -1,0 +1,5 @@
+<div class="text-badge" [ngClass]="'teachu-color-' + color">
+    <span *ngIf="!!matIcon && iconFirst" class="material-icons">{{matIcon}}</span>
+    <span *ngIf="text">{{text}}</span>
+    <span *ngIf="!!matIcon && !iconFirst" class="material-icons">{{matIcon}}</span>
+</div>
