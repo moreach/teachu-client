@@ -47,4 +47,12 @@ export class DashboardComponent {
   isEmpty(array: any[]) {
     return array.length === 0;
   }
+
+  toggleHidden(element: HTMLElement) {
+    element.classList.toggle('hidden');
+  }
+
+  getHiddenIcon(element: HTMLElement) {
+    return element.classList.contains('hidden') ? 'chevron-down' : 'chevron-up';
+  }
 }

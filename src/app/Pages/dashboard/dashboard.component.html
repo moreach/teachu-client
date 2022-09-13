@@ -6,7 +6,9 @@
         </div>
         <div *ngIf="schoolInfos$ | async as schoolInfos; else schoolInfoSpinner">
             <div *ngFor="let schoolInfo of schoolInfos">
-                <div (click)="navigate(schoolInfo.navigate)" class="entry">{{ schoolInfo.title }}</div>
+                <div (click)="navigate(schoolInfo.navigate)" class="entry">
+                    <div>{{ schoolInfo.title }}</div>
+                </div>
             </div>
             <div *ngIf="isEmpty(schoolInfos)" class="entry empty">{{ 'framework.noData' | translate }}</div>
         </div>
@@ -18,7 +20,9 @@
             <h2>{{ 'timetable.timetable' | translate }}</h2>
         </div>
         <div *ngIf="timetable$ | async as timetable; else timetableSpinner">
-            <div (click)="navigate(timetable.navigate)" class="entry">{{ timetable.date | date: 'dd.MM.yyyy' }}</div>
+            <div (click)="navigate(timetable.navigate)" class="entry">
+                <div>{{ timetable.date | date: 'dd.MM.yyyy' }}</div>
+            </div>
         </div>
         <ng-template #timetableSpinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>
     </div>
@@ -29,7 +33,17 @@
         </div>
         <div *ngIf="classList$ | async as classList; else classlistSpinner">
             <div *ngFor="let classlistItem of classList">
-                <div (click)="navigate(classlistItem.navigate)" class="entry">{{ classlistItem.className }}</div>
+                <div class="entry class-list">
+                    <div class="class-list-classname">
+                        <div (click)="navigate(classlistItem.navigate)">{{ classlistItem.className }}</div>
+                        <button mat-icon-button [color]="'secondary'" (click)="toggleHidden(classListDetails)">
+                            <mat-icon>remove_red_eye</mat-icon>
+                        </button>
+                    </div>
+                    <div #classListDetails class="hidden" (click)="navigate(classlistItem.navigate)">
+                        <div *ngFor="let student of classlistItem.students">{{ student }}</div>
+                    </div>
+                </div>
             </div>
             <div *ngIf="isEmpty(classList)" class="entry empty">{{ 'framework.noData' | translate }}</div>
         </div>
@@ -42,7 +56,9 @@
         </div>
         <div *ngIf="grades$ | async as grades; else gradesSpinner">
             <div *ngFor="let grade of grades">
-                <div (click)="navigate(grade.navigate)" class="entry">{{ grade.mark }}</div>
+                <div (click)="navigate(grade.navigate)" class="entry">
+                    <div>{{ grade.mark }}</div>
+                </div>
             </div>
             <div *ngIf="isEmpty(grades)" class="entry empty">{{ 'framework.noData' | translate }}</div>
         </div>
@@ -55,7 +71,9 @@
         </div>
         <div *ngIf="absences$ | async as absences; else absencesSpinner">
             <div *ngFor="let absence of absences">
-                <div (click)="navigate(absence.navigate)" class="entry">{{ absence.title }}</div>
+                <div (click)="navigate(absence.navigate)" class="entry">
+                    <div>{{ absence.title }}</div>
+                </div>
             </div>
             <div *ngIf="isEmpty(absences)" class="entry empty">{{ 'framework.noData' | translate }}</div>
         </div>
@@ -68,7 +86,9 @@
         </div>
         <div *ngIf="chat$ | async as chat; else chatSpinner">
             <div *ngFor="let chatItem of chat">
-                <div (click)="navigate(chatItem.navigate)" class="entry">{{ chatItem.chatName }}</div>
+                <div (click)="navigate(chatItem.navigate)" class="entry">
+                    <div>{{ chatItem.chatName }}</div>
+                </div>
             </div>
             <div *ngIf="isEmpty(chat)" class="entry empty">{{ 'framework.noData' | translate }}</div>
         </div>

@@ -49,5 +49,22 @@
             border: 1px dashed var(--teachu-black);
             cursor: default;
         }
+        .entry.class-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            height: auto;
+            min-height: 64px;
+            .class-list-classname {
+                display: grid;
+                grid-template-columns: 1fr 40px;
+                >div {
+                    padding-top: 8px;
+                }
+            }
+        }
     }
+}
+
+.hidden {
+    display: none;
 }
