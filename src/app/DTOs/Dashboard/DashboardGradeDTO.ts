@@ -5,4 +5,5 @@ export interface DashboardGradeDTO {
     mark: number;
     subject: string;
     class: string;
+    navigate: string;
 }

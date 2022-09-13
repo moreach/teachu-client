@@ -3,4 +3,5 @@ export interface DashboardClassListDTO {
     classTeacher: string;
     students: string[];
     teachers: string[];
+    navigate: string;
 }

@@ -5,4 +5,5 @@ export interface DashboardSchoolInfoDTO {
     pinned: boolean;
     date: Date;
     creator: string;
+    navigate: string;
 }

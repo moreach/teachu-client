@@ -7,6 +7,7 @@ export interface DashboardTimetableDTO {
     schoolEvent: string | null;
     schoolClassEvent: string | null;
     lessons: DashboardTimetableLessonDTO[];
+    navigate: string;
 }
 
 export interface DashboardTimetableLessonDTO {

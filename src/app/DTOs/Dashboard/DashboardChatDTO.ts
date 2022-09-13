@@ -7,4 +7,5 @@ export interface DashboardChatDTO {
     lastMessage: string;
     lastMessageFrom: string | null;
     lastMessageDate: Date;
+    navigate: string[];
 }

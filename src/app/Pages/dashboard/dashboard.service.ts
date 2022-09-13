@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { combineLatest, map, Observable } from 'rxjs';
+import { appRoutes } from 'src/app/Config/appRoutes';
 import { endpoints } from 'src/app/Config/endpoints';
 import { AbsenceInfoDTO } from 'src/app/DTOs/Absence/AbsenceInfoDTO';
 import { ClassListDTO } from 'src/app/DTOs/ClassList/ClassListDTO';
@@ -41,6 +42,7 @@ export class DashboardService {
             important: info.important,
             pinned: info.pinned,
             date: info.date,
+            navigate: appRoutes.SchoolInfos,
           } as DashboardSchoolInfoDTO;
         });
       }),
@@ -83,6 +85,7 @@ export class DashboardService {
               lessonEvent: !!lesson.event ? lesson.event.title : '',
             } as DashboardTimetableLessonDTO;
           }),
+          navigate: appRoutes.Timetable,
         } as DashboardTimetableDTO;
       }),
     );
@@ -97,6 +100,7 @@ export class DashboardService {
             classTeacher: classlist.classTeacher.firstName + ' ' + classlist.classTeacher.lastName,
             students: classlist.students.map(student => student.firstName + ' ' + student.lastName),
             teachers: classlist.teachers.map(teacher => teacher.firstName + ' ' + teacher.lastName),
+            navigate: appRoutes.Classlist,
           } as DashboardClassListDTO;
         });
       })
@@ -120,6 +124,7 @@ export class DashboardService {
             description: grade.description,
             name: grade.name,
             subject: grade.subjectName,
+            navigate: appRoutes.Grades,
           } as DashboardGradeDTO;
         });
       })
@@ -140,6 +145,7 @@ export class DashboardService {
             description: absence.description,
             type: absence.type,
             state: absence.state,
+            navigate: appRoutes.Absences,
           } as DashboardAbsenceDTO;
         });
       })
@@ -161,6 +167,7 @@ export class DashboardService {
             lastMessage: chat.lastMessage,
             lastMessageDate: chat.lastMessageDate,
             lastMessageFrom: chat.lastMessageFrom,
+            navigate: [appRoutes.Chat, chat.chatId],
           } as DashboardChatDTO;
         });
       }),

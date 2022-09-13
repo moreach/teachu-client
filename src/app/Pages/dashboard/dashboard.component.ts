@@ -35,4 +35,12 @@ export class DashboardComponent {
     this.absences$ = this.dashboardService.getAbsences$();
     this.chat$ = this.dashboardService.getChat$();
   }
+
+  navigate(navigate: string | string[]) {
+    if (typeof navigate === 'string') {
+      this.router.navigate([appRoutes.App, navigate]);
+    } else {
+      this.router.navigate([appRoutes.App, ...navigate]);
+    }
+  }
 }

@@ -8,4 +8,5 @@ export interface DashboardAbsenceDTO {
     description: string;
     type: UserEventType;
     state: UserEventState;
+    navigate: string;
 }
