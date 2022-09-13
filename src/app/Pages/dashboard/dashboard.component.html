@@ -1,0 +1,77 @@
+<div class="page">
+    <div class="part">
+        <div class="header">
+            <mat-icon>info</mat-icon>
+            <h2>{{ 'schoolInfos.schoolInfos' | translate }}</h2>
+        </div>
+        <div *ngIf="schoolInfos$ | async as schoolInfos; else schoolInfoSpinner">
+            <div *ngFor="let schoolInfo of schoolInfos">
+                <div (click)="navigate(schoolInfo.navigate)" class="entry">{{ schoolInfo.title }}</div>
+            </div>
+            <div *ngIf="isEmpty(schoolInfos)" class="entry empty">{{ 'framework.noData' | translate }}</div>
+        </div>
+        <ng-template #schoolInfoSpinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>
+    </div>
+    <div class="part">
+        <div class="header">
+            <mat-icon>calendar_today</mat-icon>
+            <h2>{{ 'timetable.timetable' | translate }}</h2>
+        </div>
+        <div *ngIf="timetable$ | async as timetable; else timetableSpinner">
+            <div (click)="navigate(timetable.navigate)" class="entry">{{ timetable.date | date: 'dd.MM.yyyy' }}</div>
+        </div>
+        <ng-template #timetableSpinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>
+    </div>
+    <div class="part">
+        <div class="header">
+            <mat-icon>list</mat-icon>
+            <h2>{{ 'classlist.classlist' | translate }}</h2>
+        </div>
+        <div *ngIf="classList$ | async as classList; else classlistSpinner">
+            <div *ngFor="let classlistItem of classList">
+                <div (click)="navigate(classlistItem.navigate)" class="entry">{{ classlistItem.className }}</div>
+            </div>
+            <div *ngIf="isEmpty(classList)" class="entry empty">{{ 'framework.noData' | translate }}</div>
+        </div>
+        <ng-template #classlistSpinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>
+    </div>
+    <div class="part">
+        <div class="header">
+            <mat-icon>grade</mat-icon>
+            <h2>{{ 'grades.grades' | translate }}</h2>
+        </div>
+        <div *ngIf="grades$ | async as grades; else gradesSpinner">
+            <div *ngFor="let grade of grades">
+                <div (click)="navigate(grade.navigate)" class="entry">{{ grade.mark }}</div>
+            </div>
+            <div *ngIf="isEmpty(grades)" class="entry empty">{{ 'framework.noData' | translate }}</div>
+        </div>
+        <ng-template #gradesSpinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>
+    </div>
+    <div class="part">
+        <div class="header">
+            <mat-icon>not_interested</mat-icon>
+            <h2>{{ 'absences.absences' | translate }}</h2>
+        </div>
+        <div *ngIf="absences$ | async as absences; else absencesSpinner">
+            <div *ngFor="let absence of absences">
+                <div (click)="navigate(absence.navigate)" class="entry">{{ absence.title }}</div>
+            </div>
+            <div *ngIf="isEmpty(absences)" class="entry empty">{{ 'framework.noData' | translate }}</div>
+        </div>
+        <ng-template #absencesSpinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>
+    </div>
+    <div class="part">
+        <div class="header">
+            <mat-icon>chat</mat-icon>
+            <h2>{{ 'chat.chat' | translate }}</h2>
+        </div>
+        <div *ngIf="chat$ | async as chat; else chatSpinner">
+            <div *ngFor="let chatItem of chat">
+                <div (click)="navigate(chatItem.navigate)" class="entry">{{ chatItem.chatName }}</div>
+            </div>
+            <div *ngIf="isEmpty(chat)" class="entry empty">{{ 'framework.noData' | translate }}</div>
+        </div>
+        <ng-template #chatSpinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>
+    </div>
+</div>

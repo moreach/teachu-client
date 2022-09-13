@@ -1,7 +1,8 @@
 {
     "framework":{
         "save":"Save",
-        "close":"Close"
+        "close":"Close",
+        "noData":"No records found"
     },
     "login":{
         "login":"Login",

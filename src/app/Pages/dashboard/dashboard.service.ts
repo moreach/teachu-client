@@ -31,7 +31,7 @@ export class DashboardService {
   getSchoolInfos$(): Observable<DashboardSchoolInfoDTO[]> {
     return this.api.callApi<SchoolInfoDTO[]>(endpoints.SchoolInfo, {}, 'GET').pipe(
       map(infos => {
-        return infos.sort((a, b) => b.date.getTime() - a.date.getTime()).slice(0, 5);
+        return infos.sort((a, b) => b.date.getTime() - a.date.getTime()).slice(0, 10);
       }),
       map(infos => {
         return infos.map(info => {
@@ -113,13 +113,15 @@ export class DashboardService {
       map(semesterClasses => semesterClasses.flatMap(semesterClass => semesterClass.subjects.map(subject => { return { ...subject, className: semesterClass.name }; }))),
       map(subjects => subjects.flatMap(subject => subject.grades.map(grade => { return { ...grade, subjectName: subject.name, className: subject.className }; }))),
       map(grades => {
-        return grades.sort((a, b) => b.date.getTime() - a.date.getTime()).slice(0, 5);
+        return grades.sort((a, b) => b.date - a.date).slice(0, 10);
       }),
       map(grades => {
         return grades.map(grade => {
+          let epochDate = new Date(0);
+          epochDate.setMilliseconds(grade.date);
           return {
             class: grade.className,
-            date: grade.date,
+            date: epochDate,
             mark: grade.mark,
             description: grade.description,
             name: grade.name,
@@ -134,7 +136,7 @@ export class DashboardService {
   getAbsences$(): Observable<DashboardAbsenceDTO[]> {
     return this.api.callApi<AbsenceInfoDTO[]>(endpoints.Absence, {}, 'GET').pipe(
       map(absences => {
-        return absences.sort((a, b) => b.to.getTime() - a.to.getTime()).slice(0, 5);
+        return absences.sort((a, b) => b.to.getTime() - a.to.getTime()).slice(0, 10);
       }),
       map(absences => {
         return absences.map(absence => {
@@ -156,7 +158,7 @@ export class DashboardService {
     // todo implement from backend endpoint
     return this.chatService.getChatOverview$().pipe(
       map(chatOverview => {
-        return chatOverview.sort((a, b) => b.lastMessageDate.getTime() - a.lastMessageDate.getTime()).slice(0, 5);
+        return chatOverview.sort((a, b) => b.lastMessageDate.getTime() - a.lastMessageDate.getTime()).slice(0, 10);
       }),
       map(chatOverview => {
         return chatOverview.map(chat => {

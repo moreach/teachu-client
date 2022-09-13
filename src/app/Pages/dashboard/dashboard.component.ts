@@ -43,4 +43,8 @@ export class DashboardComponent {
       this.router.navigate([appRoutes.App, ...navigate]);
     }
   }
+
+  isEmpty(array: any[]) {
+    return array.length === 0;
+  }
 }

@@ -27,7 +27,7 @@ export interface GradeSubjectDTO {
 export interface GradeDTO {
     name: string;
     description: string;
-    date: Date;
+    date: number;
     weight: number;
     mark: number;
 }

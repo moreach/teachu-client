@@ -15,7 +15,7 @@ export class ParentChildSelectorComponent {
     constructor(
         private parentService: ParentService,
     ) {
-        parentService.getChildren().then(ch => {
+        this.parentService.getChildren().then(ch => {
             this.children = ch;
             const savedStudentId = localStorage.getItem(appConfig.APPLICATION_SELECTED_STUDENT);
             if(savedStudentId) parentService.getChildById(savedStudentId).then(child => this._selectedChild = child );
