@@ -55,6 +55,9 @@ import { ChangePasswordComponent } from './Conponents/change-password/change-pas
 import {
     ProfilePicUploaderComponent
 } from "./Conponents/profile-pic/profile-pic-uploader/profile-pic-uploader.component";
+import { TextBadgeComponent } from './Conponents/text-badge/text-badge.component';
+import { AbsenceVisualisationComponent } from './Conponents/absence/absence-visalisation/absence-visualisation.component';
+import { AbsenceEditorComponent } from './Conponents/absence/absence-editor/absence-editor.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -102,6 +105,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         ImageComponent,
         ChangePasswordComponent,
         ProfilePicUploaderComponent,
+        TextBadgeComponent,
+        AbsenceVisualisationComponent,
+        AbsenceEditorComponent,
     ],
     imports: [
         BrowserModule,

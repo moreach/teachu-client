@@ -1,0 +1,33 @@
+button {
+    margin: 15px;
+}
+
+h4 {
+    width: 100%;
+    font-size: clamp(12.5px, 2.2vh, 18px);
+    font-style: italic;
+    font-weight: lighter;
+}
+
+.input-text{
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+}
+
+.title {
+    padding: 30px 0;
+
+    display: flex;
+    flex-flow: row wrap;
+    gap: 25px;
+    align-items: center;
+    justify-content: start;
+
+    width: 100%;
+
+    h2{
+        margin: 0;
+        font-size: 22px;
+    }
+}

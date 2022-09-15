@@ -1,0 +1,173 @@
+.page {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 400px);
+    gap: 32px;
+    max-width: 1500px;
+    .part {
+        display: grid;
+        grid-template-columns: 400px;
+        height: 400px;
+        border-radius: 8px;
+        border: 1px solid var(--teachu-black);
+        .header {
+            height: 32px;
+            display: flex;
+            gap: 16px;
+            padding: 16px;
+            border-bottom: 1px solid var(--teachu-black);
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            width: 366px;
+            background-color: var(--teachu-accent);
+            mat-icon {
+                margin-top: 4px;
+            }
+        }
+        >:last-child.spinner-wrapper {
+            height: 300px;
+            padding: 16px;
+        }
+        >:last-child:not(.spinner-wrapper) {
+            overflow-y: auto;
+            margin-right: 4px;
+            padding: 0;
+            height: 332px;
+        }
+        .spinner-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .entry {
+            cursor: pointer;
+            font-size: 16px;
+            height: 64px;
+            padding: 8px;
+            margin: 8px;
+            border-radius: 8px;
+            border: 1px solid var(--teachu-accent);
+            display: flex;
+            align-items: center;
+        }
+        .entry:hover {
+            border: 1px solid var(--teachu-black);
+            background-color: var(--teachu-accent-hover);
+        }
+        .entry.empty {
+            border: 1px dashed var(--teachu-accent);
+            cursor: default;
+        }
+        .entry.class-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            height: auto;
+            .class-list-classname {
+                display: grid;
+                grid-template-columns: 1fr 40px;
+                >div {
+                    padding-top: 8px;
+                }
+            }
+        }
+        .entry.school-info {
+            cursor: default;
+            display: grid;
+            grid-template-columns: 1fr;
+            height: auto;
+            .title-bar {
+                display: grid;
+                grid-template-columns: 1fr 40px;
+                gap: 16px;
+                width: 100%;
+            }
+            .title-bar-content {
+                display: grid;
+                grid-template-columns: 1fr 1fr 40px;
+                gap: 16px;
+                cursor: pointer;
+            }
+            .icons {
+                display: flex;
+                gap: 8px;
+                align-items: center;
+            }
+        }
+        .entry.timetable {
+            height: auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4px;
+            .event-info {
+                display: flex;
+                align-items: center;
+                justify-content: start;
+            }
+        }
+        .entry.timetable-lesson,
+        .entry.grade,
+        .entry.absence {
+            cursor: default;
+            height: auto;
+            display: grid;
+            grid-template-columns: 1fr;   
+        }
+        .timetable-lesson-title-bar,
+        .grade-title,
+        .absence-title {
+            display: grid;
+            grid-template-columns: 1fr 40px;
+            gap: 16px;
+            width: 100%;
+        }
+        .chat-dashboard-detail {
+            cursor: pointer;
+            display: grid;
+            grid-template-columns: 48px 1fr auto;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            gap: 8px;
+            height: auto;
+            .chat-image {
+                border-radius: 50%;
+                width: 48px;
+                height: 48px;
+                object-fit: cover;
+            }
+            .chat-middle-section {
+                display: flex;
+                align-items: center;
+                .chat-title {
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+            }
+            .chat-last-msg-date {
+                margin: auto;
+            }
+        }
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.details:not(.hidden) {
+    margin-top: 4px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+}

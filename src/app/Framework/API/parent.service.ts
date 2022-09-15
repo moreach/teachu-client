@@ -24,10 +24,18 @@ export class ParentService implements HttpInterceptor{
         private api: ApiService,
     ) { }
 
+    callParentEndpoint$() {
+        return this.api.callApi<ParentChildDTO[]>(endpoints.Parent, {}, 'GET');
+    }
+
+    setActiveStudent(childrenId: string) {
+        localStorage.setItem(appConfig.APPLICATION_SELECTED_STUDENT, childrenId);
+    }
+
     selectAStudent(){
         const savedId = localStorage.getItem(appConfig.APPLICATION_SELECTED_STUDENT);
         if(!savedId)
-            this.getChildren().then(children => localStorage.setItem(appConfig.APPLICATION_SELECTED_STUDENT, children[0].id));
+            this.getChildren().then(children => this.setActiveStudent(children[0].id));
     }
 
     getChildById(id: string): Promise<ParentChildDTO> {
@@ -44,11 +52,10 @@ export class ParentService implements HttpInterceptor{
         return new Promise<ParentChildDTO[]>(resolve => {
             if(this.children) resolve(this.children);
             else {
-                this.api.callApi<ParentChildDTO[]>(endpoints.Parent, {}, 'GET')
-                    .subscribe(children => {
-                        this.children = children;
-                        resolve(children);
-                    });
+                this.callParentEndpoint$().subscribe(children => {
+                    this.children = children;
+                    resolve(children);
+                });
             }
         });
     }

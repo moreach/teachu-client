@@ -1,0 +1,48 @@
+<div class="title">
+    <mat-form-field class="input-text"
+                    appearance="outline">
+        <mat-label>{{"absences.title" | translate}}</mat-label>
+        <input matInput maxlength="50" [value]="absence.title" (input)="titleChange($event)">
+    </mat-form-field>
+
+    <mat-button-toggle-group [value]="absence.type"
+                             (valueChange)="typeChange($event)"
+                             name="fontStyle">
+        <mat-button-toggle value="holiday">{{ "absences.type.holiday" | translate}}</mat-button-toggle>
+        <mat-button-toggle value="sick">{{ "absences.type.sick" | translate}}</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <app-text-badge [text]="absenceService.STATE_TRANSLATION_BASE + absence.state | translate"
+                    [color]="absenceService.getAbsenceStateColor(absence.state)"
+                    [matIcon]="absenceService.getAbsenceStateIcon(absence.state)"></app-text-badge>
+</div>
+
+<mat-form-field class="input-text"
+                appearance="outline">
+    <mat-label>{{"absences.description" | translate}}</mat-label>
+    <textarea matInput
+              cdkAutosizeMaxRows="6"
+              maxlength="500"
+              (input)="descChange($event)"
+              [value]="absence.description" cdkTextareaAutosize="true">
+    </textarea>
+</mat-form-field>
+
+<span class="absence-editor-error" *ngIf="hasValidationError">
+    {{ "absences.validationError" | translate }}
+</span>
+
+<div class="absence-editor-controls">
+    <button mat-fab color="primary"
+            (click)="save()"
+            [disabled]="hasValidationError"
+            [matTooltip]="'absences.save' | translate">
+        <mat-icon>save</mat-icon>
+    </button>
+
+    <button mat-fab color="warn"
+            (click)="cancel()"
+            [matTooltip]="'absences.cancel' | translate">
+        <mat-icon>cancel</mat-icon>
+    </button>
+</div>

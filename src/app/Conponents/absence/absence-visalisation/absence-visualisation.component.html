@@ -1,0 +1,32 @@
+<div class="title">
+    <h2 >{{absence.title}}</h2>
+
+    <app-text-badge [text]="absenceService.TYPE_TRANSLATION_BASE + absence.type | translate"
+                    [color]="absenceService.getAbsenceTypeColor(absence.type)"
+                    [matIcon]="absenceService.getAbsenceTypeIcon(absence.type)"></app-text-badge>
+
+    <app-text-badge [text]="absenceService.STATE_TRANSLATION_BASE + absence.state | translate"
+                    [color]="absenceService.getAbsenceStateColor(absence.state)"
+                    [matIcon]="absenceService.getAbsenceStateIcon(absence.state)"></app-text-badge>
+</div>
+<h4>{{absence.description}}</h4>
+<!--TODO: implement when api is ready-->
+<button *ngIf="isParent"
+        mat-fab
+        color="accent"
+        (click)="parentVerify(true)"
+        [matTooltip]="'absences.verify' | translate">
+    <mat-icon>done</mat-icon>
+</button>
+<button *ngIf="isParent"
+        mat-fab
+        color="warn"
+        (click)="parentVerify(false)"
+        [matTooltip]="'absences.reject' | translate">
+    <mat-icon>block</mat-icon>
+</button>
+<button mat-fab color="primary"
+        (click)="edit()"
+        [matTooltip]="'absences.edit' | translate">
+    <mat-icon>edit</mat-icon>
+</button>

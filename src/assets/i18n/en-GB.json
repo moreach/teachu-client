@@ -1,7 +1,8 @@
 {
     "framework":{
         "save":"Save",
-        "close":"Close"
+        "close":"Close",
+        "noData":"No records found"
     },
     "login":{
         "login":"Login",
@@ -22,7 +23,11 @@
     "grades":{
         "grades":"Grades",
         "desc": "Description",
-        "note": "Note"
+        "note": "Note",
+        "subject":"Subject",
+        "date":"Date",
+        "description":"Description",
+        "class":"Class"
     },
     "timetable":{
         "timetable":"Timetable",
@@ -51,6 +56,7 @@
         "classlist":"Classlist",
         "class":"Class",
         "teachers":"Teachers",
+        "students":"Students",
         "firstName":"Firstname",
         "lastName":"Lastname",
         "birthday":"Birthday",
@@ -59,7 +65,27 @@
         "email":"Mail"
     },
     "absences":{
-        "absences":"Absences"
+        "absences":"Absences",
+        "noAbsences": "Congratulations, you have zero absences",
+        "verify": "Verify absence",
+        "reject": "Reject absence",
+        "edit": "Edit absence",
+        "title": "Title",
+        "description": "Description",
+        "save": "Save changes",
+        "cancel": "Don't save",
+        "validationError": "Title has to have between 3 and 50 characters and description can't be longer than 500 characters",
+        "state": {
+          "pending": "Pending",
+          "excused": "Excused",
+          "unexcused": "Unexcused"
+        },
+        "type": {
+          "sick": "Sick",
+          "holiday": "Holiday"
+        },
+        "absenceState":"State",
+        "absenceType":"Type"
     },
     "chat":{
         "chat":"Chat",
@@ -185,5 +211,14 @@
     "SchoolClassEventType":{
         "trip":"Trip",
         "school":"School"
+    },
+    "Weekday":{
+        "monday":"Monday",
+        "tuesday":"Tuesday",
+        "wednesday":"Wednesday",
+        "thursday":"Thursday",
+        "friday":"Friday",
+        "saturday":"Saturday",
+        "sunday":"Sunday"
     }
 }

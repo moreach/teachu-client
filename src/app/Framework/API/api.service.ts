@@ -18,7 +18,6 @@ export class ApiService {
         if (request instanceof Blob) {
           return request;
         } else {
-          console.log('clear')
           return this.cleanUpUtf8<T>(request);
         }
       }),
