@@ -23,7 +23,11 @@
     "grades":{
         "grades":"Grades",
         "desc": "Description",
-        "note": "Note"
+        "note": "Note",
+        "subject":"Subject",
+        "date":"Date",
+        "description":"Description",
+        "class":"Class"
     },
     "timetable":{
         "timetable":"Timetable",
@@ -52,6 +56,7 @@
         "classlist":"Classlist",
         "class":"Class",
         "teachers":"Teachers",
+        "students":"Students",
         "firstName":"Firstname",
         "lastName":"Lastname",
         "birthday":"Birthday",
@@ -78,7 +83,9 @@
         "type": {
           "sick": "Sick",
           "holiday": "Holiday"
-        }
+        },
+        "absenceState":"State",
+        "absenceType":"Type"
     },
     "chat":{
         "chat":"Chat",
@@ -204,5 +211,14 @@
     "SchoolClassEventType":{
         "trip":"Trip",
         "school":"School"
+    },
+    "Weekday":{
+        "monday":"Monday",
+        "tuesday":"Tuesday",
+        "wednesday":"Wednesday",
+        "thursday":"Thursday",
+        "friday":"Friday",
+        "saturday":"Saturday",
+        "sunday":"Sunday"
     }
 }

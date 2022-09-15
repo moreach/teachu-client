@@ -68,12 +68,14 @@ export class DashboardService {
         }
       }),
       map(timetableInfo => {
+        const userEvent = !!timetableInfo.timetable.userEvent ? timetableInfo.timetable.userEvent.title : null;
+        const schoolEvent = !!timetableInfo.timetable.schoolEvent ? timetableInfo.timetable.schoolEvent.title : null;
+        const schoolClassEvent = !!timetableInfo.timetable.schoolClassEvent ? timetableInfo.timetable.schoolClassEvent.title : null;
+        const events = [userEvent, schoolEvent, schoolClassEvent].filter(e => !!e);
         return {
           date: new Date(),
           weekday: timetableInfo.timetable.weekday,
-          userEvent: !!timetableInfo.timetable.userEvent ? timetableInfo.timetable.userEvent.title : '',
-          schoolEvent: !!timetableInfo.timetable.schoolEvent ? timetableInfo.timetable.schoolEvent.title : '',
-          schoolClassEvent: !!timetableInfo.timetable.schoolClassEvent ? timetableInfo.timetable.schoolClassEvent.title : '',
+          events,
           lessons: timetableInfo.timetable.lessons.map(lesson => {
             return {
               subject: lesson.subject,

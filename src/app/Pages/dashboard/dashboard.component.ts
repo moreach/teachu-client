@@ -8,6 +8,7 @@ import { DashboardClassListDTO } from 'src/app/DTOs/Dashboard/DashboardClassList
 import { DashboardGradeDTO } from 'src/app/DTOs/Dashboard/DashboardGradeDTO';
 import { DashboardSchoolInfoDTO } from 'src/app/DTOs/Dashboard/DashboardSchoolInfoDTO';
 import { DashboardTimetableDTO } from 'src/app/DTOs/Dashboard/DashboardTimetableDTO';
+import { isToday } from 'src/app/Framework/Helpers/DateHelpers';
 import { DashboardService } from './dashboard.service';
 
 @Component({
@@ -53,6 +54,21 @@ export class DashboardComponent {
   }
 
   getHiddenIcon(element: HTMLElement) {
-    return element.classList.contains('hidden') ? 'chevron-down' : 'chevron-up';
+    return element.classList.contains('hidden') ? 'expand_more' : 'expand_less';
+  }
+
+  formatArray(array: string[]) {
+    if (array.length === 0) {
+      return '-';
+    }
+    return array.join(', ');
+  }
+
+  isToday(date: Date) {
+    return isToday(date);
+  }
+
+  isDifferentDays(date1: Date, date2: Date) {
+    new Date(date1).setHours(0, 0, 0, 0) !== new Date(date2).setHours(0, 0, 0, 0);
   }
 }

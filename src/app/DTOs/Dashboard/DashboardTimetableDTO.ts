@@ -3,9 +3,7 @@ import { Weekday } from "../Enums/Weekday";
 export interface DashboardTimetableDTO {
     date: Date;
     weekday: Weekday;
-    userEvent: string | null;
-    schoolEvent: string | null;
-    schoolClassEvent: string | null;
+    events: string[];
     lessons: DashboardTimetableLessonDTO[];
     navigate: string;
 }
