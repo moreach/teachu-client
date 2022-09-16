@@ -35,7 +35,8 @@ export class GradeService {
                 icon: this.SEMESTER_ICON,
                 leave: false,
                 translatedTitle: semester.name,
-                children: []
+                children: [],
+                isTeachu: true
             };
 
             for (let schoolClass of semester.classes) {
@@ -43,7 +44,8 @@ export class GradeService {
                     icon: this.CLASS_ICON,
                     leave: false,
                     translatedTitle: schoolClass.name,
-                    children: []
+                    children: [],
+                    isTeachu: true
                 };
 
                 for (let subject of schoolClass.subjects) {
@@ -51,7 +53,8 @@ export class GradeService {
                         icon: this.SUBJECT_ICON,
                         leave: true,
                         translatedTitle: subject.name,
-                        data: { semester, schoolClass, subject }
+                        data: { semester, schoolClass, subject },
+                        isTeachu: true
                     };
                     schoolClassLeave.children!.push(subjectLeave);
                 }

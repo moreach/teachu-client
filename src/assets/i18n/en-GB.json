@@ -220,5 +220,19 @@
         "friday":"Friday",
         "saturday":"Saturday",
         "sunday":"Sunday"
+    },
+    "learnz":{
+        "together":"Together",
+        "togetherAsk":"Ask",
+        "togetherChat":"Chat",
+        "togetherConnect":"Connect",
+        "togetherSwipe":"Swipe",
+        "group":"Group",
+        "create":"Create",
+        "learn":"Learn",
+        "challenge":"Challenge",
+        "test":"Test",
+        "draw":"Draw",
+        "settings":"Settings"
     }
 }

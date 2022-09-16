@@ -74,7 +74,7 @@ export class LoginComponent {
           return of(null);
         }
       }),
-      tap(children => this.setChildren(children))
+      tap(children => this.setChildren(children)),
     ).subscribe(_ => {
       this.router.navigate([appRoutes.App, appRoutes.Dashboard]);
     });

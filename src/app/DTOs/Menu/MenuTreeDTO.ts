@@ -11,4 +11,5 @@ export interface MenuTreeItemDTO {
     url?: string;
     children?: MenuTreeItemDTO[];
     data?: any; // used for custom data
+    isTeachu: boolean;
 }

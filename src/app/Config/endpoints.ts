@@ -11,4 +11,5 @@ export const endpoints = {
     TimetableLayout: 'timetable/layout',
     Absence: 'absence',
     Image: 'image',
+    LearnzLogin: 'userLogin',
 }
