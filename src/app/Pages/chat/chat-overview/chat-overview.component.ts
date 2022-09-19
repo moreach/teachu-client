@@ -50,7 +50,8 @@ export class ChatOverviewComponent {
   }
 
   openNewGroupChatDialog() {
-    this.dialog.open(GroupChatDialogComponent, { });
+    const dialog$ = this.dialog.open(GroupChatDialogComponent, { });
+    dialog$.afterClosed().subscribe(_ => this.chatOverviews$ = this.chatService.getChatOverview$());
   }
 
   _filter(value: string | null, users: UserOption[]) {

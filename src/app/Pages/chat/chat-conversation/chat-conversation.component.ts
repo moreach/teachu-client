@@ -59,6 +59,7 @@ export class ChatConversationComponent implements OnInit {
   sendMessage() {
     this.chatService.sendMessage$(this.chatId, this.newMessageControl.value).subscribe(_ => {
       this.newMessageControl = new FormControl('', Validators.required);
+      this.conversation$ = this.chatService.getChatConversation$(this.chatId);
     });
   }
 

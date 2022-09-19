@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { ChatResponseDTO } from 'src/app/DTOs/Chat/ChatResponseDTO';
@@ -22,7 +22,6 @@ export class ChatConversationInfoComponent {
 
   constructor(
     private chatService: ChatService,
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
     private tokenService: TokenService,
@@ -32,14 +31,15 @@ export class ChatConversationInfoComponent {
   }
 
   editChat(info: ChatResponseDTO) {
-    this.dialog.open(GroupChatDialogComponent, {
+    const dialog$ = this.dialog.open(GroupChatDialogComponent, {
       data: {
         chatId: this.chatId,
         chatName: info.title,
         chatImage: this.getProfileImage(info.members),
         usersId: info.members.map(p => p.id),
       } as ChatSaveGroupDTO
-    })
+    });
+    dialog$.afterClosed().subscribe(_ => this.info$ = this.chatService.getChatConversationInfo$(this.chatId));
   }
 
   getProfileImage(members: UserExternalUserDTO[]) {
