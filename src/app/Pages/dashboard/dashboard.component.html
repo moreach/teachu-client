@@ -146,10 +146,9 @@
         </div>
         <div *ngIf="chat$ | async as chats; else chatSpinner">
             <div *ngFor="let chat of chats" class="chat-dashboard-detail entry" (click)="navigate(chat.navigate)">
-                <img [src]="chat.chatImage" class="chat-image">
                 <app-image *ngIf="getProfileImage(chat.members); else groupImage" [round]="true" [size]="48" [imageId]="getProfileImage(chat.members) ?? ''"></app-image>
                 <ng-template #groupImage>
-                    <mat-icon [style]="{'font-size': '48px'}" class="chat-image">group</mat-icon>
+                    <mat-icon [style]="{'font-size': '40px', 'margin-left': '4px' }" class="chat-image">group</mat-icon>
                 </ng-template>
                 <div class="chat-middle-section">
                     <div>

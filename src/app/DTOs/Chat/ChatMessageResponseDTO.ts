@@ -4,6 +4,6 @@ import { UserExternalUserDTO } from "../User/UserExternalUserDTO";
 export interface ChatMessageResponseDTO {
     message: string;
     user: UserExternalUserDTO;
-    date: number;
+    timestamp: number;
     chatState: ChatMessageReadState;
 }

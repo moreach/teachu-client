@@ -72,7 +72,11 @@ export class ChatConversationComponent implements OnInit {
 
   getFromEpoch(date: number) {
     var epoch = new Date(0);
-    epoch.setMilliseconds(date);
+    if (!date) {
+      epoch = new Date();
+    } else {
+      epoch.setMilliseconds(date);
+    }
     return epoch;
   }
 }

@@ -2,7 +2,7 @@
     <div (click)="openSettings()" class="chat-info pointer">
         <app-image *ngIf="isGroupChat(conversation.info); else groupImage" [round]="true" [size]="48" [imageId]="conversation.info.members[0].imageId"></app-image>
         <ng-template #groupImage>
-            <mat-icon [style]="{'font-size': '48px'}" class="chat-image">group</mat-icon>
+            <mat-icon [style]="{'font-size': '40px', 'margin-left': '4px'}" class="chat-image">group</mat-icon>
         </ng-template>
         <div class="chat-info-detail">
             <div>
@@ -21,13 +21,13 @@
                     <mat-divider></mat-divider>
                     <div class="message-message">{{ message.message }}</div>
                     <mat-divider></mat-divider>
-                    <div class="message-timestamp">{{ isToday(message.date) ? (getFromEpoch(message.date) | date:'HH:mm') : (getFromEpoch(message.date) | date:'dd.MM.yyyy HH:mm') }}</div>
+                    <div class="message-timestamp">{{ isToday(message.timestamp) ? (getFromEpoch(message.timestamp) | date:'HH:mm') : (getFromEpoch(message.timestamp) | date:'dd.MM.yyyy HH:mm') }}</div>
                 </div>
                 <ng-template #messageSelf>
                     <div class="message message-self">
                         <div class="message-message">{{ message.message }}</div>
                         <mat-divider></mat-divider>
-                        <div class="message-timestamp">{{ isToday(message.date) ? (getFromEpoch(message.date) | date:'HH:mm') : (getFromEpoch(message.date) | date:'dd.MM.yyyy HH:mm') }}</div>
+                        <div class="message-timestamp">{{ isToday(message.timestamp) ? (getFromEpoch(message.timestamp) | date:'HH:mm') : (getFromEpoch(message.timestamp) | date:'dd.MM.yyyy HH:mm') }}</div>
                     </div>
                 </ng-template>
             </div>

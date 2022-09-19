@@ -1,13 +1,12 @@
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { combineLatest, map, Observable, startWith, switchMap } from 'rxjs';
+import { first, map, Observable, startWith, switchMap, tap } from 'rxjs';
 import { ChatUserDTO } from 'src/app/DTOs/Chat/ChatUserDTO';
 import { ChatService } from '../chat.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { v4 as guid } from 'uuid';
 import { ChatSaveGroupDTO } from 'src/app/DTOs/Chat/ChatSaveGroupDTO';
 import { ChatRequestDTO } from 'src/app/DTOs/Chat/ChatRequestDTO';
 
@@ -58,7 +57,7 @@ export class GroupChatDialogComponent implements OnInit {
       startWith(''),
       switchMap(value => this.chatService.getChatUser$(value)),
     )
-    users$.subscribe(users => this.allUsers = users);
+    users$.pipe(first()).subscribe(users => this.allUsers = users);
     this.filteredOptionsGroup$ = users$.pipe(
       map(users => users.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))),
     );
@@ -85,6 +84,7 @@ export class GroupChatDialogComponent implements OnInit {
   }
 
   getNameFromId(id: string) {
+    console.log(this.allUsers)
     const filtered = this.allUsers.filter(user => user.id === id);
     if (filtered.length === 0) {
       return '';

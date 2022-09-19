@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { ChatResponseDTO } from 'src/app/DTOs/Chat/ChatResponseDTO';
 import { UserExternalUserDTO } from 'src/app/DTOs/User/UserExternalUserDTO';
@@ -26,16 +26,18 @@ export class ChatOverviewComponent {
     private dialog: MatDialog,
     private tokenService: TokenService,
   ) {
+    const timeStampEpoch = Math.floor(Date.now());
     this.chatOverviews$ = this.chatService.getChatOverview$().pipe(
       map(chatOverviews => chatOverviews.map(c => {
         return {
           ...c,
           lastMessage: {
             ...c.lastMessage,
-            message: truncateToMaxChars(c.lastMessage.message, 100)
+            message: truncateToMaxChars(c.lastMessage.message ?? '', 100)
           }
-        } 
-      }))
+        }
+      })),
+      map(chats => chats.sort((a, b) => (!!b.lastMessage ? b.lastMessage.timestamp : timeStampEpoch) - (!!a.lastMessage ? a.lastMessage.timestamp : timeStampEpoch))),
     );
   }
 
@@ -62,7 +64,11 @@ export class ChatOverviewComponent {
 
   getDateFromEpoch(date: number) {
     var epoch = new Date(0);
-    epoch.setMilliseconds(date);
+    if (!date) {
+      epoch = new Date();
+    } else {
+      epoch.setMilliseconds(date);
+    }
     return epoch;
   }
 
@@ -72,6 +78,10 @@ export class ChatOverviewComponent {
 
   getProfileImage(users: UserExternalUserDTO[]) {
     return users.filter(u => u.id !== this.tokenService.getUserId())[0].imageId;
+  }
+
+  isEmpty(array: any[]) {
+    return array.length === 0;
   }
 }
 

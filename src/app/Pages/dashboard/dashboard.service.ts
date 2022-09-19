@@ -162,16 +162,16 @@ export class DashboardService {
     return this.api.callApi<ChatResponseDTO[]>(endpoints.Chat, { }, 'GET').pipe(
       map(chats => chats.filter(c => !!c.lastMessage)),
       map(chats => {
-        return chats.sort((a, b) => b.lastMessage.date - a.lastMessage.date).slice(0, 10);
+        return chats.sort((a, b) => b.lastMessage.timestamp - a.lastMessage.timestamp).slice(0, 10);
       }),
       map(chats => {
         return chats.map(c => {
           return {
             chatImage: this.getProfileImage(c.members),
             chatName: c.title,
-            chatType: c.members.length !== 2 ? 'group' : 'private',
+            chatType:  !!c.members && c.members.length === 2 ? 'private' : 'group',
             lastMessage: c.lastMessage.message,
-            lastMessageDate: this.fromEpoch(c.lastMessage.date),
+            lastMessageDate: this.fromEpoch(c.lastMessage.timestamp),
             lastMessageFrom: this.chatMessageFrom(c.lastMessage.user),
             navigate: [appRoutes.Chat, c.id],
           } as DashboardChatDTO

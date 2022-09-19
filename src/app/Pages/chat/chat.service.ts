@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { combineLatest, filter, map, Observable, of } from 'rxjs';
+import { combineLatest, filter, map, Observable, tap } from 'rxjs';
 import { endpoints } from 'src/app/Config/endpoints';
 import { ChatConversationDTO } from 'src/app/DTOs/Chat/ChatConversationDTO';
 import { ChatMessageRequestDTO } from 'src/app/DTOs/Chat/ChatMessageRequestDTO';
@@ -14,6 +14,8 @@ import { ApiService } from 'src/app/Framework/API/api.service';
   providedIn: 'root'
 })
 export class ChatService {
+
+  // TODO EW: bind reload in more elegant way
 
   constructor(
     private api: ApiService,
@@ -49,8 +51,8 @@ export class ChatService {
     return this.api.callApi<UserExternalUserDTO[]>(endpoints.Search + '/' + endpoints.User, { query }, 'GETwithPARAMS').pipe(
       map(users => users.map(user => {
         return {
-          id: user.id,
-          name: user.firstName + ' ' + user.lastName,
+          id: (user as any).user.id,
+          name: (user as any).user.firstName + ' ' + (user as any).user.lastName,
         }
       })),
     )

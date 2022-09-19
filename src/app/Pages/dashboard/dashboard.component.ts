@@ -76,6 +76,9 @@ export class DashboardComponent {
   }
 
   getProfileImage(members: UserExternalUserDTO[]) {
+    if (!members) {
+      return undefined;
+    }
     if (members.length === 2) {
       return members.find(m => m.id !== this.tokenService.getUserId())?.imageId;
     }
