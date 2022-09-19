@@ -1,7 +1,7 @@
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { combineLatest, map, Observable, startWith } from 'rxjs';
+import { combineLatest, map, Observable, startWith, switchMap } from 'rxjs';
 import { ChatUserDTO } from 'src/app/DTOs/Chat/ChatUserDTO';
 import { ChatService } from '../chat.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -9,6 +9,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { v4 as guid } from 'uuid';
 import { ChatSaveGroupDTO } from 'src/app/DTOs/Chat/ChatSaveGroupDTO';
+import { ChatRequestDTO } from 'src/app/DTOs/Chat/ChatRequestDTO';
 
 @Component({
   selector: 'app-group-chat-dialog',
@@ -33,16 +34,13 @@ export class GroupChatDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private dialogData: ChatSaveGroupDTO | undefined,
   ) { 
     this.groupFrom = this.formBuilder.group({
-      chatId: guid(),
       chatName: ['', Validators.required],
-      chatImage: '',
     });
 
     if (this.dialogData) {
       this.groupFrom.patchValue({
         chatId: this.dialogData.chatId,
         chatName: this.dialogData.chatName,
-        chatImage: this.dialogData.chatImage,
       });
       this.selectedUser = this.dialogData.usersId.filter(u => !!u);
     }
@@ -56,25 +54,22 @@ export class GroupChatDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const users$ = this.chatService.getChatUser$();
+    const users$ = this.groupFormUserId.valueChanges.pipe(
+      startWith(''),
+      switchMap(value => this.chatService.getChatUser$(value)),
+    )
     users$.subscribe(users => this.allUsers = users);
-    this.filteredOptionsGroup$ = combineLatest([
-      users$,
-      this.groupFormUserId.valueChanges.pipe(startWith(''))
-    ]).pipe(
-      map(([users, value]) => this._filter(value, users)),
-      map(users => users.filter(user => !this.selectedUser.includes(user.id))),
+    this.filteredOptionsGroup$ = users$.pipe(
       map(users => users.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))),
     );
   }
 
   createGroupChat() {
     const value = {
-      chatId: this.groupFrom.value.chatId,
-      chatName: this.groupFrom.value.chatName,
-      chatImage: this.groupFrom.value.chatImage,
-      usersId: this.selectedUser,
-    }
+      title: this.groupFrom.value.chatName,
+      description: '',
+      memberIds: this.selectedUser,
+    } as ChatRequestDTO;
     this.chatService.createChatGroup$(value).subscribe(_ => {
       this.close();
     });

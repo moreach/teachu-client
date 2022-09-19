@@ -8,5 +8,7 @@ export interface UserExternalUserDTO {
     lastName: string;
     birthday: Date;
     sex: UserSex;
-    city: string
+    city: string;
+    imageId: string;
+    id: string;
 }

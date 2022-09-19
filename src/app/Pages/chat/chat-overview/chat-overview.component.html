@@ -1,43 +1,33 @@
 <div class="head">
     <div>
-        <button mat-button (click)="openNewPrivateChatDialog()">{{ 'chat.newPrivateChat' | translate }}</button>
         <button mat-button (click)="openNewGroupChatDialog()">{{ 'chat.newGroupChat' | translate }}</button>
-    </div>
-    <div class="search-bar">
-        <form>
-            <mat-form-field appearance="outline">
-                <input type="text" matInput [formControl]="searchBarControl" [matAutocomplete]="auto">
-                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectUser($event.option.value)">
-                    <mat-option *ngFor="let option of searchBarUsers$ | async" [value]="option">
-                        {{ option.name }}
-                    </mat-option>
-                </mat-autocomplete>
-                <button matSuffix mat-button><mat-icon >search</mat-icon></button>
-            </mat-form-field>
-        </form>
     </div>
 </div>
 <div *ngIf="chatOverviews$ | async as chatOverviews">
     <mat-divider></mat-divider>
     <div *ngFor="let chat of chatOverviews">
-        <div class="chat-overview-detail" (click)="openDetail(chat.chatId)">
-            <img [src]="chat.chatImage" class="chat-image">
+        <div class="chat-overview-detail" (click)="openDetail(chat.id)">
+            <app-image *ngIf="!isGroupChat(chat); else groupImage" [round]="true" [size]="48" [imageId]="getProfileImage(chat.members)"></app-image>
+            <ng-template #groupImage>
+                <mat-icon [style]="{'font-size': '48px'}" class="chat-image">group</mat-icon>
+            </ng-template>
             <div class="chat-middle-section">
                 <div>
-                    <div class="chat-title">{{ chat.chatName }}</div>
-                    <div *ngIf="chat.chatType === 'group'; else private" class="chat-last-msg">
-                        {{ chat.lastMessageFrom ?? ('chat.you' | translate) }}: <i>{{ chat.lastMessage }}</i>
+                    <div class="chat-title">{{ chat.title }}</div>
+                    <div *ngIf="chat.lastMessage?.user; else noMessage" class="chat-last-msg">
+                        {{ isOwn(chat.lastMessage.user.id) ? ('chat.you' | translate) : (chat.lastMessage.user.firstName + ' ' + chat.lastMessage.user.lastName) }}: <i>{{ chat.lastMessage }}</i>
                     </div>
-                    <ng-template #private>
-                        <div class="chat-last-msg">
-                            {{ chat.lastMessageFrom === null ? ('chat.you' | translate) + ': ' : '' }}<i>{{ chat.lastMessage }}</i>
-                        </div>
+                    <ng-template #noMessage>
+                        <div class="chat-last-msg">-</div>
                     </ng-template>
                 </div>
             </div>
-            <div class="chat-last-msg-date">
-                {{ isToday(chat.lastMessageDate) ? (chat.lastMessageDate | date: 'HH:mm') : (chat.lastMessageDate | date: 'dd.MM.yyyy') }}
+            <div *ngIf="chat.lastMessage; else noMessageDate" class="chat-last-msg-date">
+                {{ isToday(chat.lastMessage.date) ? (getDateFromEpoch(chat.lastMessage.date) | date: 'HH:mm') : (getDateFromEpoch(chat.lastMessage.date) | date: 'dd.MM.yyyy') }}
             </div>
+            <ng-template #noMessageDate>
+                <div class="chat-last-msg-date">-</div>
+            </ng-template>
         </div>        
         <mat-divider></mat-divider>
     </div>

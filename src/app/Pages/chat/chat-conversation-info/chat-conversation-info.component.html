@@ -1,17 +1,20 @@
 <div *ngIf="info$ | async as info" class="chat-info">
     <div class="chat-title">
-        <h1>{{ info.chatName }}</h1>
+        <h1>{{ info.title }}</h1>
     </div>
     <div class="chat-image-wrap">
-        <img [src]="info.chatImage" class="chat-image">
+        <app-image *ngIf="getProfileImage(info.members); else groupImage" [round]="true" [size]="100" [imageId]="getProfileImage(info.members) ?? ''"></app-image>
+        <ng-template #groupImage>
+            <mat-icon [style]="{'font-size': '48px'}" class="chat-image">group</mat-icon>
+        </ng-template>
     </div>
-    <div *ngFor="let user of info.participants">
+    <div *ngFor="let user of info.members">
         <mat-divider></mat-divider>
         <div class="chat-user">
-            <img [src]="user.image" class="chat-user-image">
+            <app-image [round]="true" [size]="48" [imageId]="user.imageId" class="chat-user-image"></app-image>
             <div class="chat-user-name">
                 <div>
-                    {{ user.name ? user.name : 'chat.you' | translate }}
+                    {{ isOwn(user.id) ? ('chat.you' | translate) : (user.firstName + ' ' + user.lastName) }}
                 </div>
             </div>
             <div class="chat-user-icon">
@@ -21,7 +24,7 @@
                     <mat-icon *ngIf="user.role === 'TEACHER'">school</mat-icon>
                     <mat-icon *ngIf="user.role === 'ADMIN'">plus_one</mat-icon>
                 </div>
-                <div *ngIf="user.isAdmin">
+                <div *ngIf="user.id == info.creator.id">
                     <mat-icon>verified_user</mat-icon>
                 </div>
             </div>
@@ -29,9 +32,6 @@
     </div>
     <mat-divider></mat-divider>
     <div class="chat-leave">
-        <button *ngIf="info.isUserAdmin; else leave" mat-button (click)="editChat(info)">{{ 'chat.editChat' | translate }}</button>
-        <ng-template #leave>
-            <button mat-button (click)="leaveChat()">{{ 'chat.leaveChat' | translate }}</button>
-        </ng-template>
+        <button *ngIf="isAdmin(info.creator.id)" mat-button (click)="editChat(info)">{{ 'chat.editChat' | translate }}</button>
     </div>
 </div>

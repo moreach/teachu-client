@@ -4,7 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { ChatConversationDTO } from 'src/app/DTOs/Chat/ChatConversationDTO';
-import { ChatParticipantDTO } from 'src/app/DTOs/Chat/ChatParticipantDTO';
+import { ChatResponseDTO } from 'src/app/DTOs/Chat/ChatResponseDTO';
+import { UserExternalUserDTO } from 'src/app/DTOs/User/UserExternalUserDTO';
+import { TokenService } from 'src/app/Framework/API/token.service';
 import { isToday } from 'src/app/Framework/Helpers/DateHelpers';
 import { truncateToMaxChars } from 'src/app/Framework/Helpers/StringHelpers';
 import { ChatService } from '../chat.service';
@@ -24,6 +26,7 @@ export class ChatConversationComponent implements OnInit {
     private chatService: ChatService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private tokenService: TokenService,
   ) {
     this.chatId = this.activatedRoute.snapshot.paramMap.get(appRoutes.ChatId) ?? '';
     this.conversation$ = this.chatService.getChatConversation$(this.chatId).pipe(
@@ -40,24 +43,36 @@ export class ChatConversationComponent implements OnInit {
     
   }
 
-  openSettings(conversation: ChatConversationDTO) {
-    if (conversation.info.chatType === 'group') {
-      this.router.navigate([`${appRoutes.App}/${appRoutes.Chat}/${this.chatId}/${appRoutes.ConversationInfo}`]);
-    }
+  openSettings() {
+    this.router.navigate([`${appRoutes.App}/${appRoutes.Chat}/${this.chatId}/${appRoutes.ConversationInfo}`]);
   }
 
-  formatParticipants(participants: ChatParticipantDTO[]): string {
-    const concatenated = participants.map(p => p.name).filter(p => !!p).join(', ');
+  formatParticipants(participants: UserExternalUserDTO[]): string {
+    const concatenated = participants.map(p => p.firstName + ' ' + p.lastName).filter(p => !!p).join(', ');
     return truncateToMaxChars(concatenated, 100);
   }
 
-  isToday(date: Date) {
-    return isToday(date);
+  isToday(date: number) {
+    return isToday(this.getFromEpoch(date));
   }
 
   sendMessage() {
     this.chatService.sendMessage$(this.chatId, this.newMessageControl.value).subscribe(_ => {
       this.newMessageControl = new FormControl('', Validators.required);
     });
+  }
+
+  isGroupChat(chat: ChatResponseDTO) {
+    return chat.members.length > 2;
+  }
+
+  isOwn(userId: string) {
+    return this.tokenService.getUserId() === userId;
+  }
+
+  getFromEpoch(date: number) {
+    var epoch = new Date(0);
+    epoch.setMilliseconds(date);
+    return epoch;
   }
 }

@@ -57,5 +57,12 @@ export class TokenService {
   setSelectedLanguage(language: string) {
     localStorage.setItem(appConfig.APPLICATION_LANGUAGE, language);
   }
-  
+
+  setUserId(userId: string) {
+    localStorage.setItem(appConfig.APPLICATION_USER_ID, userId);
+  }
+
+  getUserId() {
+    return localStorage.getItem(appConfig.APPLICATION_USER_ID) ?? '';
+  }
 }
