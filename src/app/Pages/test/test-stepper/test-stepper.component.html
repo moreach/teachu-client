@@ -1,0 +1,14 @@
+<div *ngIf="questionsChoice$ | async as questionChoice">
+    <h2>{{ getTestName() }} - {{ getTimeLeft() ?? '' }}</h2>
+    <div class="choices">
+        <div *ngFor="let choice of questionChoice" (click)="setQuestionActive(choice.key)" [ngClass]="{ 'choice': true, 'answered': choice.value, 'active': isActive(choice.key) }">
+            <div>{{ getQuestionNumber(choice.key, questionChoice) }}</div>
+        </div>
+        <button mat-fab color="primary" type="button" (click)="endTest()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div *ngIf="activeQuestion$ | async as activeQuestion">
+        <app-general-question [question]="activeQuestion.question" [currentAnswer]="activeAnswer$ | async" [isTest]="true" [maxPoints]="activeQuestion.maxPoints" (answered)="answerQuestion($event)"></app-general-question>
+    </div>
+</div>

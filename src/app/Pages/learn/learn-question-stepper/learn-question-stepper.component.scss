@@ -1,0 +1,38 @@
+.card {
+    cursor: pointer;
+}
+.active-question,
+.active-answer,
+.active-solution {
+    padding: 16px;
+    border: 1px solid var(--teachu-black);
+    border-radius: 16px;
+    min-width: 400px;
+}
+.question {
+    font-size: 20px;
+}
+.description {
+    font-size: 18px;
+    margin-top: 8px;
+}
+.answer {
+    font-size: 18px;
+    margin-top: 4px;
+}
+.distribute {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.change-mode {
+    margin-top: 16px;
+}
+.solution-title {
+    font-size: 20px;
+}
+.form {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}

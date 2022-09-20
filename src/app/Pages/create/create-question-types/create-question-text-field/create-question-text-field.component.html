@@ -1,0 +1,13 @@
+<div *ngIf="!editable; else editMode">
+    <app-create-question-readonly-field [label]="'create.question' | translate" [value]="formGroup.value.question"></app-create-question-readonly-field>
+</div>
+<ng-template #editMode>
+    <form [formGroup]="formGroup" class="form">
+        <mat-form-field>
+            <input matInput type="text" formControlName="question" [placeholder]="'create.question' | translate" (change)="changeQuestion()">
+        </mat-form-field>
+        <button mat-icon-button (click)="deleteQuestion()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </form>
+</ng-template>

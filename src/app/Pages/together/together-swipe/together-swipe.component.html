@@ -1,0 +1,40 @@
+<div *ngIf="swipe$ | async as profile" class="page">
+    <div class="buttons">
+        <button (click)="swipe(profile.userId, true)" mat-fab color="primary">
+            <mat-icon>thumb_up</mat-icon>
+        </button>
+        <button (click)="swipe(profile.userId, false)" mat-fab color="primary">
+            <mat-icon>thumb_down</mat-icon>
+        </button>    
+    </div>
+    <div class="profile">
+        <div class="username">{{ profile.username }}</div>
+        <div class="grade">{{ translateGrade(profile.grade) | translate }}</div>
+        <div class="img-wrap">
+            <img [src]="profile.profileImagePath" />
+        </div>
+        <div class="information">{{ profile.information }}</div>
+    </div>
+    <div class="good-bad">
+        <div class="group">
+            <div class="icon-wrapper">
+                <mat-icon class="mat-icon">mood</mat-icon>
+            </div>
+            <div class="subjects">
+                <div>{{ translateSubject(profile.goodSubject1) | translate }}</div>
+                <div>{{ translateSubject(profile.goodSubject2) | translate }}</div>
+                <div>{{ translateSubject(profile.goodSubject3) | translate }}</div>
+            </div>
+        </div>
+        <div class="group">
+            <div class="icon-wrapper">
+                <mat-icon class="mat-icon">mood_bad</mat-icon>
+            </div>
+            <div class="subjects">
+                <div>{{ translateSubject(profile.badSubject1) | translate }}</div>
+                <div>{{ translateSubject(profile.badSubject2) | translate }}</div>
+                <div>{{ translateSubject(profile.badSubject3) | translate }}</div>
+            </div>
+        </div>
+    </div>
+</div>

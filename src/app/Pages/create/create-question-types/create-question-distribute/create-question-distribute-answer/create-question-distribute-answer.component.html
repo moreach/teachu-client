@@ -1,0 +1,17 @@
+<div *ngIf="!editable; else editMode" class="line">
+    <app-create-question-readonly-field [label]="'create.leftSide' | translate" [value]="formGroup.value.leftSide"></app-create-question-readonly-field>
+    <app-create-question-readonly-field [label]="'create.rightSide' | translate" [value]="formGroup.value.rightSide"></app-create-question-readonly-field>
+</div>
+<ng-template #editMode>
+    <form [formGroup]="formGroup" class="form">
+        <mat-form-field>
+            <input matInput type="text" formControlName="leftSide" [placeholder]="'create.leftSide' | translate" (change)="changeAnswer()">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" formControlName="rightSide" [placeholder]="'create.rightSide' | translate" (change)="changeAnswer()">
+        </mat-form-field>
+        <button mat-icon-button (click)="deleteAnswer()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </form>
+</ng-template>

@@ -1,0 +1,42 @@
+<mat-dialog-content>
+    <div *ngIf="getData() as profile" class="dialog">
+        <div class="profile">
+            <div class="profile">
+                <div *ngIf="profile.showConnected; else showNormal" class="username">{{ 'together.swipeConnectedWith' | translate }}: {{ profile.username }}</div>
+                <ng-template #showNormal>
+                    <div class="username">{{ profile.username }}</div>
+                </ng-template>
+                <div class="grade">{{ translateGrade(profile.grade) | translate }}</div>
+                <div class="img-wrap">
+                    <img [src]="profile.profileImagePath" />
+                </div>
+                <div class="information">{{ profile.information }}</div>
+            </div>
+            <div class="good-bad">
+                <div class="group">
+                    <div class="icon-wrapper">
+                        <mat-icon class="mat-icon">mood</mat-icon>
+                    </div>
+                    <div class="subjects">
+                        <div>{{ translateSubject(profile.goodSubject1) | translate }}</div>
+                        <div>{{ translateSubject(profile.goodSubject2) | translate }}</div>
+                        <div>{{ translateSubject(profile.goodSubject3) | translate }}</div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="icon-wrapper">
+                        <mat-icon class="mat-icon">mood_bad</mat-icon>
+                    </div>
+                    <div class="subjects">
+                        <div>{{ translateSubject(profile.badSubject1) | translate }}</div>
+                        <div>{{ translateSubject(profile.badSubject2) | translate }}</div>
+                        <div>{{ translateSubject(profile.badSubject3) | translate }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="profile.showConnected" class="buttons">
+            <button mat-button color="primary" (click)="navigateConnections()">{{ 'together.connectGoTo' | translate }}</button>
+        </div>
+    </div>
+</mat-dialog-content>

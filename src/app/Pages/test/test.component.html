@@ -1,0 +1,75 @@
+<div class="button-wrapper">
+    <button type="button" mat-flat-button color="primary" (click)="createNewTest()">{{ 'test.newTest' | translate }}</button>
+</div>
+<mat-tab-group class="tests">
+    <mat-tab [label]="'test.openTests' | translate">
+        <div *ngIf="openTests$ | async as openTests">
+            <h3 *ngIf="isEmpty(openTests); else testsOpen" class="no-test">{{ 'test.noOpenTest' | translate }}</h3>
+            <ng-template #testsOpen>
+                <mat-card class="test">
+                    <div class="bold">{{ 'test.testName' | translate }}</div>
+                    <div class="bold">{{ 'test.maxTime' | translate }}</div>
+                    <div class="bold">{{ 'create.subjectMain' | translate }}</div>
+                    <div class="bold">{{ 'create.subjectSecond' | translate }}</div>
+                    <div class="bold">{{ 'test.groupTest' | translate }}</div>
+                    <div class="bold">{{ 'test.owner' | translate }}</div>
+                </mat-card>
+                <mat-card *ngFor="let openTest of openTests" (click)="openStepper(openTest.testId, openTest.testOfUserId, openTest.isOwner, openTest.isGroupTest)" class="test active">
+                    <div>{{ openTest.name }}</div>
+                    <div>{{ formatTime(openTest.maxTime) }}</div>
+                    <div>{{ translateSubject(openTest.subjectMain) | translate }}</div>
+                    <div>{{ !!openTest.subjectSecond ? (translateSubject(openTest.subjectSecond) | translate) : '' }}</div>
+                    <div>
+                        <mat-icon *ngIf="openTest.isGroupTest; else strokeGroup">group</mat-icon>
+                        <ng-template #strokeGroup>
+                            <div>-</div>
+                        </ng-template>
+                    </div>
+                    <div>
+                        <mat-icon *ngIf="openTest.isOwner; else strokeOwner">verified_user</mat-icon>
+                        <ng-template #strokeOwner>
+                            <div>-</div>
+                        </ng-template>
+                    </div>
+                </mat-card>
+            </ng-template>
+        </div>
+    </mat-tab>
+    <mat-tab [label]="'test.closedTests' | translate">
+        <div *ngIf="closedTests$ | async as closedTests">
+            <h3 *ngIf="isEmpty(closedTests); else testsClosed" class="no-test">{{ 'test.noClosedTest' | translate }}</h3>
+            <ng-template #testsClosed>
+                <mat-card class="test-closed">
+                    <div class="bold">{{ 'test.testName' | translate }}</div>
+                    <div class="bold">{{ 'create.subjectMain' | translate }}</div>
+                    <div class="bold">{{ 'create.subjectSecond' | translate }}</div>
+                    <div class="bold">{{ 'test.pointsScored' | translate }}</div>
+                    <div class="bold">{{ 'test.pointsPossible' | translate }}</div>
+                    <div class="bold">{{ 'test.percentage' | translate }}</div>
+                    <div class="bold">{{ 'test.groupTest' | translate }}</div>
+                    <div class="bold">{{ 'test.owner' | translate }}</div>
+                </mat-card>
+                <mat-card *ngFor="let closedTest of closedTests" (click)="openResult(closedTest.testId, closedTest.testOfUserId)" class="test-closed active">
+                    <div>{{ closedTest.name }}</div>
+                    <div>{{ translateSubject(closedTest.subjectMain) | translate }}</div>
+                    <div>{{ !!closedTest.subjectSecond ? (translateSubject(closedTest.subjectSecond) | translate) : '' }}</div>
+                    <div>{{ !!closedTest.pointsScored ? closedTest.pointsScored : '-' }}</div>
+                    <div>{{ closedTest.pointsPossible }}</div>
+                    <div>{{ !calculatePercentage(closedTest) ? '-' : calculatePercentage(closedTest) + '%' }}</div>
+                    <div>
+                        <mat-icon *ngIf="closedTest.isGroupTest; else strokeGroup">group</mat-icon>
+                        <ng-template #strokeGroup>
+                            <div>-</div>
+                        </ng-template>
+                    </div>
+                    <div>
+                        <mat-icon *ngIf="closedTest.isOwner; else strokeOwner">verified_user</mat-icon>
+                        <ng-template #strokeOwner>
+                            <div>-</div>
+                        </ng-template>
+                    </div>
+                </mat-card>
+            </ng-template>
+        </div>
+    </mat-tab>
+</mat-tab-group>

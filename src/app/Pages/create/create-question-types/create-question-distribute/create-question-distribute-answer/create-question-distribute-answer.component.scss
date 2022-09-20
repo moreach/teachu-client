@@ -1,0 +1,10 @@
+.line {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 40px;
+    gap: 16px;
+}

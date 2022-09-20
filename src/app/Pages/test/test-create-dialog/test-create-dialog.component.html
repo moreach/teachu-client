@@ -1,0 +1,73 @@
+<mat-dialog-content>
+    <h1>{{ 'test.createTest' | translate }}</h1>
+    <mat-slide-toggle (change)="changeTestType($event.checked)" [formControl]="formControlGroupTest">{{ 'test.groupTest' | translate }}</mat-slide-toggle>
+    <form *ngIf="isGroupTest$ | async; else normalTest" [formGroup]="formGroupTestGroupTest">
+        <mat-form-field>
+            <mat-label>{{ 'test.testName' | translate }}</mat-label>
+            <input matInput type="text" formControlName="name">
+        </mat-form-field>
+        <div *ngIf="!setEditable; else setAutocomplete" class="readonly">
+            <div>{{ 'challenge.setName' | translate }}</div>
+            <div class="bold">{{ setName }}</div>
+        </div>
+        <ng-template #setAutocomplete >
+            <mat-form-field>
+                <mat-label>{{ 'challenge.setName' | translate }}</mat-label>
+                <input type="text" matInput [formControl]="filterSetControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectSet($event)">
+                <mat-option *ngFor="let option of filteredOptionsSet$ | async" [value]="option">
+                    {{ option.key }}
+                </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </ng-template>
+        <mat-form-field>
+            <mat-label>{{ 'test.group' | translate }}</mat-label>
+            <input type="text" matInput [formControl]="filterGroupControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectGroup($event)">
+            <mat-option *ngFor="let option of filteredOptionsGroup$ | async" [value]="option">
+                {{ option.key }}
+            </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>{{ 'test.maxTime' | translate }}</mat-label>
+            <input matInput type="number" formControlName="maxTime">
+        </mat-form-field>
+        <div class="buttons">
+            <button mat-button (click)="cancel()">{{ 'framework.cancel' | translate }}</button>
+            <button mat-button color="primary" [disabled]="!formGroupTestGroupTest.valid" (click)="save()">{{ 'framework.save' | translate }}</button>
+        </div>
+    </form>
+    <ng-template #normalTest>
+        <form [formGroup]="formGroupTestNormal">
+            <mat-form-field>
+                <mat-label>{{ 'test.testName' | translate }}</mat-label>
+                <input matInput type="text" formControlName="name">
+            </mat-form-field>
+            <div *ngIf="!setEditable; else setAutocomplete" class="readonly">
+                <div>{{ 'challenge.setName' | translate }}</div>
+                <div class="bold">{{ setName }}</div>
+            </div>
+            <ng-template #setAutocomplete >
+                <mat-form-field>
+                    <mat-label>{{ 'challenge.setName' | translate }}</mat-label>
+                    <input type="text" matInput [formControl]="filterSetControl" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectSet($event)">
+                    <mat-option *ngFor="let option of filteredOptionsSet$ | async" [value]="option">
+                        {{ option.key }}
+                    </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </ng-template>
+            <mat-form-field>
+                <mat-label>{{ 'test.maxTime' | translate }}</mat-label>
+                <input matInput type="number" formControlName="maxTime">
+            </mat-form-field>
+            <div class="buttons">
+                <button mat-button (click)="cancel()">{{ 'framework.cancel' | translate }}</button>
+                <button mat-button color="primary" [disabled]="!formGroupTestNormal.valid" (click)="save()">{{ 'framework.save' | translate }}</button>
+            </div>
+        </form>
+    </ng-template>
+</mat-dialog-content>

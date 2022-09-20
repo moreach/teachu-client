@@ -1,0 +1,12 @@
+.card {
+    margin-top: 16px;
+    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 40px 40px 40px 40px 40px;
+    gap: 16px;
+    .main-text {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 4px;
+    }
+}

@@ -1,0 +1,9 @@
+<div *ngIf="files$ | async as files">
+    <h2 *ngIf="isEmpty(files); else filesList">
+        {{ 'group.noFiles' | translate }}
+    </h2>
+    <ng-template #filesList>
+        <app-file-upload *ngFor="let file of files" (fileChanged)="fileChanged($event)" [fileTypes]="fileTypes()" [translationKey]="'group.groupFile'" [historizedFile]="convertNull(file)"></app-file-upload>
+    </ng-template>
+    <button mat-button color="primary" (click)="addFile()">{{ 'group.addFile' | translate }}</button>
+</div>

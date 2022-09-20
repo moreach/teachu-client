@@ -24,7 +24,7 @@ export class MenuLeaveComponent {
             if (this.item.isTeachu) {
                 this.router.navigate([this.item.url]);
             } else {
-                window.location.href = environment.URL_LEARNZ_FRONTEND + this.item.url;
+                window.location.href = environment.URL_FRONTEND + this.item.url;
             }
         }
     }

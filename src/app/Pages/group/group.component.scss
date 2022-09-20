@@ -1,0 +1,47 @@
+.button-wrapper,
+.group {
+    width: calc(100vw - 240px);
+    max-width: 1000px;
+    min-width: 300px;
+}
+.button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+}
+.no-groups {
+    margin-top: 16px;
+}
+.group {
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 48px 1fr auto auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    gap: 8px;
+    .group-image {
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        object-fit: cover;
+    }
+    .group-middle-section,
+    .files {
+        display: flex;
+        align-items: center;
+        .group-title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+    .files {
+        padding-left: 16px;
+        gap: 4px;
+    }
+    .group-last-msg-date {
+        margin: auto;
+    }
+    .group-last-msg {
+        word-break: break-all;
+    }
+}

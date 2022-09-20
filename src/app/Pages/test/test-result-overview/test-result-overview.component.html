@@ -1,0 +1,18 @@
+<div *ngIf="resultOverview$ | async as resultOverview">
+    <div class="header">
+        <h2>{{ resultOverview.testName }}</h2>
+        <mat-slide-toggle (change)="changeVisibility($event)" [formControl]="formControlVisible">{{ 'test.visible' | translate }}</mat-slide-toggle>
+    </div>
+    <mat-card class="result">
+        <div>{{ 'test.username' | translate }}</div>
+        <div>{{ 'test.time' | translate }}</div>
+        <div>{{ 'test.points' | translate }}</div>
+        <div>{{ 'test.percentage' | translate }}</div>
+    </mat-card>
+    <mat-card *ngFor="let result of resultOverview.results" (click)="openDetails(result.testOfUserId, result.userId)" class="result pointer">
+        <div>{{ result.username }}</div>
+        <div>{{ formatTime(result.timeUsed) }} / {{ formatTime(resultOverview.maxTime) }}</div>
+        <div>{{ result.pointsScored }} / {{ resultOverview.pointsPossible }}</div>
+        <div>{{ calculatePercentage(result.pointsScored, resultOverview.pointsPossible) }}%</div>
+    </mat-card>
+</div>

@@ -1,0 +1,32 @@
+.button-wrapper {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: flex-end;
+}
+.button-wrapper,
+.learn {
+    width: calc(100vw - 240px);
+    max-width: 1000px;
+    min-width: 300px;
+    .no-session {
+        margin-top: 16px;
+    }
+}
+.session,
+.session-closed {
+    margin-top: 16px;
+    display: grid;
+    gap: 16px;
+}
+.session {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.session-closed {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.bold {
+    font-weight: bold;
+}
+.active {
+    cursor: pointer;
+}

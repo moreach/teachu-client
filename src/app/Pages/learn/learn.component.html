@@ -1,0 +1,66 @@
+<div class="button-wrapper">
+    <button type="button" mat-flat-button color="primary" (click)="createNew()">{{ 'learn.newSession' | translate }}</button>
+</div>
+<mat-tab-group class="learn">
+    <mat-tab [label]="'learn.openSessions' | translate">
+        <div *ngIf="openSessions$ | async as openSessions">
+            <h3 *ngIf="isEmpty(openSessions); else sessionsOpen" class="no-session">{{ 'learn.noOpenSession' | translate }}</h3>
+            <ng-template #sessionsOpen>
+                <mat-card class="session">
+                    <div class="bold">{{ 'learn.created' | translate }}</div>
+                    <div class="bold">{{ 'learn.setName' | translate }}</div>
+                    <div class="bold">{{ 'create.subjectMain' | translate }}</div>
+                    <div class="bold">{{ 'create.subjectSecond' | translate }}</div>
+                    <div class="bold">{{ 'learn.correctAnswers' | translate }}</div>
+                    <div class="bold">{{ 'learn.incorrectAnswers' | translate }}</div>
+                    <div class="bold">{{ 'learn.progress' | translate }}</div>
+                </mat-card>
+                <mat-card *ngFor="let openSession of openSessions" (click)="openSessionStepper(openSession.learnSessionId)" class="session active">
+                    <div>
+                        <div>{{ openSession.created | date: 'dd.MM.yyyy' }}</div>
+                        <div>{{ openSession.created | date: 'HH:mm:ss' }}</div>
+                    </div>
+                    <div>{{ openSession.setName }}</div>
+                    <div>{{ translateSubject(openSession.subjectMain) | translate }}</div>
+                    <div>{{ !!openSession.subjectSecond ? (translateSubject(openSession.subjectSecond) | translate) : '' }}</div>
+                    <div>{{ openSession.numberOfRightAnswers }}</div>
+                    <div>{{ openSession.numberOfWrongAnswers }}</div>
+                    <div>{{ calculateProgress(openSession) }}%</div>
+                </mat-card>
+            </ng-template>
+        </div>
+    </mat-tab>
+    <mat-tab [label]="'learn.closedSessions' | translate">
+        <div *ngIf="closedSessions$ | async as closedSessions">
+            <h3 *ngIf="isEmpty(closedSessions); else sessionsClosed" class="no-session">{{ 'learn.noClosedSession' | translate }}</h3>
+            <ng-template #sessionsClosed>
+                <mat-card class="session-closed">
+                    <div class="bold">{{ 'learn.created' | translate }}</div>
+                    <div class="bold">{{ 'learn.ended' | translate }}</div>
+                    <div class="bold">{{ 'learn.setName' | translate }}</div>
+                    <div class="bold">{{ 'create.subjectMain' | translate }}</div>
+                    <div class="bold">{{ 'create.subjectSecond' | translate }}</div>
+                    <div class="bold">{{ 'learn.correctAnswers' | translate }}</div>
+                    <div class="bold">{{ 'learn.incorrectAnswers' | translate }}</div>
+                    <div class="bold">{{ 'learn.percentage' | translate }}</div>
+                </mat-card>
+                <mat-card *ngFor="let closedSession of closedSessions" (click)="openSessionStepper(closedSession.learnSessionId)" class="session-closed active">
+                    <div>
+                        <div>{{ closedSession.created | date: 'dd.MM.yyyy' }}</div>
+                        <div>{{ closedSession.created | date: 'HH:mm:ss' }}</div>
+                    </div>
+                    <div>
+                        <div>{{ closedSession.ended | date: 'dd.MM.yyyy' }}</div>
+                        <div>{{ closedSession.ended | date: 'HH:mm:ss' }}</div>
+                    </div>
+                    <div>{{ closedSession.setName }}</div>
+                    <div>{{ translateSubject(closedSession.subjectMain) | translate }}</div>
+                    <div>{{ !!closedSession.subjectSecond ? (translateSubject(closedSession.subjectSecond) | translate) : '-' }}</div>
+                    <div>{{ closedSession.numberOfRightAnswers }}</div>
+                    <div>{{ closedSession.numberOfWrongAnswers }}</div>
+                    <div>{{ calculatePercentage(closedSession) }}%</div>
+                </mat-card>
+            </ng-template>
+        </div>
+    </mat-tab>
+</mat-tab-group>

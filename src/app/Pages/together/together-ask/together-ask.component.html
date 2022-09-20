@@ -1,0 +1,93 @@
+<div *ngIf="asks$ | async as asks">
+    <mat-tab-group>
+        <mat-tab [label]="'together.openAsks' | translate">
+            <div *ngIf="!isEmpty(asks.openAsks); else noOpenAsks" class="tab-content">
+                <mat-divider></mat-divider>
+                <div *ngFor="let user of asks.openAsks">
+                    <div class="user">
+                        <img (click)="openDetail(user)" [src]="user.profileImagePath" class="user-image">
+                        <div (click)="openDetail(user)" class="user-name">{{ user.username }}</div>
+                        <button (click)="answerUser(user.userId, true)" mat-icon-button class="user-vote-button">
+                            <mat-icon>thumb_up</mat-icon>
+                        </button>
+                        <button (click)="answerUser(user.userId, false)" mat-icon-button class="user-vote-button">
+                            <mat-icon>thumb_down</mat-icon>
+                        </button>
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+            </div>
+            <ng-template #noOpenAsks>
+                <h2 class="tab-content">{{ 'together.noOpenAsks' | translate }}</h2>
+            </ng-template>
+        </mat-tab>
+        <mat-tab [label]="'together.newAsk' | translate">
+            <form [formGroup]="filter" class="tab-content">
+                <div class="line">
+                    <mat-form-field>
+                        <input matInput type="text" formControlName="username" [placeholder]="'together.username' | translate">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>{{ 'together.grade' | translate }}</mat-label>
+                        <mat-select formControlName="grade">
+                            <mat-option *ngFor="let grade of grades" [value]="grade.value">{{ ('Grade.' + grade.key) | translate }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="line">
+                    <mat-form-field>
+                        <mat-label>{{ 'together.goodSubject' | translate }}</mat-label>
+                        <mat-select formControlName="goodSubject">
+                            <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>{{ 'together.badSubject' | translate }}</mat-label>
+                        <mat-select formControlName="badSubject">
+                            <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="line">
+                    <div></div>
+                    <button mat-flat-button color="primary" type="submit" (click)="filterUsers()">
+                        {{ 'together.filter' | translate }}
+                    </button>
+                </div>
+            </form>
+            <div *ngIf="filterResult$ | async as filteredUsers">
+                <div *ngIf="!isEmpty(filteredUsers); else noSentAsks" class="tab-content">
+                    <mat-divider></mat-divider>
+                    <div *ngFor="let user of filteredUsers">
+                        <div class="user user-new-asks">
+                            <img (click)="openDetail(user)" [src]="user.profileImagePath" class="user-image">
+                            <div (click)="openDetail(user)" class="user-name">{{ user.username }}</div>
+                            <button (click)="askUser(user.userId)" mat-icon-button class="user-ask-button">
+                                <mat-icon>accessibility</mat-icon>
+                            </button>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </div>
+                </div>
+                <ng-template #noSentAsks>
+                    <h2 class="tab-content">{{ 'together.noSearchResults' | translate }}</h2>
+                </ng-template>
+            </div>
+        </mat-tab>
+        <mat-tab [label]="'together.asksSent' | translate">
+            <div *ngIf="!isEmpty(asks.sentAsks); else noSentAsks" class="tab-content">
+                <mat-divider></mat-divider>
+                <div *ngFor="let user of asks.sentAsks">
+                    <div (click)="openDetail(user)" class="user user-asks-sent">
+                        <img [src]="user.profileImagePath" class="user-image">
+                        <div class="user-name">{{ user.username }}</div>
+                    </div>
+                    <mat-divider></mat-divider>
+                </div>
+            </div>
+            <ng-template #noSentAsks>
+                <h2 class="tab-content">{{ 'together.noSentAsks' | translate }}</h2>
+            </ng-template>
+        </mat-tab>
+    </mat-tab-group>
+</div>

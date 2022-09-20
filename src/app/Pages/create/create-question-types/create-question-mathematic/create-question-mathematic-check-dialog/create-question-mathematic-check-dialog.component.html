@@ -1,0 +1,13 @@
+<h1>{{ 'create.evaluateQuestion' | translate }}</h1>
+<app-create-question-readonly-field [label]="'create.question' | translate" [value]="question" [twice]="true"></app-create-question-readonly-field>
+<app-create-question-readonly-field [label]="'create.answer' | translate" [value]="answer" [twice]="true"></app-create-question-readonly-field>
+<app-create-question-readonly-field [label]="'create.answerMin' | translate" [value]="answerMin" [twice]="true"></app-create-question-readonly-field>
+<app-create-question-readonly-field *ngIf="!minError; else minErrorOccured" [label]="'create.minEvaluated' | translate" [value]="minEvaluated" [twice]="true"></app-create-question-readonly-field>
+<ng-template #minErrorOccured>
+    <app-create-question-readonly-field [label]="'create.minEvaluated' | translate" [value]="'create.errorOccured' | translate" [twice]="true"></app-create-question-readonly-field>
+</ng-template>
+<app-create-question-readonly-field [label]="'create.answerMax' | translate" [value]="answerMax" [twice]="true"></app-create-question-readonly-field>
+<app-create-question-readonly-field *ngIf="!maxError; else maxErrorOccured" [label]="'create.maxEvaluated' | translate" [value]="maxEvaluated" [twice]="true"></app-create-question-readonly-field>
+<ng-template #maxErrorOccured>
+    <app-create-question-readonly-field [label]="'create.maxEvaluated' | translate" [value]="'create.errorOccured' | translate" [twice]="true"></app-create-question-readonly-field>
+</ng-template>

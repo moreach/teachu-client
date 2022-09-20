@@ -1,0 +1,31 @@
+.connection-overview-detail {
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    gap: 8px;
+    max-width: 1000px;
+    width: calc(100vw - 240px);
+    min-width: 300px;
+    .connection-image {
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        object-fit: cover;
+    }
+    .connection-middle-section {
+        display: flex;
+        align-items: center;
+        .connection-title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+    .connection-last-msg-date {
+        margin: auto;
+    }
+    .connection-last-msg {
+        word-break: break-all;
+    }
+}

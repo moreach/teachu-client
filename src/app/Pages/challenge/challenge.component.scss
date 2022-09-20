@@ -1,0 +1,20 @@
+.challenge {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 40px 40px;
+    gap: 16px;
+    margin-bottom: 16px;
+    width: calc(100vw - 260px);
+    .info :last-child {
+        margin-top: 4px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100vw - 240px);
+    margin-top: 16px;
+    margin-bottom: 8px;
+}

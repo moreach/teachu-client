@@ -1,0 +1,15 @@
+.line {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 8px;
+}
+
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 160px 160px 40px;
+    gap: 16px;
+}
+
+button {
+    height: 36px;
+}

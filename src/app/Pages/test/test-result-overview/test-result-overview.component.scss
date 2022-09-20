@@ -1,0 +1,13 @@
+.result {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+}
+.pointer {
+    cursor: pointer;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,29 @@
+<div class="file-upload">
+    <div *ngIf="_filePath; else fileUpload">
+        <button mat-flat-button color="accent" type="button" (click)="downloadFile()">
+            {{ !_externalFilename ? ('fileUpload.file' | translate) : _externalFilename }}
+        </button>
+        <button *ngIf="!_historizedFile; else contextMenu" mat-icon-button class="space" (click)="removeFile()">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <ng-template #contextMenu>
+            <button mat-icon-button class="space" [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="openHistory()">{{ 'fileUpload.viewVersionHistory' | translate }}</button>
+                <button *ngIf="_historizedFile!.editable" mat-menu-item (click)="fileVersion.click()">{{ 'fileUpload.uploadNewVersion' | translate }}</button>
+                <button *ngIf="_historizedFile!.policyChangeable" mat-menu-item [matMenuTriggerFor]="filePolicies">{{ 'fileUpload.changePolicy' | translate }}</button>
+                <button *ngIf="_historizedFile!.deletable" mat-menu-item (click)="removeFile()">{{ 'fileUpload.deleteFile' | translate }}</button>
+            </mat-menu>
+            <mat-menu #filePolicies>
+                <button mat-menu-item *ngFor="let policy of policies" (click)="setPolicy(policy.value)">{{ ('FilePolicy.' + policy.key) | translate }}</button>
+            </mat-menu>
+            <input type="file" #fileVersion class="hidden" (change)="uploadFile(fileVersion.files, true)" [accept]="fileTypes">
+        </ng-template>
+    </div>
+    <ng-template #fileUpload>
+        <input type="file" #file class="hidden" (change)="uploadFile(file.files)" [accept]="fileTypes">
+        <button mat-flat-button color="accent" type="button" (click)="file.click()">{{ ('fileUpload.uploadFile' | translate) + (translationKey ? ' ' + (translationKey | translate) : '') }}</button>
+    </ng-template>
+</div>

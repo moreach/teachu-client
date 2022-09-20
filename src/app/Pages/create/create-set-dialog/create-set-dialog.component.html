@@ -1,0 +1,32 @@
+<mat-dialog-content [formGroup]="formGroup">
+    <h1>{{ 'create.newSet' | translate }}</h1>
+    <mat-form-field>
+        <input matInput type="text" formControlName="name" [placeholder]="'create.name' | translate">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>{{ 'create.description' | translate }}</mat-label>
+        <textarea [formControlName]="'description'" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>{{ 'create.subjectMain' | translate }}</mat-label>
+        <mat-select formControlName="subjectMain">
+            <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>{{ 'create.subjectSecond' | translate }}</mat-label>
+        <mat-select formControlName="subjectSecond">
+            <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="isPolicyEditable">
+        <mat-label>{{ 'create.setPolicy' | translate }}</mat-label>
+        <mat-select formControlName="setPolicy">
+            <mat-option *ngFor="let policy of policies" [value]="policy.value">{{ ('SetPolicy.' + policy.key) | translate }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="buttons">
+        <button mat-button (click)="close()">{{ 'framework.cancel' | translate }}</button>
+        <button mat-button color="primary" [disabled]="!formGroup.valid" (click)="save()">{{ 'framework.save' | translate }}</button>
+    </div>
+</mat-dialog-content>

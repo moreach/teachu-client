@@ -1,0 +1,34 @@
+.choice {
+    margin-top: 4px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--teachu-black);
+    color: var(--teachu-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.answered {
+    background-color: var(--teachu-primary);
+}
+.active {
+    margin-top: 0px;
+    border: 4px solid var(--teachu-primary);
+}
+.active.answered {
+    margin-top: 0px;
+    border: 4px solid var(--teachu-black);
+}
+button {
+    margin-top: 4px;
+    width: 60px;
+    height: 60px;
+}
+.choices {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+}

@@ -1,0 +1,31 @@
+<div *ngIf="!editable; else editMode" class="line">
+    <app-create-question-readonly-field [label]="'create.question' | translate" [value]="formGroup.value.question"></app-create-question-readonly-field>
+    <div></div>
+    <app-create-question-readonly-field [label]="'create.answer' | translate" [value]="formGroup.value.answer"></app-create-question-readonly-field>
+    <app-create-question-readonly-field [label]="'create.digits' | translate" [value]="'' + formGroup.value.digits"></app-create-question-readonly-field>
+</div>
+<ng-template #editMode>
+    <form [formGroup]="formGroup" class="form">
+        <mat-form-field>
+            <input matInput type="text" formControlName="question" [placeholder]="'create.question' | translate" (change)="changeQuestion()">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" formControlName="answer" [placeholder]="'create.answer' | translate" (change)="changeQuestion()">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" formControlName="digits" [placeholder]="'create.digits' | translate" (change)="changeQuestion()">
+        </mat-form-field>
+        <button mat-button (click)="addQuestion()">
+            {{ 'create.addVariable' | translate }}
+        </button>
+        <button mat-button (click)="checkQuestion()">
+            {{ 'create.checkMathematic' | translate }}
+        </button>
+        <button mat-icon-button (click)="deleteQuestion()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </form>
+</ng-template>
+<div *ngFor="let variable of currentChildValue">
+    <app-create-question-mathematic-variable [variable]="variable" [editable]="editable" (answerChange)="changeAnswer($event)" (answerDelete)="deleteAnswer($event)"></app-create-question-mathematic-variable>
+</div>

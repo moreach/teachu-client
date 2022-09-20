@@ -1,0 +1,19 @@
+.button-wrapper {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: flex-end;
+}
+.button-wrapper,
+.sets {
+    width: calc(100vw - 240px);
+    max-width: 1000px;
+    min-width: 300px;
+    .line {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .first-line {
+        margin-top: 16px;
+    }
+}

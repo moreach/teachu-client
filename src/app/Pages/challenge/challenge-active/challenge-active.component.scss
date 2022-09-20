@@ -1,0 +1,38 @@
+.top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    gap: 120px;
+}
+.players {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+    gap: 16px;
+}
+.text {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+.text-smaller {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+.bold {
+    font-weight: bold;
+}
+.result {
+    display: grid;
+    grid-template-columns: 80px 200px 80px;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+.result-answer {
+    margin-bottom: 32px;
+}
+.space {
+    margin-bottom: 32px;
+}
+.time {
+    cursor: default;
+}

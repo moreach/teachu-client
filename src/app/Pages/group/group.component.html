@@ -1,0 +1,35 @@
+<div *ngIf="overview$ | async as overview">
+    <div class="button-wrapper">
+        <button mat-button color="primary" (click)="openInfo(null)">{{ 'group.newGroup' | translate }}</button>
+    </div>
+    <mat-divider></mat-divider>
+    <h2 *ngIf="isEmpty(overview); else groupOverview" class="no-groups">{{ 'group.noGroups' | translate }}</h2>
+    <ng-template #groupOverview>
+        <div *ngFor="let group of overview">
+            <div class="group">
+                <img (click)="openInfo(group.groupId)" [src]="group.profileImagePath" class="group-image">
+                <div (click)="navigateToChat(group.groupId)" class="group-middle-section">
+                    <div>
+                        <div class="group-title">{{ group.groupName }}</div>
+                        <div *ngIf="!group.lastMessageWasInfoMessage; else infoMessage" class="group-last-msg">
+                            {{ group.lastMessageSentByMe ? ('group.you' | translate) : group.lastMessageSentUsername }}:<i>{{ group.lastMessage }}</i>
+                        </div>
+                        <ng-template #infoMessage>
+                            <div class="group-last-msg">
+                                <i>{{ translateInfoMessage(group.lastMessage ?? '').value }} {{ translateInfoMessage(group.lastMessage ?? '').key | translate }}</i>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+                <div (click)="navigateToChat(group.groupId)" class="group-last-msg-date">
+                    {{ isToday(group.lastMessageDateSent!) ? (group.lastMessageDateSent | date: 'HH:mm') : (group.lastMessageDateSent | date: 'dd.MM.yyyy') }}
+                </div>
+                <div (click)="navigateToFiles(group.groupId)" class="files">
+                    <div>{{ group.numberOfFiles }}</div>
+                    <mat-icon>insert_drive_file</mat-icon>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+        </div>
+    </ng-template>
+</div>

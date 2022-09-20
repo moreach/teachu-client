@@ -1,0 +1,27 @@
+<mat-dialog-content [formGroup]="formGroup">
+    <h1>{{ 'draw.collectionSettings' | translate }}</h1>
+    <mat-form-field>
+        <mat-label>{{ 'draw.name' | translate }}</mat-label>
+        <input matInput type="text" formControlName="name">
+    </mat-form-field>
+    <mat-slide-toggle [formControl]="formControlIsGroup" (change)="changeGroupConnect($event.checked)">{{ 'draw.groupConnect' | translate }}</mat-slide-toggle>
+    <mat-form-field *ngIf="formControlIsGroup.value">
+        <mat-label>{{ 'draw.groupName' | translate }}</mat-label>
+        <input type="text" matInput [formControl]="formControlGroupFilter" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectGroup($event)">
+          <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">
+            {{ option.key }}
+          </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field *ngIf="formControlIsGroup.value">
+        <mat-label>{{ 'draw.drawGroupPolicy' | translate }}</mat-label>
+        <mat-select formControlName="drawGroupPolicy">
+            <mat-option *ngFor="let policy of policies" [value]="policy.value">{{ ('DrawGroupPolicy.' + policy.key) | translate }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="buttons">
+        <button mat-button (click)="cancel()">{{ 'framework.cancel' | translate }}</button>
+        <button mat-button color="primary" (click)="save()" [disabled]="!formGroup.valid">{{ 'framework.save' | translate }}</button>
+    </div>
+</mat-dialog-content>

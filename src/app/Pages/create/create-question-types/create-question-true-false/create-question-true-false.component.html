@@ -1,0 +1,17 @@
+<div *ngIf="!editable; else editMode" class="line">
+    <app-create-question-readonly-field [label]="'create.question' | translate" [value]="formGroup.value.question"></app-create-question-readonly-field>
+    <app-create-question-readonly-field [label]="'create.answer' | translate" [value]="formGroup.value.answer ? ('create.answerTrue' | translate) : ('create.answerFalse' | translate)"></app-create-question-readonly-field>
+</div>
+<ng-template #editMode>
+    <form [formGroup]="formGroup" class="form">
+        <mat-form-field>
+            <input matInput type="text" formControlName="question" [placeholder]="'create.question' | translate" (change)="changeQuestion()">
+        </mat-form-field>
+        <div class="toggle">
+            <mat-slide-toggle (change)="changeQuestion()" formControlName="answer">{{ 'create.answer' | translate }}</mat-slide-toggle>
+        </div>
+        <button mat-icon-button (click)="deleteQuestion()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </form>
+</ng-template>

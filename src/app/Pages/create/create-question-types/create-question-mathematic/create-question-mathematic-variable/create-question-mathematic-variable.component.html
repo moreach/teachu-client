@@ -1,0 +1,29 @@
+<div *ngIf="!editable; else editMode" class="line">
+    <app-create-question-readonly-field [label]="'create.display' | translate" [value]=" formGroup.value.display"></app-create-question-readonly-field>
+    <app-create-question-readonly-field [label]="'create.min' | translate" [value]="'' +formGroup.value.min"></app-create-question-readonly-field>
+    <app-create-question-readonly-field [label]="'create.max' | translate" [value]="'' +formGroup.value.max"></app-create-question-readonly-field>
+    <app-create-question-readonly-field [label]="'create.interval' | translate" [value]="'' +formGroup.value.interval"></app-create-question-readonly-field>
+    <app-create-question-readonly-field [label]="'create.digits' | translate" [value]="'' +formGroup.value.digits"></app-create-question-readonly-field>
+</div>
+<ng-template #editMode>
+    <form [formGroup]="formGroup" class="form">
+        <mat-form-field>
+            <input matInput type="text" formControlName="display" [placeholder]="'create.display' | translate" (change)="changeAnswer()">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" formControlName="min" [placeholder]="'create.min' | translate" (change)="changeAnswer()">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" formControlName="max" [placeholder]="'create.max' | translate" (change)="changeAnswer()">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" formControlName="interval" [placeholder]="'create.interval' | translate" (change)="changeAnswer()">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" formControlName="digits" [placeholder]="'create.digits' | translate" (change)="changeAnswer()">
+        </mat-form-field>
+        <button mat-icon-button (click)="deleteAnswer()">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </form>
+</ng-template>

@@ -1,0 +1,47 @@
+<div *ngIf="questions$ | async as questions">
+    <div *ngIf="showResult$ | async; else stepper">
+        <app-learn-result [questions]="questions"></app-learn-result>
+    </div>
+    <ng-template #stepper>
+        <div *ngIf="progress$ | async as progress">
+            <div *ngIf="showSolution$ | async; else question" class="active-solution">
+                <div *ngIf="activeSolution$ | async as activeSolution">
+                    <div *ngIf="activeModeWrite" class="solution-title">{{ (activeSolution.wasCorrect ? 'learn.youWereRight' : 'learn.youWereWrong') | translate }}</div>
+                    <div class="description">{{ 'learn.solution' | translate }}: {{ activeSolution.answer }}</div>
+                    <form class="form" [formGroup]="formGroup">
+                        <button mat-flat-button color="primary" type="button" (click)="nextQuestion(activeSolution.questionId)">{{ 'learn.nextQuestion' | translate }}</button>
+                        <mat-slide-toggle (change)="changeCorrectIncorrect(activeSolution)" formControlName="correct">{{ 'learn.markAsCorrect' | translate }}</mat-slide-toggle>
+                        <mat-slide-toggle (change)="markQuestion(activeSolution.questionId)" formControlName="hard">{{ 'learn.markAsHard' | translate }}</mat-slide-toggle>
+                    </form>
+                </div>
+            </div>
+            <ng-template #question>
+                <div *ngIf="activeQuestion$ | async as activeQuestion">
+                    <div class="active-question">
+                        <app-general-question *ngIf="activeModeWrite; else cardMode" [question]="activeQuestion.question" [progress]="progress" (answered)="writeAnswer($event)"></app-general-question>
+                        <ng-template #cardMode>
+                            <div class="card" (click)="cardAnswer(activeQuestion.question.questionId)">
+                                <div class="question">{{ activeQuestion.question.question }}</div>
+                                <div *ngIf="getQuestionType(activeQuestion.question.questionType) === 'Distribute'" class="description distribute">
+                                    <div>
+                                        <div *ngFor="let answer of activeQuestion.question.answerSetOne" class="answer">{{ answer.answer }}</div>
+                                    </div>
+                                    <div>
+                                        <div *ngFor="let answer of activeQuestion.question.answerSetTwo" class="answer">{{ answer.answer }}</div>
+                                    </div>
+                                </div>
+                                <div *ngIf="getQuestionType(activeQuestion.question.questionType) === 'Mathematic'" class="description">{{ 'generalQuestion.roundBy' | translate }} {{ activeQuestion.question.description }} {{ 'generalQuestion.digits' | translate }}</div>
+                                <div *ngIf="getQuestionType(activeQuestion.question.questionType) === 'MultipleChoice'" class="description">
+                                    <div *ngFor="let answer of activeQuestion.question.answerSetOne" class="answer">{{ answer.answer }}</div>
+                                </div>
+                                <div *ngIf="getQuestionType(activeQuestion.question.questionType) === 'TrueFalse'" class="description">{{ 'generalQuestion.trueOfFalse' | translate }}</div>
+                                <div *ngIf="getQuestionType(activeQuestion.question.questionType) === 'Word'" class="description">{{ 'generalQuestion.translateTo' | translate }} {{ translateSubject(activeQuestion.question.description ?? '') | translate }}</div>
+                            </div>
+                        </ng-template>
+                    </div>
+                    <button mat-flat-button color="primary" type="button" (click)="changeMode()" class="change-mode">{{ (activeModeWrite ? 'learn.changeToCardMode' : 'learn.changeToWriteMode') | translate }}</button>
+                </div>
+            </ng-template>
+        </div>
+    </ng-template>
+</div>

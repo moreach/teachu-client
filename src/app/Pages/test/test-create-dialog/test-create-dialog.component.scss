@@ -1,0 +1,22 @@
+mat-dialog-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    form {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    .readonly {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .bold {
+        font-weight: bold;
+    }
+}

@@ -1,0 +1,67 @@
+<div *ngIf="challenge$ | async as challenge">
+    <div class="top">
+        <h2>{{ challenge.name }}</h2>
+        <div *ngIf="challenge.isOwner && getState(challenge.state) !== 'Ended'">
+            <button mat-button color="primary" (click)="challengeNextFlow()">{{ 'challenge.proceed' | translate }}</button>
+        </div>
+        <div *ngIf="getState(challenge.state) === 'Ended'">
+            <button mat-button color="primary" (click)="goBack()">{{ 'framework.back' | translate }}</button>
+        </div>
+        <div *ngIf="getState(challenge.state) === 'Question'">
+            <button *ngIf="heartBeat$ | async" mat-fab color="primary" class="time">
+                {{ secondsLeft(challenge.questionCloses, challenge.isOwner) }}
+            </button>
+        </div>
+    </div>
+    <div [ngSwitch]="getState(challenge.state)">
+        <div *ngSwitchCase="'BeforeGame'">
+            <div class="text">{{ 'challenge.waitingForPlayersToJoin' | translate }}</div>
+            <div class="text-smaller">{{ 'challenge.currently' | translate }} {{ getLength(challenge.result) }} {{ 'challenge.players' | translate }}</div>
+            <div class="players">
+                <mat-card *ngFor="let player of challenge.result">
+                    <div>{{ player.username }}</div>
+                </mat-card>
+            </div>
+        </div>
+        <div *ngSwitchCase="'Question'">
+            <app-general-question *ngIf="challenge.question != null" [question]="challenge.question" [challengeId]="this.challengeId" [disabled]="challenge.isOwner" (answered)="challengeAnswer($event)"></app-general-question>
+        </div>
+        <div *ngSwitchCase="'Answer'">
+            <div class="text">{{ 'challenge.waitingForPlayersToAnswer' | translate }}</div>
+        </div>
+        <div *ngSwitchCase="'Result'">
+            <div *ngIf="challenge.lastQuestionPoint != null" class="result-answer">
+                <div *ngIf="wasRight(challenge.lastQuestionPoint); else wasWrong" class="text">{{ 'challenge.wasRight' | translate }}</div>
+                <ng-template #wasWrong>
+                    <div class="text">{{ 'challenge.wasWrong' | translate }}</div>
+                </ng-template>
+                <div class="text-smaller">{{ 'challenge.youScored' | translate }}: {{ challenge.lastQuestionPoint }}</div>
+            </div>
+            <div *ngIf="challenge.lastQuestionCorrectAnswer != null" class="text-smaller result-answer">{{ 'challenge.correctAnswerWas' | translate }}: {{ challenge.lastQuestionCorrectAnswer }}</div>
+            <mat-card class="result">
+                <div class="text-smaller bold">#</div>
+                <div class="text-smaller">{{ 'challenge.username' | translate }}</div>
+                <div class="text-smaller">{{ 'challenge.points' | translate }}</div>
+            </mat-card>
+            <mat-card *ngFor="let user of challenge.result" class="result">
+                <div class="text-smaller bold">{{ getPlace(user, challenge.result) }}</div>
+                <div class="text-smaller">{{ user.username }}</div>
+                <div class="text-smaller">{{ user.points }}</div>
+            </mat-card>
+        </div>
+        <div *ngSwitchCase="'Ended'">
+            <div class="text">{{ 'challenge.ended' | translate }}</div>
+            <div class="text space">{{ 'challenge.finalScores' | translate }}</div>
+            <mat-card class="result">
+                <div class="text-smaller bold">#</div>
+                <div class="text-smaller">{{ 'challenge.username' | translate }}</div>
+                <div class="text-smaller">{{ 'challenge.points' | translate }}</div>
+            </mat-card>
+            <mat-card *ngFor="let user of challenge.result" class="result">
+                <div class="text-smaller bold">{{ getPlace(user, challenge.result) }}</div>
+                <div class="text-smaller">{{ user.username }}</div>
+                <div class="text-smaller">{{ user.points }}</div>
+            </mat-card>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div *ngIf="settings$ | async as settings">
+    <form [formGroup]="formGroup" class="page">
+        <div class="header">
+            <div class="settings">
+                <mat-form-field>
+                    <mat-label>{{ 'test.testName' | translate }}</mat-label>
+                    <input matInput type="text" formControlName="name">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>{{ 'test.maxTime' | translate }}</mat-label>
+                    <input matInput type="number" formControlName="maxTime">
+                </mat-form-field>
+                <mat-slide-toggle formControlName="visible">{{ 'test.visible' | translate }}</mat-slide-toggle>
+                <mat-slide-toggle formControlName="active">{{ 'test.active' | translate }}</mat-slide-toggle>
+            </div>
+            <div class="info">
+                <div>{{ 'test.setName' | translate }}:</div>
+                <div class="bold">{{ settings.setName }}</div>
+            </div>
+            <div class="info">
+                <div>{{ 'create.subjectMain' | translate }}:</div>
+                <div class="bold">{{ translateSubject(settings.subjectMain) | translate }}</div>
+            </div>
+            <div class="info">
+                <div>{{ 'create.subjectSecond' | translate }}:</div>
+                <div class="bold">{{ !!settings.subjectSecond ? (translateSubject(settings.subjectSecond) | translate) : '-' }}</div>
+            </div>
+        </div>
+        <div *ngFor="let question of settings.questions" class="question-wrap">
+            <div>
+                <div class="question">{{ question.question.question }}</div>
+                <mat-divider *ngIf="!hideDivider(question.question.questionType)" class="divider"></mat-divider>
+                <div *ngIf="getQuestionType(question.question.questionType) === 'Distribute'" class="description distribute">
+                    <div>
+                        <div *ngFor="let answer of question.question.answerSetOne" class="answer">{{ answer.answer }}</div>
+                    </div>
+                    <div>
+                        <div *ngFor="let answer of question.question.answerSetTwo" class="answer">{{ answer.answer }}</div>
+                    </div>
+                </div>
+                <div *ngIf="getQuestionType(question.question.questionType) === 'Mathematic'" class="description">{{ 'generalQuestion.roundBy' | translate }} {{ question.question.description }} {{ 'generalQuestion.digits' | translate }}</div>
+                <div *ngIf="getQuestionType(question.question.questionType) === 'MultipleChoice'" class="description">
+                    <div *ngFor="let answer of question.question.answerSetOne" class="answer">{{ answer.answer }}</div>
+                </div>
+                <div *ngIf="getQuestionType(question.question.questionType) === 'TrueFalse'" class="description">{{ 'generalQuestion.trueOfFalse' | translate }}</div>
+                <div *ngIf="getQuestionType(question.question.questionType) === 'Word'" class="description">{{ 'generalQuestion.translateTo' | translate }} {{ translateSubjectFromString(question.question.description ?? '') | translate }}</div>
+            </div>
+            <mat-divider class="divider"></mat-divider>
+            <div *ngIf="question.solution" class="answer">{{ 'test.solution' | translate }}: {{ isTrueFalse(question) ? (cleanupSolution(question) ?? '' | translate) : cleanupSolution(question) }}</div>
+            <mat-divider *ngIf="question.solution" class="divider"></mat-divider>
+            <mat-form-field>
+                <mat-label>{{ 'test.points' | translate }}</mat-label>
+                <input matInput type="number" [formControlName]="question.question.questionId + '_points'">
+            </mat-form-field>
+            <mat-divider class="divider no-top"></mat-divider>
+            <mat-slide-toggle [formControlName]="question.question.questionId + '_visible'">{{ 'test.visible' | translate }}</mat-slide-toggle>
+        </div>
+        <button mat-flat-button color="primary" type="button" [disabled]="!formGroup.valid" (click)="save()" class="save">{{ 'framework.save' | translate }}</button>
+    </form>
+</div>

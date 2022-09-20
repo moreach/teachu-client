@@ -1,0 +1,54 @@
+<div *ngIf="result$ | async as result">
+    <h2>{{ result.name }} ({{ translateSubject(result.subjectMain) | translate }}{{ !result.subjectSecond ? '' : ' - ' }}{{ !result.subjectSecond ? '' : translateSubject(result.subjectSecond) | translate }})</h2>
+    <div class="page">
+        <div class="info">
+            <div>{{ 'test.timeUsed' | translate }}:</div>
+            <div class="bold">{{ formatTime(result.timeUsed) }}</div>
+            <div>{{ 'test.maxTime' | translate }}:</div>
+            <div class="bold">{{ formatTime(result.maxTime) }}</div>
+            <div>{{ 'test.points' | translate }}:</div>
+            <div class="bold">{{ result.pointsScored }} / {{ result.pointsPossible }}</div>
+            <div>{{ 'test.percentage' | translate }}:</div>
+            <div class="bold">{{ calculatePercentage(result.pointsScored, result.pointsPossible) }}%</div>
+        </div>
+        <div [ngClass]="{ 'question-info': true, 'adjustable': pointsAdjustable }">
+            <div>-</div>
+            <div>{{ 'generalQuestion.question' | translate }}</div>
+            <div>{{ 'test.solution' | translate }}</div>
+            <div>{{ 'generalQuestion.answer' | translate }}</div>
+            <div>{{ 'test.points' | translate }}</div>
+            <div *ngIf="pointsAdjustable"></div>
+        </div>
+        <div *ngFor="let question of result.questions" [ngClass]="{ 'question-wrap': true, 'adjustable': pointsAdjustable, 'correct': question.wasRight }">
+            <div>
+                <mat-icon *ngIf="question.wasRight; else notCorrect">check</mat-icon>
+                <ng-template #notCorrect>
+                    <mat-icon>close</mat-icon>
+                </ng-template>
+            </div>
+            <div>
+                <div class="question">{{ question.question.question }}</div>
+                <div *ngIf="getQuestionType(question.question.questionType) === 'Distribute'" class="description distribute">
+                    <div>
+                        <div *ngFor="let answer of question.question.answerSetOne" class="answer">{{ answer.answer }}</div>
+                    </div>
+                    <div>
+                        <div *ngFor="let answer of question.question.answerSetTwo" class="answer">{{ answer.answer }}</div>
+                    </div>
+                </div>
+                <div *ngIf="getQuestionType(question.question.questionType) === 'Mathematic'" class="description">{{ 'generalQuestion.roundBy' | translate }} {{ question.question.description }} {{ 'generalQuestion.digits' | translate }}</div>
+                <div *ngIf="getQuestionType(question.question.questionType) === 'MultipleChoice'" class="description">
+                    <div *ngFor="let answer of question.question.answerSetOne" class="answer">{{ answer.answer }}</div>
+                </div>
+                <div *ngIf="getQuestionType(question.question.questionType) === 'TrueFalse'" class="description">{{ 'generalQuestion.trueOfFalse' | translate }}</div>
+                <div *ngIf="getQuestionType(question.question.questionType) === 'Word'" class="description">{{ 'generalQuestion.translateTo' | translate }} {{ translateSubjectFromString(question.question.description ?? '') | translate }}</div>
+            </div>
+            <div class="answer">{{ isTrueFalse(question) ? (cleanupSolution(question) ?? '' | translate) : cleanupSolution(question) }}</div>
+            <div class="answer">{{ isTrueFalse(question) ? (cleanupAnswer(question) ?? '' | translate) : cleanupAnswer(question) }}</div>
+            <div class="answer">{{ question.pointsScored }} / {{ question.pointsPossible }}</div>
+            <button *ngIf="pointsAdjustable" mat-flat-button type="button" (click)="editPoints(question.question.questionId, question.wasRight, question.pointsScored)">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

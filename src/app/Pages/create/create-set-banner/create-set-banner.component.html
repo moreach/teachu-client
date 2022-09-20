@@ -1,0 +1,38 @@
+<mat-card class="card">
+    <div>
+        <div class="main-text">{{ translateSubject(set!.subjectMain) | translate }}</div>
+        <div *ngIf="set!.subjectSecond">{{ translateSubject(set!.subjectSecond) | translate }}</div>
+    </div>
+    <div>
+        <div class="main-text">{{ set!.name }}</div>
+        <div>{{ set!.description }}</div>
+    </div>
+    <div>
+        <div class="main-text">{{ set!.numberOfQuestions }} {{ 'create.items' | translate }}</div>
+        <div>{{ 'create.createdBy' | translate }}: {{ set!.owner }}</div>
+    </div>
+    <button *ngIf="set!.usable; else notUsable" mat-icon-button (click)="learnSet(set!.setId, set!.name)">
+        <mat-icon>school</mat-icon>
+    </button>
+    <button *ngIf="set!.usable" mat-icon-button (click)="challengeSet(set!.setId, set!.name)">
+        <mat-icon>poll</mat-icon>
+    </button>
+    <button *ngIf="set!.usable" mat-icon-button (click)="testSet(set!.setId, set!.name)">
+        <mat-icon>assignment_turned_in</mat-icon>
+    </button>
+    <button *ngIf="set!.usable" mat-icon-button (click)="viewSet(set!.setId)">
+        <mat-icon>remove_red_eye</mat-icon>
+    </button>
+    <ng-template #notUsable>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </ng-template>
+    <button *ngIf="set!.editable; else notEditable" mat-icon-button (click)="editSet(set!.setId, set!.policyEditable)">
+        <mat-icon>edit</mat-icon>
+    </button>
+    <ng-template #notEditable>
+        <div></div>
+    </ng-template>
+</mat-card>

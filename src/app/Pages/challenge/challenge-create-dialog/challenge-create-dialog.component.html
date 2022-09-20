@@ -1,0 +1,26 @@
+<mat-dialog-content [formGroup]="formGroup">
+    <h1>{{ 'challenge.createChallenge' | translate }}</h1>
+    <mat-form-field>
+        <mat-label>{{ 'challenge.name' | translate }}</mat-label>
+        <input matInput type="text" formControlName="name">
+    </mat-form-field>
+    <div *ngIf="!setEditable; else setAutocomplete" class="readonly">
+        <div>{{ 'challenge.setName' | translate }}</div>
+        <div class="bold">{{ setName }}</div>
+    </div>
+    <ng-template #setAutocomplete >
+        <mat-form-field>
+            <mat-label>{{ 'challenge.setName' | translate }}</mat-label>
+            <input type="text" matInput [formControl]="filterSetControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectSet($event)">
+              <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">
+                {{ option.key }}
+              </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </ng-template>
+    <div class="buttons">
+        <button mat-button (click)="cancel()">{{ 'framework.cancel' | translate }}</button>
+        <button mat-button color="primary" [disabled]="!formGroup.valid" (click)="save()">{{ 'framework.save' | translate }}</button>
+    </div>
+</mat-dialog-content>

@@ -10,3 +10,13 @@ export function truncateToMaxChars(text: string, charCount: number): string {
 export function removeEmptyAndSpecialChars(text: string): string {
     return text.replace(/[^a-zA-Z0-9]/g, '');
 }
+
+export function formatTime(minutes: number) {
+    if (!minutes) {
+        return 0 + '\'';
+    }
+    if (minutes >= 60) {
+        return Math.floor(minutes / 60) + 'h ' + (minutes % 60) + '\'';
+    }
+    return minutes + '\'';
+}

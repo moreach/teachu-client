@@ -1,0 +1,47 @@
+<div class="button-wrapper">
+    <button type="button" mat-flat-button color="primary" (click)="newSet()">{{ 'create.newSet' | translate }}</button>
+</div>
+<mat-tab-group class="sets">
+    <mat-tab [label]="'create.latestSets' | translate">
+        <div *ngIf="latest$ | async as latest">
+            <h3 *ngIf="isEmpty(latest)">{{ 'create.noSets' | translate }}</h3>
+            <app-create-set-banner *ngFor="let set of latest" [set]="set"></app-create-set-banner>
+        </div>
+    </mat-tab>
+    <mat-tab [label]="'create.findSet' | translate">
+        <div *ngIf="filtered$ | async as filtered">
+            <form [formGroup]="filter">
+                <div class="line first-line">
+                    <mat-form-field>
+                        <input matInput type="text" formControlName="name" [placeholder]="'create.name' | translate">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>{{ 'create.subjectMain' | translate }}</mat-label>
+                        <mat-select formControlName="subjectMain">
+                            <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>{{ 'create.subjectSecond' | translate }}</mat-label>
+                        <mat-select formControlName="subjectSecond">
+                            <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="line">
+                    <div></div>
+                    <div></div>
+                    <button mat-flat-button color="primary" type="submit" (click)="filterApply()">{{ 'create.filter' | translate }}</button>
+                </div>
+            </form>
+            <app-create-set-banner *ngFor="let set of filtered" [set]="set"></app-create-set-banner>
+            <h3 *ngIf="isEmpty(filtered)">{{ 'create.noSets' | translate }}</h3>
+        </div>
+    </mat-tab>
+    <mat-tab [label]="'create.ownSets' | translate">
+        <div *ngIf="own$ | async as own">
+            <h3 *ngIf="isEmpty(own)">{{ 'create.noSets' | translate }}</h3>
+            <app-create-set-banner *ngFor="let set of own" [set]="set"></app-create-set-banner>
+        </div>
+    </mat-tab>
+</mat-tab-group>

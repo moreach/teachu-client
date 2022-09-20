@@ -1,0 +1,65 @@
+<div *ngIf="info$ | async as info">
+    <div *ngIf="getActivePage(info.pages) as activePage" class="header">
+        <h2>{{ info.name }}</h2>
+        <mat-slide-toggle *ngIf="activePage.editable" [formControl]="formControlEditMode" class="slide" (change)="navigateEditMode($event.checked)">{{ 'draw.editMode' | translate }}</mat-slide-toggle>
+        <div *ngIf="formControlEditMode.value" class="mode-picker">
+            <mat-icon>{{ selectedModeIcon() }}</mat-icon>
+            <mat-select [formControl]="formControlMode" (valueChange)="canvasChangeMode()">
+                <mat-option *ngFor="let mode of modes" [value]="mode.key"class="color-option" [disabled]="isSelectedMode(mode.key)">
+                    <mat-icon *ngIf="!isSelectedMode(mode.key)">{{ mode.value }}</mat-icon>{{ ('DrawMode.' + mode.key) | translate }}
+                </mat-option>
+            </mat-select>
+        </div>
+        <div *ngIf="formControlEditMode.value" class="color-picker">
+            <mat-icon [ngStyle]="{ 'color': formControlColor.value }">format_color_fill</mat-icon>
+            <mat-select [formControl]="formControlColor">
+                <mat-option *ngFor="let color of colors" [value]="color.value"class="color-option" [disabled]="isSelectedColor(color.value)">
+                    <mat-icon *ngIf="!isSelectedColor(color.value)" [ngStyle]="{ 'color': color.value }">format_color_fill</mat-icon>{{ ('Colors.' + color.key) | translate }}
+                </mat-option>
+            </mat-select>
+        </div>
+        <div *ngIf="formControlEditMode.value">
+            <button mat-icon-button (click)="stepBackward()" class="step-button">
+                <mat-icon>undo</mat-icon>
+            </button>
+            <button mat-icon-button (click)="stepForward()" class="step-button">
+                <mat-icon>redo</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="site header">
+        <canvas #canvas [ngClass]="{ 'active-page': true, 'hidden': !(editMode$ | async) }"></canvas>
+        <div *ngIf="getActivePage(info.pages) as activePage">
+            <div *ngIf="!(editMode$ | async)" class="active-page-wrapper">
+                <img *ngIf="!activePage.isEmpty; else emptyActiveImage" [src]="activePage.dataUrl" class="active-page">
+                <ng-template #emptyActiveImage>
+                    <div class="active-page active-image-empty">{{ 'draw.empty' | translate }}</div>
+                </ng-template>
+            </div>
+        </div>
+        <div class="page-collection">
+            <button *ngIf="info.editable" mat-flat-button color="primary" (click)="createPage()" class="add-page">{{ 'draw.addPage' | translate }}</button>
+            <div *ngFor="let page of info.pages" class="page">
+                <div [ngClass]="{ 'active': pageId$.value === page.pageId, 'drawing': true, 'pointer': true }" (click)="openPage(page.pageId)">
+                    <img *ngIf="!page.isEmpty else emptyImage" [src]="page.dataUrl" class="drawing-image">
+                    <ng-template #emptyImage>
+                        <div class="drawing-image empty-image">
+                            <div>{{ 'draw.empty' | translate }}</div>
+                        </div>
+                    </ng-template>
+                </div>
+                <div class="action-bar">
+                    <div class="action">
+                        <mat-icon *ngIf="page.editable" (click)="editPage(page.pageId)" class="pointer">edit</mat-icon>
+                    </div>
+                    <div class="action">
+                        <mat-icon *ngIf="page.deletable" (click)="deletePage(page.pageId, info.pages)" class="pointer">delete</mat-icon>
+                    </div>
+                    <div class="action profile-image">
+                        <img *ngIf="!!page.editingPersonName && !!page.editingPersonProfileImagePath" [src]="page.editingPersonProfileImagePath" [matTooltip]="page.editingPersonName">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+.page {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    .buttons, .subjects, .good-bad {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 24px;
+    }
+    .good-bad {
+        gap: 100px;
+    }
+    .profile {
+        max-width: 500px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        .img-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+                width: 400px;
+                height: 400px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+        }
+        .username {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .grade, .information {
+            text-align: center;
+        }
+    }
+    .group {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 8px;
+        .mat-icon {
+            font-size: 40px;
+            width: 40px;
+            height: 40px;
+        }
+        .icon-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

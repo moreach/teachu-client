@@ -1,0 +1,18 @@
+.file-upload {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 8px;
+    
+    .hidden {
+        display: none;
+    }
+
+    .center {
+        display: flex;
+        align-items: center;
+    }
+
+    .space {
+        margin-left: 16px;
+    }
+}

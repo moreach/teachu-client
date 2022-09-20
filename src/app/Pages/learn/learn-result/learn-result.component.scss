@@ -1,0 +1,20 @@
+.header {
+    border: 1px solid var(--teachu-black);
+}
+.answered {
+    border: 1px solid var(--teachu-incorrect);
+}
+.answered.answered-correct {
+    border: 1px solid var(--teachu-correct);
+}
+.question-card {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 40px 1fr 1fr 1fr;
+    gap: 16px;
+}
+.back {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+}

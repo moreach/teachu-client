@@ -1,0 +1,44 @@
+.text {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+.text-smaller {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+.text-field {
+    font-size: 18px;
+}
+.form {
+    margin-top: 32px;
+    display: flex;
+    gap: 16px;
+}
+button {
+    margin-top: 2px;
+    height: 36px;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+.true-false {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+.distribute {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 16px;
+}
+.question-bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+.selected {
+    border: 2px solid var(--teachu-black);
+}

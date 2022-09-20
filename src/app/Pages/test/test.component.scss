@@ -1,0 +1,33 @@
+.button-wrapper {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: flex-end;
+}
+.button-wrapper,
+.tests {
+    width: calc(100vw - 240px);
+    max-width: 1000px;
+    min-width: 300px;
+    .no-test {
+        margin-top: 16px;
+    }
+}
+.test,
+.test-closed {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    display: grid;
+    gap: 16px;
+}
+.test {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.test-closed {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.bold {
+    font-weight: bold;
+}
+.active {
+    cursor: pointer;
+}

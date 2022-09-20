@@ -1,0 +1,28 @@
+<div *ngIf="overview$ | async as overview" class="page">
+    <h2 *ngIf="isEmpty(overview); else listView">
+        {{ 'together.noConnections' | translate }}
+    </h2>
+    <ng-template #listView>
+        <mat-divider></mat-divider>
+        <div *ngFor="let connection of overview">
+            <div class="connection-overview-detail">
+                <img (click)="openDetail(connection)" [src]="connection.profileImagePath" class="connection-image">
+                <div (click)="navigateToChat(connection.userId)" class="connection-middle-section">
+                    <div>
+                        <div class="connection-title">{{ connection.username }}</div>
+                        <div class="connection-last-msg">
+                            {{ connection.lastMessageSentByMe ? ('together.you' | translate) + ': ' : '' }}<i>{{ connection.lastMessage }}</i>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="connection.lastMessageDateSent; else noMessage" (click)="navigateToChat(connection.userId)" class="connection-last-msg-date">
+                    {{ isToday(connection.lastMessageDateSent) ? (connection.lastMessageDateSent | date: 'HH:mm') : (connection.lastMessageDateSent | date: 'dd.MM.yyyy') }}
+                </div>
+                <ng-template #noMessage>
+                    <div (click)="navigateToChat(connection.userId)" class="connection-last-msg-date"><i>{{ 'together.noMessage' | translate }}</i></div>
+                </ng-template>
+            </div>        
+            <mat-divider></mat-divider>
+        </div>
+    </ng-template>
+</div>

@@ -1,0 +1,36 @@
+<div *ngIf="collections$ | async as collections" class="page">
+    <div class="header">
+        <h2>{{ 'draw.drawings' | translate }}</h2>
+        <button type="button" mat-flat-button color="primary" (click)="createCollection()">{{ 'draw.newDrawing' | translate }}</button>
+    </div>
+    <mat-card class="collection">
+        <div>{{ 'draw.name' | translate }}</div>
+        <div>{{ 'draw.pages' | translate }}</div>
+        <div>{{ 'draw.changed' | translate }}</div>
+        <div>{{ 'draw.groupName' | translate }}</div>
+        <div>
+            <mat-icon>edit</mat-icon>
+        </div>
+        <div>
+            <mat-icon>delete</mat-icon>
+        </div>
+    </mat-card>
+    <mat-card *ngFor="let collection of collections" class="collection">
+        <div class="pointer" (click)="openDrawing(collection.collectionId, collection.firstPageId)">{{ collection.name }}</div>
+        <div class="pointer" (click)="openDrawing(collection.collectionId, collection.firstPageId)">{{ collection.numberOfPages }}</div>
+        <div class="pointer" (click)="openDrawing(collection.collectionId, collection.firstPageId)">{{ collection.lastChangedBy }} ({{ collection.lastChanged | date: 'dd.MM.yyyy HH:mm:ss' }})</div>
+        <div class="pointer" (click)="openDrawing(collection.collectionId, collection.firstPageId)">{{ collection.isGroupCollection ? collection.groupName : '-' }}</div>
+        <div>
+            <mat-icon *ngIf="collection.editable; else nonEdit" class="pointer" (click)="editCollection(collection.collectionId, collection.firstPageId, collection.name, collection.groupId, collection.drawGroupPolicy)">edit</mat-icon>
+            <ng-template #nonEdit>
+                <div>-</div>
+            </ng-template>
+        </div>
+        <div>
+            <mat-icon *ngIf="collection.deletable; else nonDelete" class="pointer" (click)="deleteCollection(collection.collectionId)">delete</mat-icon>
+            <ng-template #nonDelete>
+                <div>-</div>
+            </ng-template>
+        </div>
+    </mat-card>
+</div>

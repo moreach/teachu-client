@@ -1,0 +1,32 @@
+<div *ngIf="chat$ | async as chat">
+    <div (click)="openDetail(chat.user)" class="chat-info">
+        <img [src]="chat.user.profileImagePath" class="chat-image">
+        <div class="chat-title">
+            {{ chat.user.username }}
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="messages">
+        <div *ngFor="let message of chat.messages" class="message-wrapper">
+            <div [ngClass]="{ 'message': true, 'message-self': message.sentByMe, 'message-non-self': !message.sentByMe }">
+                <div *ngIf="!message.sentByMe" class="message-sender">{{ chat.user.username }}</div>
+                <mat-divider *ngIf="!message.sentByMe"></mat-divider>
+                <div>{{ message.message }}</div>
+                <mat-divider></mat-divider>
+                <div class="message-dateSent">{{ isToday(message.dateSent) ? (message.dateSent | date:'HH:mm') : (message.dateSent | date:'dd.MM.yyyy HH:mm') }}</div>
+            </div>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <form class="new-message">
+        <mat-form-field>
+            <mat-label>{{ 'together.message' | translate }}</mat-label>
+            <textarea matInput [formControl]="newMessageControl"></textarea>
+        </mat-form-field>
+        <div class="wrapper">
+            <button mat-icon-button (click)="sendMessage()" [disabled]="!newMessageControl.value">
+                <mat-icon>send</mat-icon>
+            </button>
+        </div>
+    </form>
+</div>
