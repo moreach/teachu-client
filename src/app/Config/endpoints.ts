@@ -6,6 +6,8 @@ export const endpoints = {
     ChangePassword: 'authentication/password',
     Search: 'search',
     User: 'user',
+    Chat: 'chat',
+    Messages: 'messages',
     Grade: 'grade',
     Timetable: 'timetable',
     TimetableLayout: 'timetable/layout',

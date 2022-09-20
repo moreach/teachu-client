@@ -1,4 +1,5 @@
 import { ChatType } from "../Enums/ChatType";
+import { UserExternalUserDTO } from "../User/UserExternalUserDTO";
 
 export interface DashboardChatDTO {
     chatName: string;
@@ -7,5 +8,6 @@ export interface DashboardChatDTO {
     lastMessage: string;
     lastMessageFrom: string | null;
     lastMessageDate: Date;
+    members: UserExternalUserDTO[];
     navigate: string[];
 }

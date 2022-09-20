@@ -11,7 +11,6 @@ export class MenuTreeService {
     }
 
     getMenuTree$(): Observable<MenuTreeDTO> {
-        // todo replace with backend endpoint
         const mockData = {
             tree: [
                 {
