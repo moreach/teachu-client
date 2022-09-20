@@ -37,14 +37,17 @@ export class AbsencesComponent implements OnInit{
     }
 
     newAbsence() {
+        let toDate = new Date(Date.now());
+        toDate.setDate(toDate.getDate() + 2);
+
         const absence: AbsenceInfoDTO = {
             id: this.service.NEW_ABSENCE_ID,
             title: "New Absence",
             type: "holiday",
             state: "pending",
             description: "",
-            from: new Date(),
-            to: new Date(),
+            from: Date.now(),
+            to: toDate.valueOf(),
         };
 
         this.newMode = true;

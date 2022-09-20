@@ -49,10 +49,17 @@ export class AbsenceEditorComponent implements OnInit{
             this.absence.type = newType;
     }
 
+    dateChange(from: boolean, changeEvent: any){
+        if(from) this.absence.from = new Date(changeEvent.target.value).valueOf();
+        else this.absence.to = new Date(changeEvent.target.value).valueOf();
+        this.validate();
+    }
+
     validate() {
         this.hasValidationError = this.absence.title.length < 3 ||
             this.absence.title.length > 50 ||
-            this.absence.description.length > 500;
+            this.absence.description.length > 500 ||
+            this.absence.from > this.absence.to;
     }
 
     get absenceService(): AbsencesService{

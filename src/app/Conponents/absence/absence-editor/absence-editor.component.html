@@ -17,6 +17,22 @@
                     [matIcon]="absenceService.getAbsenceStateIcon(absence.state)"></app-text-badge>
 </div>
 
+<div class="absence-editor-time">
+    <mat-form-field>
+        <input matInput
+               type="datetime-local"
+               placeholder="{{ 'absences.absenceStartDate' | translate }}"
+               (input)="dateChange(true, $event)">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput
+               type="datetime-local"
+               placeholder="{{ 'absences.absenceEndDate' | translate }}"
+               (input)="dateChange(false, $event)">
+    </mat-form-field>
+</div>
+
 <mat-form-field class="input-text"
                 appearance="outline">
     <mat-label>{{"absences.description" | translate}}</mat-label>

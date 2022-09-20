@@ -74,18 +74,21 @@
         "description":"Description",
         "save":"Save changes",
         "cancel":"Don't save",
-        "validationError":"Title has to have between 3 and 50 characters and description can't be longer than 500 characters",
+        "validationError":"Title has to have between 3 and 50 characters and description can't be longer than 500 characters and start date has to be before end date",
         "state":{
             "pending":"Pending",
             "excused":"Excused",
-            "unexcused":"Unexcused"
+            "unexcused":"Unexcused",
+            "verified": "Verified"
         },
         "type":{
             "sick":"Sick",
             "holiday":"Holiday"
         },
         "absenceState":"State",
-        "absenceType":"Type"
+        "absenceType":"Type",
+        "absenceStartDate":"absence start date",
+        "absenceEndDate":"absence end date"
     },
     "chat":{
         "chat":"Chat",

@@ -17,6 +17,11 @@ export class AbsenceVisualisationComponent {
         private service: AbsencesService,
     ) { }
 
+    visualizeDate(dateNumber: number): string{
+        const date: Date = new Date(dateNumber);
+        return date.toDateString() + " " + date.getHours() + ":" + date.getMinutes();
+    }
+
     parentVerify(){
         this.absence.state = "verified";
         this.service.verifyAbsence(this.absence).then(() => this.verifiedAbsence.emit());

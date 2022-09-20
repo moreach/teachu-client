@@ -9,6 +9,7 @@
                     [color]="absenceService.getAbsenceStateColor(absence.state)"
                     [matIcon]="absenceService.getAbsenceStateIcon(absence.state)"></app-text-badge>
 </div>
+<h3>{{visualizeDate(absence.from)}} - {{visualizeDate(absence.to)}}</h3>
 <h4>{{absence.description}}</h4>
 <button *ngIf="isParent && showVerify()"
         mat-fab
