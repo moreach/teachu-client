@@ -60,8 +60,7 @@
         </div>
         <div *ngIf="classList$ | async as classList; else classlistSpinner">
             <div *ngFor="let classlistItem of classList">
-<!--                TODO move classes to individual screen and add click event here-->
-                <div class="entry class-list">
+                <div class="entry class-list" (click)="navigate(classlistItem.navigate)">
                     <div class="class-list-classname">
                         <div><b>{{ classlistItem.className }}</b> ({{ classlistItem.classTeacher }})</div>
                     </div>

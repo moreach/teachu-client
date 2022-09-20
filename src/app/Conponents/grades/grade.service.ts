@@ -7,8 +7,8 @@ import {GradeDTO, GradeSemesterDTO} from "../../DTOs/Grade/GradeDTOs";
 })
 export class GradeService {
     readonly SEMESTER_ICON: string = "home";
-    readonly CLASS_ICON: string = "error";
-    readonly SUBJECT_ICON: string = "error";
+    readonly CLASS_ICON: string = "local_library";
+    readonly SUBJECT_ICON: string = "class";
 
     getLastExams(semesters: GradeSemesterDTO[], amount?: number | undefined): GradeDTO[]{
         let exams: GradeDTO[] = [];
@@ -42,6 +42,7 @@ export class GradeService {
                 let schoolClassLeave: MenuTreeItemDTO = {
                     icon: this.CLASS_ICON,
                     leave: false,
+                    level: 1,
                     translatedTitle: schoolClass.name,
                     children: []
                 };
@@ -50,6 +51,7 @@ export class GradeService {
                     let subjectLeave: MenuTreeItemDTO = {
                         icon: this.SUBJECT_ICON,
                         leave: true,
+                        level: 2,
                         translatedTitle: subject.name,
                         data: { semester, schoolClass, subject }
                     };

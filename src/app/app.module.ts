@@ -43,7 +43,6 @@ import { RecentExamsComponent } from './Conponents/grades/recent-exams/recent-ex
 import { ClassGradesComponent } from './Conponents/grades/class-grades/class-grades.component';
 import { GradeDetailComponent } from './Conponents/grades/grade-detail/grade-detail.component';
 import { LessonDetailsComponent } from './Pages/timetable/lesson-details/lesson-details.component';
-import { ClasslistComponent } from './Pages/classlist/classlist.component';
 import { ClasslistListComponent } from './Pages/classlist/classlist-list/classlist-list.component';
 import { ClasslistDetailComponent } from './Pages/classlist/classlist-detail/classlist-detail.component';
 import { ChooseStudentDialogComponent } from './Pages/login/choose-student-dialog/choose-student-dialog.component';
@@ -57,6 +56,7 @@ import {
 import { TextBadgeComponent } from './Conponents/text-badge/text-badge.component';
 import { AbsenceVisualisationComponent } from './Conponents/absence/absence-visalisation/absence-visualisation.component';
 import { AbsenceEditorComponent } from './Conponents/absence/absence-editor/absence-editor.component';
+import { ClassInfoComponent } from './Pages/class-info/class-info.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -95,7 +95,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         ClassGradesComponent,
         GradeDetailComponent,
         LessonDetailsComponent,
-        ClasslistComponent,
         ClasslistListComponent,
         ClasslistDetailComponent,
         ChooseStudentDialogComponent,
@@ -106,6 +105,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         TextBadgeComponent,
         AbsenceVisualisationComponent,
         AbsenceEditorComponent,
+        ClassInfoComponent,
     ],
     imports: [
         BrowserModule,

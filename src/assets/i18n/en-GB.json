@@ -23,7 +23,7 @@
     "grades":{
         "grades":"Grades",
         "desc": "Description",
-        "note": "Note",
+        "mark": "Mark",
         "subject":"Subject",
         "date":"Date",
         "description":"Description",
@@ -63,6 +63,9 @@
         "sex":"Sex",
         "city":"City",
         "email":"Mail"
+    },
+    "class": {
+      "class": "Class Info"
     },
     "absences":{
         "absences":"Absences",

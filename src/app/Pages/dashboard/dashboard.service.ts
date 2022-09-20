@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { combineLatest, map, Observable, of } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { endpoints } from 'src/app/Config/endpoints';
 import { AbsenceInfoDTO } from 'src/app/DTOs/Absence/AbsenceInfoDTO';
@@ -104,7 +104,7 @@ export class DashboardService {
             classTeacher: classlist.classTeacher.firstName + ' ' + classlist.classTeacher.lastName,
             students: classlist.students.map(student => student.firstName + ' ' + student.lastName),
             teachers: classlist.teachers.map(teacher => teacher.firstName + ' ' + teacher.lastName),
-            navigate: appRoutes.Classlist,
+            navigate: [appRoutes.Class, classlist.name],
           } as DashboardClassListDTO;
         });
       })

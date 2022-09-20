@@ -2,7 +2,7 @@ import {AfterViewInit, Component, HostListener} from "@angular/core";
 import {LanguagesService} from "./Framework/Languages/languages.service";
 import {DarkThemeService} from "./Framework/dark-theme/dark-theme.service";
 import { UserService } from "./Pages/user-settings/user.service";
-import { Observable } from "rxjs";
+import {Observable} from "rxjs";
 import {MenuTreeService} from "./Conponents/menu-tree/menu-tree.service";
 import { MenuTreeDTO } from "./DTOs/Menu/MenuTreeDTO";
 import {UserOwnDTO} from "./DTOs/User/UserOwnDTO";
@@ -15,11 +15,11 @@ const WINDOW_WIDTH_BREAKPOINT: number = 1000;
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit{
     title = 'TeachU';
     bigWindow: boolean = false;
     menuClosed: boolean = false;
-    menuTree$: Observable<MenuTreeDTO>;
+    menuTree$: Observable<MenuTreeDTO> | undefined;
     isSignedIn$: Observable<boolean>;
     currentUser$: Observable<UserOwnDTO | undefined>;
     isParent: boolean = false;
@@ -51,8 +51,6 @@ export class AppComponent implements AfterViewInit {
                 } else subscriber.next(undefined);
             })
         });
-
-
 
         this.menuTree$ = this.menuTreeService.getMenuTree$();
     }

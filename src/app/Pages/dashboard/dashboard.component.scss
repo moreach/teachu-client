@@ -69,6 +69,7 @@
             cursor: default;
         }
         .entry.class-list {
+            cursor: pointer;
             display: grid;
             grid-template-columns: 1fr;
             height: auto;

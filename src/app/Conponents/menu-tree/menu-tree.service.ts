@@ -1,17 +1,21 @@
 import {Injectable} from "@angular/core";
-import { Observable, of } from "rxjs";
-import { MenuTreeDTO } from "src/app/DTOs/Menu/MenuTreeDTO";
+import { Observable } from "rxjs";
+import {MenuTreeDTO, MenuTreeItemDTO} from "src/app/DTOs/Menu/MenuTreeDTO";
+import {ClasslistService} from "../../Pages/classlist/classlist.service";
+import {appRoutes} from "../../Config/appRoutes";
 
 @Injectable({
     providedIn: 'root'
 })
 export class MenuTreeService {
 
-    constructor() {
+    constructor(
+        private classListService: ClasslistService,
+    ) {
     }
 
     getMenuTree$(): Observable<MenuTreeDTO> {
-        const mockData = {
+        let menuTree: MenuTreeDTO = {
             tree: [
                 {
                     icon: "home",
@@ -30,12 +34,6 @@ export class MenuTreeService {
                     leave: true,
                     titleTranslationKey: "timetable.timetable",
                     url: "/app/timetable"
-                },
-                {
-                    icon: "list",
-                    leave: true,
-                    titleTranslationKey: "classlist.classlist",
-                    url: "/app/classlist",
                 },
                 {
                     icon: "grade",
@@ -60,30 +58,34 @@ export class MenuTreeService {
                     leave: true,
                     titleTranslationKey: "userSettings.userSettings",
                     url: "/app/userSettings"
-                },
-                {
-                    icon: "school",
-                    leave: false,
-                    translatedTitle: "Classes",
-                    children: [
-                        {
-                            icon: "error",
-                            leave: true,
-                            translatedTitle: "IN19a",
-                            level: 1,
-                            url: "/app/class/IN19a"
-                        },
-                        {
-                            icon: "error",
-                            leave: true,
-                            translatedTitle: "BM19f",
-                            level: 1,
-                            url: "/app/class/BM19f"
-                        }
-                    ]
                 }
             ]
         };
-        return of(mockData);
+        return new Observable<MenuTreeDTO>(obs => {
+            obs.next(menuTree);
+            this.getSchoolClasses().subscribe(classes => {
+                menuTree.tree.push(classes);
+                obs.next(menuTree);
+            });
+        });
+    }
+
+    private getSchoolClasses(): Observable<MenuTreeItemDTO>{
+        return new Observable<MenuTreeItemDTO>(obs => {
+            this.classListService.getClasses$().subscribe(classes => {
+                obs.next({
+                    icon: "school",
+                    leave: false,
+                    translatedTitle: "Classes",
+                    children: classes.map(clazz => ({
+                        icon: "local_library",
+                        leave: true,
+                        translatedTitle: clazz.name,
+                        level: 1,
+                        url: `${appRoutes.App}/${appRoutes.Class}/${clazz.name}`
+                    }) as MenuTreeItemDTO),
+                })
+            });
+        });
     }
 }
