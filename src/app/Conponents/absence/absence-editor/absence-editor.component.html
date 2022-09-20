@@ -28,9 +28,11 @@
     </textarea>
 </mat-form-field>
 
-<span class="absence-editor-error" *ngIf="hasValidationError">
-    {{ "absences.validationError" | translate }}
-</span>
+<div *ngIf="hasValidationError">
+    <span class="absence-editor-error">
+        {{ "absences.validationError" | translate }}
+    </span>
+</div>
 
 <div class="absence-editor-controls">
     <button mat-fab color="primary"

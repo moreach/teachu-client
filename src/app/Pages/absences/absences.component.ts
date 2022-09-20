@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbsenceEditDoneDTO, AbsencesService} from './absences.service';
+import {AbsencesService} from './absences.service';
 import {AbsenceInfoDTO} from "../../DTOs/Absence/AbsenceInfoDTO";
 import {UserService} from "../user-settings/user.service";
 
@@ -8,18 +8,14 @@ import {UserService} from "../user-settings/user.service";
     templateUrl: './absences.component.html',
     styleUrls: ['./absences.component.scss']
 })
-// TODO: - implement parent verified logic
-//       - fix parent edit (studentId parameter is not added)
-//       - reload all absences after creating new, maybe even after editing
-//       - implement use of start and end
-
 export class AbsencesComponent implements OnInit{
     readonly ABSENCE_ELEMENT_ID_BASE: string = "absence-";
 
     absences: AbsenceInfoDTO[] | undefined;
     isParent: boolean = false;
+    newMode: boolean = false;
 
-    private absencesInEditing: boolean[] = [];
+    private absenceInEditing: string | undefined;
 
     constructor(
         private service: AbsencesService,
@@ -27,12 +23,17 @@ export class AbsencesComponent implements OnInit{
     ) { }
 
     ngOnInit(): void {
-        this.service.getAbsences$().subscribe(abs => {
-            this.absences = abs;
-            this.absencesInEditing = Array(this.absences.length).fill(false);
-        });
+        this.loadAbsences();
         this.userService.getCurrentUser$()
             .subscribe(user => this.isParent = user.role === "parent");
+    }
+
+    loadAbsences(): void {
+        this.service.clearCache();
+        this.service.getAbsences$().subscribe(abs => {
+            this.absenceInEditing = undefined;
+            this.absences = abs;
+        });
     }
 
     newAbsence() {
@@ -46,31 +47,19 @@ export class AbsencesComponent implements OnInit{
             to: new Date(),
         };
 
+        this.newMode = true;
         this.absences?.unshift(absence);
-        this.absencesInEditing.unshift(true);
+        this.absenceInEditing = absence.id;
         // I have to wait for the *ngFor to rerender with the new absence 🤦‍♂️
         setTimeout(() => this.scrollToNextAbsence(-1), 100);
     }
 
-    doneEditing(index: number, doneEditingDTO: AbsenceEditDoneDTO){
-        this.setEditMode(index, false);
-
-        if(this.absences){
-            if(doneEditingDTO.canceled && doneEditingDTO.new){
-                this.absences.shift();
-                this.absencesInEditing.shift();
-            } else {
-                if(this.isParent){
-                    // changedAbsence.state = "verified"; TODO: wait for api implementation
-                }else doneEditingDTO.absence.state = "pending";
-
-                const indexToChange: number = this.absences.findIndex(a => a.id === doneEditingDTO.absence.id);
-                if(indexToChange !== -1)
-                    this.absences[indexToChange] = doneEditingDTO.absence;
-            }
-        }else{
-            console.error("Tried to save absence, when not done loading absences")
-        }
+    doneEditing(cancel: boolean){
+        if(this.newMode && cancel) this.absences?.shift();
+        this.newMode = false;
+        this.absenceInEditing = undefined;
+        if(!cancel)
+            this.loadAbsences();
     }
 
     scrollToNextAbsence(currentAbsence: number) {
@@ -86,11 +75,20 @@ export class AbsencesComponent implements OnInit{
         return false;
     }
 
-    getEditMode(index: number): boolean{
-        return this.absencesInEditing[index];
+    getEditMode(id: string): boolean{
+        return this.absenceInEditing === id;
     }
 
-    setEditMode(index: number, value: boolean){
-        this.absencesInEditing[index] = value;
+    setEditMode(id: string){
+        if(this.newMode){
+            this.newMode = false;
+            this.absences?.shift();
+        }
+
+        this.absenceInEditing = id;
+    }
+
+    verifiedAbsence(index: number) {
+        if(this.absences) this.absences[index].state = "verified";
     }
 }

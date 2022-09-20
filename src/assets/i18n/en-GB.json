@@ -56,7 +56,8 @@
         "state": {
           "pending": "Pending",
           "excused": "Excused",
-          "unexcused": "Unexcused"
+          "unexcused": "Unexcused",
+          "verified": "Verified"
         },
         "type": {
           "sick": "Sick",

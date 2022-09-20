@@ -1,5 +1,5 @@
 <ng-container *ngIf="absences && absences.length > 0 else noAbsences">
-    <div class="floating-add-container">
+    <div class="floating-add-container" *ngIf="!newMode">
         <button mat-fab
                 color="accent"
                 (click)="newAbsence()"
@@ -10,13 +10,14 @@
     <div id="absencesContainer" class="absence-container">
         <div *ngFor="let absence of absences; index as i" [id]="ABSENCE_ELEMENT_ID_BASE + i" class="absence">
             <div class="absence-body">
-                <app-absence-visualisation *ngIf="!getEditMode(i)"
-                                          [absence]="absence"
-                                          [isParent]="isParent"
-                                          (editAbsence)="setEditMode(i, true)">
+                <app-absence-visualisation *ngIf="!getEditMode(absence.id)"
+                                           [absence]="absence"
+                                           [isParent]="isParent"
+                                           (verifiedAbsence)="verifiedAbsence(i)"
+                                           (editAbsence)="setEditMode(absence.id)">
                 </app-absence-visualisation>
-                <app-absence-editor *ngIf="getEditMode(i)"
-                                    (exit)="doneEditing(i, $event)"
+                <app-absence-editor *ngIf="getEditMode(absence.id)"
+                                    (exit)="doneEditing($event)"
                                     [absence]="absence">
                 </app-absence-editor>
             </div>
@@ -33,6 +34,14 @@
     </div>
 </ng-container>
 <ng-template #noAbsences>
+    <div class="floating-add-container" *ngIf="!newMode">
+        <button mat-fab
+                color="accent"
+                (click)="newAbsence()"
+                [matTooltip]="'absences.add' | translate">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
 <!--    ngIf is because i don't want to show the image just because the page is loading
 (maybe implement loader some time)-->
     <div class="no-absence-container" *ngIf="absences">

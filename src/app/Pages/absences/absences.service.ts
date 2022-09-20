@@ -6,12 +6,6 @@ import {Observable} from "rxjs";
 import {UserEventType} from "../../DTOs/Enums/UserEventType";
 import {UserEventState} from "../../DTOs/Enums/UserEventState";
 
-export interface AbsenceEditDoneDTO{
-    absence: AbsenceInfoDTO;
-    new: boolean;
-    canceled: boolean;
-}
-
 @Injectable({
     providedIn: 'root'
 })
@@ -26,26 +20,21 @@ export class AbsencesService{
         private api: ApiService,
     ) { }
 
-    saveAbsence(absence: AbsenceInfoDTO): Promise<AbsenceEditDoneDTO> {
+    verifyAbsence(absence: AbsenceInfoDTO): Promise<void> {
+        return new Promise<void>((resolve, reject) =>
+            this.api.callApi(endpoints.AbsenceVerify + "/" + absence.id, {}, "PUT")
+                .subscribe({
+                    next: () => resolve(),
+                    error: () => reject(),
+                }));
+    }
+
+    saveAbsence(absence: AbsenceInfoDTO): Observable<string> {
         const isNew: boolean = this.NEW_ABSENCE_ID === absence.id;
-        const responseDTO: AbsenceEditDoneDTO = {
-            absence: absence,
-            new: isNew,
-            canceled: false,
-        };
-
-        return new Promise<AbsenceEditDoneDTO>((resolve, reject) => {
-            let request;
-            if(isNew)
-                request = this.api.callApi(endpoints.Absence, absence, 'POST');
-            else
-                request = this.api.callApi(endpoints.Absence + "/" + absence.id, absence, 'PUT');
-
-            request.subscribe({
-                next: () => resolve(responseDTO),
-                error: () => reject(responseDTO)
-            });
-        });
+        if(isNew)
+            return this.api.callApi(endpoints.Absence, absence, 'POST');
+        else
+            return this.api.callApi(endpoints.Absence + "/" + absence.id, absence, 'PUT');
     }
 
     getAbsences$(): Observable<AbsenceInfoDTO[]>{
@@ -77,6 +66,8 @@ export class AbsencesService{
         switch (state){
             case "excused":
                 return "accent";
+            case "verified":
+                return "secondary"
             case "pending":
                 return "primary";
             case "unexcused":
@@ -88,10 +79,16 @@ export class AbsencesService{
         switch (state){
             case "excused":
                 return "done";
+            case "verified":
+                return "how_to_reg";
             case "pending":
                 return "pending_actions";
             case "unexcused":
                 return "block";
         }
+    }
+
+    clearCache() {
+        this.absences = undefined;
     }
 }

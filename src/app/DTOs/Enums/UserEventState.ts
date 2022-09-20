@@ -1,1 +1,1 @@
-export type UserEventState = 'pending' | 'excused' | 'unexcused';
+export type UserEventState = 'pending' | 'verified' | 'excused' | 'unexcused';

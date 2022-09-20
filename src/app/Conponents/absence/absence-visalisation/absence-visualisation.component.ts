@@ -9,6 +9,7 @@ import {AbsencesService} from "../../../Pages/absences/absences.service";
 })
 export class AbsenceVisualisationComponent {
     @Output() editAbsence: EventEmitter<AbsenceInfoDTO> = new EventEmitter<AbsenceInfoDTO>();
+    @Output() verifiedAbsence: EventEmitter<void> = new EventEmitter<void>();
     @Input() absence!: AbsenceInfoDTO;
     @Input() isParent: boolean = false;
 
@@ -16,13 +17,17 @@ export class AbsenceVisualisationComponent {
         private service: AbsencesService,
     ) { }
 
-    parentVerify(verify: boolean){
-        // this.absence.state = verify ? "verified" : "pending"; //TODO implement when API is ready
-        this.service.saveAbsence(this.absence);
+    parentVerify(){
+        this.absence.state = "verified";
+        this.service.verifyAbsence(this.absence).then(() => this.verifiedAbsence.emit());
     }
 
     edit(){
         this.editAbsence.emit(this.absence);
+    }
+
+    showVerify(): boolean {
+        return this.isParent && this.absence?.state !== "verified";
     }
 
     get absenceService(): AbsencesService{
