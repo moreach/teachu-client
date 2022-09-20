@@ -87,7 +87,7 @@ export class DashboardComponent {
     return isToday(date);
   }
 
-  isDifferentDays(date1: Date, date2: Date): boolean {
+  isDifferentDays(date1: number, date2: number): boolean {
     return new Date(date1).setHours(0, 0, 0, 0) !== new Date(date2).setHours(0, 0, 0, 0);
   }
 

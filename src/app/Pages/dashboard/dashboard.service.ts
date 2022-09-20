@@ -140,7 +140,7 @@ export class DashboardService {
   getAbsences$(): Observable<DashboardAbsenceDTO[]> {
     return this.api.callApi<AbsenceInfoDTO[]>(endpoints.Absence, {}, 'GET').pipe(
       map(absences => {
-        return absences.sort((a, b) => b.to.getTime() - a.to.getTime()).slice(0, 10);
+        return absences.sort((a, b) => new Date(b.to).getTime() - new Date(a.to).getTime()).slice(0, 10);
       }),
       map(absences => {
         return absences.map(absence => {
