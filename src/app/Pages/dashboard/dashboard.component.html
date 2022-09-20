@@ -1,26 +1,21 @@
 <div class="page">
     <div class="part">
-        <div class="header">
+        <div class="header" (click)="navigateSchoolInfos()">
             <mat-icon>info</mat-icon>
             <h2>{{ 'schoolInfos.schoolInfos' | translate }}</h2>
         </div>
         <div *ngIf="schoolInfos$ | async as schoolInfos; else schoolInfoSpinner">
             <div *ngFor="let schoolInfo of schoolInfos">
                 <div class="entry school-info">
-                    <div class="title-bar">
-                        <div (click)="navigate(schoolInfo.navigate)" class="title-bar-content">
-                            <div class="bold center">{{ schoolInfo.title }}</div>
-                            <div class="center">{{ schoolInfo.date | date: 'dd.MM.yyyy' }}</div>
-                            <div class="icons">
-                                <mat-icon *ngIf="schoolInfo.important" class="mat-icon">announcement</mat-icon>
-                                <mat-icon *ngIf="schoolInfo.pinned" class="mat-icon">bookmark</mat-icon>
-                            </div>
+                    <div class="title-bar-content">
+                        <div class="bold center">{{ schoolInfo.title }}</div>
+                        <div class="center">{{ schoolInfo.date | date: 'dd.MM.yyyy' }}</div>
+                        <div class="icons">
+                            <mat-icon *ngIf="schoolInfo.important" class="mat-icon">announcement</mat-icon>
+                            <mat-icon *ngIf="schoolInfo.pinned" class="mat-icon">bookmark</mat-icon>
                         </div>
-                        <button mat-icon-button [color]="'secondary'" (click)="toggleHidden(schoolinfoDetails)">
-                            <mat-icon>{{ getHiddenIcon(schoolinfoDetails) }}</mat-icon>
-                        </button>
                     </div>
-                    <div #schoolinfoDetails class="hidden details" (click)="navigate(schoolInfo.navigate)">
+                    <div class="hidden details">
                         {{ schoolInfo.creator }}: {{ schoolInfo.message }}
                     </div>
                 </div>
@@ -30,12 +25,12 @@
         <ng-template #schoolInfoSpinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>
     </div>
     <div class="part">
-        <div class="header">
+        <div class="header" (click)="navigateTimetable()">
             <mat-icon>calendar_today</mat-icon>
             <h2>{{ 'timetable.timetable' | translate }}</h2>
         </div>
         <div *ngIf="timetable$ | async as timetable; else timetableSpinner">
-            <div (click)="navigate(timetable.navigate)" class="entry timetable">
+            <div class="entry timetable">
                 <div class="bold">{{ ('Weekday.' + timetable.weekday) | translate }} - {{ timetable.date | date: 'dd.MM.yyyy' }}</div>
                 <div *ngFor="let event of timetable.events" class="event-info" [style]="{ 'height': '20px' }">
                     <mat-icon [style]="{ 'font-size': '14px', 'margin-top': '6px' }">info</mat-icon>
@@ -44,12 +39,9 @@
             </div>
             <div *ngFor="let lesson of timetable.lessons" class="entry timetable-lesson">
                 <div class="timetable-lesson-title-bar">
-                    <div class="pointer center bold" (click)="navigate(timetable.navigate)">{{ lesson.from }} - {{ lesson.to }} {{ lesson.subject }}</div>
-                    <button mat-icon-button [color]="'secondary'" (click)="toggleHidden(lessonDetails)">
-                        <mat-icon>{{ getHiddenIcon(lessonDetails) }}</mat-icon>
-                    </button>
+                    <div class="pointer center bold">{{ lesson.from }} - {{ lesson.to }} {{ lesson.subject }}</div>
                 </div>
-                <div #lessonDetails class="hidden details" (click)="navigate(timetable.navigate)">
+                <div class="hidden details">
                     <div>{{ 'timetable.teacher' | translate }}: {{ lesson.teacher }}</div>
                     <div>{{ 'timetable.room' | translate }}: {{ lesson.room }}</div>
                     <div *ngIf="lesson.lessonEvent" class="event-info">
@@ -62,22 +54,20 @@
         <ng-template #timetableSpinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>
     </div>
     <div class="part">
-        <div class="header">
+        <div class="header" style="cursor: default;">
             <mat-icon>list</mat-icon>
             <h2>{{ 'classlist.classlist' | translate }}</h2>
         </div>
         <div *ngIf="classList$ | async as classList; else classlistSpinner">
             <div *ngFor="let classlistItem of classList">
+<!--                TODO move classes to individual screen and add click event here-->
                 <div class="entry class-list">
                     <div class="class-list-classname">
-                        <div (click)="navigate(classlistItem.navigate)"><b>{{ classlistItem.className }}</b> ({{ classlistItem.classTeacher }})</div>
-                        <button mat-icon-button [color]="'secondary'" (click)="toggleHidden(classListDetails)">
-                            <mat-icon>{{ getHiddenIcon(classListDetails) }}</mat-icon>
-                        </button>
+                        <div><b>{{ classlistItem.className }}</b> ({{ classlistItem.classTeacher }})</div>
                     </div>
-                    <div #classListDetails class="hidden details" (click)="navigate(classlistItem.navigate)">
-                        <div><b>{{ 'classlist.teachers' | translate }}</b>: {{ formatArray(classlistItem.teachers) }}</div>
-                        <div><b>{{ 'classlist.students' | translate }}</b>: {{ formatArray(classlistItem.students) }}</div>
+                    <div class="hidden details">
+                        <div>{{ 'classlist.teachers' | translate }}: {{ formatArray(classlistItem.teachers) }}</div>
+                        <div>{{ 'classlist.students' | translate }}: {{ formatArray(classlistItem.students) }}</div>
                     </div>
                 </div>
             </div>
@@ -86,7 +76,7 @@
         <ng-template #classlistSpinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>
     </div>
     <div class="part">
-        <div class="header">
+        <div class="header" (click)="navigateGrades()">
             <mat-icon>grade</mat-icon>
             <h2>{{ 'grades.grades' | translate }}</h2>
         </div>
@@ -94,12 +84,9 @@
             <div *ngFor="let grade of grades">
                 <div class="entry grade">
                     <div class="grade-title">
-                        <div (click)="navigate(grade.navigate)" class="bold pointer center">{{ grade.mark }} - {{ grade.name }}</div>
-                        <button mat-icon-button [color]="'secondary'" (click)="toggleHidden(classListDetails)">
-                            <mat-icon>{{ getHiddenIcon(classListDetails) }}</mat-icon>
-                        </button>
+                        <div class="bold pointer center">{{ grade.mark }} - {{ grade.name }}</div>
                     </div>
-                    <div #classListDetails class="hidden details" (click)="navigate(grade.navigate)">
+                    <div class="hidden details">
                         <div>{{ 'grades.subject' | translate }}: {{ grade.subject }}</div>
                         <div>{{ 'grades.class' | translate }}: {{ grade.class }}</div>
                         <div>{{ 'grades.date' | translate }}: {{ grade.date | date: 'dd.MM.yyyy' }}</div>
@@ -112,7 +99,7 @@
         <ng-template #gradesSpinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>
     </div>
     <div class="part">
-        <div class="header">
+        <div class="header" (click)="navigateAbsences()">
             <mat-icon>not_interested</mat-icon>
             <h2>{{ 'absences.absences' | translate }}</h2>
         </div>
@@ -120,15 +107,12 @@
             <div *ngFor="let absence of absences">
                 <div class="entry absence">
                     <div class="absence-title">
-                        <div *ngIf="isDifferentDays(absence.from, absence.to); else sameDay" (click)="navigate(absence.navigate)" class="bold pointer center">{{ absence.from | date: 'dd.MM.yyyy' }} - {{ absence.to | date: 'dd.MM.yyyy' }}: {{ absence.title }}</div>
+                        <div *ngIf="isDifferentDays(absence.from, absence.to); else sameDay" class="bold pointer center">{{ absence.from | date: 'dd.MM.yyyy' }} - {{ absence.to | date: 'dd.MM.yyyy' }}: {{ absence.title }}</div>
                         <ng-template #sameDay>
-                            <div (click)="navigate(absence.navigate)" class="bold pointer center">{{ absence.from | date: 'dd.MM.yyyy' }} {{ absence.from | date: 'HH:mm' }} - {{ absence.to | date: 'HH:mm' }}: {{ absence.title }}</div>
+                            <div class="bold pointer center">{{ absence.from | date: 'dd.MM.yyyy' }} {{ absence.from | date: 'HH:mm' }} - {{ absence.to | date: 'HH:mm' }}: {{ absence.title }}</div>
                         </ng-template>
-                        <button mat-icon-button [color]="'secondary'" (click)="toggleHidden(classListDetails)">
-                            <mat-icon>{{ getHiddenIcon(classListDetails) }}</mat-icon>
-                        </button>
                     </div>
-                    <div #classListDetails class="hidden details" (click)="navigate(absence.navigate)">
+                    <div class="hidden details">
                         <div>{{ 'absences.description' | translate }}: {{ absence.description }}</div>
                         <div>{{ 'absences.absenceType' | translate }}: {{ ('UserEventType.' + absence.type) | translate }}</div>
                         <div>{{ 'absences.absenceState' | translate }}: {{ ('UserEventState.' + absence.state) | translate }}</div>
@@ -140,7 +124,7 @@
         <ng-template #absencesSpinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>
     </div>
     <div class="part">
-        <div class="header">
+        <div class="header" style="cursor: default;">
             <mat-icon>chat</mat-icon>
             <h2>{{ 'chat.chat' | translate }}</h2>
         </div>
@@ -153,10 +137,10 @@
                 <div class="chat-middle-section">
                     <div>
                         <div class="chat-title">{{ chat.chatName }}</div>
-                        <div *ngIf="chat.chatType === 'group'; else private" class="chat-last-msg">
+                        <div *ngIf="chat.chatType === 'group'; else privateChat" class="chat-last-msg">
                             {{ chat.lastMessageFrom ?? ('chat.you' | translate) }}: <i>{{ chat.lastMessage }}</i>
                         </div>
-                        <ng-template #private>
+                        <ng-template #privateChat>
                             <div class="chat-last-msg">
                                 {{ chat.lastMessageFrom === null ? ('chat.you' | translate) + ': ' : '' }}<i>{{ chat.lastMessage }}</i>
                             </div>

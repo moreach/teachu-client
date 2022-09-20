@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
@@ -48,6 +48,22 @@ export class DashboardComponent {
     }
   }
 
+  navigateAbsences(){
+    this.navigate(appRoutes.Absences);
+  }
+
+  navigateGrades(){
+    this.navigate(appRoutes.Grades);
+  }
+
+  navigateSchoolInfos(){
+    this.navigate(appRoutes.SchoolInfos);
+  }
+
+  navigateTimetable(){
+    this.navigate(appRoutes.Timetable);
+  }
+
   isEmpty(array: any[]) {
     return array.length === 0;
   }
@@ -71,8 +87,8 @@ export class DashboardComponent {
     return isToday(date);
   }
 
-  isDifferentDays(date1: Date, date2: Date) {
-    new Date(date1).setHours(0, 0, 0, 0) !== new Date(date2).setHours(0, 0, 0, 0);
+  isDifferentDays(date1: Date, date2: Date): boolean {
+    return new Date(date1).setHours(0, 0, 0, 0) !== new Date(date2).setHours(0, 0, 0, 0);
   }
 
   getProfileImage(members: UserExternalUserDTO[]) {
