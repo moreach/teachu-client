@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import { DarkThemeService } from "src/app/Framework/dark-theme/dark-theme.service";
-import { MatDialog } from "@angular/material/dialog";
 import { UserService } from "./user.service";
-import {debounceTime, skip, Subject, switchMap, takeUntil} from "rxjs";
+import { skip, Subject, switchMap, takeUntil, throttleTime} from "rxjs";
 import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
 import {UserOwnChangeDTO} from "../../DTOs/User/UserOwnChangeDTO";
+import { GetLanguage } from "src/app/DTOs/Enums/Language";
 
 @Component({
     selector: "user-settings",
@@ -22,14 +22,12 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
     darkTheme: boolean = true;
     phoneNumberControl: FormControl;
     profileImageControl: FormControl;
+    phoneSavedTimeout: number | undefined;
     private uploadedProfileImage: File | undefined;
-    private phoneSavedTimeout: number | undefined;
     private darkThemeSubject: Subject<boolean> = new Subject<boolean>();
 
     constructor(
-      private builder: FormBuilder,
       private darkThemeService: DarkThemeService,
-      private dialog: MatDialog,
       private userService: UserService,
     ) {
         this.phoneNumberControl = new FormControl('', [ Validators.required ]);
@@ -48,24 +46,27 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
     ngOnInit() {
         this.phoneNumberControl.valueChanges.pipe(
             skip(1), // skip the first because this change is when the user loaded
-            debounceTime(this.DEBOUNCE_TIME),
+            throttleTime(this.DEBOUNCE_TIME),
             switchMap(value => this.savePhoneNumber(value)),
             takeUntil(this.unsubscribe)
-        ).subscribe(() => { });
+        ).subscribe();
 
         this.darkThemeSubject.asObservable().pipe(
-            debounceTime(this.DEBOUNCE_TIME),
+            throttleTime(this.DEBOUNCE_TIME),
             switchMap(async (value) => this.saveDarkTheme(value)),
             takeUntil(this.unsubscribe)
-        ).subscribe(() => { });
+        ).subscribe();
     }
 
     savePhoneNumber(newNumber: string): string{
-        this.user!.phone = newNumber;
-        this.saveUser();
-        this.showPhoneSaved = true;
-        this.phoneSavedTimeout = setTimeout(() => this.showPhoneSaved = false, 3500);
-        return newNumber;
+        if (this.user) {
+            this.user!.phone = newNumber;
+            this.saveUser();
+            this.showPhoneSaved = true;
+            this.phoneSavedTimeout = setTimeout(() => this.showPhoneSaved = false, 3500);
+            return newNumber;
+        }
+        return this.phoneNumberControl.value;
     }
 
     toggleDarkTheme(){
@@ -75,8 +76,10 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
     }
 
     private saveDarkTheme(darkTheme: boolean): boolean {
-        this.user!.darkTheme = darkTheme;
-        this.saveUser();
+        if (this.user) {
+            this.user!.darkTheme = darkTheme;
+            this.saveUser();
+        }
         return darkTheme;
     }
 
@@ -95,7 +98,16 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
         }
     }
 
+    saveLanguage(language: string) {
+        if (this.user) {
+            this.user!.language = GetLanguage(language);
+            this.saveUser();
+        }
+    }
+
     ngOnDestroy() {
+        this.savePhoneNumber(this.phoneNumberControl.value);
+        this.saveDarkTheme(this.darkTheme);
         this.unsubscribe.next();
         this.unsubscribe.complete();
     }

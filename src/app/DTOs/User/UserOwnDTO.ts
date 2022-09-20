@@ -16,4 +16,5 @@ export interface UserOwnDTO {
     street: string;
     phone: string;
     imageId: string;
+    id: string;
 }

@@ -9,14 +9,23 @@ import { TimetableDayDTO, TimetableLessonDTO } from 'src/app/DTOs/Timetable/Time
 })
 export class LessonDetailsComponent {
 
+  lesson: TimetableLessonDTO | null = null;
+  day: TimetableDayDTO | undefined = undefined;
+  date: Date;
+  subject: string | undefined = undefined;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any
-  ) { }
-
-  getData() {
-    return {
-      lesson: this.data.lesson as any as TimetableLessonDTO,
-      day: this.data.day as any as TimetableDayDTO
-    };
+  ) {
+    if (this.data.lesson) {
+      this.lesson = this.data.lesson;
+    }
+    if (this.data.day) {
+      this.day = this.data.day;
+    }
+    this.date = this.data.date;
+    if (this.data.subject) {
+      this.subject = this.data.subject;
+    }
   }
 }

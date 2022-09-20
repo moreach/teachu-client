@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { endpoints } from 'src/app/Config/endpoints';
 import { TimetableDayDTO } from 'src/app/DTOs/Timetable/TimetableDayDTO';
 import { TimetableLayoutDTO } from 'src/app/DTOs/Timetable/TimetableLayoutDTO';
 import { ApiService } from 'src/app/Framework/API/api.service';
-import { compareDates } from 'src/app/Framework/Helpers/DateHelpers';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +15,11 @@ export class TimetableService {
   ) { }
 
   getTimetable$(from: Date, to: Date): Observable<TimetableDayDTO[]> {
-    return this.api.callApi<TimetableDayDTO[]>(endpoints.Timetable, { from, to }, 'GET');
+    const value = {
+      from: from.toISOString().split('T')[0],
+      to: to.toISOString().split('T')[0],
+    };
+    return this.api.callApi<TimetableDayDTO[]>(endpoints.Timetable, value, 'GETwithPARAMS');
   }
 
   getLessonInfo$(): Observable<TimetableLayoutDTO[]> {

@@ -37,7 +37,6 @@ import { ChatOverviewComponent } from './Pages/chat/chat-overview/chat-overview.
 import { ChatConversationComponent } from './Pages/chat/chat-conversation/chat-conversation.component';
 import { ChatConversationInfoComponent } from './Pages/chat/chat-conversation-info/chat-conversation-info.component';
 import { GroupChatDialogComponent } from './Pages/chat/group-chat-dialog/group-chat-dialog.component';
-import { PrivateChatDialogComponent } from './Pages/chat/private-chat-dialog/private-chat-dialog.component';
 import { AbsencesComponent } from './Pages/absences/absences.component';
 import { SchoolInfosComponent } from './Pages/school-infos/school-infos.component';
 import { RecentExamsComponent } from './Conponents/grades/recent-exams/recent-exams.component';
@@ -90,7 +89,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         ChatConversationComponent,
         ChatConversationInfoComponent,
         GroupChatDialogComponent,
-        PrivateChatDialogComponent,
         AbsencesComponent,
         SchoolInfosComponent,
         RecentExamsComponent,

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { LanguagesService } from './languages.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { LanguagesService } from './languages.service';
   styleUrls: ['./language-lookup.component.scss']
 })
 export class LanguageLookupComponent {
+
+  @Output() languageChanged: EventEmitter<string> = new EventEmitter();
 
   constructor (
     private languageService: LanguagesService,
@@ -23,6 +25,7 @@ export class LanguageLookupComponent {
   }
 
   selectLanguage(language: string) {
+    this.languageChanged.emit(language);
     this.languageService.selectLanguage(language);
   }
 

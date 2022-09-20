@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { combineLatest, map, Observable, startWith } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
-import { ChatOverviewDTO } from 'src/app/DTOs/Chat/ChatOverviewDTO';
-import { ChatUserDTO } from 'src/app/DTOs/Chat/ChatUserDTO';
+import { ChatResponseDTO } from 'src/app/DTOs/Chat/ChatResponseDTO';
+import { UserExternalUserDTO } from 'src/app/DTOs/User/UserExternalUserDTO';
+import { TokenService } from 'src/app/Framework/API/token.service';
 import { isToday } from 'src/app/Framework/Helpers/DateHelpers';
 import { truncateToMaxChars } from 'src/app/Framework/Helpers/StringHelpers';
 import { ChatService } from '../chat.service';
 import { GroupChatDialogComponent } from '../group-chat-dialog/group-chat-dialog.component';
-import { PrivateChatDialogComponent } from '../private-chat-dialog/private-chat-dialog.component';
 
 @Component({
   selector: 'app-chat-overview',
@@ -19,56 +18,26 @@ import { PrivateChatDialogComponent } from '../private-chat-dialog/private-chat-
 })
 export class ChatOverviewComponent {
 
-  chatOverviews$: Observable<ChatOverviewDTO[]>;
-  searchBarControl = new FormControl('');
-  searchBarUsers$: Observable<UserOption[]>;
+  chatOverviews$: Observable<ChatResponseDTO[]>;
 
   constructor(
     private chatService: ChatService,
     private router: Router,
     private dialog: MatDialog,
+    private tokenService: TokenService,
   ) {
+    const timeStampEpoch = Math.floor(Date.now());
     this.chatOverviews$ = this.chatService.getChatOverview$().pipe(
       map(chatOverviews => chatOverviews.map(c => {
         return {
           ...c,
-          lastMessage: truncateToMaxChars(c.lastMessage, 100),
-        } 
-      }))
-    );
-
-    this.searchBarUsers$ = combineLatest([
-      this.chatService.getChatUser$(),
-      this.chatOverviews$.pipe(
-        map(co => co.map(c => {
-          return {
-            id: c.chatId,
-            name: c.chatName,
-          } as ChatUserDTO
-        }))
-      ),
-      this.searchBarControl.valueChanges.pipe(startWith('')),
-    ]).pipe(
-      map(([users, chats, value]) => [users.filter(u => !chats.some(c => c.id === u.id)), chats, value]),
-      map(([users, chats, value]) => [
-          (users as ChatUserDTO[]).map(u => {
-            return {
-              ...u,
-              userExists: false,
-            } as UserOption
-          }),
-          (chats as ChatUserDTO[]).map(c => {
-            return {
-              ...c,
-              userExists: true,
-            } as UserOption
-          }),
-          value
-        ]
-      ),
-      map(([users, chats, value]) => [[...users, ...chats], value]),
-      map(([users, value]) => this._filter(value, users)),
-      map(users => users.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))),
+          lastMessage: {
+            ...c.lastMessage,
+            message: truncateToMaxChars(c.lastMessage.message ?? '', 100)
+          }
+        }
+      })),
+      map(chats => chats.sort((a, b) => (!!b.lastMessage ? b.lastMessage.timestamp : timeStampEpoch) - (!!a.lastMessage ? a.lastMessage.timestamp : timeStampEpoch))),
     );
   }
 
@@ -76,20 +45,13 @@ export class ChatOverviewComponent {
     this.router.navigate([`${appRoutes.App}/${appRoutes.Chat}/${chatId}`]);
   }
 
-  isToday(date: Date) {
-    return isToday(date);
-  }
-
-  openNewPrivateChatDialog(userId?: string) {
-    this.dialog.open(PrivateChatDialogComponent, { 
-      data: {
-        userId
-      }
-    });
+  isToday(date: number) {
+    return isToday(this.getDateFromEpoch(date));
   }
 
   openNewGroupChatDialog() {
-    this.dialog.open(GroupChatDialogComponent, { });
+    const dialog$ = this.dialog.open(GroupChatDialogComponent, { });
+    dialog$.afterClosed().subscribe(_ => this.chatOverviews$ = this.chatService.getChatOverview$());
   }
 
   _filter(value: string | null, users: UserOption[]) {
@@ -97,13 +59,30 @@ export class ChatOverviewComponent {
     return users.filter(user => user.name.toLowerCase().includes(filterValue));
   }
 
-  selectUser(user: UserOption) {
-    if (user.userExists) {
-      this.openDetail(user.id);
+  isGroupChat(chat: ChatResponseDTO) {
+    return chat.members.length > 2;
+  }
+
+  getDateFromEpoch(date: number) {
+    var epoch = new Date(0);
+    if (!date) {
+      epoch = new Date();
     } else {
-      this.openNewPrivateChatDialog(user.id);
+      epoch.setMilliseconds(date);
     }
-    this.searchBarControl.setValue('');
+    return epoch;
+  }
+
+  isOwn(userId: string) {
+    return userId === this.tokenService.getUserId();
+  }
+
+  getProfileImage(users: UserExternalUserDTO[]) {
+    return users.filter(u => u.id !== this.tokenService.getUserId())[0].imageId;
+  }
+
+  isEmpty(array: any[]) {
+    return array.length === 0;
   }
 }
 

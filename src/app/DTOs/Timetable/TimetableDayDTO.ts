@@ -1,12 +1,13 @@
 import { ClassListTeacherDTO } from "../ClassList/ClassListDTO";
 import { LessonEventType } from "../Enums/LessonEventType";
 import { SchoolClassEventType } from "../Enums/SchoolClassEventType";
+import { SchoolEventType } from "../Enums/SchoolEventType";
 import { UserEventState } from "../Enums/UserEventState";
 import { UserEventType } from "../Enums/UserEventType";
 import { Weekday } from "../Enums/Weekday";
 
 export interface TimetableDayDTO {
-  date: Date;
+  date: number;
   weekday: Weekday;
   userEvent: TimetableUserEventDTO;
   schoolEvent: TimetableSchoolEventDTO;
@@ -28,7 +29,7 @@ export interface TimetableSchoolEventDTO {
   to: Date;
   title: string;
   description: string;
-  type: UserEventType;
+  type: SchoolEventType;
 }
 
 export interface TimetableLessonDTO {

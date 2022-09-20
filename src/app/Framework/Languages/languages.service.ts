@@ -1,6 +1,7 @@
 import { KeyValue } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { languages } from 'src/app/DTOs/Enums/Language';
 import { TokenService } from '../API/token.service';
 
 @Injectable({
@@ -47,7 +48,7 @@ export class LanguagesService {
 
   selectableLanguages() {
     // todo translate manually with excel helper to languages in json files
-    return languages.filter(l => l.key === 'en-GB');
+    return languages.filter(l => l.key === 'en-GB' || l.key === 'de-DE' || l.key === 'fr-FR');
   }
 
   getSelectedLanguage(): string {
@@ -58,26 +59,3 @@ export class LanguagesService {
     return languages;
   }
 }
-
-const languages: KeyValue<string, string>[] = [
-  { key: 'en-GB', value: 'languages.english' },
-  { key: 'ar-SA', value: 'languages.arabic' },
-  { key: 'zh-CN', value: 'languages.chinese' },
-  { key: 'da-DK', value: 'languages.danish' },
-  { key: 'nl-NL', value: 'languages.dutch' },
-  { key: 'fi-FI', value: 'languages.finnish' },
-  { key: 'fr-FR', value: 'languages.french' },
-  { key: 'de-DE', value: 'languages.german' },
-  { key: 'hi-IN', value: 'languages.hindi' },
-  { key: 'it-IT', value: 'languages.italian' },
-  { key: 'ja-JP', value: 'languages.japanese' },
-  { key: 'ko-KR', value: 'languages.korean' },
-  { key: 'pl-PL', value: 'languages.polish' },
-  { key: 'pt-PT', value: 'languages.portuguese' },
-  { key: 'ru-RU', value: 'languages.russian' },
-  { key: 'es-ES', value: 'languages.spanish' },
-  { key: 'sv-SE', value: 'languages.swedish' },
-  { key: 'th-TH', value: 'languages.thai' },
-  { key: 'tr-TR', value: 'languages.turkish' },
-  { key: 'vi-VN', value: 'languages.vietnamese' },
-];

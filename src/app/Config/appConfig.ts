@@ -7,4 +7,5 @@ export const appConfig = {
     APPLICATION_EXPIRES: 'teachu-expires',
     APPLICATION_LANGUAGE: 'teachu-language',
     APPLICATION_SELECTED_STUDENT: 'selected-student',
+    APPLICATION_USER_ID: 'teachu-user-id',
 }
