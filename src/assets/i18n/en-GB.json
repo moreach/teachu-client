@@ -1,8 +1,7 @@
 {
     "framework":{
         "save":"Save",
-        "close":"Close",
-        "noData":"No records found"
+        "close":"Close"
     },
     "login":{
         "login":"Login",
@@ -11,7 +10,7 @@
         "wrong":"Login was wrong",
         "logout":"Logout"
     },
-    "outline":{
+    "outline": {
         "selectedStudent":"Selected student"
     },
     "dashboard":{
@@ -22,41 +21,19 @@
     },
     "grades":{
         "grades":"Grades",
-        "desc":"Description",
-        "note":"Note",
-        "subject":"Subject",
-        "date":"Date",
-        "description":"Description",
-        "class":"Class"
+        "desc": "Description",
+        "note": "Note"
     },
     "timetable":{
         "timetable":"Timetable",
         "day":"Day",
         "calendar":"Calendar",
-        "weekFrom":"Week from",
-        "details":"Details",
-        "lesson":"Lesson",
-        "userEvent":"User Event",
-        "schoolEvent":"School Event",
-        "schoolClassEvent":"Class Event",
-        "lessonEvent":"Lesson Event",
-        "schoolClass":"Class",
-        "room":"Room",
-        "teacher":"Teacher",
-        "subject":"Subject",
-        "title":"Title",
-        "description":"Description",
-        "from":"From",
-        "to":"To",
-        "type":"Type",
-        "state":"State",
-        "noDetailsAvailable":"No details available"
+        "weekFrom":"Week from"
     },
     "classlist":{
         "classlist":"Classlist",
         "class":"Class",
         "teachers":"Teachers",
-        "students":"Students",
         "firstName":"Firstname",
         "lastName":"Lastname",
         "birthday":"Birthday",
@@ -66,26 +43,26 @@
     },
     "absences":{
         "absences":"Absences",
-        "noAbsences":"Congratulations, you have zero absences",
-        "verify":"Verify absence",
-        "reject":"Reject absence",
-        "edit":"Edit absence",
-        "title":"Title",
-        "description":"Description",
-        "save":"Save changes",
-        "cancel":"Don't save",
-        "validationError":"Title has to have between 3 and 50 characters and description can't be longer than 500 characters",
-        "state":{
-            "pending":"Pending",
-            "excused":"Excused",
-            "unexcused":"Unexcused"
+        "noAbsences": "Congratulations, you have zero absences",
+        "verify": "Verify absence",
+        "reject": "Reject absence",
+        "edit": "Edit absence",
+        "title": "Title",
+        "description": "Description",
+        "save": "Save changes",
+        "cancel": "Don't save",
+        "validationError": "Title has to have between 3 and 50 characters and description can't be longer than 500 characters",
+        "add": "Create new absence",
+        "state": {
+          "pending": "Pending",
+          "excused": "Excused",
+          "unexcused": "Unexcused",
+          "verified": "Verified"
         },
-        "type":{
-            "sick":"Sick",
-            "holiday":"Holiday"
-        },
-        "absenceState":"State",
-        "absenceType":"Type"
+        "type": {
+          "sick": "Sick",
+          "holiday": "Holiday"
+        }
     },
     "chat":{
         "chat":"Chat",
@@ -94,20 +71,20 @@
         "joinedTheChat":"Joined the Chat",
         "privateChat":"Private Chat",
         "groupChat":"Group Chat",
-        "newChat":"New Chat",
+        "newGroupChat":"New Group Chat",
+        "newPrivateChat":"New Private Chat",
         "chatName":"Chat Name",
         "chatImage":"Chat Image",
         "user":"User",
         "users":"Users",
         "message":"Message",
         "leaveChat":"Leave Chat",
-        "editChat":"Edit Chat",
-        "noChats":"No Chats yet"
+        "editChat":"Edit Chat"
     },
-    "userSettings":{
+    "userSettings": {
         "userSettings":"Settings",
-        "userData":"Your Data",
-        "preferences":"Preferences",
+        "userData": "Your Data",
+        "preferences": "Preferences",
         "email":"E-Mail Address",
         "changePassword":"Change Password",
         "firstName":"Firstname",
@@ -122,25 +99,25 @@
         "postalCode":"Postal Code",
         "street":"Street",
         "phone":"Phone",
-        "profileImage":{
-            "profileImage":"Profile Image",
-            "validation":{
-                "notFound":"No image provided",
-                "notSupportedType":"Image type has to be png or jpeg",
-                "toBig":"Image can't be bigger than 1 MB"
-            }
+        "profileImage": {
+          "profileImage": "Profile Image",
+          "validation": {
+            "notFound": "No image provided",
+            "notSupportedType": "Image type has to be png or jpeg",
+            "toBig": "Image can't be bigger than 1 MB"
+          }
         },
-        "upload":"Upload new",
+        "upload": "Upload new",
         "passwordOld":"Old Password",
         "passwordNew":"New Password",
         "passwordConfirm":"Repeat New Password",
-        "phoneSaved":"Phone number saved",
-        "passwordValidation":{
-            "toShort":"Password has to be at least 8 digits long",
-            "missingCapital":"Password has to contain one uppercase letter",
-            "missingLow":"Password has to contain one lowercase letter",
-            "missingNumber":"Password has to contain at least one  number",
-            "wrongCurrent":"E-Mail or Password wrong."
+        "phoneSaved": "Phone number saved",
+        "passwordValidation": {
+          "toShort": "Password has to be at least 8 digits long",
+          "missingCapital": "Password has to contain one uppercase letter",
+          "missingLow": "Password has to contain one lowercase letter",
+          "missingNumber": "Password has to contain at least one  number",
+          "wrongCurrent": "E-Mail or Password wrong."
         }
     },
     "errorBackend":{
@@ -188,37 +165,5 @@
         "male":"Male",
         "female":"Female",
         "other":"Other"
-    },
-    "LessonEventType":{
-        "exam":"Exam",
-        "homework":"Homework",
-        "note":"Note"
-    },
-    "UserEventType":{
-        "sick":"Sick",
-        "holiday":"Holiday"
-    },
-    "UserEventState":{
-        "pending":"Pending",
-        "excused":"Excused",
-        "unexcused":"Unexcused"
-    },
-    "SchoolEventType":{
-        "holiday":"Holiday",
-        "activity":"Activity",
-        "note":"Note"
-    },
-    "SchoolClassEventType":{
-        "trip":"Trip",
-        "school":"School"
-    },
-    "Weekday":{
-        "monday":"Monday",
-        "tuesday":"Tuesday",
-        "wednesday":"Wednesday",
-        "thursday":"Thursday",
-        "friday":"Friday",
-        "saturday":"Saturday",
-        "sunday":"Sunday"
     }
 }
