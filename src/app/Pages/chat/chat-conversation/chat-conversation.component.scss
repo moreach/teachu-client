@@ -33,6 +33,7 @@
         flex-direction: column-reverse;
         .message-wrapper {
             display: flex;
+            padding-right: 4px;
             .info-message,
             .message {
                 display: inline-block;
@@ -47,11 +48,11 @@
                 background-color: var(--teachu-grey-darker);
             }
             .message.message-non-self {
-                background-color: var(--teachu-accent);
+                background-color: var(--teachu-secondary);
             }
             .message.message-self {
                 margin-left: auto;
-                background-color: var(--teachu-primary);
+                background-color: var(--teachu-accent);
             }
             .message-sender,
             .message-timestamp {

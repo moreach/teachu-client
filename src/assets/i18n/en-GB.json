@@ -94,15 +94,15 @@
         "joinedTheChat":"Joined the Chat",
         "privateChat":"Private Chat",
         "groupChat":"Group Chat",
-        "newGroupChat":"New Group Chat",
-        "newPrivateChat":"New Private Chat",
+        "newChat":"New Chat",
         "chatName":"Chat Name",
         "chatImage":"Chat Image",
         "user":"User",
         "users":"Users",
         "message":"Message",
         "leaveChat":"Leave Chat",
-        "editChat":"Edit Chat"
+        "editChat":"Edit Chat",
+        "noChats":"No Chats yet"
     },
     "userSettings": {
         "userSettings":"Settings",

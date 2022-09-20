@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, map, Observable, of } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { endpoints } from 'src/app/Config/endpoints';
 import { AbsenceInfoDTO } from 'src/app/DTOs/Absence/AbsenceInfoDTO';
+import { ChatResponseDTO } from 'src/app/DTOs/Chat/ChatResponseDTO';
 import { ClassListDTO } from 'src/app/DTOs/ClassList/ClassListDTO';
 import { DashboardAbsenceDTO } from 'src/app/DTOs/Dashboard/DashboardAbsenceDTO';
 import { DashboardChatDTO } from 'src/app/DTOs/Dashboard/DashboardChatDTO';
@@ -14,9 +15,10 @@ import { GradeSemesterDTO } from 'src/app/DTOs/Grade/GradeDTOs';
 import { SchoolInfoDTO } from 'src/app/DTOs/SchoolInfo/SchoolInfoDTO';
 import { TimetableDayDTO } from 'src/app/DTOs/Timetable/TimetableDayDTO';
 import { TimetableLayoutDTO } from 'src/app/DTOs/Timetable/TimetableLayoutDTO';
+import { UserExternalUserDTO } from 'src/app/DTOs/User/UserExternalUserDTO';
 import { ApiService } from 'src/app/Framework/API/api.service';
+import { TokenService } from 'src/app/Framework/API/token.service';
 import { truncateToMaxChars } from 'src/app/Framework/Helpers/StringHelpers';
-import { ChatService } from '../chat/chat.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +27,7 @@ export class DashboardService {
 
   constructor(
     private api: ApiService,
-    private chatService: ChatService,
+    private tokenService: TokenService,
   ) { }
 
   getSchoolInfos$(): Observable<DashboardSchoolInfoDTO[]> {
@@ -157,24 +159,24 @@ export class DashboardService {
   }
 
   getChat$(): Observable<DashboardChatDTO[]> {
-    // todo implement from backend endpoint
-    return this.chatService.getChatOverview$().pipe(
-      map(chatOverview => {
-        return chatOverview.sort((a, b) => b.lastMessageDate.getTime() - a.lastMessageDate.getTime()).slice(0, 10);
+    return this.api.callApi<ChatResponseDTO[]>(endpoints.Chat, { }, 'GET').pipe(
+      map(chats => chats.filter(c => !!c.lastMessage)),
+      map(chats => {
+        return chats.sort((a, b) => b.lastMessage.timestamp - a.lastMessage.timestamp).slice(0, 10);
       }),
-      map(chatOverview => {
-        return chatOverview.map(chat => {
+      map(chats => {
+        return chats.map(c => {
           return {
-            chatImage: chat.chatImage,
-            chatName: chat.chatName,
-            chatType: chat.chatType,
-            lastMessage: chat.lastMessage,
-            lastMessageDate: chat.lastMessageDate,
-            lastMessageFrom: chat.lastMessageFrom,
-            navigate: [appRoutes.Chat, chat.chatId],
-          } as DashboardChatDTO;
+            chatImage: this.getProfileImage(c.members),
+            chatName: c.title,
+            chatType:  !!c.members && c.members.length === 2 ? 'private' : 'group',
+            lastMessage: c.lastMessage.message,
+            lastMessageDate: this.fromEpoch(c.lastMessage.timestamp),
+            lastMessageFrom: this.chatMessageFrom(c.lastMessage.user),
+            navigate: [appRoutes.Chat, c.id],
+          } as DashboardChatDTO
         });
-      }),
+      })
     );
   }
 
@@ -190,5 +192,22 @@ export class DashboardService {
       from: filtered[0].start,
       to: filtered[0].end,
     };
+  }
+
+  fromEpoch(date: number) {
+    let epochDate = new Date(0);
+    epochDate.setMilliseconds(date);
+    return epochDate;
+  }
+
+  chatMessageFrom(user: UserExternalUserDTO) {
+    return this.tokenService.getUserId() === user.id ? null : user.firstName + ' ' + user.lastName;
+  }
+
+  getProfileImage(users: UserExternalUserDTO[]) {
+    if (users.length === 2) {
+      return users.find(u => u.id !== this.tokenService.getUserId())?.imageId;
+    }
+    return null;
   }
 }

@@ -8,6 +8,8 @@ import { DashboardClassListDTO } from 'src/app/DTOs/Dashboard/DashboardClassList
 import { DashboardGradeDTO } from 'src/app/DTOs/Dashboard/DashboardGradeDTO';
 import { DashboardSchoolInfoDTO } from 'src/app/DTOs/Dashboard/DashboardSchoolInfoDTO';
 import { DashboardTimetableDTO } from 'src/app/DTOs/Dashboard/DashboardTimetableDTO';
+import { UserExternalUserDTO } from 'src/app/DTOs/User/UserExternalUserDTO';
+import { TokenService } from 'src/app/Framework/API/token.service';
 import { isToday } from 'src/app/Framework/Helpers/DateHelpers';
 import { DashboardService } from './dashboard.service';
 
@@ -28,6 +30,7 @@ export class DashboardComponent {
   constructor(
     private dashboardService: DashboardService,
     private router: Router,
+    private tokenService: TokenService,
   ) {
     this.schoolInfos$ = this.dashboardService.getSchoolInfos$();
     this.timetable$ = this.dashboardService.getTimetable$();
@@ -70,5 +73,15 @@ export class DashboardComponent {
 
   isDifferentDays(date1: Date, date2: Date) {
     new Date(date1).setHours(0, 0, 0, 0) !== new Date(date2).setHours(0, 0, 0, 0);
+  }
+
+  getProfileImage(members: UserExternalUserDTO[]) {
+    if (!members) {
+      return undefined;
+    }
+    if (members.length === 2) {
+      return members.find(m => m.id !== this.tokenService.getUserId())?.imageId;
+    }
+    return undefined;
   }
 }

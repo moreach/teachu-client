@@ -1,7 +1,7 @@
-import { ChatConversationInfoDTO } from "./ChatConversationInfoDTO";
-import { ChatMessageDTO } from "./ChatMessageDTO";
+import { ChatMessageResponseDTO } from "./ChatMessageResponseDTO";
+import { ChatResponseDTO } from "./ChatResponseDTO";
 
 export interface ChatConversationDTO {
-    info: ChatConversationInfoDTO;
-    messages: ChatMessageDTO[];
+    info: ChatResponseDTO;
+    messages: ChatMessageResponseDTO[];
 }

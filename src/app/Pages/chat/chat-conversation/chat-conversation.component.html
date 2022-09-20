@@ -1,38 +1,36 @@
 <div *ngIf="conversation$ | async as conversation" class="page">
-    <div (click)="openSettings(conversation)" [ngClass]="{ 'chat-info': true, 'pointer': conversation.info.chatType === 'group' }">
-        <img [src]="conversation.info.chatImage" class="chat-image">
+    <div (click)="openSettings()" class="chat-info pointer">
+        <app-image *ngIf="isGroupChat(conversation.info); else groupImage" [round]="true" [size]="48" [imageId]="conversation.info.members[0].imageId"></app-image>
+        <ng-template #groupImage>
+            <mat-icon [style]="{'font-size': '40px', 'margin-left': '4px'}" class="chat-image">group</mat-icon>
+        </ng-template>
         <div class="chat-info-detail">
             <div>
-                <div class="chat-title">{{ conversation.info.chatName }}</div>
-                <div *ngIf="conversation.info.chatType === 'group'">
-                    {{ formatParticipants(conversation.info.participants) }}
+                <div class="chat-title">{{ conversation.info.title }}</div>
+                <div>
+                    {{ formatParticipants(conversation.info.members) }}
                 </div>
             </div>
         </div>
     </div>
     <div class="messages">
         <div *ngFor="let message of conversation.messages">
-            <div *ngIf="!message.isInfoOnly; else infoOnly" class="message-wrapper">
-                <div *ngIf="message.sender; else messageSelf" class="message message-non-self">
-                    <div class="message-sender">{{ message.sender }}</div>
+            <div class="message-wrapper">
+                <div *ngIf="!isOwn(message.user.id); else messageSelf" class="message message-non-self">
+                    <div class="message-sender">{{ message.user.firstName + ' ' + message.user.lastName }}</div>
                     <mat-divider></mat-divider>
                     <div class="message-message">{{ message.message }}</div>
                     <mat-divider></mat-divider>
-                    <div class="message-timestamp">{{ isToday(message.timestamp) ? (message.timestamp | date:'HH:mm') : (message.timestamp | date:'dd.MM.yyyy HH:mm') }}</div>
+                    <div class="message-timestamp">{{ isToday(message.timestamp) ? (getFromEpoch(message.timestamp) | date:'HH:mm') : (getFromEpoch(message.timestamp) | date:'dd.MM.yyyy HH:mm') }}</div>
                 </div>
                 <ng-template #messageSelf>
                     <div class="message message-self">
                         <div class="message-message">{{ message.message }}</div>
                         <mat-divider></mat-divider>
-                        <div class="message-timestamp">{{ isToday(message.timestamp) ? (message.timestamp | date:'HH:mm') : (message.timestamp | date:'dd.MM.yyyy HH:mm') }}</div>
+                        <div class="message-timestamp">{{ isToday(message.timestamp) ? (getFromEpoch(message.timestamp) | date:'HH:mm') : (getFromEpoch(message.timestamp) | date:'dd.MM.yyyy HH:mm') }}</div>
                     </div>
                 </ng-template>
             </div>
-            <ng-template #infoOnly>
-                <div class="message-wrapper">
-                    <div class="info-message">{{ message.message.split('|')[0] }} - {{ message.message.split('|')[1] | translate }}</div>
-                </div>
-            </ng-template>
         </div>
     </div>
     <mat-divider></mat-divider>

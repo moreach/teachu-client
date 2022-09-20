@@ -1,189 +1,72 @@
 import { Injectable } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { combineLatest, filter, map, Observable, tap } from 'rxjs';
+import { endpoints } from 'src/app/Config/endpoints';
 import { ChatConversationDTO } from 'src/app/DTOs/Chat/ChatConversationDTO';
-import { ChatConversationInfoDTO } from 'src/app/DTOs/Chat/ChatConversationInfoDTO';
-import { ChatMessageDTO } from 'src/app/DTOs/Chat/ChatMessageDTO';
-import { ChatOverviewDTO } from 'src/app/DTOs/Chat/ChatOverviewDTO';
-import { ChatSaveGroupDTO } from 'src/app/DTOs/Chat/ChatSaveGroupDTO';
+import { ChatMessageRequestDTO } from 'src/app/DTOs/Chat/ChatMessageRequestDTO';
+import { ChatMessageResponseDTO } from 'src/app/DTOs/Chat/ChatMessageResponseDTO';
+import { ChatRequestDTO } from 'src/app/DTOs/Chat/ChatRequestDTO';
+import { ChatResponseDTO } from 'src/app/DTOs/Chat/ChatResponseDTO';
 import { ChatUserDTO } from 'src/app/DTOs/Chat/ChatUserDTO';
-import { addMinutes } from 'src/app/Framework/Helpers/DateHelpers';
+import { UserExternalUserDTO } from 'src/app/DTOs/User/UserExternalUserDTO';
+import { ApiService } from 'src/app/Framework/API/api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
-  constructor() { }
+  // TODO EW: bind reload in more elegant way
 
-  getChatOverview$(): Observable<ChatOverviewDTO[]> {
-    // todo implement from backend endpoint
-    const mockData = [
-      {
-        chatId: '101',
-        chatName: 'Mathinachhilf',
-        chatType: 'group',
-        chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
-        lastMessage: 'Hello',
-        lastMessageFrom: 'Oliver Umbricht',
-        lastMessageDate: addMinutes(new Date(), -10)
-      } as ChatOverviewDTO,
-      {
-        chatId: '102',
-        chatName: 'Chat 2',
-        chatType: 'group',
-        chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
-        lastMessage: 'Last message Chat 2',
-        lastMessageFrom: null,
-        lastMessageDate: addMinutes(new Date(), -20)
-      } as ChatOverviewDTO,
-      {
-        chatId: '103',
-        chatName: 'Micha Schweizer',
-        chatType: 'private',
-        chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
-        lastMessage: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s',
-        lastMessageFrom: 'Micha Schweizer',
-        lastMessageDate: addMinutes(new Date(), -2000)
-      } as ChatOverviewDTO,
-      {
-        chatId: '104',
-        chatName: 'Jonas Hauser',
-        chatType: 'private',
-        chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
-        lastMessage: 'Last message Chat Jonas',
-        lastMessageFrom: null,
-        lastMessageDate: addMinutes(new Date(), -5000)
-      } as ChatOverviewDTO,
-    ];
-    return of(mockData);
+  constructor(
+    private api: ApiService,
+  ) { }
+
+  getChatOverview$(): Observable<ChatResponseDTO[]> {
+    return this.api.callApi<ChatResponseDTO[]>(endpoints.Chat, { }, 'GET');
   }
 
   getChatConversation$(chatId: string): Observable<ChatConversationDTO> {
-    // todo implement from backend endpoint
-    const mockData = {
-      info: {
-        chatImage: 'https://www.w3schools.com/howto/img_avatar.png',
-        chatName: 'Mathinachhilf',
-        chatType: 'group',
-        isUserAdmin: true,
-        participants: [{
-          name: null,
-          userId: null,
-          image: 'https://www.w3schools.com/howto/img_avatar.png',
-          role: 'student',
-          isAdmin: true
-        }, {
-          name: 'Oliver Andreas Umbricht',
-          userId: '201',
-          image: 'https://www.w3schools.com/howto/img_avatar.png',
-          role: 'student',
-          isAdmin: false
-        }, {
-          name: 'Felix Winzenried',
-          userId: '202',
-          image: 'https://www.w3schools.com/howto/img_avatar.png',
-          role: 'student',
-          isAdmin: false
-        }, {
-          name: 'Stefano La Rosa',
-          userId: '206',
-          image: 'https://www.w3schools.com/howto/img_avatar.png',
-          role: 'TEACHER',
-          isAdmin: false
-        }, {
-          name: 'Roberto Formisano',
-          userId: '207',
-          image: 'https://www.w3schools.com/howto/img_avatar.png',
-          role: 'TEACHER',
-          isAdmin: false
-        }, {
-          name: 'Flurin Jan Bruppacher',
-          userId: '208',
-          image: 'https://www.w3schools.com/howto/img_avatar.png',
-          role: 'student',
-          isAdmin: false
-        }],
-      } as ChatConversationInfoDTO,
-      messages: [{
-        message: 'Jonas Hauser|chat.leftTheChat',
-        sender: null,
-        timestamp: addMinutes(new Date(), -5000),
-        isInfoOnly: true
-      }, {
-        message: 'Hello Hello',
-        sender: null,
-        timestamp: addMinutes(new Date(), -4000),
-        isInfoOnly: false
-      }, {
-        message: 'Felix Winzenried|chat.joinedTheChat',
-        sender: null,
-        timestamp: addMinutes(new Date(), -3500),
-        isInfoOnly: true
-      }, {
-        message: 'Gits na en Session',
-        sender: 'Felix Winzenried',
-        timestamp: addMinutes(new Date(), -3000),
-        isInfoOnly: false
-      }, {
-        message: 'S git na eine',
-        sender: 'Oliver Umbricht',
-        timestamp: addMinutes(new Date(), -2500),
-        isInfoOnly: false
-      }, {
-        message: 'Chömed Buebe dünd mal schaffe',
-        sender: 'Stefano La Rosa',
-        timestamp: addMinutes(new Date(), -10),
-        isInfoOnly: false
-      }] as ChatMessageDTO[]
-    } as ChatConversationDTO;
-    return of(mockData);
-  }
-
-  getChatConversationInfo$(chatId: string): Observable<ChatConversationInfoDTO> {
-    // todo implement from backend endpoint
-    return this.getChatConversation$(chatId).pipe(
-      map(chatConversation => chatConversation.info)
+    return combineLatest(
+      this.api.callApi<ChatMessageResponseDTO[]>(endpoints.Chat + '/' + endpoints.Messages + '/' + chatId, { }, 'GET'),
+      this.api.callApi<ChatResponseDTO[]>(endpoints.Chat, { }, 'GET')
+    ).pipe(
+      map(([messages, chats]) => {
+        return {
+          info: chats.find(chat => chat.id === chatId),
+          messages: messages.reverse(),
+        } as ChatConversationDTO;
+      }),
     );
   }
 
-  getChatUser$(): Observable<ChatUserDTO[]> {
-    // todo implement from backend endpoint
-    const mockData = [{
-      id: '201',
-      name: 'Oliver Umbricht'
-    }, {
-      id: '202',
-      name: 'Felix Winzenried'
-    }, {
-      id: '203',
-      name: 'Micha Schweizer'
-    }, {
-      id: '204',
-      name: 'Roman Bürge'
-    }, {
-      id: '205',
-      name: 'Eric Wermelinger'
-    }];
-    return of(mockData);
+  getChatConversationInfo$(chatId: string): Observable<ChatResponseDTO> {
+    return this.api.callApi<ChatResponseDTO[]>(endpoints.Chat, { }, 'GET').pipe(
+      map(chats => chats.find(chat => chat.id === chatId)),
+      filter(chat => !!chat),
+      map(chat => chat as ChatResponseDTO),
+    );
   }
 
-  createChatGroup$(value: ChatSaveGroupDTO) {
-    // todo implement from backend endpoint
-    return of(null);
+  getChatUser$(query: string): Observable<ChatUserDTO[]> {
+    return this.api.callApi<UserExternalUserDTO[]>(endpoints.Search + '/' + endpoints.User, { query }, 'GETwithPARAMS').pipe(
+      map(users => users.map(user => {
+        return {
+          id: (user as any).user.id,
+          name: (user as any).user.firstName + ' ' + (user as any).user.lastName,
+        }
+      })),
+    )
   }
 
-  createChatPrivate$(userId: string) {
-    // todo implement from backend endpoint
-    return of(null);
+  createChatGroup$(value: ChatRequestDTO) {
+    return this.api.callApi(endpoints.Chat, value, 'POST');
   }
 
   sendMessage$(chatId: string, message: string) {
-    // todo implement from backend endpoint
-    return of(null);
-  }
-
-  leaveChat$(chatId: string) {
-    // todo implement from backend endpoint
-    return of(null);
+    const value = {
+      chatId,
+      message,
+    } as ChatMessageRequestDTO;
+    return this.api.callApi(endpoints.Chat + '/' + endpoints.Messages, value, 'POST');
   }
 }

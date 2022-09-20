@@ -91,6 +91,7 @@ export class LoginComponent {
     if (user.language) {
       this.languageService.selectLanguage(GetLanguageKey(user.language));
     }
+    this.tokenService.setUserId(user.id)
   }
 
   setChildren(children: ParentChildDTO[] | null) {
