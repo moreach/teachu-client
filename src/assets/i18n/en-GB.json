@@ -11,7 +11,7 @@
         "wrong":"Login was wrong",
         "logout":"Logout"
     },
-    "outline": {
+    "outline":{
         "selectedStudent":"Selected student"
     },
     "dashboard":{
@@ -22,8 +22,8 @@
     },
     "grades":{
         "grades":"Grades",
-        "desc": "Description",
-        "note": "Note",
+        "desc":"Description",
+        "note":"Note",
         "subject":"Subject",
         "date":"Date",
         "description":"Description",
@@ -66,26 +66,29 @@
     },
     "absences":{
         "absences":"Absences",
-        "noAbsences": "Congratulations, you have zero absences",
-        "verify": "Verify absence",
-        "reject": "Reject absence",
-        "edit": "Edit absence",
-        "title": "Title",
-        "description": "Description",
-        "save": "Save changes",
-        "cancel": "Don't save",
-        "validationError": "Title has to have between 3 and 50 characters and description can't be longer than 500 characters",
-        "state": {
-          "pending": "Pending",
-          "excused": "Excused",
-          "unexcused": "Unexcused"
+        "noAbsences":"Congratulations, you have zero absences",
+        "verify":"Verify absence",
+        "reject":"Reject absence",
+        "edit":"Edit absence",
+        "title":"Title",
+        "description":"Description",
+        "save":"Save changes",
+        "cancel":"Don't save",
+        "validationError":"Title has to have between 3 and 50 characters and description can't be longer than 500 characters and start date has to be before end date",
+        "state":{
+            "pending":"Pending",
+            "excused":"Excused",
+            "unexcused":"Unexcused",
+            "verified": "Verified"
         },
-        "type": {
-          "sick": "Sick",
-          "holiday": "Holiday"
+        "type":{
+            "sick":"Sick",
+            "holiday":"Holiday"
         },
         "absenceState":"State",
-        "absenceType":"Type"
+        "absenceType":"Type",
+        "absenceStartDate":"absence start date",
+        "absenceEndDate":"absence end date"
     },
     "chat":{
         "chat":"Chat",
@@ -104,10 +107,10 @@
         "editChat":"Edit Chat",
         "noChats":"No Chats yet"
     },
-    "userSettings": {
+    "userSettings":{
         "userSettings":"Settings",
-        "userData": "Your Data",
-        "preferences": "Preferences",
+        "userData":"Your Data",
+        "preferences":"Preferences",
         "email":"E-Mail Address",
         "changePassword":"Change Password",
         "firstName":"Firstname",
@@ -122,25 +125,25 @@
         "postalCode":"Postal Code",
         "street":"Street",
         "phone":"Phone",
-        "profileImage": {
-          "profileImage": "Profile Image",
-          "validation": {
-            "notFound": "No image provided",
-            "notSupportedType": "Image type has to be png or jpeg",
-            "toBig": "Image can't be bigger than 1 MB"
-          }
+        "profileImage":{
+            "profileImage":"Profile Image",
+            "validation":{
+                "notFound":"No image provided",
+                "notSupportedType":"Image type has to be png or jpeg",
+                "toBig":"Image can't be bigger than 1 MB"
+            }
         },
-        "upload": "Upload new",
+        "upload":"Upload new",
         "passwordOld":"Old Password",
         "passwordNew":"New Password",
         "passwordConfirm":"Repeat New Password",
-        "phoneSaved": "Phone number saved",
-        "passwordValidation": {
-          "toShort": "Password has to be at least 8 digits long",
-          "missingCapital": "Password has to contain one uppercase letter",
-          "missingLow": "Password has to contain one lowercase letter",
-          "missingNumber": "Password has to contain at least one  number",
-          "wrongCurrent": "E-Mail or Password wrong."
+        "phoneSaved":"Phone number saved",
+        "passwordValidation":{
+            "toShort":"Password has to be at least 8 digits long",
+            "missingCapital":"Password has to contain one uppercase letter",
+            "missingLow":"Password has to contain one lowercase letter",
+            "missingNumber":"Password has to contain at least one  number",
+            "wrongCurrent":"E-Mail or Password wrong."
         }
     },
     "errorBackend":{

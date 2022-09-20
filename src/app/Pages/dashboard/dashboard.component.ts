@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
@@ -71,8 +71,8 @@ export class DashboardComponent {
     return isToday(date);
   }
 
-  isDifferentDays(date1: Date, date2: Date) {
-    new Date(date1).setHours(0, 0, 0, 0) !== new Date(date2).setHours(0, 0, 0, 0);
+  isDifferentDays(date1: number, date2: number): boolean {
+    return new Date(date1).setHours(0, 0, 0, 0) !== new Date(date2).setHours(0, 0, 0, 0);
   }
 
   getProfileImage(members: UserExternalUserDTO[]) {

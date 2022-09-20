@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { AbsencesService } from './absences.service';
+import {AbsencesService} from './absences.service';
 import {AbsenceInfoDTO} from "../../DTOs/Absence/AbsenceInfoDTO";
 import {UserService} from "../user-settings/user.service";
 
@@ -13,7 +13,9 @@ export class AbsencesComponent implements OnInit{
 
     absences: AbsenceInfoDTO[] | undefined;
     isParent: boolean = false;
-    editMode: boolean = false;
+    newMode: boolean = false;
+
+    private absenceInEditing: string | undefined;
 
     constructor(
         private service: AbsencesService,
@@ -21,25 +23,46 @@ export class AbsencesComponent implements OnInit{
     ) { }
 
     ngOnInit(): void {
-        this.service.getAbsences$().subscribe(abs => this.absences = abs);
+        this.loadAbsences();
         this.userService.getCurrentUser$()
             .subscribe(user => this.isParent = user.role === "parent");
     }
 
-    doneEditing(changedAbsence: AbsenceInfoDTO | undefined){
-        this.editMode = false;
-        if(changedAbsence && this.absences) {
-            if(this.isParent){
-                // changedAbsence.state = "verified"; TODO: wait for api implementation
-            }else changedAbsence.state = "pending";
+    loadAbsences(): void {
+        this.service.clearCache();
+        this.service.getAbsences$().subscribe(abs => {
+            this.absenceInEditing = undefined;
+            this.absences = abs;
+        });
+    }
 
-            const indexToChange: number = this.absences.findIndex(a => a.id === changedAbsence.id);
+    newAbsence() {
+        let toDate = new Date(Date.now());
+        toDate.setDate(toDate.getDate() + 2);
 
-            if(indexToChange === -1)
-                this.absences.push(changedAbsence);
-            else
-                this.absences[indexToChange] = changedAbsence;
-        }
+        const absence: AbsenceInfoDTO = {
+            id: this.service.NEW_ABSENCE_ID,
+            title: "New Absence",
+            type: "holiday",
+            state: "pending",
+            description: "",
+            from: Date.now(),
+            to: toDate.valueOf(),
+        };
+
+        this.newMode = true;
+        this.absences?.unshift(absence);
+        this.absenceInEditing = absence.id;
+        // I have to wait for the *ngFor to rerender with the new absence 🤦‍♂️
+        setTimeout(() => this.scrollToNextAbsence(-1), 100);
+    }
+
+    doneEditing(cancel: boolean){
+        if(this.newMode && cancel) this.absences?.shift();
+        this.newMode = false;
+        this.absenceInEditing = undefined;
+        if(!cancel)
+            this.loadAbsences();
     }
 
     scrollToNextAbsence(currentAbsence: number) {
@@ -53,5 +76,22 @@ export class AbsencesComponent implements OnInit{
         if(this.absences)
             return index >= this.absences.length - 1;
         return false;
+    }
+
+    getEditMode(id: string): boolean{
+        return this.absenceInEditing === id;
+    }
+
+    setEditMode(id: string){
+        if(this.newMode){
+            this.newMode = false;
+            this.absences?.shift();
+        }
+
+        this.absenceInEditing = id;
+    }
+
+    verifiedAbsence(index: number) {
+        if(this.absences) this.absences[index].state = "verified";
     }
 }

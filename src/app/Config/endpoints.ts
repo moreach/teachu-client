@@ -12,5 +12,6 @@ export const endpoints = {
     Timetable: 'timetable',
     TimetableLayout: 'timetable/layout',
     Absence: 'absence',
+    AbsenceVerify: 'absence/verify',
     Image: 'image',
 }

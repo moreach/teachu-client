@@ -63,13 +63,12 @@ export class ParentService implements HttpInterceptor{
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let newReq = req;
 
-        if(req.method === 'GET'){
-            const studentId = this.getSelectedStudentIdIfRequired(req.url);
-            if(!!studentId){
-                newReq = req.clone({
-                    setParams: { "studentId": studentId },
-                });
-            }
+        const studentId = this.getSelectedStudentIdIfRequired(req.url);
+        if(!!studentId){
+            newReq = req.clone({
+                setParams: { "studentId": studentId },
+            });
+            if(!environment.IS_PROD) console.log("interceptor - updated request params", newReq.params);
         }
 
         return next.handle(newReq);
@@ -77,6 +76,8 @@ export class ParentService implements HttpInterceptor{
 
     private getSelectedStudentIdIfRequired(url: string): string | null {
         let endpoint = url.replace(environment.URL_API, "");
+        if(endpoint.includes("/"))
+            endpoint = endpoint.substring(0, endpoint.indexOf("/"));
 
         if(this.endpointsWithStudentId.includes(endpoint)){
             const studentId = localStorage.getItem(appConfig.APPLICATION_SELECTED_STUDENT);
