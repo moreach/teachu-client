@@ -12,7 +12,7 @@ import { TimetableComponent } from './Pages/timetable/timetable.component';
 import {UserSettingsComponent} from "./Pages/user-settings/user-settings.component";
 import { SchoolInfosComponent } from './Pages/school-infos/school-infos.component';
 import { AbsencesComponent } from './Pages/absences/absences.component';
-import {ClassInfoComponent} from "./Pages/class-info/class-info.component";
+import {ClassListComponent} from "./Pages/classlist/class-list.component";
 
 const routes: Routes = [
   { path: '', redirectTo: `/${appRoutes.Login}`, pathMatch: 'full' },
@@ -25,7 +25,7 @@ const routes: Routes = [
       { path: appRoutes.Dashboard, component: DashboardComponent },
       { path: appRoutes.SchoolInfos, component: SchoolInfosComponent },
       { path: appRoutes.Timetable, component: TimetableComponent },
-      { path:`${appRoutes.Class}/:${appRoutes.ClassName}`, component: ClassInfoComponent },
+      { path:`${appRoutes.Class}/:${appRoutes.ClassName}`, component: ClassListComponent },
       { path: appRoutes.Grades, component: GradesComponent },
       { path: appRoutes.Absences, component: AbsencesComponent },
       { path: appRoutes.Chat, component: ChatOverviewComponent, pathMatch: 'full' },

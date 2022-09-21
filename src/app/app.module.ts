@@ -56,7 +56,7 @@ import {
 import { TextBadgeComponent } from './Conponents/text-badge/text-badge.component';
 import { AbsenceVisualisationComponent } from './Conponents/absence/absence-visalisation/absence-visualisation.component';
 import { AbsenceEditorComponent } from './Conponents/absence/absence-editor/absence-editor.component';
-import { ClassInfoComponent } from './Pages/class-info/class-info.component';
+import { ClassListComponent } from './Pages/classlist/class-list.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -105,7 +105,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         TextBadgeComponent,
         AbsenceVisualisationComponent,
         AbsenceEditorComponent,
-        ClassInfoComponent,
+        ClassListComponent,
     ],
     imports: [
         BrowserModule,
