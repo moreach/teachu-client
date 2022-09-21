@@ -1,0 +1,11 @@
+.content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

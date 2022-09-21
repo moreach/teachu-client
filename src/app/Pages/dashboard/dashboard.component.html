@@ -62,7 +62,7 @@
             <div *ngFor="let classlistItem of classList">
                 <div class="entry class-list" (click)="navigate(classlistItem.navigate)">
                     <div class="class-list-classname">
-                        <div><b>{{ classlistItem.className }}</b> ({{ classlistItem.classTeacher }})</div>
+                        <div><b>{{ classlistItem.className }}</b> - {{ classlistItem.classTeacher }}</div>
                     </div>
                     <div class="hidden details">
                         <div>{{ 'classlist.teachers' | translate }}: {{ formatArray(classlistItem.teachers) }}</div>

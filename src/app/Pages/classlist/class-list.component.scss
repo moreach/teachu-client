@@ -1,5 +1,31 @@
 .page {
-    display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
+    display: block;
+
+    .teachers{
+        width: 100%;
+
+        display: flex;
+        flex-flow: row wrap;
+        gap: 60px;
+        padding-bottom: 50px;
+
+        .teacher{
+            max-width: 400px;
+            width: max-content;
+            min-width: 200px;
+            padding: 25px;
+            border-radius: 20px;
+
+            background-color: var(--teachu-white);
+            filter: drop-shadow(0 15px 20px var(--teachu-primary-brightest));
+        }
+    }
+
+    @media (max-width: 1000px) {
+        .teachers{
+            justify-content: center;
+        }
+    }
 }
