@@ -9,6 +9,8 @@ import {appRoutes} from "../../Config/appRoutes";
 })
 export class MenuTreeService {
 
+    private finalTree: boolean = false;
+
     constructor(
         private classListService: ClasslistService,
     ) {
@@ -63,10 +65,13 @@ export class MenuTreeService {
         };
         return new Observable<MenuTreeDTO>(obs => {
             obs.next(menuTree);
-            this.getSchoolClasses().subscribe(classes => {
-                menuTree.tree.push(classes);
-                obs.next(menuTree);
-            });
+            if(!this.finalTree){
+                this.getSchoolClasses().subscribe(classes => {
+                    menuTree.tree.push(classes);
+                    this.finalTree = true;
+                    obs.next(menuTree);
+                });
+            }
         });
     }
 
