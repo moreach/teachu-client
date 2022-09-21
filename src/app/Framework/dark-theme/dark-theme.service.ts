@@ -1,7 +1,7 @@
-import { OverlayContainer } from '@angular/cdk/overlay';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { appConfig } from 'src/app/Config/appConfig';
+import {OverlayContainer} from '@angular/cdk/overlay';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {appConfig} from 'src/app/Config/appConfig';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,7 @@ export class DarkThemeService {
     document.body.classList.toggle('darkTheme', isDarkTheme);
     this.overlay.getContainerElement().classList.toggle('darkTheme', isDarkTheme);
 
-    const styles: string[] = ['primary', 'primary-brightest', 'accent', 'accent-hover', 'accent-click', 'white', 'grey', 'grey-darker', 'black', 'secondary', 'warn'];
+    const styles: string[] = ['primary', 'primary-brightest', 'accent', 'accent-hover', 'accent-click', 'white', 'grey', 'grey-darker', 'grey-darkest', 'black', 'secondary', 'warn'];
     const setTo: string = isDarkTheme ? 'dark' : 'light';
     let r = document.querySelector(':root') as HTMLElement;
     let computed = getComputedStyle(r);
