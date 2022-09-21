@@ -104,7 +104,7 @@ export class DashboardService {
             classTeacher: classlist.classTeacher.firstName + ' ' + classlist.classTeacher.lastName,
             students: classlist.students.map(student => student.firstName + ' ' + student.lastName),
             teachers: classlist.teachers.map(teacher => teacher.firstName + ' ' + teacher.lastName),
-            navigate: appRoutes.Classlist,
+            navigate: [appRoutes.Class, classlist.name],
           } as DashboardClassListDTO;
         });
       })

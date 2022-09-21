@@ -4,11 +4,11 @@ import { ClassListStudentDTO } from 'src/app/DTOs/ClassList/ClassListDTO';
 import { UserSex, SEXS } from 'src/app/DTOs/User/UserSex';
 
 @Component({
-  selector: 'app-classlist-detail',
-  templateUrl: './classlist-detail.component.html',
-  styleUrls: ['./classlist-detail.component.scss']
+  selector: 'app-classlist-detail-dialog',
+  templateUrl: './class-list-detail-dialog.component.html',
+  styleUrls: ['./class-list-detail-dialog.component.scss']
 })
-export class ClasslistDetailComponent {
+export class ClassListDetailDialogComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any

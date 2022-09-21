@@ -1,0 +1,11 @@
+<div *ngIf="person" class="content">
+    <div class="image-wrapper">
+        <app-image [round]="true" [size]="100" [imageStyle]="'margin-bottom: 16px;'" [imageId]="person.imageId" ></app-image>
+    </div>
+    <app-readonly-field [label]="'classlist.firstName' | translate" [value]="person.firstName"></app-readonly-field>
+    <app-readonly-field [label]="'classlist.lastName' | translate" [value]="person.lastName"></app-readonly-field>
+    <app-readonly-field [label]="'classlist.birthday' | translate" [value]="person.birthday | date: 'dd.MM.yyyy'"></app-readonly-field>
+    <app-readonly-field [label]="'classlist.email' | translate" [value]="person.email"></app-readonly-field>
+    <app-readonly-field [label]="'classlist.sex' | translate" [value]="('Sex.' + person.sex) | translate"></app-readonly-field>
+    <app-readonly-field [label]="'classlist.city' | translate" [value]="person.city"></app-readonly-field>
+</div>

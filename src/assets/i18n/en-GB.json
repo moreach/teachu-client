@@ -22,8 +22,8 @@
     },
     "grades":{
         "grades":"Grades",
-        "desc":"Description",
-        "note":"Note",
+        "desc": "Description",
+        "mark": "Mark",
         "subject":"Subject",
         "date":"Date",
         "description":"Description",
@@ -64,12 +64,16 @@
         "city":"City",
         "email":"Mail"
     },
+    "class": {
+      "class": "Class Info"
+    },
     "absences":{
         "absences":"Absences",
         "noAbsences":"Congratulations, you have zero absences",
         "verify":"Verify absence",
         "reject":"Reject absence",
         "edit":"Edit absence",
+        "add":"Add absence",
         "title":"Title",
         "description":"Description",
         "save":"Save changes",

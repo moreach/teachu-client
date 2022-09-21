@@ -1,19 +1,68 @@
 .data-row {
-    margin-top: 4px;
-    margin-bottom: 4px;
+    margin: 8px;
+    height: 55px;
     display: grid;
     cursor: pointer;
-    grid-template-columns: 80px 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 55px repeat(6, 1fr);
+    align-items: center;
 }
-h2 {
-    margin-bottom: 0px;
+
+.data-row:not(.header){
+    padding: 5px;
+    border-radius: 10px;
+    border: 5px solid var(--teachu-grey);
+    transition: background-color 300ms ease-out;
 }
-.text {
-    margin-top: 16px;
+
+.data-row:not(.header):hover{
+    background-color: var(--teachu-grey);
 }
+
 .header {
     font-weight: bold;
 }
-.end {
-    margin-bottom: 20px;
+
+@media (max-width: 1200px) {
+    .data-row{
+        grid-template-columns: 55px repeat(5, 1fr);
+        .sex{
+            display: none !important;
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .data-row{
+        grid-template-columns: 55px repeat(4, 1fr);
+        .city{
+            display: none !important;
+        }
+    }
+}
+
+@media (max-width: 650px) {
+    .data-row{
+        grid-template-columns: 55px repeat(3, 1fr);
+        .birthday{
+            display: none !important;
+        }
+    }
+}
+
+@media (max-width: 520px) {
+    .data-row{
+        grid-template-columns: 55px repeat(2, 1fr);
+        .email{
+            display: none !important;
+        }
+    }
+}
+
+@media (max-width: 380px) {
+    .data-row{
+        grid-template-columns: repeat(2, 1fr);
+        .image{
+            display: none !important;
+        }
+    }
 }

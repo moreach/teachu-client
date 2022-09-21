@@ -48,6 +48,22 @@ export class DashboardComponent {
     }
   }
 
+  navigateAbsences(){
+    this.navigate(appRoutes.Absences);
+  }
+
+  navigateGrades(){
+    this.navigate(appRoutes.Grades);
+  }
+
+  navigateSchoolInfos(){
+    this.navigate(appRoutes.SchoolInfos);
+  }
+
+  navigateTimetable(){
+    this.navigate(appRoutes.Timetable);
+  }
+
   isEmpty(array: any[]) {
     return array.length === 0;
   }

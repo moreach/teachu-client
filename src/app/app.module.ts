@@ -43,9 +43,8 @@ import { RecentExamsComponent } from './Conponents/grades/recent-exams/recent-ex
 import { ClassGradesComponent } from './Conponents/grades/class-grades/class-grades.component';
 import { GradeDetailComponent } from './Conponents/grades/grade-detail/grade-detail.component';
 import { LessonDetailsComponent } from './Pages/timetable/lesson-details/lesson-details.component';
-import { ClasslistComponent } from './Pages/classlist/classlist.component';
 import { ClasslistListComponent } from './Pages/classlist/classlist-list/classlist-list.component';
-import { ClasslistDetailComponent } from './Pages/classlist/classlist-detail/classlist-detail.component';
+import { ClassListDetailDialogComponent } from './Pages/classlist/classlist-detail/class-list-detail-dialog.component';
 import { ChooseStudentDialogComponent } from './Pages/login/choose-student-dialog/choose-student-dialog.component';
 import { ParentChildSelectorComponent } from './Conponents/parent-child-selector/parent-child-selector.component';
 import {ParentService} from "./Framework/API/parent.service";
@@ -57,6 +56,9 @@ import {
 import { TextBadgeComponent } from './Conponents/text-badge/text-badge.component';
 import { AbsenceVisualisationComponent } from './Conponents/absence/absence-visalisation/absence-visualisation.component';
 import { AbsenceEditorComponent } from './Conponents/absence/absence-editor/absence-editor.component';
+import { ClassListComponent } from './Pages/classlist/class-list.component';
+import { TableHeaderComponent } from './Conponents/table-header/table-header.component';
+import { ClassListDetailComponent } from './Conponents/class-list-detail/class-list-detail.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -95,9 +97,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         ClassGradesComponent,
         GradeDetailComponent,
         LessonDetailsComponent,
-        ClasslistComponent,
         ClasslistListComponent,
-        ClasslistDetailComponent,
+        ClassListDetailDialogComponent,
         ChooseStudentDialogComponent,
         ParentChildSelectorComponent,
         ImageComponent,
@@ -106,6 +107,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         TextBadgeComponent,
         AbsenceVisualisationComponent,
         AbsenceEditorComponent,
+        ClassListComponent,
+        TableHeaderComponent,
+        ClassListDetailComponent,
     ],
     imports: [
         BrowserModule,

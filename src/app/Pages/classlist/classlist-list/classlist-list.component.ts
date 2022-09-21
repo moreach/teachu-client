@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ClassListStudentDTO, ClassListTeacherDTO } from 'src/app/DTOs/ClassList/ClassListDTO';
-import { ClasslistDetailComponent } from '../classlist-detail/classlist-detail.component';
+import { ClassListDetailDialogComponent } from '../classlist-detail/class-list-detail-dialog.component';
 
 @Component({
   selector: 'app-classlist-list',
@@ -25,6 +25,11 @@ export class ClasslistListComponent {
   constructor(
     private dialog: MatDialog,
   ) { }
+
+  getSortState(key: string): boolean | undefined {
+      if(key !== this.sortKey) return undefined;
+      return !this.isReversed;
+  }
 
   sortBasis(p: ClassListStudentDTO[] | ClassListTeacherDTO[]) {
     p.sort((a, b) => {
@@ -63,7 +68,7 @@ export class ClasslistListComponent {
   }
 
   openDetail(person: ClassListStudentDTO | ClassListTeacherDTO) {
-    this.dialog.open(ClasslistDetailComponent, {
+    this.dialog.open(ClassListDetailDialogComponent, {
       data: {
         person
       },
