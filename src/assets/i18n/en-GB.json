@@ -73,6 +73,7 @@
         "verify":"Verify absence",
         "reject":"Reject absence",
         "edit":"Edit absence",
+        "add":"Add absence",
         "title":"Title",
         "description":"Description",
         "save":"Save changes",
