@@ -65,4 +65,12 @@ export class TokenService {
   getUserId() {
     return localStorage.getItem(appConfig.APPLICATION_USER_ID) ?? '';
   }
+
+  setJWT(jwt: string) {
+    localStorage.setItem(appConfig.APPLICATION_JWT, jwt);
+  }
+
+  getJWT() {
+    return localStorage.getItem(appConfig.APPLICATION_JWT ?? '');
+  }
 }

@@ -8,4 +8,6 @@ export const appConfig = {
     APPLICATION_LANGUAGE: 'teachu-language',
     APPLICATION_SELECTED_STUDENT: 'selected-student',
     APPLICATION_USER_ID: 'teachu-user-id',
+    APPLICATION_JWT: 'extension-token',
+    API_HEADER_BEARER: 'Bearer',
 }

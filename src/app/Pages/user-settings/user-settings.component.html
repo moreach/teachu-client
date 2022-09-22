@@ -8,13 +8,54 @@
 
         <app-language-lookup style="width: 100%" (languageChanged)="saveLanguage($event)"></app-language-lookup>
 
-        <form id="phoneNumberForm">
+        <form id="phoneNumberForm" [formGroup]="formGroup">
             <mat-form-field>
                 <mat-label>{{ "userSettings.phone" | translate}}</mat-label>
-                <input matInput [placeholder]="'userSettings.phone' | translate"
-                       [formControl]="phoneNumberControl">
+                <input matInput [placeholder]="'userSettings.phone' | translate" formControlName="phoneNumber">
                 <mat-icon *ngIf="!showPhoneSaved" matSuffix>phone_iphone</mat-icon>
                 <mat-icon id="savedIcon" *ngIf="showPhoneSaved" [matTooltip]="'userSettings.phoneSaved' | translate" matSuffix>verified</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ 'settings.goodSubject1' | translate }}</mat-label>
+                <mat-select formControlName="goodSubject1">
+                    <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
+                </mat-select>
+                <mat-icon id="savedIcon" *ngIf="showPhoneSaved" matSuffix>verified</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ 'settings.goodSubject2' | translate }}</mat-label>
+                <mat-select formControlName="goodSubject2">
+                    <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
+                </mat-select>
+                <mat-icon id="savedIcon" *ngIf="showPhoneSaved" matSuffix>verified</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ 'settings.goodSubject3' | translate }}</mat-label>
+                <mat-select formControlName="goodSubject3">
+                    <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
+                </mat-select>
+                <mat-icon id="savedIcon" *ngIf="showPhoneSaved" matSuffix>verified</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ 'settings.badSubject1' | translate }}</mat-label>
+                <mat-select formControlName="badSubject1">
+                    <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
+                </mat-select>
+                <mat-icon id="savedIcon" *ngIf="showPhoneSaved" matSuffix>verified</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ 'settings.badSubject2' | translate }}</mat-label>
+                <mat-select formControlName="badSubject2">
+                    <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
+                </mat-select>
+                <mat-icon id="savedIcon" *ngIf="showPhoneSaved" matSuffix>verified</mat-icon>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ 'settings.badSubject3' | translate }}</mat-label>
+                <mat-select formControlName="badSubject3">
+                    <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
+                </mat-select>
+                <mat-icon id="savedIcon" *ngIf="showPhoneSaved" matSuffix>verified</mat-icon>
             </mat-form-field>
         </form>
 

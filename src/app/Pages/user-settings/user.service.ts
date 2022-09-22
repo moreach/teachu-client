@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
-import {distinctUntilChanged, filter, map, Observable, startWith} from 'rxjs';
+import {combineLatest, distinctUntilChanged, filter, map, Observable, startWith} from 'rxjs';
 import {appRoutes} from 'src/app/Config/appRoutes';
 import {endpoints} from 'src/app/Config/endpoints';
 import {UserOwnChangeDTO} from 'src/app/DTOs/User/UserOwnChangeDTO';
@@ -8,6 +8,8 @@ import {ApiService} from 'src/app/Framework/API/api.service';
 import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
 import {FileUploadResponse} from "../../Conponents/profile-pic/profile-pic-uploader/profile-pic-uploader.component";
 import {HttpEventType, HttpResponse} from "@angular/common/http";
+import { ApiExtensionService } from 'src/app/Framework/API/api-extension.service';
+import { UserExtensionProfileUploadDTO } from 'src/app/DTOs/User/UserExtensionProfileUploadDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,7 @@ export class UserService {
   constructor(
     private router: Router,
     private apiService: ApiService,
+    private extensionApi: ApiExtensionService,
   ) { }
 
   getCurrentUser$(): Observable<UserOwnDTO> {
@@ -27,8 +30,17 @@ export class UserService {
     return this.currentUser;
   }
 
-  saveUser$(formValue: UserOwnChangeDTO) {
-    return this.apiService.callApi(endpoints.User, formValue, "PUT").subscribe(() => {
+  getUserSubjects$(): Observable<UserExtensionProfileUploadDTO> {
+    return this.extensionApi.callApi<UserExtensionProfileUploadDTO>(endpoints.UserProfile, {}, 'GET');
+  }
+
+  saveUser$(formValue: UserOwnChangeDTO, extensionForm: UserExtensionProfileUploadDTO) {
+    const userForm$ = this.apiService.callApi(endpoints.User, formValue, 'PUT');
+    const extensionForm$ = this.extensionApi.callApi(endpoints.UserProfile, extensionForm, 'POST');
+    return combineLatest(
+      userForm$,
+      extensionForm$,
+    ).subscribe(_ => {
       this.currentUser = undefined;
       this.getCurrentUser$();
     });

@@ -4,11 +4,13 @@ import { Router } from '@angular/router';
 import { of, switchMap, tap } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { endpoints } from 'src/app/Config/endpoints';
+import { JwtDTO } from 'src/app/DTOs/Authentication/JwtDTO';
 import { LoginDTO } from 'src/app/DTOs/Authentication/LoginDTO';
 import { TokenDTO } from 'src/app/DTOs/Authentication/TokenDTO';
 import { GetLanguageKey } from 'src/app/DTOs/Enums/Language';
 import { ParentChildDTO } from 'src/app/DTOs/User/ParentChildDTO';
 import { UserOwnDTO } from 'src/app/DTOs/User/UserOwnDTO';
+import { ApiExtensionService } from 'src/app/Framework/API/api-extension.service';
 import { ApiService } from 'src/app/Framework/API/api.service';
 import { ErrorHandlingService } from 'src/app/Framework/API/error-handling.service';
 import { ParentService } from 'src/app/Framework/API/parent.service';
@@ -29,6 +31,7 @@ export class LoginComponent {
 
   constructor(
     private api: ApiService,
+    private extensionApi: ApiExtensionService,
     private formBuilder: FormBuilder,
     private tokenService: TokenService,
     private router: Router,
@@ -65,6 +68,8 @@ export class LoginComponent {
   login() {
     this.api.callApi<TokenDTO>(endpoints.Login, { ...this.form.value }, 'POST').pipe(
       tap(token => this.setToken(token)),
+      switchMap(_ => this.extensionApi.callApi<JwtDTO>(endpoints.UserLogin, { ...this.form.value }, 'POST')),
+      tap(token => this.setJWT(token.jwt)),
       switchMap(_ => this.api.callApi<UserOwnDTO>(endpoints.User, { }, 'GET')),
       tap(user => this.setSettings(user)),
       switchMap(user => {
@@ -85,6 +90,10 @@ export class LoginComponent {
     this.tokenService.setRefreshToken(token.refresh);
     this.tokenService.setExpired(token.accessExpires);
   }
+
+  setJWT(jwt: string) {
+    this.tokenService.setJWT(jwt);
+  };
 
   setSettings(user: UserOwnDTO) {
     this.darkThemeService.setDarkTheme(user.darkTheme);
