@@ -68,7 +68,7 @@ export class LoginComponent {
   login() {
     this.api.callApi<TokenDTO>(endpoints.Login, { ...this.form.value }, 'POST').pipe(
       tap(token => this.setToken(token)),
-      switchMap(token => this.extensionApi.callApi<UserTokenDTO>(endpoints.UserRefreshToken, { token: token.refresh } as UserTokenDTO, 'POST')),
+      switchMap(token => this.extensionApi.callApi<UserTokenDTO>(endpoints.UserRefreshToken, { token: token.access } as UserTokenDTO, 'POST')),
       tap(token => this.setJWT(token.token)),
       switchMap(_ => this.api.callApi<UserOwnDTO>(endpoints.User, { }, 'GET')),
       tap(user => this.setSettings(user)),

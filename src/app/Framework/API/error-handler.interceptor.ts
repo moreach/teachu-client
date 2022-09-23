@@ -33,13 +33,14 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
     const isExtensionCall = request.url.includes(environment.URL_LEARNZ_BACKEND);
     return request.clone({
       setHeaders: {
-        [appConfig.API_HEADER_AUTHORIZATION]: `${isExtensionCall ? appConfig.API_HEADER_BEARER + ' ' : ''}${token}`
+        [isExtensionCall ? appConfig.API_HEADER_EXTENSION_AUTHORIZATION : appConfig.API_HEADER_AUTHORIZATION]: `${isExtensionCall ? appConfig.API_HEADER_BEARER + ' ' : ''}${token}`
       }
     });
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const token = this.tokenService.getToken();
+    const isExtensionBackend = request.url.includes(environment.URL_LEARNZ_BACKEND);
+    const token = isExtensionBackend ? this.tokenService.getJWT() : this.tokenService.getToken();
     if (!!token) {
       request = this.cloneRequest(request, token);
     }
@@ -52,7 +53,6 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
           this.tokenService.removeExpired();
           this.errorHandler.redirectToLogin();
         }
-        const isExtensionBackend = error.url.includes(environment.URL_LEARNZ_BACKEND);
         if (error.status === 401 && this.unauthorizedCount < appConfig.UNAUTHORIZED_ERROR_RETRY_COUNT) {
           if (isExtensionBackend) {
             this.unauthorizedCount++;
