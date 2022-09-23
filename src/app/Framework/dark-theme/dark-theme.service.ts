@@ -1,6 +1,6 @@
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, startWith} from 'rxjs';
 import {appConfig} from 'src/app/Config/appConfig';
 
 @Injectable({
@@ -25,6 +25,12 @@ export class DarkThemeService {
       return false;
     }
     return isDarkTheme === 'true';
+  }
+
+  getDarkTheme$() {
+    return this.isDarkTheme$.asObservable().pipe(
+      startWith(this.getDarkTheme()),
+    );
   }
 
   applyDarkTheme(isDarkTheme: boolean) {
