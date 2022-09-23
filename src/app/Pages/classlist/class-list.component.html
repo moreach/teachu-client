@@ -1,10 +1,12 @@
 <div *ngIf="classList$ | async as classList" class="page">
-    <h2>{{ ('classlist.teachers' | translate) + ' ' + classList.name }}</h2>
-    <div class="teachers">
+    <div>
+      <h2>{{ ('classlist.teachers' | translate) + ' ' + classList.name }}</h2>
+      <div class="teachers">
         <app-class-list-detail class="teacher"
                                *ngFor="let teacher of classList.teachers"
                                [person]="teacher">
         </app-class-list-detail>
+      </div>
     </div>
 
     <app-classlist-list [className]="classList.name" [teacherName]="classList.classTeacher.firstName + ' ' + classList.classTeacher.lastName" [people]="classList.students"></app-classlist-list>

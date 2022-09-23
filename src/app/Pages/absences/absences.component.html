@@ -21,15 +21,6 @@
                                     [absence]="absence">
                 </app-absence-editor>
             </div>
-
-            <div *ngIf="!isLastOfMap(i) else emptyAbsenceFooter" class="absence-footer" (click)="scrollToNextAbsence(i)">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-            <ng-template #emptyAbsenceFooter>
-                <div style="height: 50px;"></div>
-            </ng-template>
         </div>
     </div>
 </ng-container>
