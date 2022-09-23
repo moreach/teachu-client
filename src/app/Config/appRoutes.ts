@@ -13,6 +13,8 @@ export const appRoutes = {
     SchoolInfos: 'schoolInfos',
     Timetable: 'timetable',
     UserSettings: 'userSettings',
+    Class: 'class',
+    ClassName: 'classId',
 
     Edit: 'edit',
     EditPolicy: 'edit-policy',

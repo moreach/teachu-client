@@ -10,7 +10,7 @@ import {UserEventType} from "../../../DTOs/Enums/UserEventType";
     styleUrls: ['./absence-editor.component.scss']
 })
 export class AbsenceEditorComponent implements OnInit{
-    @Output("exit") exitEvent: EventEmitter<AbsenceInfoDTO | undefined> = new EventEmitter<AbsenceInfoDTO | undefined>();
+    @Output("exit") exitEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
     @Input() absence!: AbsenceInfoDTO;
     hasValidationError: boolean = false;
 
@@ -26,12 +26,12 @@ export class AbsenceEditorComponent implements OnInit{
     save() {
         this.validate();
         if(!this.hasValidationError){
-            this.service.saveAbsence(this.absence).subscribe(() => this.exitEvent.emit(this.absence));
+            this.service.saveAbsence(this.absence).subscribe(() => this.exitEvent.emit(false));
         }
     }
 
     cancel(){
-        this.exitEvent.emit(undefined);
+        this.exitEvent.emit(true);
     }
 
     titleChange(changeEvent: any){
@@ -49,10 +49,17 @@ export class AbsenceEditorComponent implements OnInit{
             this.absence.type = newType;
     }
 
+    dateChange(from: boolean, changeEvent: any){
+        if(from) this.absence.from = new Date(changeEvent.target.value).valueOf();
+        else this.absence.to = new Date(changeEvent.target.value).valueOf();
+        this.validate();
+    }
+
     validate() {
         this.hasValidationError = this.absence.title.length < 3 ||
             this.absence.title.length > 50 ||
-            this.absence.description.length > 500;
+            this.absence.description.length > 500 ||
+            this.absence.from > this.absence.to;
     }
 
     get absenceService(): AbsencesService{

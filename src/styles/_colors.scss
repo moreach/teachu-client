@@ -10,6 +10,7 @@
     --teachu-white: #EFFFFF; // is used for texts and backgrounds
     --teachu-grey: #F4F4F6; // can be used for areas, texts or backgrounds
     --teachu-grey-darker: #D3D3D9; // can be used for areas, texts or backgrounds
+    --teachu-grey-darkest: #A2A4AC; // can be used for areas, texts or backgrounds
     --teachu-black: #000914; // is used for texts and backgrounds
 
     --teachu-secondary: #AFB9C7; // something that doesn't do anything special but should have an other color (just a backup color)
@@ -26,6 +27,7 @@
     --teachu-light-white: #EFFFFF;
     --teachu-light-grey: #F4F4F6;
     --teachu-light-grey-darker: #D3D3D9;
+    --teachu-light-grey-darkest: #A2A4AC;
     --teachu-light-black: #000914;
 
     --teachu-light-secondary: #AFB9C7;
@@ -33,15 +35,16 @@
 
     // darkmode
     --teachu-dark-primary: #99C5FF;
-    --teachu-dark-primary-brightest: #f3f8ff;
+    --teachu-dark-primary-brightest: #000E24;
 
-    --teachu-dark-accent: #467A56;
-    --teachu-dark-accent-hover: #376745;
-    --teachu-dark-accent-click: #204a2b;
+    --teachu-dark-accent: #2F5D3C;
+    --teachu-dark-accent-hover: #3F724F;
+    --teachu-dark-accent-click: #628E6F;
 
     --teachu-dark-white: #1d1d1d;
     --teachu-dark-grey: #282828;
-    --teachu-dark-grey-darker: #363636;
+    --teachu-dark-grey-darker: #2F2F2F;
+    --teachu-dark-grey-darkest: #424243;
     --teachu-dark-black: #F2F6FF;
 
     --teachu-dark-secondary: #6A5B4F;

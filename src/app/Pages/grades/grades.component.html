@@ -2,6 +2,7 @@
     <app-recent-exams [amount]="RECENT_EXAMS_AMOUNT" [semesterData]="allSemesterDTOs" (examClickedEvent)="recentExamClicked($event)"></app-recent-exams>
     <div [class]="getGridClass()">
         <app-menu-tree [style.display]="getMenuTreeDisplay()"
+                       [indentationWidth]="10"
                        (leaveClickedEvent)="menuTreeLeaveClicked($event)"
                        [treeData]="examMenuTree">
         </app-menu-tree>

@@ -1,17 +1,23 @@
 import {Injectable} from "@angular/core";
-import { Observable, of } from "rxjs";
-import { MenuTreeDTO, MenuTreeItemDTO } from "src/app/DTOs/Menu/MenuTreeDTO";
+import { Observable } from "rxjs";
+import {MenuTreeDTO, MenuTreeItemDTO} from "src/app/DTOs/Menu/MenuTreeDTO";
+import {ClasslistService} from "../../Pages/classlist/classlist.service";
+import {appRoutes} from "../../Config/appRoutes";
 
 @Injectable({
     providedIn: 'root'
 })
 export class MenuTreeService {
 
-    constructor() {
+    private finalTree: boolean = false;
+
+    constructor(
+        private classListService: ClasslistService,
+    ) {
     }
 
     getMenuTree$(): Observable<MenuTreeDTO> {
-        const mockData = {
+        let menuTree: MenuTreeDTO = {
             tree: [
                 {
                     icon: "home",
@@ -30,12 +36,6 @@ export class MenuTreeService {
                     leave: true,
                     titleTranslationKey: "timetable.timetable",
                     url: "/app/timetable",
-                },
-                {
-                    icon: "list",
-                    leave: true,
-                    titleTranslationKey: "classlist.classlist",
-                    url: "/app/classlist",
                 },
                 {
                     icon: "grade",
@@ -74,10 +74,38 @@ export class MenuTreeService {
                     icon: "settings",
                     leave: true,
                     titleTranslationKey: "userSettings.userSettings",
-                    url: "/app/userSettings",
-                },
-            ] as MenuTreeItemDTO[]
+                    url: "/app/userSettings"
+                }
+            ]
         };
-        return of(mockData);
+        return new Observable<MenuTreeDTO>(obs => {
+            obs.next(menuTree);
+            if(!this.finalTree){
+                this.getSchoolClasses().subscribe(classes => {
+                    menuTree.tree.push(classes);
+                    this.finalTree = true;
+                    obs.next(menuTree);
+                });
+            }
+        });
+    }
+
+    private getSchoolClasses(): Observable<MenuTreeItemDTO>{
+        return new Observable<MenuTreeItemDTO>(obs => {
+            this.classListService.getClasses$().subscribe(classes => {
+                obs.next({
+                    icon: "school",
+                    leave: false,
+                    translatedTitle: "Classes",
+                    children: classes.map(clazz => ({
+                        icon: "local_library",
+                        leave: true,
+                        translatedTitle: clazz.name,
+                        level: 1,
+                        url: `${appRoutes.App}/${appRoutes.Class}/${clazz.name}`
+                    }) as MenuTreeItemDTO),
+                })
+            });
+        });
     }
 }

@@ -8,8 +8,8 @@ import {GradeDTO, SubjectData} from "../../../DTOs/Grade/GradeDTOs";
 })
 export class ClassGradesComponent {
     readonly SEMESTER_ICON: string = "home";
-    readonly CLASS_ICON: string = "error";
-    readonly SUBJECT_ICON: string = "error";
+    readonly CLASS_ICON: string = "local_library";
+    readonly SUBJECT_ICON: string = "class";
 
     @Input() selectedSubject: SubjectData | undefined;
     @Output() openMenuClicked: EventEmitter<boolean> = new EventEmitter<boolean>();

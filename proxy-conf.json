@@ -1,0 +1,12 @@
+{
+    "/api": {
+        "target": "http://localhost/api",
+        "secure": false,
+        "changeOrigin": true
+    },
+    "/admin": {
+        "target": "http://localhost/admin",
+        "secure": false,
+        "changeOrigin": true
+    }
+}

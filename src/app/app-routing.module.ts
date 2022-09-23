@@ -12,6 +12,7 @@ import { TimetableComponent } from './Pages/timetable/timetable.component';
 import {UserSettingsComponent} from "./Pages/user-settings/user-settings.component";
 import { SchoolInfosComponent } from './Pages/school-infos/school-infos.component';
 import { AbsencesComponent } from './Pages/absences/absences.component';
+import {ClassListComponent} from "./Pages/classlist/class-list.component";
 import { ClasslistComponent } from './Pages/classlist/classlist.component';
 import { ChallengeActiveComponent } from './Pages/challenge/challenge-active/challenge-active.component';
 import { ChallengeComponent } from './Pages/challenge/challenge.component';
@@ -45,7 +46,7 @@ const routes: Routes = [
       { path: appRoutes.Dashboard, component: DashboardComponent },
       { path: appRoutes.SchoolInfos, component: SchoolInfosComponent },
       { path: appRoutes.Timetable, component: TimetableComponent },
-      { path: appRoutes.Classlist, component: ClasslistComponent },
+      { path:`${appRoutes.Class}/:${appRoutes.ClassName}`, component: ClassListComponent },
       { path: appRoutes.Grades, component: GradesComponent },
       { path: appRoutes.Absences, component: AbsencesComponent },
       { path: appRoutes.Chat, component: ChatOverviewComponent, pathMatch: 'full' },

@@ -9,21 +9,14 @@
                     [color]="absenceService.getAbsenceStateColor(absence.state)"
                     [matIcon]="absenceService.getAbsenceStateIcon(absence.state)"></app-text-badge>
 </div>
+<h3>{{visualizeDate(absence.from)}} - {{visualizeDate(absence.to)}}</h3>
 <h4>{{absence.description}}</h4>
-<!--TODO: implement when api is ready-->
-<button *ngIf="isParent"
+<button *ngIf="isParent && showVerify()"
         mat-fab
         color="accent"
-        (click)="parentVerify(true)"
+        (click)="parentVerify()"
         [matTooltip]="'absences.verify' | translate">
     <mat-icon>done</mat-icon>
-</button>
-<button *ngIf="isParent"
-        mat-fab
-        color="warn"
-        (click)="parentVerify(false)"
-        [matTooltip]="'absences.reject' | translate">
-    <mat-icon>block</mat-icon>
 </button>
 <button mat-fab color="primary"
         (click)="edit()"

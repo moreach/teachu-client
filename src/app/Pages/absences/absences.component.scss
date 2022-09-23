@@ -1,5 +1,13 @@
 @import 'src/styles/colors';
 
+.floating-add-container{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    margin: 40px;
+}
+
 .absence-container {
     height: 100%;
     width: 100%;

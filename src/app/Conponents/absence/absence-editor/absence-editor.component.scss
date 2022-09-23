@@ -19,6 +19,13 @@
     max-height: 150px;
 }
 
+.absence-editor-time{
+    display: flex;
+    gap: 15px;
+    flex-flow: row;
+    flex-wrap: wrap;
+}
+
 .absence-editor-error {
     color: var(--teachu-warn);
 }
@@ -27,6 +34,6 @@
     display: flex;
     flex-flow: row wrap;
     gap: 20px;
-    justify-content: flex-end;
+    justify-content: flex-start;
     margin-top: 20px;
 }

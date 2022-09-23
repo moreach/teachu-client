@@ -12,16 +12,29 @@ import {UserEventState} from "../../DTOs/Enums/UserEventState";
 export class AbsencesService{
     readonly STATE_TRANSLATION_BASE: string = "absences.state.";
     readonly TYPE_TRANSLATION_BASE: string = "absences.type.";
+    readonly NEW_ABSENCE_ID: string = "--new--";
 
-    // private absences: AbsenceInfoDTO[] | undefined;
     private absences: Observable<AbsenceInfoDTO[]> | undefined;
 
     constructor(
         private api: ApiService,
     ) { }
 
-    saveAbsence(absence: AbsenceInfoDTO): Observable<any> {
-        return this.api.callApi(endpoints.Absence + "/" + absence.id, absence, 'PUT');
+    verifyAbsence(absence: AbsenceInfoDTO): Promise<void> {
+        return new Promise<void>((resolve, reject) =>
+            this.api.callApi(endpoints.AbsenceVerify + "/" + absence.id, {}, "PUT")
+                .subscribe({
+                    next: () => resolve(),
+                    error: () => reject(),
+                }));
+    }
+
+    saveAbsence(absence: AbsenceInfoDTO): Observable<string> {
+        const isNew: boolean = this.NEW_ABSENCE_ID === absence.id;
+        if(isNew)
+            return this.api.callApi(endpoints.Absence, absence, 'POST');
+        else
+            return this.api.callApi(endpoints.Absence + "/" + absence.id, absence, 'PUT');
     }
 
     getAbsences$(): Observable<AbsenceInfoDTO[]>{
@@ -53,6 +66,8 @@ export class AbsencesService{
         switch (state){
             case "excused":
                 return "accent";
+            case "verified":
+                return "secondary"
             case "pending":
                 return "primary";
             case "unexcused":
@@ -64,10 +79,16 @@ export class AbsencesService{
         switch (state){
             case "excused":
                 return "done";
+            case "verified":
+                return "how_to_reg";
             case "pending":
                 return "pending_actions";
             case "unexcused":
                 return "block";
         }
+    }
+
+    clearCache() {
+        this.absences = undefined;
     }
 }
