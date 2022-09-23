@@ -2,8 +2,9 @@
 
 .settings-container{
     display: grid;
-    grid-template-columns: 33% 33% 33%;
-    justify-items: center;
+    grid-template-columns: 1fr 1fr;
+    justify-items: start;
+    gap: 20px;
 
     #preferences{
         max-width: 300px;

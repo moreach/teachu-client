@@ -1,4 +1,15 @@
 <div class="settings-container">
+    <div id="userData" class="user-data" *ngIf="user">
+      <h2>{{ "userSettings.userData" | translate }}</h2>
+      <app-readonly-field [label]="'userSettings.email' | translate" [value]="user.email"></app-readonly-field>
+      <app-readonly-field [label]="'userSettings.firstName' | translate" [value]="user.firstName"></app-readonly-field>
+      <app-readonly-field [label]="'userSettings.lastName' | translate" [value]="user.lastName"></app-readonly-field>
+      <app-readonly-field [label]="'userSettings.birthday' | translate" [value]="user.birthday | date:'dd.MM.yyyy'"></app-readonly-field>
+      <app-readonly-field [label]="'userSettings.sex' | translate" [value]="('Sex.' + user.sex) | translate"></app-readonly-field>
+      <app-readonly-field [label]="'userSettings.city' | translate" [value]="user.city"></app-readonly-field>
+      <app-readonly-field [label]="'userSettings.postalCode' | translate" [value]="user.postalCode"></app-readonly-field>
+      <app-readonly-field [label]="'userSettings.street' | translate" [value]="user.street"></app-readonly-field>
+    </div>
     <div id="preferences">
         <h2>{{ "userSettings.preferences" | translate }}</h2>
         <button mat-icon-button (click)="toggleDarkTheme()" >
@@ -25,19 +36,6 @@
                                   (done)="profileImageUploaded()">
         </app-profile-pic-uploader>
     </div>
-
-    <div id="userData" class="user-data" *ngIf="user">
-        <h2 style="text-align: center;">{{ "userSettings.userData" | translate }}</h2>
-        <app-readonly-field [label]="'userSettings.email' | translate" [value]="user.email"></app-readonly-field>
-        <app-readonly-field [label]="'userSettings.firstName' | translate" [value]="user.firstName"></app-readonly-field>
-        <app-readonly-field [label]="'userSettings.lastName' | translate" [value]="user.lastName"></app-readonly-field>
-        <app-readonly-field [label]="'userSettings.birthday' | translate" [value]="user.birthday | date:'dd.MM.yyyy'"></app-readonly-field>
-        <app-readonly-field [label]="'userSettings.sex' | translate" [value]="('Sex.' + user.sex) | translate"></app-readonly-field>
-        <app-readonly-field [label]="'userSettings.city' | translate" [value]="user.city"></app-readonly-field>
-        <app-readonly-field [label]="'userSettings.postalCode' | translate" [value]="user.postalCode"></app-readonly-field>
-        <app-readonly-field [label]="'userSettings.street' | translate" [value]="user.street"></app-readonly-field>
-    </div>
-
     <div id="changePassword">
         <h2>{{ "userSettings.changePassword" | translate }}</h2>
         <app-change-password></app-change-password>

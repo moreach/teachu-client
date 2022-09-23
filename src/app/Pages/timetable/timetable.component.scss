@@ -9,7 +9,6 @@
 .calendar {
     display: grid;
     grid-template-columns: 100px 1fr;
-    border: 1px solid var(--teachu-black);
     .day {
         border-left: 1px solid var(--teachu-black);
     }
@@ -21,11 +20,11 @@
         box-sizing: border-box;
     }
     .hour {
-        border-top: 1px dotted var(--teachu-black);
+        border-top: 1px solid var(--teachu-black);
     }
     .date,
     .hour {
-        padding: 4px;
+        padding: 10px;
     }
     .date,
     .hour,
@@ -42,12 +41,15 @@
         height: 100%;
         width: 100%;
         border-radius: 4px;
-        font-size: 12px;
         text-align: center;
         flex-direction: column;
         cursor: pointer;
         padding-top: 4px;
         gap: 4px;
+        transition: 250ms all ease-in-out;
+    }
+    .lesson:hover {
+        transform: scale(1.05);
     }
     .dateInfo {
         height: 100%;
