@@ -58,7 +58,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
             this.unauthorizedCount++;
             return this.extensionApi.callApi<UserTokenDTO>(endpoints.UserRefreshToken, {
               token: this.tokenService.getRefreshToken(),
-            } as UserTokenDTO, 'PUT').pipe(
+            } as UserTokenDTO, 'POST').pipe(
               tap(token =>  this.tokenService.setJWT(token.token)),
               switchMap(token => next.handle(this.cloneRequest(request, token.token))),
             );

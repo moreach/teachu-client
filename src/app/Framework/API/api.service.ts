@@ -11,8 +11,8 @@ export class ApiService {
     private http: HttpClient,
   ) { }
 
-  callApi<T>(endpoint: string, payload: any, method: HttpMethods, options?: any, isTeachu: boolean = true) {
-    const request = this.buildRequest(endpoint, payload, method, options, isTeachu) as Observable<T>;
+  callApi<T>(endpoint: string, payload: any, method: HttpMethods, options?: any) {
+    const request = this.buildRequest(endpoint, payload, method, options) as Observable<T>;
     return request.pipe(
       map(request => {
         if (request instanceof Blob) {
@@ -24,9 +24,9 @@ export class ApiService {
     );
   }
 
-  private buildRequest(endpoint: string, payload: any, method: HttpMethods, options?: any, isTeachu: boolean = true) {
+  private buildRequest(endpoint: string, payload: any, method: HttpMethods, options?: any) {
     if(!environment.IS_PROD) console.log("api - sending request: ", endpoint, method, payload, options)
-    const requestEndpoint = `${isTeachu ? environment.URL_API : environment.URL_LEARNZ_BACKEND}${endpoint}`;
+    const requestEndpoint = `${environment.URL_API}${endpoint}`;
 
     let request: any;
     switch (method) {
