@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { of, switchMap, tap } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { endpoints } from 'src/app/Config/endpoints';
-import { JwtDTO } from 'src/app/DTOs/Authentication/JwtDTO';
 import { LoginDTO } from 'src/app/DTOs/Authentication/LoginDTO';
 import { TokenDTO } from 'src/app/DTOs/Authentication/TokenDTO';
 import { GetLanguageKey } from 'src/app/DTOs/Enums/Language';
 import { ParentChildDTO } from 'src/app/DTOs/User/ParentChildDTO';
 import { UserOwnDTO } from 'src/app/DTOs/User/UserOwnDTO';
+import { UserTokenDTO } from 'src/app/DTOs/User/UserTokenDTO';
 import { ApiExtensionService } from 'src/app/Framework/API/api-extension.service';
 import { ApiService } from 'src/app/Framework/API/api.service';
 import { ErrorHandlingService } from 'src/app/Framework/API/error-handling.service';
@@ -68,8 +68,8 @@ export class LoginComponent {
   login() {
     this.api.callApi<TokenDTO>(endpoints.Login, { ...this.form.value }, 'POST').pipe(
       tap(token => this.setToken(token)),
-      switchMap(_ => this.extensionApi.callApi<JwtDTO>(endpoints.UserLogin, { ...this.form.value }, 'POST')),
-      tap(token => this.setJWT(token.jwt)),
+      switchMap(token => this.extensionApi.callApi<UserTokenDTO>(endpoints.UserRefreshToken, { token: token.refresh } as UserTokenDTO, 'POST')),
+      tap(token => this.setJWT(token.token)),
       switchMap(_ => this.api.callApi<UserOwnDTO>(endpoints.User, { }, 'GET')),
       tap(user => this.setSettings(user)),
       switchMap(user => {

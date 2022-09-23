@@ -7,8 +7,9 @@ import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
 import {UserOwnChangeDTO} from "../../DTOs/User/UserOwnChangeDTO";
 import { GetLanguage } from "src/app/DTOs/Enums/Language";
 import { getSubjects } from "src/app/DTOs/Enums/Subject";
-import { UserExtensionProfileDTO } from 'src/app/DTOs/User/UserExtensionProfileDTO';
 import { FormGroupTyped } from "src/app/Material/types";
+import { UserExtensionProfileDTO } from "src/app/DTOs/User/UserExtensionProfileUploadDTO";
+import { getGrades } from "src/app/DTOs/Enums/Grade";
 
 @Component({
     selector: "user-settings",
@@ -20,7 +21,7 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
     private unsubscribe = new Subject<void>()
 
     user: UserOwnDTO | undefined;
-
+    grades = getGrades();
     showPhoneSaved: boolean = false;
     darkTheme: boolean = true;
     profileImageControl: FormControl;
@@ -43,6 +44,8 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
             badSubject1: [null, Validators.required],
             badSubject2: [null, Validators.required],
             badSubject3: [null, Validators.required],
+            information: ['', Validators.required],
+            grade: [null, Validators.required],
         }) as FormGroupTyped<UserExtensionProfileDTO & { phoneNumber: string }>;
         
         this.profileImageControl = new FormControl(this.uploadedProfileImage, [
@@ -64,6 +67,8 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
                 badSubject1: subjects.badSubject1,
                 badSubject2: subjects.badSubject2,
                 badSubject3: subjects.badSubject3,
+                grade: subjects.grade,
+                information: subjects.information,
             };
             this.formGroup.patchValue(value);
             this.formGroup.updateValueAndValidity();

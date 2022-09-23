@@ -14,7 +14,7 @@ import { ErrorHandlingService } from './error-handling.service';
 import { TokenService } from './token.service';
 import { environment } from 'src/environments/environment';
 import { ApiExtensionService } from './api-extension.service';
-import { JwtDTO } from 'src/app/DTOs/Authentication/JwtDTO';
+import { UserTokenDTO } from 'src/app/DTOs/User/UserTokenDTO';
 
 @Injectable()
 export class ErrorHandlerInterceptor implements HttpInterceptor {
@@ -56,14 +56,11 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
         if (error.status === 401 && this.unauthorizedCount < appConfig.UNAUTHORIZED_ERROR_RETRY_COUNT) {
           if (isExtensionBackend) {
             this.unauthorizedCount++;
-            return this.extensionApi.callApi<JwtDTO>(endpoints.UserLogin, {
-              refresh: this.tokenService.getRefreshToken(),
-            } as TokenDTO, 'PUT').pipe(
-              tap(token => {
-                this.tokenService.setJWT(token.jwt);
-
-              }),
-              switchMap(token => next.handle(this.cloneRequest(request, token.jwt))),
+            return this.extensionApi.callApi<UserTokenDTO>(endpoints.UserRefreshToken, {
+              token: this.tokenService.getRefreshToken(),
+            } as UserTokenDTO, 'PUT').pipe(
+              tap(token =>  this.tokenService.setJWT(token.token)),
+              switchMap(token => next.handle(this.cloneRequest(request, token.token))),
             );
           } else {
             this.unauthorizedCount++;

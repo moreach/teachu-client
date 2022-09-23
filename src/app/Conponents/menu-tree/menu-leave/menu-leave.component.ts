@@ -21,11 +21,7 @@ export class MenuLeaveComponent {
     leaveClicked() {
         this.leaveClickedEvent.emit(this.item);
         if (this.item != undefined && !!this.item.url) {
-            if (this.item.isTeachu) {
-                this.router.navigate([this.item.url]);
-            } else {
-                window.location.href = environment.URL_FRONTEND + this.item.url;
-            }
+            this.router.navigate([this.item.url]);
         }
     }
 }

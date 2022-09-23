@@ -9,7 +9,7 @@ import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
 import {FileUploadResponse} from "../../Conponents/profile-pic/profile-pic-uploader/profile-pic-uploader.component";
 import {HttpEventType, HttpResponse} from "@angular/common/http";
 import { ApiExtensionService } from 'src/app/Framework/API/api-extension.service';
-import { UserExtensionProfileDTO } from 'src/app/DTOs/User/UserExtensionProfileDTO';
+import { UserExtensionProfileDTO } from 'src/app/DTOs/User/UserExtensionProfileUploadDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ import { UserExtensionProfileDTO } from 'src/app/DTOs/User/UserExtensionProfileD
 export class UserService {
 
   private currentUser: Observable<UserOwnDTO> | undefined;
-
+  
   constructor(
     private router: Router,
     private apiService: ApiService,

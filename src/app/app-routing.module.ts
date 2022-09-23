@@ -13,7 +13,6 @@ import {UserSettingsComponent} from "./Pages/user-settings/user-settings.compone
 import { SchoolInfosComponent } from './Pages/school-infos/school-infos.component';
 import { AbsencesComponent } from './Pages/absences/absences.component';
 import {ClassListComponent} from "./Pages/classlist/class-list.component";
-import { ClasslistComponent } from './Pages/classlist/classlist.component';
 import { ChallengeActiveComponent } from './Pages/challenge/challenge-active/challenge-active.component';
 import { ChallengeComponent } from './Pages/challenge/challenge.component';
 import { CreateSetEditComponent } from './Pages/create/create-set-edit/create-set-edit.component';

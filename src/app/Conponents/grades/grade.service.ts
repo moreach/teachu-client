@@ -36,7 +36,6 @@ export class GradeService {
                 leave: false,
                 translatedTitle: semester.name,
                 children: [],
-                isTeachu: true
             };
 
             for (let schoolClass of semester.classes) {
@@ -46,7 +45,6 @@ export class GradeService {
                     level: 1,
                     translatedTitle: schoolClass.name,
                     children: [],
-                    isTeachu: true
                 };
 
                 for (let subject of schoolClass.subjects) {
@@ -56,7 +54,6 @@ export class GradeService {
                         level: 2,
                         translatedTitle: subject.name,
                         data: { semester, schoolClass, subject },
-                        isTeachu: true
                     };
                     schoolClassLeave.children!.push(subjectLeave);
                 }

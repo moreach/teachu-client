@@ -16,42 +16,52 @@
                 <mat-icon id="savedIcon" *ngIf="showPhoneSaved" [matTooltip]="'userSettings.phoneSaved' | translate" matSuffix>verified</mat-icon>
             </mat-form-field>
             <mat-form-field>
-                <mat-label>{{ 'settings.goodSubject1' | translate }}</mat-label>
+                <mat-label>{{ 'userSettings.grade' | translate }}</mat-label>
+                <mat-select formControlName="grade">
+                    <mat-option *ngFor="let grade of grades" [value]="grade.value">{{ ('Grade.' + grade.key) | translate }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ 'userSettings.information' | translate }}</mat-label>
+                <textarea formControlName="information" matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>{{ 'userSettings.goodSubject1' | translate }}</mat-label>
                 <mat-select formControlName="goodSubject1">
                     <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
                 </mat-select>
                 <mat-icon id="savedIcon" *ngIf="showPhoneSaved" matSuffix>verified</mat-icon>
             </mat-form-field>
             <mat-form-field>
-                <mat-label>{{ 'settings.goodSubject2' | translate }}</mat-label>
+                <mat-label>{{ 'userSettings.goodSubject2' | translate }}</mat-label>
                 <mat-select formControlName="goodSubject2">
                     <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
                 </mat-select>
                 <mat-icon id="savedIcon" *ngIf="showPhoneSaved" matSuffix>verified</mat-icon>
             </mat-form-field>
             <mat-form-field>
-                <mat-label>{{ 'settings.goodSubject3' | translate }}</mat-label>
+                <mat-label>{{ 'userSettings.goodSubject3' | translate }}</mat-label>
                 <mat-select formControlName="goodSubject3">
                     <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
                 </mat-select>
                 <mat-icon id="savedIcon" *ngIf="showPhoneSaved" matSuffix>verified</mat-icon>
             </mat-form-field>
             <mat-form-field>
-                <mat-label>{{ 'settings.badSubject1' | translate }}</mat-label>
+                <mat-label>{{ 'userSettings.badSubject1' | translate }}</mat-label>
                 <mat-select formControlName="badSubject1">
                     <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
                 </mat-select>
                 <mat-icon id="savedIcon" *ngIf="showPhoneSaved" matSuffix>verified</mat-icon>
             </mat-form-field>
             <mat-form-field>
-                <mat-label>{{ 'settings.badSubject2' | translate }}</mat-label>
+                <mat-label>{{ 'userSettings.badSubject2' | translate }}</mat-label>
                 <mat-select formControlName="badSubject2">
                     <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
                 </mat-select>
                 <mat-icon id="savedIcon" *ngIf="showPhoneSaved" matSuffix>verified</mat-icon>
             </mat-form-field>
             <mat-form-field>
-                <mat-label>{{ 'settings.badSubject3' | translate }}</mat-label>
+                <mat-label>{{ 'userSettings.badSubject3' | translate }}</mat-label>
                 <mat-select formControlName="badSubject3">
                     <mat-option *ngFor="let subject of subjects" [value]="subject.value">{{ ('Subject.' + subject.key) | translate }}</mat-option>
                 </mat-select>

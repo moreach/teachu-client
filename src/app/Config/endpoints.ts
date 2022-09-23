@@ -63,7 +63,6 @@ export const endpoints = {
     TogetherConnectUser: 'togetherConnectUser',
     TogetherSwipeUser: 'togetherSwipeUser',
     TogetherUsersFilter: 'togetherUsersFilter',
-    UserLogin: 'userLogin',
     UserRefreshToken: 'userRefreshToken',
     UserProfile: 'userProfile',
     WebSocket: 'learnzsocket',
