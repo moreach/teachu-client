@@ -201,6 +201,9 @@ export class DashboardService {
   }
 
   chatMessageFrom(user: UserExternalUserDTO) {
+    if (!user) {
+      return '';
+    }
     return this.tokenService.getUserId() === user.id ? null : user.firstName + ' ' + user.lastName;
   }
 

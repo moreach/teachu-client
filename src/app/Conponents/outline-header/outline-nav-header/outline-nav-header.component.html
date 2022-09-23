@@ -2,5 +2,6 @@
     <button mat-icon-button class="child" (click)="toggleMenu()">
         <mat-icon>{{menuToggleIcon}}</mat-icon>
     </button>
-    <span class="child">TeachU</span>
+    <img class="child" [height]="30" [src]="getLogo$ | async">
+    <img class="child margin-top-2" [height]="30" [src]="getBanner$ | async">
 </div>
