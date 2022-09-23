@@ -13,37 +13,29 @@
 
 .upload-container{
     cursor: pointer;
-    box-sizing: border-box;
-
+    background-color: var(--teachu-primary);
+    color: var(--teachu-white);
+    border-radius: 5px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-
-    background-color: var(--teachu-accent);
-    border-radius: 0.4rem;
-
-    transition: background 0.3s ease-out;
+    transition: 250ms all ease-out;
 }
 
 .upload-container:hover{
-    background-color: var(--teachu-accent-hover);
+    background-color: var(--teachu-dark-primary);
 }
 
 .upload-container:active{
-    background-color: var(--teachu-accent-click);
+    background-color: var(--teachu-light-primary);
 }
 
 .upload-label{
     font-size: 0.8rem;
-    color: var(--teachu-black);
-    transition: color 0.3s ease-out;
 }
 
 .upload-text{
-    color: var(--teachu-primary);
     font-size: 1rem;
-
-    margin-left: 5px;
 }

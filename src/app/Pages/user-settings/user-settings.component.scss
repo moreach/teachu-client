@@ -6,19 +6,28 @@
     justify-items: start;
     gap: 20px;
 
-    #preferences{
-        max-width: 300px;
+    #userData {
+        width: 100%;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        flex-wrap: nowrap;
+        gap: 20px;
     }
 
-    .user-data{
+    #preferences {
+        width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        flex-wrap: nowrap;
+        gap: 20px;
+    }
+
+    #changePassword {
         width: 100%;
-        max-width: 400px;
+    }
+
+    #phoneNumberForm {
+        width: 100%;
     }
 }
 

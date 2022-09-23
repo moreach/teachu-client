@@ -1,5 +1,5 @@
 <div class="settings-container">
-    <div id="userData" class="user-data" *ngIf="user">
+    <div id="userData" *ngIf="user">
       <h2>{{ "userSettings.userData" | translate }}</h2>
       <app-readonly-field [label]="'userSettings.email' | translate" [value]="user.email"></app-readonly-field>
       <app-readonly-field [label]="'userSettings.firstName' | translate" [value]="user.firstName"></app-readonly-field>
@@ -20,7 +20,7 @@
         <app-language-lookup style="width: 100%" (languageChanged)="saveLanguage($event)"></app-language-lookup>
 
         <form id="phoneNumberForm">
-            <mat-form-field>
+            <mat-form-field style="width: 100%">
                 <mat-label>{{ "userSettings.phone" | translate}}</mat-label>
                 <input matInput [placeholder]="'userSettings.phone' | translate"
                        [formControl]="phoneNumberControl">
@@ -29,8 +29,7 @@
             </mat-form-field>
         </form>
 
-        <app-profile-pic-uploader buttonHeight="45px"
-                                  buttonWidth="200px"
+        <app-profile-pic-uploader buttonWidth="100%"
                                   [buttonLabel]="'userSettings.profileImage.profileImage'"
                                   [buttonText]="'userSettings.upload'"
                                   (done)="profileImageUploaded()">
