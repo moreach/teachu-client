@@ -39,6 +39,10 @@ $teachu-dark-theme: mat.define-dark-theme((
   )
 ));
 
+:root {
+    background-color: var(--teachu-white);
+}
+
 .darkTheme {
   $dark-mode: "true";
   @include mat.all-component-themes($teachu-dark-theme);
