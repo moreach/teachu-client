@@ -1,0 +1,25 @@
+Open ToDos migration:
+
+- Fix Auth interceptor
+-- When TeachU fails, same as today.
+-- When Learnz fails, both tokens need to be removed and recreated.
+
+- Fix Login
+-- Change Pipe, sucht that only when both tokens succeed, it is stored in the local storage.
+
+- Fix Logout
+-- Fix removal of tokens, such that allways the state is consisten.
+
+- Fix Save on Settingspage
+-- Looks like the TeachU Backend is not called.
+
+- Validate apikey in Learnz Backend correctly
+
+- Change to random apikey in both backends
+
+- Fix Websocket
+-- Change to correct url in Websocket Service
+-- Enhance the Chat by Websockets across the systems
+
+- Translations
+-- Add json from Learnz
