@@ -1,4 +1,6 @@
-export interface UserExtensionProfileUploadDTO {
+export interface UserExtensionProfileDTO {
+  grade: number;
+  information: string;
   goodSubject1: number;
   goodSubject2: number;
   goodSubject3: number;

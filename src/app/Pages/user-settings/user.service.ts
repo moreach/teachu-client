@@ -9,7 +9,7 @@ import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
 import {FileUploadResponse} from "../../Conponents/profile-pic/profile-pic-uploader/profile-pic-uploader.component";
 import {HttpEventType, HttpResponse} from "@angular/common/http";
 import { ApiExtensionService } from 'src/app/Framework/API/api-extension.service';
-import { UserExtensionProfileUploadDTO } from 'src/app/DTOs/User/UserExtensionProfileUploadDTO';
+import { UserExtensionProfileDTO } from 'src/app/DTOs/User/UserExtensionProfileDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -30,11 +30,11 @@ export class UserService {
     return this.currentUser;
   }
 
-  getUserSubjects$(): Observable<UserExtensionProfileUploadDTO> {
-    return this.extensionApi.callApi<UserExtensionProfileUploadDTO>(endpoints.UserProfile, {}, 'GET');
+  getUserSubjects$(): Observable<UserExtensionProfileDTO> {
+    return this.extensionApi.callApi<UserExtensionProfileDTO>(endpoints.UserProfile, {}, 'GET');
   }
 
-  saveUser$(formValue: UserOwnChangeDTO, extensionForm: UserExtensionProfileUploadDTO) {
+  saveUser$(formValue: UserOwnChangeDTO, extensionForm: UserExtensionProfileDTO) {
     const userForm$ = this.apiService.callApi(endpoints.User, formValue, 'PUT');
     const extensionForm$ = this.extensionApi.callApi(endpoints.UserProfile, extensionForm, 'POST');
     return combineLatest(

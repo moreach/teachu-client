@@ -7,7 +7,7 @@ import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
 import {UserOwnChangeDTO} from "../../DTOs/User/UserOwnChangeDTO";
 import { GetLanguage } from "src/app/DTOs/Enums/Language";
 import { getSubjects } from "src/app/DTOs/Enums/Subject";
-import { UserExtensionProfileUploadDTO } from 'src/app/DTOs/User/UserExtensionProfileUploadDTO';
+import { UserExtensionProfileDTO } from 'src/app/DTOs/User/UserExtensionProfileDTO';
 import { FormGroupTyped } from "src/app/Material/types";
 
 @Component({
@@ -28,7 +28,7 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
     private uploadedProfileImage: File | undefined;
     private darkThemeSubject: Subject<boolean> = new Subject<boolean>();
     subjects = getSubjects();
-    formGroup: FormGroupTyped<UserExtensionProfileUploadDTO & { phoneNumber: string }>;
+    formGroup: FormGroupTyped<UserExtensionProfileDTO & { phoneNumber: string }>;
 
     constructor(
       private darkThemeService: DarkThemeService,
@@ -43,7 +43,7 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
             badSubject1: [null, Validators.required],
             badSubject2: [null, Validators.required],
             badSubject3: [null, Validators.required],
-        }) as FormGroupTyped<UserExtensionProfileUploadDTO & { phoneNumber: string }>;
+        }) as FormGroupTyped<UserExtensionProfileDTO & { phoneNumber: string }>;
         
         this.profileImageControl = new FormControl(this.uploadedProfileImage, [
             Validators.required,
@@ -114,7 +114,7 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
         location.reload();
     }
 
-    saveUser(subjects: UserExtensionProfileUploadDTO){
+    saveUser(subjects: UserExtensionProfileDTO){
         if(this.user) {
             const userChanges: UserOwnChangeDTO = {
                 language: this.user.language,
