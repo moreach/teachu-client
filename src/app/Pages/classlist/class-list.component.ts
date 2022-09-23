@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {appRoutes} from "../../Config/appRoutes";
 import {ClassListDTO} from "../../DTOs/ClassList/ClassListDTO";
-import {Observable} from "rxjs";
+import {filter, Observable, of, startWith, switchMap} from "rxjs";
 import {ClasslistService} from "./classlist.service";
 
 @Component({
@@ -12,14 +12,20 @@ import {ClasslistService} from "./classlist.service";
 })
 export class ClassListComponent {
 
-    className: string;
     classList$: Observable<ClassListDTO>;
 
     constructor(
         private activeRoute: ActivatedRoute,
         private service: ClasslistService,
+        private router: Router,
     ) {
-        this.className = this.activeRoute.snapshot.paramMap.get(appRoutes.ClassName) ?? "";
-        this.classList$ = service.getClass$(this.className);
+        const className$ = this.router.events.pipe(
+            filter(e => e instanceof NavigationEnd),
+            startWith(this.activeRoute.snapshot.paramMap.get(appRoutes.ClassName) ?? ""),
+            switchMap(_ => of(this.activeRoute.snapshot.paramMap.get(appRoutes.ClassName) ?? "")),
+        );
+        this.classList$ = className$.pipe(
+            switchMap(className => this.service.getClass$(className)),
+        );
     }
 }
