@@ -1,13 +1,32 @@
-<form [formGroup]="form">
-    <h1>{{ 'login.login' | translate }}</h1>
-    <mat-error *ngIf="loginWrong">
-        {{ 'login.wrong' | translate }}
-    </mat-error>
-    <mat-form-field>
-        <input matInput type="text" formControlName="email" [placeholder]="'login.email' | translate" required>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="password" formControlName="password" [placeholder]="'login.password' | translate" required>
-    </mat-form-field>
-    <button mat-flat-button color="primary" type="submit" (click)="login()" [disabled]="!form.valid || !form.dirty">{{ 'login.login' | translate }}</button>
-</form>
+<div class="login-container">
+    <div class="login">
+        <div>
+            <ng-container *ngIf="darkTheme else lightTheme">
+                <img class="logo" src="assets/images/logo-dark.svg" alt="😢"/>
+                <img class="banner" src="assets/images/banner-dark.svg" alt="😢"/>
+            </ng-container>
+            <ng-template #lightTheme>
+                <img class="logo" src="assets/images/logo-light.svg" alt="😢"/>
+                <img class="banner" src="assets/images/banner-light.svg" alt="😢"/>
+            </ng-template>
+        </div>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut lectus arcu bibendum at varius vel pharetra vel turpis. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id velit ut tortor pretium viverra. Netus et malesuada fames ac turpis egestas.</p>
+
+        <button mat-stroked-button color="primary" (click)="openGithub()">More info</button>
+    </div>
+
+    <form [formGroup]="form">
+        <h1>{{ 'login.login' | translate }}</h1>
+        <mat-error *ngIf="loginWrong">
+            {{ 'login.wrong' | translate }}
+        </mat-error>
+        <mat-form-field>
+            <input matInput type="text" formControlName="email" [placeholder]="'login.email' | translate" required autofocus>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="password" formControlName="password" [placeholder]="'login.password' | translate" required>
+        </mat-form-field>
+        <button mat-flat-button color="primary" type="submit" (click)="login()" [disabled]="!form.valid || !form.dirty">{{ 'login.login' | translate }}</button>
+    </form>
+</div>

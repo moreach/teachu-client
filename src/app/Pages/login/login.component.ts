@@ -1,21 +1,21 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { of, switchMap, tap } from 'rxjs';
-import { appRoutes } from 'src/app/Config/appRoutes';
-import { endpoints } from 'src/app/Config/endpoints';
-import { LoginDTO } from 'src/app/DTOs/Authentication/LoginDTO';
-import { TokenDTO } from 'src/app/DTOs/Authentication/TokenDTO';
-import { GetLanguageKey } from 'src/app/DTOs/Enums/Language';
-import { ParentChildDTO } from 'src/app/DTOs/User/ParentChildDTO';
-import { UserOwnDTO } from 'src/app/DTOs/User/UserOwnDTO';
-import { ApiService } from 'src/app/Framework/API/api.service';
-import { ErrorHandlingService } from 'src/app/Framework/API/error-handling.service';
-import { ParentService } from 'src/app/Framework/API/parent.service';
-import { TokenService } from 'src/app/Framework/API/token.service';
-import { DarkThemeService } from 'src/app/Framework/dark-theme/dark-theme.service';
-import { LanguagesService } from 'src/app/Framework/Languages/languages.service';
-import { FormGroupTyped } from 'src/app/Material/types';
+import {Component} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {of, switchMap, tap} from 'rxjs';
+import {appRoutes} from 'src/app/Config/appRoutes';
+import {endpoints} from 'src/app/Config/endpoints';
+import {LoginDTO} from 'src/app/DTOs/Authentication/LoginDTO';
+import {TokenDTO} from 'src/app/DTOs/Authentication/TokenDTO';
+import {GetLanguageKey} from 'src/app/DTOs/Enums/Language';
+import {ParentChildDTO} from 'src/app/DTOs/User/ParentChildDTO';
+import {UserOwnDTO} from 'src/app/DTOs/User/UserOwnDTO';
+import {ApiService} from 'src/app/Framework/API/api.service';
+import {ErrorHandlingService} from 'src/app/Framework/API/error-handling.service';
+import {ParentService} from 'src/app/Framework/API/parent.service';
+import {TokenService} from 'src/app/Framework/API/token.service';
+import {DarkThemeService} from 'src/app/Framework/dark-theme/dark-theme.service';
+import {LanguagesService} from 'src/app/Framework/Languages/languages.service';
+import {FormGroupTyped} from 'src/app/Material/types';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +26,7 @@ export class LoginComponent {
 
   form: FormGroupTyped<LoginDTO>;
   loginWrong: boolean = false;
+  darkTheme: boolean = false;
 
   constructor(
     private api: ApiService,
@@ -59,7 +60,9 @@ export class LoginComponent {
       });
     }
 
-    this.darkThemeService.setDarkTheme(this.darkThemeService.getDarkTheme());
+    this.darkTheme = this.darkThemeService.getDarkTheme();
+    this.darkThemeService.setDarkTheme(this.darkTheme);
+
   }
 
   login() {
@@ -98,5 +101,9 @@ export class LoginComponent {
     if (!!children) {
       this.parentService.setActiveStudent(children[0].id);
     }
+  }
+
+  openGithub(){
+      window.open("https://github.com/moreach/teachu", "_blank");
   }
 }

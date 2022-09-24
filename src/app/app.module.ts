@@ -22,43 +22,44 @@ import {MenuTreeComponent} from './Conponents/menu-tree/menu-tree.component';
 import {ExpansionWrapperComponent} from './Conponents/menu-tree/expansion-wrapper/expansion-wrapper.component';
 import {MenuNodeComponent} from './Conponents/menu-tree/menu-node/menu-node.component';
 import {MenuLeaveComponent} from './Conponents/menu-tree/menu-leave/menu-leave.component';
-import { ExpansionWrapperToggleComponent } from "./Conponents/menu-tree/expansion-content-toggle/expansion-wrapper-toggle.component";
+import {
+    ExpansionWrapperToggleComponent
+} from "./Conponents/menu-tree/expansion-content-toggle/expansion-wrapper-toggle.component";
 import {OutlineNavHeaderComponent} from './Conponents/outline-header/outline-nav-header/outline-nav-header.component';
 import {OutlineHeaderComponent} from './Conponents/outline-header/outline-header/outline-header.component';
 import {UserSettingsComponent} from "./Pages/user-settings/user-settings.component";
 import {MaterialFileInputModule} from "ngx-material-file-input";
 import {MAT_DATE_LOCALE} from "@angular/material/core";
 import {ProfilePicComponent} from './Conponents/profile-pic/profile-pic.component';
-import { DashboardComponent } from './Pages/dashboard/dashboard.component';
-import { TimetableComponent } from './Pages/timetable/timetable.component';
-import { GradesComponent } from './Pages/grades/grades.component';
-import { ReadonlyFieldComponent } from './Conponents/readonly-field/readonly-field.component';
-import { ChatOverviewComponent } from './Pages/chat/chat-overview/chat-overview.component';
-import { ChatConversationComponent } from './Pages/chat/chat-conversation/chat-conversation.component';
-import { ChatConversationInfoComponent } from './Pages/chat/chat-conversation-info/chat-conversation-info.component';
-import { GroupChatDialogComponent } from './Pages/chat/group-chat-dialog/group-chat-dialog.component';
-import { AbsencesComponent } from './Pages/absences/absences.component';
-import { SchoolInfosComponent } from './Pages/school-infos/school-infos.component';
-import { RecentExamsComponent } from './Conponents/grades/recent-exams/recent-exams.component';
-import { ClassGradesComponent } from './Conponents/grades/class-grades/class-grades.component';
-import { GradeDetailComponent } from './Conponents/grades/grade-detail/grade-detail.component';
-import { LessonDetailsComponent } from './Pages/timetable/lesson-details/lesson-details.component';
-import { ClasslistListComponent } from './Pages/classlist/classlist-list/classlist-list.component';
-import { ClassListDetailDialogComponent } from './Pages/classlist/classlist-detail/class-list-detail-dialog.component';
-import { ChooseStudentDialogComponent } from './Pages/login/choose-student-dialog/choose-student-dialog.component';
-import { ParentChildSelectorComponent } from './Conponents/parent-child-selector/parent-child-selector.component';
+import {DashboardComponent} from './Pages/dashboard/dashboard.component';
+import {TimetableComponent} from './Pages/timetable/timetable.component';
+import {GradesComponent} from './Pages/grades/grades.component';
+import {ReadonlyFieldComponent} from './Conponents/readonly-field/readonly-field.component';
+import {ChatOverviewComponent} from './Pages/chat/chat-overview/chat-overview.component';
+import {ChatConversationComponent} from './Pages/chat/chat-conversation/chat-conversation.component';
+import {ChatConversationInfoComponent} from './Pages/chat/chat-conversation-info/chat-conversation-info.component';
+import {GroupChatDialogComponent} from './Pages/chat/group-chat-dialog/group-chat-dialog.component';
+import {AbsencesComponent} from './Pages/absences/absences.component';
+import {SchoolInfosComponent} from './Pages/school-infos/school-infos.component';
+import {RecentExamsComponent} from './Conponents/grades/recent-exams/recent-exams.component';
+import {ClassGradesComponent} from './Conponents/grades/class-grades/class-grades.component';
+import {GradeDetailComponent} from './Conponents/grades/grade-detail/grade-detail.component';
+import {LessonDetailsComponent} from './Pages/timetable/lesson-details/lesson-details.component';
+import {ClasslistListComponent} from './Pages/classlist/classlist-list/classlist-list.component';
+import {ClassListDetailDialogComponent} from './Pages/classlist/classlist-detail/class-list-detail-dialog.component';
+import {ParentChildSelectorComponent} from './Conponents/parent-child-selector/parent-child-selector.component';
 import {ParentService} from "./Framework/API/parent.service";
-import { ImageComponent } from './Framework/image/image.component';
-import { ChangePasswordComponent } from './Conponents/change-password/change-password.component';
+import {ImageComponent} from './Framework/image/image.component';
+import {ChangePasswordComponent} from './Conponents/change-password/change-password.component';
 import {
     ProfilePicUploaderComponent
 } from "./Conponents/profile-pic/profile-pic-uploader/profile-pic-uploader.component";
-import { TextBadgeComponent } from './Conponents/text-badge/text-badge.component';
-import { AbsenceVisualisationComponent } from './Conponents/absence/absence-visalisation/absence-visualisation.component';
-import { AbsenceEditorComponent } from './Conponents/absence/absence-editor/absence-editor.component';
-import { ClassListComponent } from './Pages/classlist/class-list.component';
-import { TableHeaderComponent } from './Conponents/table-header/table-header.component';
-import { ClassListDetailComponent } from './Conponents/class-list-detail/class-list-detail.component';
+import {TextBadgeComponent} from './Conponents/text-badge/text-badge.component';
+import {AbsenceVisualisationComponent} from './Conponents/absence/absence-visalisation/absence-visualisation.component';
+import {AbsenceEditorComponent} from './Conponents/absence/absence-editor/absence-editor.component';
+import {ClassListComponent} from './Pages/classlist/class-list.component';
+import {TableHeaderComponent} from './Conponents/table-header/table-header.component';
+import {ClassListDetailComponent} from './Conponents/class-list-detail/class-list-detail.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -99,7 +100,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         LessonDetailsComponent,
         ClasslistListComponent,
         ClassListDetailDialogComponent,
-        ChooseStudentDialogComponent,
         ParentChildSelectorComponent,
         ImageComponent,
         ChangePasswordComponent,

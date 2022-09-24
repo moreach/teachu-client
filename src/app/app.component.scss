@@ -10,9 +10,13 @@
   .page {
     padding: 20px 40px;
     overflow: auto;
+  }
+
+  .login-only {
+    height: 100%;
 
     @media screen and (max-width: 800px) {
-      padding: 20px;
+        padding: 20px;
     }
   }
 
