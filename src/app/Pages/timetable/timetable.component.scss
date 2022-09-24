@@ -10,7 +10,7 @@
     display: grid;
     grid-template-columns: 100px 1fr;
     .day {
-        border-left: 1px solid var(--teachu-black);
+        border-left: 1px solid var(--teachu-base-3);
     }
     .block.first-line {
         height: 100px;
@@ -20,7 +20,7 @@
         box-sizing: border-box;
     }
     .hour {
-        border-top: 1px solid var(--teachu-black);
+        border-top: 1px solid var(--teachu-base-3);
     }
     .date,
     .hour {
@@ -47,9 +47,12 @@
         padding-top: 4px;
         gap: 4px;
         transition: 250ms all ease-in-out;
+        background-color: var(--teachu-primary-4);
+        color: var(--teachu-base-0);
     }
     .lesson:hover {
         transform: scale(1.05);
+        background-color: var(--teachu-primary-5);
     }
     .dateInfo {
         height: 100%;
@@ -59,7 +62,7 @@
         flex-direction: column;
     }
     .today {
-        background-color: var(--teachu-warn);
+        background-color: var(--teachu-error-0);
     }
 }
 
@@ -67,7 +70,7 @@
     grid-template-columns: repeat(8, 1fr);
     > .day:nth-last-of-type(-n+2) {
         .hour {
-            background-color: var(--teachu-grey);
+            background-color: var(--teachu-base-2);
         }
     }
 }

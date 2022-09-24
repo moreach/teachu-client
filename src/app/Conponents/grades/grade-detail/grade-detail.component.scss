@@ -2,7 +2,7 @@
     word-break: break-word;
 
     margin-top: 20px;
-    background-color: var(--teachu-grey);
+    background-color: var(--teachu-base-1);
     padding: 20px;
     border-radius: 5px;
 
@@ -57,19 +57,20 @@
             border-radius: 3px;
             width: 125px;
 
-            color: var(--teachu-primary);
-            background-color: var(--teachu-primary-brightest);
+            color: var(--teachu-base-5);
+            background-color: var(--teachu-secondary-4);
         }
     }
 
     #mark{
-        color: var(--teachu-primary);
+        background-color: var(--teachu-primary-4);
+        color: var(--teachu-base-0);
         font-size: 25px;
         font-weight: bold;
+        min-width: 60px;
+        text-align: center;
 
         padding: 10px;
         border-radius: 5px;
-
-        background-color: var(--teachu-primary-brightest);
     }
 }

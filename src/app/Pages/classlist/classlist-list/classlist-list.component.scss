@@ -17,11 +17,11 @@
 .data-row:not(.header){
     border-radius: 10px;
     transition: 250ms all ease-out;
-    background-color: var(--teachu-grey);
+    background-color: var(--teachu-base-1);
 }
 
 .data-row:not(.header):hover{
-    background-color: var(--teachu-grey-darker);
+    background-color: var(--teachu-base-2);
 }
 
 .header {

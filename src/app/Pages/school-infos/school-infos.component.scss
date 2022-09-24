@@ -17,8 +17,9 @@
         gap: 16px;
         padding: 16px;
         border-radius: 5px;
-        background-color: var(--teachu-grey);
+        background-color: var(--teachu-base-1);
         min-height: 300px;
+        transition: 250ms all ease-in-out;
 
         .image {
             width: 100%;
@@ -37,12 +38,19 @@
             justify-content: space-between;
         }
         &.important {
-            background-color: var(--teachu-primary);
-            color: var(--teachu-white);
+            background-color: var(--teachu-secondary-0);
+
+            &:hover {
+              background-color: var(--teachu-secondary-1);
+            }
         }
         .mat-icon {
             font-size: 40px;
             margin-right: 16px;
+        }
+
+        &:hover {
+            background-color: var(--teachu-base-2);
         }
     }
 }
