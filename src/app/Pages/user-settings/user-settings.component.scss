@@ -2,32 +2,22 @@
 
 .settings-container{
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-items: start;
-    gap: 20px;
+    grid-template-columns: 33% 33% 33%;
+    justify-items: center;
 
-    #userData {
-        width: 100%;
+    #preferences{
+        max-width: 300px;
         display: flex;
         flex-direction: column;
-        flex-wrap: nowrap;
-        gap: 20px;
+        align-items: center;
     }
 
-    #preferences {
-        width: 100%;
+    .user-data{
         display: flex;
         flex-direction: column;
-        flex-wrap: nowrap;
-        gap: 20px;
-    }
-
-    #changePassword {
+        gap: 10px;
         width: 100%;
-    }
-
-    #phoneNumberForm {
-        width: 100%;
+        max-width: 400px;
     }
 }
 
@@ -35,14 +25,14 @@
     color: var(--teachu-accent);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1300px) {
     .settings-container{
         grid-template-columns: 50% 50%;
         gap: 80px 0;
     }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 750px) {
     .settings-container{
         grid-template-columns: 100%;
         gap: 80px 0;
