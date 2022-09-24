@@ -1,22 +1,25 @@
 .page {
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
-    &.width-3 {
-        grid-template-columns: 1fr 1fr 1fr;
+
+    @media screen and (max-width: 1360px){
+      grid-template-columns: 1fr 1fr;
     }
-    &.width-2 {
-        grid-template-columns: 1fr 1fr;
+
+    @media screen and (max-width: 700px){
+      grid-template-columns: 1fr;
     }
-    &.width-1 {
-        grid-template-columns: 1fr;
-    }
+
     .info {
         display: flex;
         flex-direction: column;
         gap: 16px;
-        border: 1px solid var(--teachu-black);
-        margin-bottom: 20px;
         padding: 16px;
+        border-radius: 5px;
+        background-color: var(--teachu-grey);
+        min-height: 300px;
+
         .image {
             width: 100%;
         }
@@ -34,7 +37,8 @@
             justify-content: space-between;
         }
         &.important {
-            background-color: var(--teachu-secondary);
+            background-color: var(--teachu-primary);
+            color: var(--teachu-white);
         }
         .mat-icon {
             font-size: 40px;

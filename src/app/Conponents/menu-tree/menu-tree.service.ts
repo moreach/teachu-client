@@ -54,12 +54,6 @@ export class MenuTreeService {
                     leave: true,
                     titleTranslationKey: "chat.chat",
                     url: "/app/chat"
-                },
-                {
-                    icon: "settings",
-                    leave: true,
-                    titleTranslationKey: "userSettings.userSettings",
-                    url: "/app/userSettings"
                 }
             ]
         };

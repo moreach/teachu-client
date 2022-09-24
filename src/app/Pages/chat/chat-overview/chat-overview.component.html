@@ -3,14 +3,10 @@
         <button mat-button (click)="openNewGroupChatDialog()">{{ 'chat.newChat' | translate }}</button>
     </div>
 </div>
-<div *ngIf="chatOverviews$ | async as chatOverviews">
-    <mat-divider></mat-divider>
+<div *ngIf="chatOverviews$ | async as chatOverviews"  class="chat-overview-list">
     <div *ngFor="let chat of chatOverviews">
         <div class="chat-overview-detail" (click)="openDetail(chat.id)">
-            <app-image *ngIf="!isGroupChat(chat); else groupImage" [round]="true" [size]="48" [imageId]="getProfileImage(chat.members)"></app-image>
-            <ng-template #groupImage>
-                <mat-icon [style]="{'font-size': '40px', 'margin-left': '4px'}" class="chat-image">group</mat-icon>
-            </ng-template>
+            <app-image [size]="48" [imageId]="getProfileImage(chat)"></app-image>
             <div class="chat-middle-section">
                 <div>
                     <div class="chat-title">{{ chat.title }}</div>
@@ -28,8 +24,7 @@
             <ng-template #noMessageDate>
                 <div class="chat-last-msg-date">-</div>
             </ng-template>
-        </div>        
-        <mat-divider></mat-divider>
+        </div>
     </div>
     <div *ngIf="isEmpty(chatOverviews)">
         <div class="chat-overview-detail">{{ 'chat.noChats' | translate }}</div>

@@ -50,7 +50,7 @@ $teachu-dark-theme: mat.define-dark-theme((
 
 /* -- SCROLLBAR -- */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
   height: 10px;
 }
 
@@ -67,7 +67,7 @@ $teachu-dark-theme: mat.define-dark-theme((
   background: var(--teachu-grey-darker);
 }
 
-html, body { min-height: 100vh; }
+body { min-height: 100vh; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 // remove default toasty styles

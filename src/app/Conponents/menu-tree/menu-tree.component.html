@@ -1,10 +1,9 @@
 <div class="menu-tree">
     <ng-template #nodeTemplateRef let-node>
-        <div>
+        <div class="menu-tree-sub-container">
             <ng-container *ngIf="node.leave else subNode">
                 <div class="menu-tree-item"
-                     [style.padding-left]="(indentationWidth * node.level) + 'px'"
-                     [style.width]="'calc(100% - ' + (indentationWidth * node.level) + 'px)'">
+                     [style.padding-left]="(indentationWidth * node.level) + 'px'">
                     <app-menu-leave [item]="node" (leaveClickedEvent)="leaveClicked($event)"></app-menu-leave>
                 </div>
             </ng-container>
@@ -18,7 +17,8 @@
                 </div>
                 <div #item expansion-wrapper
                      [expanded]="false"
-                     style="overflow: hidden">
+                     style="overflow: hidden"
+                     class="menu-tree-sub-container">
                     <ng-template ngFor
                                  [ngForOf]="node.children"
                                  [ngForTemplate]="nodeTemplateRef">

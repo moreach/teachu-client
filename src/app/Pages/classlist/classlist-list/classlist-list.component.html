@@ -1,5 +1,6 @@
-<h2>{{ isTeacher ? (('classlist.teachers' | translate) + ' ' + className) : (('classlist.class' | translate) + ' ' + className) }}</h2>
-<div class="data-row header">
+<div class="classlist-table">
+  <h2>{{ isTeacher ? (('classlist.teachers' | translate) + ' ' + className) : (('classlist.class' | translate) + ' ' + className) }}</h2>
+  <div class="data-row header">
     <div class="image"></div>
     <app-table-header [text]="'classlist.firstName' | translate"
                       [asc]="getSortState('firstName')"
@@ -29,9 +30,8 @@
                       [asc]="getSortState('city')"
                       (click)="sortBy('city')">
     </app-table-header>
-</div>
-<mat-divider></mat-divider>
-<div *ngFor="let person of _people" class="data-row" (click)="openDetail(person)">
+  </div>
+  <div *ngFor="let person of _people" class="data-row" (click)="openDetail(person)">
     <app-image class="image" [round]="true" [size]="48" [imageId]="person.imageId" ></app-image>
     <div class="text">{{ person.firstName }}</div>
     <div class="text">{{ person.lastName }}</div>
@@ -39,4 +39,5 @@
     <div class="text email">{{ person.email }}</div>
     <div class="text sex">{{ ('Sex.' + person.sex) | translate }}</div>
     <div class="text city">{{ person.city }}</div>
+  </div>
 </div>

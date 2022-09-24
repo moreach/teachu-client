@@ -33,9 +33,6 @@ export class DashboardService {
   getSchoolInfos$(): Observable<DashboardSchoolInfoDTO[]> {
     return this.api.callApi<SchoolInfoDTO[]>(endpoints.SchoolInfo, {}, 'GET').pipe(
       map(infos => {
-        return infos.sort((a, b) => b.date.getTime() - a.date.getTime()).slice(0, 10);
-      }),
-      map(infos => {
         return infos.map(info => {
           return {
             title: info.title,

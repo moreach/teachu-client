@@ -1,21 +1,27 @@
+.classlist-table {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 20px;
+}
+
 .data-row {
-    margin: 8px;
     height: 55px;
     display: grid;
     cursor: pointer;
     grid-template-columns: 55px repeat(6, 1fr);
     align-items: center;
+    padding: 10px;
 }
 
 .data-row:not(.header){
-    padding: 5px;
     border-radius: 10px;
-    border: 5px solid var(--teachu-grey);
-    transition: background-color 300ms ease-out;
+    transition: 250ms all ease-out;
+    background-color: var(--teachu-grey);
 }
 
 .data-row:not(.header):hover{
-    background-color: var(--teachu-grey);
+    background-color: var(--teachu-grey-darker);
 }
 
 .header {
