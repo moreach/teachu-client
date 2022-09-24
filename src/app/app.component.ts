@@ -68,6 +68,8 @@ export class AppComponent implements AfterViewInit{
 
         if(this.bigWindow && !oldBigWindow)
             this.menuClosed = false;
+
+        document.body.style.height = window.innerHeight + "px";
     }
 
     toggleMenu() {

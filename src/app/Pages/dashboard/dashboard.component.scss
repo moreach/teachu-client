@@ -1,15 +1,16 @@
 .page {
     display: grid;
-    grid-template-columns: repeat(auto-fit, clamp(300px, 100%, 400px));
-    gap: 32px;
-    max-width: 1500px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
     justify-content: center;
+
     .part {
         display: grid;
-        grid-template-columns: clamp(300px, 100%, 400px);
         height: 400px;
-        border-radius: 20px;
-        transition: 200ms ease-out;
+        border-radius: 5px;
+        transition: 200ms all ease-out;
+        overflow: hidden;
+        background-color: var(--teachu-grey);
 
         .header {
             height: 32px;
@@ -18,9 +19,6 @@
             padding: 16px;
             transition: 300ms ease-out;
 
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            max-width: clamp(300px, 100%, 400px);
             background-color: var(--teachu-primary-brightest);
             color: var(--teachu-black);
             mat-icon {
@@ -38,7 +36,7 @@
         >:last-child:not(.spinner-wrapper) {
             overflow-y: auto;
             margin-right: 4px;
-            padding: 0;
+            padding: 20px;
             height: 332px;
         }
         .spinner-wrapper {
@@ -49,9 +47,8 @@
         .entry {
             font-size: 16px;
             height: 64px;
-            padding: 8px;
-            margin: 8px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 5px;
             outline: 5px solid transparent;
             display: flex;
             align-items: center;
@@ -115,7 +112,7 @@
             cursor: default;
             height: auto;
             display: grid;
-            grid-template-columns: 1fr;   
+            grid-template-columns: 1fr;
         }
         .timetable-lesson-title-bar,
         .grade-title,
@@ -154,13 +151,21 @@
     }
 
     .part:hover{
-        background-color: var(--teachu-primary-brightest);
         filter: drop-shadow(0 12px 10px var(--teachu-primary-brightest));
+        transform: scale(1.05);
 
         .header{
             color: var(--teachu-white);
             background-color: var(--teachu-primary);
         }
+    }
+
+    @media screen and (max-width: 1400px) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @media screen and (max-width: 800px) {
+        grid-template-columns: 1fr;
     }
 }
 

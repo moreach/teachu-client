@@ -19,6 +19,7 @@
         grid-auto-flow: column;
         grid-auto-columns: min(200px);
         gap: 10px;
+        padding: 10px;
 
         box-sizing: border-box;
         overflow-x: auto;
@@ -27,14 +28,13 @@
             transition: background-color 300ms ease;
             cursor: pointer;
 
-            margin: 5px;
-            padding: 10px;
+            padding: 20px;
 
             display: grid;
             grid-template-rows: 50% 50%;
             grid-template-columns: 100%;
 
-            background-color: var(--teachu-accent);
+            background-color: var(--teachu-grey);
             border-radius: 10px;
 
             .text-container {
@@ -45,7 +45,7 @@
                 .exam-title {
                     color: var(--teachu-black);
                     width: calc(100% - 40px);
-                    font-size: 20px
+                    font-size: 20px;
                 }
 
                 .exam-grade {

@@ -21,18 +21,18 @@
     justify-content: flex-start;
     align-items: center;
 
-    background-color: var(--teachu-accent);
+    background-color: var(--teachu-primary);
     border-radius: 0.4rem;
 
-    transition: background 0.3s ease-out;
+    transition: filter 200ms ease-out;
 }
 
 .upload-container:hover{
-    background-color: var(--teachu-accent-hover);
+    filter: brightness(1.2);
 }
 
 .upload-container:active{
-    background-color: var(--teachu-accent-click);
+    filter: brightness(1.4);
 }
 
 .upload-label{
@@ -42,7 +42,7 @@
 }
 
 .upload-text{
-    color: var(--teachu-primary);
+    color: var(--teachu-white);
     font-size: 1rem;
 
     margin-left: 5px;

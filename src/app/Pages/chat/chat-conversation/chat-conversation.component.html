@@ -15,29 +15,24 @@
     </div>
     <div class="messages">
         <div *ngFor="let message of conversation.messages">
-            <div class="message-wrapper">
-                <div *ngIf="!isOwn(message.user.id); else messageSelf" class="message message-non-self">
-                    <div class="message-sender">{{ message.user.firstName + ' ' + message.user.lastName }}</div>
-                    <mat-divider></mat-divider>
+            <div *ngIf="!isOwn(message.user.id); else messageSelf" class="message message-non-self">
+                <div class="message-sender">{{ message.user.firstName + ' ' + message.user.lastName }}</div>
+                <div class="message-message">{{ message.message }}</div>
+                <div class="message-timestamp">{{ isToday(message.timestamp) ? (getFromEpoch(message.timestamp) | date:'HH:mm') : (getFromEpoch(message.timestamp) | date:'dd.MM.yyyy HH:mm') }}</div>
+            </div>
+            <ng-template #messageSelf>
+                <div class="message message-self">
+                    <div class="message-sender">{{ 'chat.you' | translate }}</div>
                     <div class="message-message">{{ message.message }}</div>
-                    <mat-divider></mat-divider>
                     <div class="message-timestamp">{{ isToday(message.timestamp) ? (getFromEpoch(message.timestamp) | date:'HH:mm') : (getFromEpoch(message.timestamp) | date:'dd.MM.yyyy HH:mm') }}</div>
                 </div>
-                <ng-template #messageSelf>
-                    <div class="message message-self">
-                        <div class="message-message">{{ message.message }}</div>
-                        <mat-divider></mat-divider>
-                        <div class="message-timestamp">{{ isToday(message.timestamp) ? (getFromEpoch(message.timestamp) | date:'HH:mm') : (getFromEpoch(message.timestamp) | date:'dd.MM.yyyy HH:mm') }}</div>
-                    </div>
-                </ng-template>
-            </div>
+            </ng-template>
         </div>
     </div>
-    <mat-divider></mat-divider>
     <form class="new-message">
         <mat-form-field>
             <mat-label>{{ 'chat.message' | translate }}</mat-label>
-            <textarea matInput [formControl]="newMessageControl"></textarea>
+            <textarea matInput [formControl]="newMessageControl" rows="1"></textarea>
         </mat-form-field>
         <div class="wrapper">
             <button mat-icon-button (click)="sendMessage()" [disabled]="!newMessageControl.valid">

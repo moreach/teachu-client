@@ -3,6 +3,7 @@
     flex-wrap: nowrap;
     flex-direction: column;
     align-content: center;
+    gap: 20px;
 
     .class-grades-header{
         height: 100px;
@@ -66,10 +67,8 @@
         align-items: center;
         justify-items: center;
 
-        background-color: var(--teachu-white);
-        border: 5px solid var(--teachu-grey);
+        background-color: var(--teachu-grey);
         border-radius: 10px;
-        margin: 5px;
         padding: 10px;
         height: 30px;
 
@@ -98,6 +97,6 @@
     }
 
     .grade-row:hover{
-        background-color: var(--teachu-grey);
+        background-color: var(--teachu-grey-darker);
     }
 }

@@ -1,13 +1,13 @@
 @import 'src/styles/_colors.scss';
 
 .profile-picture-container{
-  padding: 1px;
-
-  border: 1px solid var(--teachu-black);
+  border: none;
   border-radius: 50%;
-  transition: 250ms filter ease-out;
+
+  outline: 1px solid transparent;
+  transition: 250ms all ease-in-out;
 }
 
 .profile-picture-container:hover{
-  filter: drop-shadow(0 0 0.5rem var(--teachu-black)) opacity(70%);
+  outline: 1px solid var(--teachu-black);
 }

@@ -1,7 +1,8 @@
 .page {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
     gap: 40px;
-    display: block;
 
     .teachers{
         width: 100%;

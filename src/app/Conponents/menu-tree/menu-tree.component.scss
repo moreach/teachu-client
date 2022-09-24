@@ -6,30 +6,36 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 10px;
 
   .menu-tree-item {
     cursor: pointer;
-
-    height: 50px;
     width: 100%;
-
-    border-radius: 10px;
-    border: 5px solid transparent;
+    border-radius: 5px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    padding: 10px 5px;
 
-    transition: border 0.5s ease-out;
+    transition: 0.5s all ease-out;
     color: var(--teachu-black);
-  }
 
-  .menu-tree-item:hover {
-    //background-color: var(--teachu-grey-darker);
-    border: 5px solid var(--teachu-grey-darker);
+    &:hover {
+      background-color: var(--teachu-grey-darker);
+    }
   }
 
   .menu-tree-indented-leave {
     padding-left: 20px;
-    width: calc(100% - 20px);
+  }
+
+  .menu-tree-sub-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
   }
 }

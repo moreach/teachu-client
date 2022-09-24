@@ -77,8 +77,8 @@ export class ChatOverviewComponent {
     return userId === this.tokenService.getUserId();
   }
 
-  getProfileImage(users: UserExternalUserDTO[]) {
-    return users.filter(u => u.id !== this.tokenService.getUserId())[0].imageId;
+  getProfileImage(chat: ChatResponseDTO) {
+    return chat.members[0].imageId;
   }
 
   isEmpty(array: any[]) {

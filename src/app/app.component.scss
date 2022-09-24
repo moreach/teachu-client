@@ -2,23 +2,22 @@
 
 .root {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: block;
   background-color: var(--teachu-white);
   overflow: hidden;
 
   .page {
-    padding: 20px;
+    padding: 20px 40px;
     overflow: auto;
-  }
 
-  .login-only {
-    margin-top: 32px;
-    margin-left: 32px;
+    @media screen and (max-width: 800px) {
+      padding: 20px;
+    }
   }
 
   .big-outline {
-    height: 100vh;
+    height: 100%;
     width: 100%;
 
     display: inline-grid;
@@ -41,7 +40,7 @@
   }
 
   .small-outline{
-    height: 100vh;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -58,7 +57,7 @@
       top: 0;
       left: 0;
       z-index: 999;
-      height: 100vh;
+      height: 100%;
       width: 100vw;
       overflow: hidden;
 
@@ -111,7 +110,7 @@
     }
 
     .page {
-      height: calc(100vh - 100px);
+      height: calc(100% - 100px);
     }
   }
 }
