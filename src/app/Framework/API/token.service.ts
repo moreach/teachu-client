@@ -73,4 +73,8 @@ export class TokenService {
   getJWT() {
     return localStorage.getItem(appConfig.APPLICATION_JWT ?? '');
   }
+
+  removeJWT() {
+    localStorage.removeItem(appConfig.APPLICATION_JWT);
+  }
 }

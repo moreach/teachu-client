@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { of, switchMap, tap } from 'rxjs';
+import { map, of, switchMap, tap } from 'rxjs';
 import { appRoutes } from 'src/app/Config/appRoutes';
 import { endpoints } from 'src/app/Config/endpoints';
 import { LoginDTO } from 'src/app/DTOs/Authentication/LoginDTO';
@@ -48,6 +48,8 @@ export class LoginComponent {
     if (this.tokenService.isExpired()) {
       this.tokenService.removeToken();
       this.tokenService.removeRefreshToken();
+      this.tokenService.removeExpired();
+      this.tokenService.removeJWT();
       this.errorHandler.redirectToLogin();
     }
     const refresh = this.tokenService.getRefreshToken();
@@ -67,9 +69,15 @@ export class LoginComponent {
 
   login() {
     this.api.callApi<TokenDTO>(endpoints.Login, { ...this.form.value }, 'POST').pipe(
-      tap(token => this.setToken(token)),
-      switchMap(token => this.extensionApi.callApi<UserTokenDTO>(endpoints.UserRefreshToken, { token: token.access } as UserTokenDTO, 'POST')),
-      tap(token => this.setJWT(token.token)),
+      switchMap(token => {
+        return this.extensionApi.callApi<UserTokenDTO>(endpoints.UserRefreshToken, { token: token.access } as UserTokenDTO, 'POST').pipe(
+          map(jwt => { return { token, jwt } })
+        );
+      }),
+      tap(tokens => {
+        this.setToken(tokens.token);
+        this.setJWT(tokens.jwt.token);
+      }),
       switchMap(_ => this.api.callApi<UserOwnDTO>(endpoints.User, { }, 'GET')),
       tap(user => this.setSettings(user)),
       switchMap(user => {
@@ -106,6 +114,8 @@ export class LoginComponent {
   setChildren(children: ParentChildDTO[] | null) {
     if (!!children) {
       this.parentService.setActiveStudent(children[0].id);
+    } else {
+      this.parentService.removeActiveStudent();
     }
   }
 }

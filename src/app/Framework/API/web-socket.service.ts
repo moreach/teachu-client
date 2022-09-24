@@ -4,8 +4,7 @@ import { BehaviorSubject, filter } from 'rxjs';
 import { endpoints } from 'src/app/Config/endpoints';
 import { WebSocketConnectionDTO } from 'src/app/DTOs/User/WebSocketConnectionDTO';
 import { environment } from 'src/environments/environment';
-import { ApiService } from './api.service';
-import { TokenService } from './token.service';
+import { ApiExtensionService } from './api-extension.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,7 @@ export class WebSocketService {
   private connection: signalR.HubConnection | undefined;
 
   constructor(
-    private apiService: ApiService,
+    private extensionApi: ApiExtensionService,
   ) { }
 
   private setupConnection() {
@@ -26,7 +25,7 @@ export class WebSocketService {
       this.connection.start().then(() => {
         this.connection!.invoke('getConnectionId')
           .then((connectionId: string) => {
-            this.apiService.callApi(endpoints.WebSocketConnections, {
+            this.extensionApi.callApi(endpoints.WebSocketConnections, {
               connectionId,
           } as WebSocketConnectionDTO, 'POST').subscribe();
         });

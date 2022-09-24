@@ -51,14 +51,21 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
           this.tokenService.removeToken();
           this.tokenService.removeRefreshToken();
           this.tokenService.removeExpired();
+          this.tokenService.removeJWT();
           this.errorHandler.redirectToLogin();
         }
         if (error.status === 401 && this.unauthorizedCount < appConfig.UNAUTHORIZED_ERROR_RETRY_COUNT) {
           if (isExtensionBackend) {
             this.unauthorizedCount++;
-            return this.extensionApi.callApi<UserTokenDTO>(endpoints.UserRefreshToken, {
-              token: this.tokenService.getRefreshToken(),
-            } as UserTokenDTO, 'POST').pipe(
+            return this.api.callApi<TokenDTO>(endpoints.Login, {
+              refresh: this.tokenService.getRefreshToken(),
+            } as TokenDTO, 'PUT').pipe(
+              tap(token => {
+                this.tokenService.setToken(token.access);
+                this.tokenService.setRefreshToken(token.refresh);
+                this.tokenService.setExpired(token.accessExpires);
+              }),
+              switchMap(_ => this.extensionApi.callApi<UserTokenDTO>(endpoints.UserRefreshToken, { token: this.tokenService.getRefreshToken() } as UserTokenDTO, 'POST')),
               tap(token =>  this.tokenService.setJWT(token.token)),
               switchMap(token => next.handle(this.cloneRequest(request, token.token))),
             );

@@ -32,6 +32,10 @@ export class ParentService implements HttpInterceptor{
         localStorage.setItem(appConfig.APPLICATION_SELECTED_STUDENT, childrenId);
     }
 
+    removeActiveStudent() {
+        localStorage.removeItem(appConfig.APPLICATION_SELECTED_STUDENT);
+    }
+
     selectAStudent(){
         const savedId = localStorage.getItem(appConfig.APPLICATION_SELECTED_STUDENT);
         if(!savedId)

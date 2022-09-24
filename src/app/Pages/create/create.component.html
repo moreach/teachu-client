@@ -4,7 +4,7 @@
 <mat-tab-group class="sets">
     <mat-tab [label]="'create.latestSets' | translate">
         <div *ngIf="latest$ | async as latest">
-            <h3 *ngIf="isEmpty(latest)">{{ 'create.noSets' | translate }}</h3>
+            <h3 *ngIf="isEmpty(latest)">{{ 'create.noSet' | translate }}</h3>
             <app-create-set-banner *ngFor="let set of latest" [set]="set"></app-create-set-banner>
         </div>
     </mat-tab>
@@ -35,12 +35,12 @@
                 </div>
             </form>
             <app-create-set-banner *ngFor="let set of filtered" [set]="set"></app-create-set-banner>
-            <h3 *ngIf="isEmpty(filtered)">{{ 'create.noSets' | translate }}</h3>
+            <h3 *ngIf="isEmpty(filtered)">{{ 'create.noSet' | translate }}</h3>
         </div>
     </mat-tab>
     <mat-tab [label]="'create.ownSets' | translate">
         <div *ngIf="own$ | async as own">
-            <h3 *ngIf="isEmpty(own)">{{ 'create.noSets' | translate }}</h3>
+            <h3 *ngIf="isEmpty(own)">{{ 'create.noSet' | translate }}</h3>
             <app-create-set-banner *ngFor="let set of own" [set]="set"></app-create-set-banner>
         </div>
     </mat-tab>
