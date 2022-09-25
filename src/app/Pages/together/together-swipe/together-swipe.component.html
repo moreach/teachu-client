@@ -11,7 +11,7 @@
         <div class="username">{{ profile.username }}</div>
         <div class="grade">{{ translateGrade(profile.grade) | translate }}</div>
         <div class="img-wrap">
-            <img [src]="profile.profileImagePath" />
+            <app-image [round]="true" [size]="48" [imageId]="profile.profileImagePath"></app-image>
         </div>
         <div class="information">{{ profile.information }}</div>
     </div>

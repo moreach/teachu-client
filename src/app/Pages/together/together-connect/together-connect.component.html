@@ -6,7 +6,7 @@
         <mat-divider></mat-divider>
         <div *ngFor="let connection of overview">
             <div class="connection-overview-detail">
-                <img (click)="openDetail(connection)" [src]="connection.profileImagePath" class="connection-image">
+                <app-image (click)="openDetail(connection)" [imageStyle]="'cursor: pointer;'" [round]="true" [size]="48" [imageId]="connection.profileImagePath"></app-image>
                 <div (click)="navigateToChat(connection.userId)" class="connection-middle-section">
                     <div>
                         <div class="connection-title">{{ connection.username }}</div>

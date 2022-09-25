@@ -7,7 +7,7 @@
     <ng-template #groupOverview>
         <div *ngFor="let group of overview">
             <div class="group">
-                <img (click)="openInfo(group.groupId)" [src]="group.profileImagePath" class="group-image">
+                <app-image [round]="true" [size]="48" [imageId]="group.profileImagePath" (click)="openInfo(group.groupId)"></app-image>
                 <div (click)="navigateToChat(group.groupId)" class="group-middle-section">
                     <div>
                         <div class="group-title">{{ group.groupName }}</div>

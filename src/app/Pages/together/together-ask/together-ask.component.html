@@ -5,7 +5,7 @@
                 <mat-divider></mat-divider>
                 <div *ngFor="let user of asks.openAsks">
                     <div class="user">
-                        <img (click)="openDetail(user)" [src]="user.profileImagePath" class="user-image">
+                        <app-image [round]="true" [size]="48" [imageId]="user.profileImagePath"></app-image>
                         <div (click)="openDetail(user)" class="user-name">{{ user.username }}</div>
                         <button (click)="answerUser(user.userId, true)" mat-icon-button class="user-vote-button">
                             <mat-icon>thumb_up</mat-icon>
@@ -60,7 +60,7 @@
                     <mat-divider></mat-divider>
                     <div *ngFor="let user of filteredUsers">
                         <div class="user user-new-asks">
-                            <img (click)="openDetail(user)" [src]="user.profileImagePath" class="user-image">
+                            <app-image [round]="true" [size]="48" [imageId]="user.profileImagePath"></app-image>
                             <div (click)="openDetail(user)" class="user-name">{{ user.username }}</div>
                             <button (click)="askUser(user.userId)" mat-icon-button class="user-ask-button">
                                 <mat-icon>accessibility</mat-icon>
@@ -79,7 +79,7 @@
                 <mat-divider></mat-divider>
                 <div *ngFor="let user of asks.sentAsks">
                     <div (click)="openDetail(user)" class="user user-asks-sent">
-                        <img [src]="user.profileImagePath" class="user-image">
+                        <app-image [round]="true" [size]="48" [imageId]="user.profileImagePath"></app-image>
                         <div class="user-name">{{ user.username }}</div>
                     </div>
                     <mat-divider></mat-divider>

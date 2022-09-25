@@ -1,6 +1,6 @@
 <div *ngIf="chat$ | async as chat">
     <div (click)="openInfo()" class="chat-info">
-        <img [src]="chat.profileImagePath" class="chat-image">
+        <app-image [round]="true" [size]="48" [imageId]="chat.profileImagePath"></app-image>
         <div class="chat-title">
             {{ chat.groupName }}
         </div>

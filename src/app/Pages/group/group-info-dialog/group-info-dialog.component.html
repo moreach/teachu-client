@@ -18,7 +18,7 @@
             <mat-divider></mat-divider>
             <div *ngFor="let user of groupInfo.members">
                 <div class="user">
-                    <img [src]="user.profileImagePath">
+                    <app-image [round]="true" [size]="48" [imageId]="user.profileImagePath"></app-image>
                     <div class="text-wrap">
                         <div class="username">{{ user.username }}</div>
                     </div>

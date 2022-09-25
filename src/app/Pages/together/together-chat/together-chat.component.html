@@ -1,6 +1,6 @@
 <div *ngIf="chat$ | async as chat">
     <div (click)="openDetail(chat.user)" class="chat-info">
-        <img [src]="chat.user.profileImagePath" class="chat-image">
+        <app-image [round]="true" [size]="48" [imageId]="chat.user.profileImagePath"></app-image>
         <div class="chat-title">
             {{ chat.user.username }}
         </div>

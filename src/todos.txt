@@ -1,5 +1,3 @@
 Open ToDos migration:
-- Change to random apikey in both backends
-
 - Fix Websocket
 -- Enhance the Chat by Websockets across the systems

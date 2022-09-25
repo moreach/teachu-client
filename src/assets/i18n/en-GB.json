@@ -566,5 +566,17 @@
         "Line":"Line",
         "Text":"Text",
         "Erase":"Erase"
+    },
+    "together-ask":{
+        "together-ask":"Ask"
+    },
+    "together-caht":{
+        "together-chat":"Chat"
+    },
+    "togther-swipe":{
+        "together-swipe":"Swipe"
+    },
+    "together-connect":{
+        "together-connect":"Connect"
     }
 }
