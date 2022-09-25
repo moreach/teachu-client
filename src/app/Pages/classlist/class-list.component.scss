@@ -14,8 +14,13 @@
         .teacher{
             padding: 25px;
             border-radius: 5px;
+            background-color: var(--teachu-base-0);
+            box-shadow: 0 0 10px 10px var(--teachu-base-1);
+            transition: 250ms all ease-in-out;
 
-            background-color: var(--teachu-base-1);
+            &:hover {
+                transform: scale(1.05);
+            }
         }
     }
 

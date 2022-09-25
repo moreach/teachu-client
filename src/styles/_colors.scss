@@ -1,73 +1,73 @@
 :root {
     // base
-    --teachu-base-0: #f8fafc;
-    --teachu-base-1: #f1f5f9;
-    --teachu-base-2: #e2e8f0;
-    --teachu-base-3: #334155;
-    --teachu-base-4: #1e293b;
-    --teachu-base-5: #0f172a;
+    --teachu-base-0: #fafafa;
+    --teachu-base-1: #e5e5e5;
+    --teachu-base-2: #a3a3a3;
+    --teachu-base-3: #404040;
+    --teachu-base-4: #262626;
+    --teachu-base-5: #171717;
 
-    --teachu-primary-0: #c084fc;
-    --teachu-primary-1: #a855f7;
-    --teachu-primary-2: #9333ea;
-    --teachu-primary-3: #7e22ce;
-    --teachu-primary-4: #6b21a8;
-    --teachu-primary-5: #581c87;
+    --teachu-primary-0: #bfdbfe;
+    --teachu-primary-1: #60a5fa;
+    --teachu-primary-2: #3b82f6;
+    --teachu-primary-3: #1d4ed8;
+    --teachu-primary-4: #1e40af;
+    --teachu-primary-5: #1e3a8a;
 
-    --teachu-secondary-0: #d9f99d;
-    --teachu-secondary-1: #bef264;
-    --teachu-secondary-2: #a3e635;
-    --teachu-secondary-3: #84cc16;
-    --teachu-secondary-4: #65a30d;
-    --teachu-secondary-5: #4d7c0f;
+    --teachu-secondary-0: #fed7aa;
+    --teachu-secondary-1: #fdba74;
+    --teachu-secondary-2: #fb923c;
+    --teachu-secondary-3: #f97316;
+    --teachu-secondary-4: #ea580c;
+    --teachu-secondary-5: #c2410c;
 
     --teachu-error-0: #e11d48;
 
     //light
-    --teachu-light-base-0: #f8fafc;
-    --teachu-light-base-1: #f1f5f9;
-    --teachu-light-base-2: #e2e8f0;
-    --teachu-light-base-3: #334155;
-    --teachu-light-base-4: #1e293b;
-    --teachu-light-base-5: #0f172a;
+    --teachu-light-base-0: #fafafa;
+    --teachu-light-base-1: #e5e5e5;
+    --teachu-light-base-2: #a3a3a3;
+    --teachu-light-base-3: #404040;
+    --teachu-light-base-4: #262626;
+    --teachu-light-base-5: #171717;
 
-    --teachu-light-primary-0: #c084fc;
-    --teachu-light-primary-1: #a855f7;
-    --teachu-light-primary-2: #9333ea;
-    --teachu-light-primary-3: #7e22ce;
-    --teachu-light-primary-4: #6b21a8;
-    --teachu-light-primary-5: #581c87;
+    --teachu-light-primary-0: #bfdbfe;
+    --teachu-light-primary-1: #60a5fa;
+    --teachu-light-primary-2: #3b82f6;
+    --teachu-light-primary-3: #1d4ed8;
+    --teachu-light-primary-4: #1e40af;
+    --teachu-light-primary-5: #1e3a8a;
 
-    --teachu-light-secondary-0: #d9f99d;
-    --teachu-light-secondary-1: #bef264;
-    --teachu-light-secondary-2: #a3e635;
-    --teachu-light-secondary-3: #84cc16;
-    --teachu-light-secondary-4: #65a30d;
-    --teachu-light-secondary-5: #4d7c0f;
+    --teachu-light-secondary-0: #fed7aa;
+    --teachu-light-secondary-1: #fdba74;
+    --teachu-light-secondary-2: #fb923c;
+    --teachu-light-secondary-3: #f97316;
+    --teachu-light-secondary-4: #ea580c;
+    --teachu-light-secondary-5: #c2410c;
 
     --teachu-light-error-0: #e11d48;
 
     //dark
-    --teachu-dark-base-0: #0f172a;
-    --teachu-dark-base-1: #1e293b;
-    --teachu-dark-base-2: #334155;
-    --teachu-dark-base-3: #e2e8f0;
-    --teachu-dark-base-4: #f1f5f9;
-    --teachu-dark-base-5: #f8fafc;
+    --teachu-dark-base-0: #171717;
+    --teachu-dark-base-1: #262626;
+    --teachu-dark-base-2: #404040;
+    --teachu-dark-base-3: #a3a3a3;
+    --teachu-dark-base-4: #e5e5e5;
+    --teachu-dark-base-5: #fafafa;
 
-    --teachu-dark-primary-0: #581c87;
-    --teachu-dark-primary-1: #6b21a8;
-    --teachu-dark-primary-2: #7e22ce;
-    --teachu-dark-primary-3: #9333ea;
-    --teachu-dark-primary-4: #a855f7;
-    --teachu-dark-primary-5: #c084fc;
+    --teachu-dark-primary-0: #1e3a8a;
+    --teachu-dark-primary-1: #1e40af;
+    --teachu-dark-primary-2: #1d4ed8;
+    --teachu-dark-primary-3: #3b82f6;
+    --teachu-dark-primary-4: #60a5fa;
+    --teachu-dark-primary-5: #bfdbfe;
 
-    --teachu-dark-secondary-0: #4d7c0f;
-    --teachu-dark-secondary-1: #65a30d;
-    --teachu-dark-secondary-2: #84cc16;
-    --teachu-dark-secondary-3: #a3e635;
-    --teachu-dark-secondary-4: #bef264;
-    --teachu-dark-secondary-5: #d9f99d;
+    --teachu-dark-secondary-0: #c2410c;
+    --teachu-dark-secondary-1: #ea580c;
+    --teachu-dark-secondary-2: #f97316;
+    --teachu-dark-secondary-3: #fb923c;
+    --teachu-dark-secondary-4: #fdba74;
+    --teachu-dark-secondary-5: #fed7aa;
 
     --teachu-dark-error-0: #f43f5e;
 }

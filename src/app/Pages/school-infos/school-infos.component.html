@@ -1,13 +1,13 @@
 <div *ngIf="schoolInfos$ | async as schoolInfos" [ngClass]="{ 'page': true }">
-  <div *ngFor="let info of schoolInfos" [ngClass]="{ 'info': true, 'important': info.important }">
-    <div class="header">
-      <div class="text">
-        <div class="creator">{{ info.creator.firstName + ' ' + info.creator.lastName + ': ' + (info.date | date: 'dd.MM.yyyy') }}</div>
-        <div class="title">{{ info.title }}</div>
-      </div>
-      <mat-icon *ngIf="info.pinned" class="mat-icon">bookmark</mat-icon>
-    </div>
-    <div>{{ info.message }}</div>
+  <div *ngFor="let info of schoolInfos" [ngClass]="{ 'school-info': true, 'important': info.important }">
     <app-image *ngIf="info.imageId" [imageId]="info.imageId"></app-image>
+    <mat-icon *ngIf="info.pinned" class="mat-icon school-info__pinned">bookmark</mat-icon>
+    <div class="school-info__header">
+      <span>{{(info.date | date: 'dd.MM.yyyy')}}</span>
+      <span>{{info.creator.firstName + ' ' + info.creator.lastName}}</span>
+    </div>
+    <div class="school-info__body">
+      <p>{{ info.message }}</p>
+    </div>
   </div>
 </div>
