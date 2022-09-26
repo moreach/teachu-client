@@ -1,7 +1,8 @@
 .page {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
+    gap: 30px;
+    box-sizing: border-box !important;
 
     @media screen and (max-width: 1360px){
       grid-template-columns: 1fr 1fr;
@@ -11,38 +12,65 @@
       grid-template-columns: 1fr;
     }
 
-    .info {
+    .school-info {
+        box-sizing: border-box !important;
         display: flex;
         flex-direction: column;
-        gap: 16px;
-        padding: 16px;
+        flex-wrap: nowrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        align-content: center;
         border-radius: 5px;
-        background-color: var(--teachu-grey);
-        min-height: 300px;
+        overflow: hidden;
+        background-color: var(--teachu-base-1);
+        position: relative;
+        transition: 250ms all ease-in-out;
 
-        .image {
+        &:hover {
+            background-color: var(--teachu-base-2);
+            transform: scale(1.05);
+        }
+
+        &.important {
+            background-color: var(--teachu-secondary-0);
+
+            &:hover {
+                background-color: var(--teachu-secondary-1);
+            }
+        }
+
+        .school-info__pinned {
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding: 10px;
+            border-bottom-left-radius: 5px;
+            background-color: #00000040;
+        }
+
+        .school-info__header {
+            box-sizing: border-box !important;
+            padding: 25px;
             width: 100%;
-        }
-        .creator {
-            font-weight: bold;
-            margin-bottom: 16px;
-        }
-        .title {
-            font-weight: bold;
-            font-size: 20px;
-        }
-        .header {
+            font-weight: 700;
             display: flex;
             flex-direction: row;
+            flex-wrap: nowrap;
+            align-content: center;
             justify-content: space-between;
+            align-items: center;
         }
-        &.important {
-            background-color: var(--teachu-primary);
-            color: var(--teachu-white);
+
+        .school-info__title {
+            box-sizing: border-box !important;
+            padding: 0 25px;
+            width: 100%;
         }
-        .mat-icon {
-            font-size: 40px;
-            margin-right: 16px;
+
+        .school-info__body {
+            box-sizing: border-box !important;
+            padding: 25px;
+            width: 100%;
         }
     }
 }
