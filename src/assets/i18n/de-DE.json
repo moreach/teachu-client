@@ -1,16 +1,17 @@
 {
   "framework":{
     "save":"Speichern",
-    "close":"Schließen"
+    "close":"Schliessen",
+    "noData":"Keine Einträge gefunden"
   },
   "login":{
     "login":"Anmeldung",
     "email":"E-Mail",
     "password":"Passwort",
-    "wrong":"Login war falsch",
+    "wrong":"Login inkorrekt",
     "logout":"Abmelden"
   },
-  "outline": {
+  "outline":{
     "selectedStudent":"Ausgewählter Schüler"
   },
   "dashboard":{
@@ -20,51 +21,100 @@
     "schoolInfos":"Schule Infos"
   },
   "grades":{
-    "grades":"Klassenstufen",
+    "grades":"Noten",
     "desc":" Beschreibung",
-    "note":" Note"
+    "mark":" Note",
+    "subject":"Thema",
+    "date":"Datum",
+    "description":"Beschreibung",
+    "class":"Klasse"
   },
   "timetable":{
     "timetable":"Stundenplan",
     "day":"Tag",
     "calendar":"Kalender",
-    "weekFrom":"Woche von"
+    "weekFrom":"Woche vom",
+    "details":"Details",
+    "lesson":"Lektion",
+    "userEvent":"Ereignis",
+    "schoolEvent":"Schulereignis",
+    "schoolClassEvent":"Ereignis der Klasse",
+    "lessonEvent":"Ereignis der Lektion",
+    "schoolClass":"Klasse",
+    "room":"Raum",
+    "teacher":"Lehrer",
+    "subject":"Fach",
+    "title":"Titel",
+    "description":"Beschreibung",
+    "from":"Von",
+    "to":"Bis",
+    "type":"Typ",
+    "state":"Stand",
+    "noDetailsAvailable":"Keine Details verfügbar"
   },
   "classlist":{
     "classlist":"Klassenliste",
     "class":"Klasse",
     "teachers":"Lehrer",
+    "students":"Schüler",
     "firstName":"Vorname",
     "lastName":"Nachname",
     "birthday":"Geburtstag",
     "sex":"Geschlecht",
     "city":"Stadt",
-    "email":"Mail"
+    "email":"E-Mail"
+  },
+  "class": {
+   "class":" Klasseninfo"
   },
   "absences":{
-    "absences":"Abwesenheiten"
+    "absences":"Abwesenheiten",
+    "noAbsences":"Herzlichen Glückwunsch, Sie haben keine Abwesenheiten!",
+    "verify":"Abwesenheit bestätigen",
+    "reject":"Abwesenheit ablehnen",
+    "edit":"Abwesenheit bearbeiten",
+    "add":"Abwesenheit hinzufügen",
+    "title":"Titel",
+    "description":"Beschreibung",
+    "save":"Änderungen speichern",
+    "cancel":"Nicht speichern",
+    "validationError":"Der Titel muss zwischen 3 und 50 Zeichen haben, die Beschreibung darf nicht länger als 500 Zeichen sein und das Anfangsdatum muss vor dem Enddatum liegen.",
+    "state":{
+      "pending":"Ausstehend",
+      "excused":"Entschuldigt",
+      "unexcused":"Unentschuldigt",
+      "verified":" Überprüft"
+    },
+    "type":{
+      "sick":"Krank",
+      "holiday":"Urlaub"
+    },
+    "absenceState":"Stand",
+    "absenceType":"Typ",
+    "absenceStartDate":"Beginn der Absenz",
+    "absenceEndDate":"Ende der Absenz"
   },
   "chat":{
     "chat":"Chat",
-    "you":"Sie",
-    "leftTheChat":"Den Chat verlassen",
-    "joinedTheChat":"Dem Chat beigetreten",
+    "you":"Du",
+    "leftTheChat":"hat den Chat verlassen",
+    "joinedTheChat":"iIst dem Chat beigetreten",
     "privateChat":"Privater Chat",
     "groupChat":"Gruppen-Chat",
-    "newGroupChat":"Neuer Gruppenchat",
-    "newPrivateChat":"Neuer Privat-Chat",
+    "newChat":"Neuer Chat",
     "chatName":"Chat-Name",
-    "chatImage":"Chat-Bild",
+    "chatImage":"Profilbild",
     "user":"Benutzer",
     "users":"Benutzer",
     "message":"Nachricht",
     "leaveChat":"Chat verlassen",
-    "editChat":"Chat bearbeiten"
+    "editChat":"Chat bearbeiten",
+    "noChats":"Noch keine Chats vorhanden"
   },
-  "userSettings": {
+  "userSettings":{
     "userSettings":"Einstellungen",
-    "userData":" Ihre Daten",
-    "preferences":" Präferenzen",
+    "userData":"Deine Daten",
+    "preferences":"Einstellungen",
     "email":"E-Mail Adresse",
     "changePassword":"Passwort ändern",
     "firstName":"Vorname",
@@ -74,30 +124,30 @@
     "sex_male":"Männlich",
     "sex_female":"Weiblich",
     "sex_other":"Andere",
-    "darkTheme":"Dunkles Thema",
+    "darkTheme":"Dark Theme",
     "city":"Stadt",
     "postalCode":"Postleitzahl",
-    "street":"Straße",
+    "street":"Strasse",
     "phone":"Telefon",
-    "profileImage": {
-     "profileImage":" Profilbild",
-     "validation": {
-      "notFound":" Kein Bild vorhanden",
-      "notSupportedType":" Bildtyp muss png oder jpeg sein",
-      "toBig":" Das Bild darf nicht größer als 1 MB sein"
-     }
+    "profileImage":{
+      "profileImage":"Profilbild",
+      "validation":{
+        "notFound":"Kein Bild vorhanden",
+        "notSupportedType":"Bildtyp muss png oder jpeg sein",
+        "toBig":"Das Bild darf nicht grösser als 1 MB sein"
+      }
     },
-    "upload":" Neues hochladen",
+    "upload":"Neues Bild hochladen",
     "passwordOld":"Altes Passwort",
     "passwordNew":"Neues Passwort",
     "passwordConfirm":"Neues Passwort wiederholen",
-    "phoneSaved":" Gespeicherte Rufnummer",
-    "passwordValidation": {
-     "toShort":" Das Passwort muss mindestens 8 Ziffern lang sein",
-     "missingCapital":" Das Passwort muss einen Großbuchstaben enthalten",
-     "missingLow":" Das Passwort muss einen Kleinbuchstaben enthalten",
-     "missingNumber":" Passwort muss mindestens eine Zahl enthalten",
-     "wrongCurrent":" E-Mail oder Passwort falsch."
+    "phoneSaved":"Telefonnummer gespeichert",
+    "passwordValidation":{
+      "toShort":"Das Passwort muss mindestens 8 Zeichen lang sein",
+      "missingCapital":"Das Passwort muss einen Grossbuchstaben enthalten",
+      "missingLow":"Das Passwort muss einen Kleinbuchstaben enthalten",
+      "missingNumber":"Das Passwort muss mindestens eine Zahl enthalten",
+      "wrongCurrent":"E-Mail oder Passwort inkorrekt"
     }
   },
   "errorBackend":{
@@ -105,13 +155,13 @@
     "unknownError":"Unbekannter Fehler aufgetreten",
     "InvalidPasswordempty":"Passwort leer",
     "InvalidPasswordlessthen8characters":"Passwort ist kürzer als 8 Zeichen",
-    "InvalidPasswordnouppercasecharacter":"Passwort enthält keine Großbuchstaben",
-    "InvalidPasswordnolowercasecharacter":"Passwort enthält keine Kleinbuchstaben",
+    "InvalidPasswordnouppercasecharacter":"Passwort enthält keinen Grossbuchstaben",
+    "InvalidPasswordnolowercasecharacter":"Passwort enthält keinen Kleinbuchstaben",
     "InvalidPasswordnonumber":"Passwort enthält keine Zahl",
     "InvalidEmailinvalid":"Ungültige E-Mail",
-    "InvalidImageisempty":"Bild ist leer",
-    "InvalidImagetypeisunsupportedpleaseusepngorjpeg":"Bild-Typ wird nicht unterstützt. Bitte verwenden Sie stattdessen png oder jpeg.",
-    "InvalidPasswordorEmailisincorrect":"Email oder Passwort ist falsch"
+    "InvalidImageisempty":"Profilbild ist leer",
+    "InvalidImagetypeisunsupportedpleaseusepngorjpeg":"Profilbild-Typ wird nicht unterstützt. Bitte verwenden Sie stattdessen png oder jpeg.",
+    "InvalidPasswordorEmailisincorrect":"E-Mail oder Passwort ist inkorrekt"
   },
   "errorHandling":{
     "errorOccured":"Fehler aufgetreten",
@@ -145,5 +195,37 @@
     "male":"Männlich",
     "female":"Weiblich",
     "other":"Andere"
+  },
+  "LessonEventType":{
+    "exam":"Prüfung",
+    "homework":"Hausaufgaben",
+    "note":"Notiz"
+  },
+  "UserEventType":{
+    "sick":"Krank",
+    "holiday":"Ferien"
+  },
+  "UserEventState":{
+    "pending":"Hängig",
+    "excused":"Entschuldigt",
+    "unexcused":"Unentschuldigt"
+  },
+  "SchoolEventType":{
+    "holiday":"Ferien",
+    "activity":"Aktivität",
+    "note":"Notiz"
+  },
+  "SchoolClassEventType":{
+    "trip":"Reise",
+    "school":"Schule"
+  },
+  "Weekday":{
+    "monday":"Montag",
+    "tuesday":"Dienstag",
+    "wednesday":"Mittwoch",
+    "thursday":"Donnerstag",
+    "friday":"Freitag",
+    "saturday":"Samstag",
+    "sunday":"Sonntag"
   }
 }

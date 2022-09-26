@@ -1,16 +1,17 @@
 {
   "framework":{
     "save":"Sauvegarder",
-    "close":"Fermer"
+    "close":"Fermer",
+    "noData":"Aucun enregistrement trouvé"
   },
   "login":{
     "login":"Connexion",
-    "email":"Courrier électronique",
+    "email":"Mail",
     "password":"Mot de passe",
     "wrong":"La connexion était incorrecte",
     "logout":"Déconnexion"
   },
-  "outline": {
+  "outline":{
     "selectedStudent":"Étudiant sélectionné"
   },
   "dashboard":{
@@ -22,18 +23,40 @@
   "grades":{
     "grades":"Notes",
     "desc":" Description",
-    "note":" Note"
+    "mark":" Mark",
+    "subject":"Sujet",
+    "date":"Date",
+    "description":"Description",
+    "class":"Classe"
   },
   "timetable":{
     "timetable":"Emploi du temps",
     "day":"Jour",
     "calendar":"Calendrier",
-    "weekFrom":"Semaine de"
+    "weekFrom":"Semaine de",
+    "details":"Détails",
+    "lesson":"Leçon",
+    "userEvent":"Événement de l'utilisateur",
+    "schoolEvent":"Événement de l'école",
+    "schoolClassEvent":"Événement de classe",
+    "lessonEvent":"Événement de leçon",
+    "schoolClass":"Classe",
+    "room":"Salle",
+    "teacher":"Enseignant",
+    "subject":"Sujet",
+    "title":"Titre",
+    "description":"Description",
+    "from":"De",
+    "to":"À",
+    "type":"Type",
+    "state":"État",
+    "noDetailsAvailable":"Aucun détail disponible"
   },
   "classlist":{
-    "classlist":"Liste des cours",
+    "classlist":"Liste de classe",
     "class":"Classe",
     "teachers":"Enseignants",
+    "students":"Étudiants",
     "firstName":"Prénom",
     "lastName":"Nom de famille",
     "birthday":"Anniversaire",
@@ -41,30 +64,57 @@
     "city":"Ville",
     "email":"Mail"
   },
+  "class": {
+   "class":" Informations sur la classe"
+  },
   "absences":{
-    "absences":"Absences"
+    "absences":"Absences",
+    "noAbsences":"Félicitations, vous n'avez pas d'absences",
+    "verify":"Vérifier l'absence",
+    "reject":"Rejeter l'absence",
+    "edit":"Modifier une absence",
+    "add":"Ajouter une absence",
+    "title":"Titre",
+    "description":"Description",
+    "save":"Sauvegarder les changements",
+    "cancel":"Ne pas sauvegarder",
+    "validationError":"Le titre doit comporter entre 3 et 50 caractères, la description ne doit pas dépasser 500 caractères et la date de début doit être antérieure à la date de fin.",
+    "state":{
+      "pending":"En attente",
+      "excused":"Excusé",
+      "unexcused":"Non excusé",
+      "verified":" Vérifié"
+    },
+    "type":{
+      "sick":"Malade",
+      "holiday":"Vacances"
+    },
+    "absenceState":"État",
+    "absenceType":"Type",
+    "absenceStartDate":"date de début d'absence",
+    "absenceEndDate":"date de fin d'absence"
   },
   "chat":{
     "chat":"Chat",
     "you":"Vous",
     "leftTheChat":"A quitté le Chat",
-    "joinedTheChat":"Rejoint le Chat",
+    "joinedTheChat":"Rejoint la discussion",
     "privateChat":"Chat privé",
-    "groupChat":"Discussion de groupe",
-    "newGroupChat":"Nouvelle discussion de groupe",
-    "newPrivateChat":"Nouveau chat privé",
+    "groupChat":"Conversation de groupe",
+    "newChat":"Nouvelle discussion",
     "chatName":"Nom du chat",
     "chatImage":"Image du chat",
     "user":"Utilisateur",
     "users":"Utilisateurs",
     "message":"Message",
     "leaveChat":"Laisser le Chat",
-    "editChat":"Modifier le chat"
+    "editChat":"Modifier la discussion",
+    "noChats":"Aucune discussion pour le moment"
   },
-  "userSettings": {
+  "userSettings":{
     "userSettings":"Paramètres",
-    "userData":" Vos données",
-    "preferences":" Préférences",
+    "userData":"Vos données",
+    "preferences":"Préférences",
     "email":"Adresse e-mail",
     "changePassword":"Changer le mot de passe",
     "firstName":"Prénom",
@@ -79,32 +129,32 @@
     "postalCode":"Code postal",
     "street":"Rue",
     "phone":"Téléphone",
-    "profileImage": {
-     "profileImage":" Image du profil",
-     "validation": {
-      "notFound":" Aucune image fournie",
-      "notSupportedType":" L'image doit être de type png ou jpeg.",
-      "toBig":" La taille de l'image ne doit pas dépasser 1 MB"
-     }
+    "profileImage":{
+      "profileImage":"Image du profil",
+      "validation":{
+        "notFound":"Aucune image fournie",
+        "notSupportedType":"L'image doit être de type png ou jpeg.",
+        "toBig":"La taille de l'image ne doit pas dépasser 1 MB"
+      }
     },
-    "upload":" Télécharger le nouveau",
+    "upload":"Télécharger le nouveau",
     "passwordOld":"Ancien mot de passe",
     "passwordNew":"Nouveau mot de passe",
     "passwordConfirm":"Répéter le nouveau mot de passe",
-    "phoneSaved":" Numéro de téléphone enregistré",
-    "passwordValidation": {
-     "toShort":" Le mot de passe doit comporter au moins 8 chiffres.",
-     "missingCapital":" Le mot de passe doit contenir une lettre majuscule.",
-     "missingLow":" Le mot de passe doit contenir une lettre minuscule",
-     "missingNumber":" Le mot de passe doit contenir au moins un chiffre",
-     "wrongCurrent":" Courriel ou mot de passe incorrect."
+    "phoneSaved":"Numéro de téléphone enregistré",
+    "passwordValidation":{
+      "toShort":"Le mot de passe doit comporter au moins 8 chiffres.",
+      "missingCapital":"Le mot de passe doit contenir une lettre majuscule.",
+      "missingLow":"Le mot de passe doit contenir une lettre minuscule",
+      "missingNumber":"Le mot de passe doit contenir au moins un chiffre",
+      "wrongCurrent":"Courriel ou mot de passe incorrect."
     }
   },
   "errorBackend":{
     "errorOccured":"Erreur survenue",
     "unknownError":"Erreur inconnue survenue",
     "InvalidPasswordempty":"Mot de passe vide",
-    "InvalidPasswordlessthen8characters":"Le mot de passe comporte moins de 8 caractères",
+    "InvalidPasswordlessthen8characters":"Le mot de passe a moins de 8 caractères",
     "InvalidPasswordnouppercasecharacter":"Le mot de passe ne contient aucun caractère majuscule",
     "InvalidPasswordnolowercasecharacter":"Le mot de passe ne contient aucun caractère minuscule",
     "InvalidPasswordnonumber":"Le mot de passe ne contient pas de chiffre",
@@ -145,5 +195,37 @@
     "male":"Homme",
     "female":"Femme",
     "other":"Autre"
+  },
+  "LessonEventType":{
+    "exam":"Examen",
+    "homework":"Devoirs à domicile",
+    "note":"Note"
+  },
+  "UserEventType":{
+    "sick":"Malade",
+    "holiday":"Vacances"
+  },
+  "UserEventState":{
+    "pending":"En attente",
+    "excused":"Excusé",
+    "unexcused":"Non excusé"
+  },
+  "SchoolEventType":{
+    "holiday":"Vacances",
+    "activity":"Activité",
+    "note":"Note"
+  },
+  "SchoolClassEventType":{
+    "trip":"Voyage",
+    "school":"École"
+  },
+  "Weekday":{
+    "monday":"Lundi",
+    "tuesday":"Mardi",
+    "wednesday":"Mercredi",
+    "thursday":"Jeudi",
+    "friday":"Vendredi",
+    "saturday":"Samedi",
+    "sunday":"Dimanche"
   }
 }
