@@ -13,7 +13,7 @@ export class DarkThemeService {
   constructor(
     private overlay: OverlayContainer
   ) {}
-
+  
   setDarkTheme(isDarkTheme: boolean) {
     localStorage.setItem(appConfig.APPLICATION_DARK_THEME, isDarkTheme.valueOf().toString());
     this.isDarkTheme$.next(isDarkTheme);
@@ -37,27 +37,7 @@ export class DarkThemeService {
     document.body.classList.toggle('darkTheme', isDarkTheme);
     this.overlay.getContainerElement().classList.toggle('darkTheme', isDarkTheme);
 
-    const styles: string[] = [
-      'base-0',
-      'base-1',
-      'base-2',
-      'base-3',
-      'base-4',
-      'base-5',
-      'primary-0',
-      'primary-1',
-      'primary-2',
-      'primary-3',
-      'primary-4',
-      'primary-5',
-      'secondary-0',
-      'secondary-1',
-      'secondary-2',
-      'secondary-3',
-      'secondary-4',
-      'secondary-5',
-      'error-0',
-    ];
+    const styles: string[] = ['primary', 'primary-brightest', 'accent', 'accent-hover', 'accent-click', 'white', 'grey', 'grey-darker', 'grey-darkest', 'black', 'secondary', 'warn'];
     const setTo: string = isDarkTheme ? 'dark' : 'light';
     let r = document.querySelector(':root') as HTMLElement;
     let computed = getComputedStyle(r);

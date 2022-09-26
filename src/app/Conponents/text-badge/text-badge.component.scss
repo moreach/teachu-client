@@ -17,21 +17,21 @@
 }
 
 .teachu-color-primary {
-    background-color: var(--teachu-primary-4);
-    color: var(--teachu-base-0);
+    background-color: var(--teachu-primary);
+    color: var(--teachu-white);
 }
 
 .teachu-color-accent {
-    background-color: var(--teachu-secondary-1);
-    color: var(--teachu-base-5);
+    background-color: var(--teachu-accent);
+    color: var(--teachu-primary);
 }
 
 .teachu-color-secondary {
-    background-color: var(--teachu-primary-1);
-    color: var(--teachu-base-5);
+    background-color: var(--teachu-secondary);
+    color: var(--teachu-white);
 }
 
 .teachu-color-warn {
-    background-color: var(--teachu-error-0);
-    color: var(--teachu-base-0);
+    background-color: var(--teachu-warn);
+    color: var(--teachu-white);
 }

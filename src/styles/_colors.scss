@@ -1,73 +1,52 @@
 :root {
     // base
-    --teachu-base-0: #fafafa;
-    --teachu-base-1: #e5e5e5;
-    --teachu-base-2: #a3a3a3;
-    --teachu-base-3: #404040;
-    --teachu-base-4: #262626;
-    --teachu-base-5: #171717;
+    --teachu-primary: #00214D; // is used for most things with color
+    --teachu-primary-brightest: #e0e4ea; // used as en underlying color when the primary is the font
 
-    --teachu-primary-0: #bfdbfe;
-    --teachu-primary-1: #60a5fa;
-    --teachu-primary-2: #3b82f6;
-    --teachu-primary-3: #1d4ed8;
-    --teachu-primary-4: #1e40af;
-    --teachu-primary-5: #1e3a8a;
+    --teachu-accent: #00EBC7; // is used for things that should stand out
+    --teachu-accent-hover: #00e5ba; // used for accent areas on hover
+    --teachu-accent-click: #00dda6; // used for accent areas on active
 
-    --teachu-secondary-0: #fed7aa;
-    --teachu-secondary-1: #fdba74;
-    --teachu-secondary-2: #fb923c;
-    --teachu-secondary-3: #f97316;
-    --teachu-secondary-4: #ea580c;
-    --teachu-secondary-5: #c2410c;
+    --teachu-white: #EFFFFF; // is used for texts and backgrounds
+    --teachu-grey: #F4F4F6; // can be used for areas, texts or backgrounds
+    --teachu-grey-darker: #D3D3D9; // can be used for areas, texts or backgrounds
+    --teachu-grey-darkest: #A2A4AC; // can be used for areas, texts or backgrounds
+    --teachu-black: #000914; // is used for texts and backgrounds
 
-    --teachu-error-0: #e11d48;
+    --teachu-secondary: #AFB9C7; // something that doesn't do anything special but should have an other color (just a backup color)
+    --teachu-warn: #FF5470; // used for stuff like delete or cancel buttons
 
-    //light
-    --teachu-light-base-0: #fafafa;
-    --teachu-light-base-1: #e5e5e5;
-    --teachu-light-base-2: #a3a3a3;
-    --teachu-light-base-3: #404040;
-    --teachu-light-base-4: #262626;
-    --teachu-light-base-5: #171717;
+    // lightmode
+    --teachu-light-primary: #00214D;
+    --teachu-light-primary-brightest: #e0e4ea;
 
-    --teachu-light-primary-0: #bfdbfe;
-    --teachu-light-primary-1: #60a5fa;
-    --teachu-light-primary-2: #3b82f6;
-    --teachu-light-primary-3: #1d4ed8;
-    --teachu-light-primary-4: #1e40af;
-    --teachu-light-primary-5: #1e3a8a;
+    --teachu-light-accent: #00EBC7;
+    --teachu-light-accent-hover: #00e5ba;
+    --teachu-light-accent-click: #00dda6;
 
-    --teachu-light-secondary-0: #fed7aa;
-    --teachu-light-secondary-1: #fdba74;
-    --teachu-light-secondary-2: #fb923c;
-    --teachu-light-secondary-3: #f97316;
-    --teachu-light-secondary-4: #ea580c;
-    --teachu-light-secondary-5: #c2410c;
+    --teachu-light-white: #EFFFFF;
+    --teachu-light-grey: #F4F4F6;
+    --teachu-light-grey-darker: #D3D3D9;
+    --teachu-light-grey-darkest: #A2A4AC;
+    --teachu-light-black: #000914;
 
-    --teachu-light-error-0: #e11d48;
+    --teachu-light-secondary: #AFB9C7;
+    --teachu-light-warn: #FF5470;
 
-    //dark
-    --teachu-dark-base-0: #171717;
-    --teachu-dark-base-1: #262626;
-    --teachu-dark-base-2: #404040;
-    --teachu-dark-base-3: #a3a3a3;
-    --teachu-dark-base-4: #e5e5e5;
-    --teachu-dark-base-5: #fafafa;
+    // darkmode
+    --teachu-dark-primary: #99C5FF;
+    --teachu-dark-primary-brightest: #000E24;
 
-    --teachu-dark-primary-0: #1e3a8a;
-    --teachu-dark-primary-1: #1e40af;
-    --teachu-dark-primary-2: #1d4ed8;
-    --teachu-dark-primary-3: #3b82f6;
-    --teachu-dark-primary-4: #60a5fa;
-    --teachu-dark-primary-5: #bfdbfe;
+    --teachu-dark-accent: #2F5D3C;
+    --teachu-dark-accent-hover: #3F724F;
+    --teachu-dark-accent-click: #628E6F;
 
-    --teachu-dark-secondary-0: #c2410c;
-    --teachu-dark-secondary-1: #ea580c;
-    --teachu-dark-secondary-2: #f97316;
-    --teachu-dark-secondary-3: #fb923c;
-    --teachu-dark-secondary-4: #fdba74;
-    --teachu-dark-secondary-5: #fed7aa;
+    --teachu-dark-white: #1d1d1d;
+    --teachu-dark-grey: #282828;
+    --teachu-dark-grey-darker: #2F2F2F;
+    --teachu-dark-grey-darkest: #424243;
+    --teachu-dark-black: #F2F6FF;
 
-    --teachu-dark-error-0: #f43f5e;
+    --teachu-dark-secondary: #6A5B4F;
+    --teachu-dark-warn: #A14A68;
 }

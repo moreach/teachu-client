@@ -45,14 +45,14 @@
         }
 
         .subject-average{
-            color: var(--teachu-base-0);
-            background-color: var(--teachu-primary-4);
+            color: var(--teachu-primary);
             font-size: 25px;
             font-weight: bold;
+
             padding: 10px;
             border-radius: 5px;
-            min-width: 80px;
-            text-align: center;
+
+            background-color: var(--teachu-primary-brightest);
         }
     }
 
@@ -67,7 +67,7 @@
         align-items: center;
         justify-items: center;
 
-        background-color: var(--teachu-base-1);
+        background-color: var(--teachu-grey);
         border-radius: 10px;
         padding: 10px;
         height: 30px;
@@ -79,11 +79,12 @@
         .grade-mark{
             padding: 7px;
             border-radius: 5px;
+
             font-size: 18px;
             font-weight: bold;
-            color: var(--teachu-base-0);
-            background-color: var(--teachu-primary-4);
-            min-width: 50px;
+            color: var(--teachu-primary);
+
+            background-color: var(--teachu-primary-brightest);
         }
 
         .grade-date{
@@ -96,10 +97,6 @@
     }
 
     .grade-row:hover{
-        background-color: var(--teachu-base-2);
-    }
-
-    .grade-row:active{
-        background-color: var(--teachu-base-0);
+        background-color: var(--teachu-grey-darker);
     }
 }

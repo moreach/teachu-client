@@ -2,8 +2,8 @@
 
 .toasty {
     width: 232px;
-    background-color: var(--teachu-primary-4);
-    color: var(--teachu-base-0);
+    background-color: var(--teachu-primary);
+    color: var(--teachu-white);
     margin-top: 10px;
     padding: 16px;
     border-radius: 4px;
@@ -22,7 +22,7 @@
         font-size: 14px;
     }
     mat-divider {
-        border-top-color: var(--teachu-base-0);
+        border-top-color: var(--teachu-white);
         margin-top: 2px;
         margin-bottom: 2px;
     }

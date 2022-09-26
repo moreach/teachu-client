@@ -33,14 +33,14 @@ export class ChatConversationComponent implements OnInit {
       map(c => {
         return {
           info: c.info,
-          messages: c.messages,
+          messages: c.messages.reverse(), // column reverse is used to keep the scroll at the bottom
         }
       }),
     );
   }
 
   ngOnInit(): void {
-
+    
   }
 
   openSettings() {

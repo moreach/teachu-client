@@ -8,9 +8,9 @@
         display: grid;
         height: 400px;
         border-radius: 5px;
-        transition: 250ms all ease-out;
+        transition: 200ms all ease-out;
         overflow: hidden;
-        background-color: var(--teachu-base-1);
+        background-color: var(--teachu-grey);
 
         .header {
             height: 32px;
@@ -19,8 +19,8 @@
             padding: 16px;
             transition: 300ms ease-out;
 
-            background-color: var(--teachu-primary-4);
-            color: var(--teachu-base-0);
+            background-color: var(--teachu-primary-brightest);
+            color: var(--teachu-black);
             mat-icon {
                 margin-top: 4px;
             }
@@ -55,14 +55,14 @@
             transition: 200ms ease-in-out;
         }
         .entry:hover, .entry:active {
-            background-color: var(--teachu-base-2);
+            background-color: var(--teachu-secondary);
 
             .hidden{
                 max-height: 150px;
             }
         }
         .entry.empty {
-            border: 1px dashed var(--teachu-secondary-1);
+            border: 1px dashed var(--teachu-accent);
             cursor: default;
         }
         .entry.class-list {
@@ -151,10 +151,12 @@
     }
 
     .part:hover{
+        filter: drop-shadow(0 12px 10px var(--teachu-primary-brightest));
         transform: scale(1.05);
 
         .header{
-            background-color: var(--teachu-primary-3);
+            color: var(--teachu-white);
+            background-color: var(--teachu-primary);
         }
     }
 

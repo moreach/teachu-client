@@ -4,10 +4,10 @@
   border: none;
   border-radius: 50%;
 
-  outline: 2px solid transparent;
+  outline: 1px solid transparent;
   transition: 250ms all ease-in-out;
 }
 
 .profile-picture-container:hover{
-  outline: 2px solid var(--teachu-base-4);
+  outline: 1px solid var(--teachu-black);
 }
