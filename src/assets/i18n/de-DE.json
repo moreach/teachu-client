@@ -227,5 +227,10 @@
     "friday":"Freitag",
     "saturday":"Samstag",
     "sunday":"Sonntag"
+  },
+  "teachu":{
+    "descriptionTitle":"«Revolutionierung der digitalen Zusammenarbeit zwischen Schülern, Lehrern und Eltern an Schweizer Oberstufen.»",
+    "descriptionDetail":"Eine Interdisziplinäre Projektarbeit von Roman Bürge, Micha Schweizer, Oliver Umbricht und Eric Wermelinger, entstanden von April - Oktober 2022 an der Berufsmaturität der Berufsfachschule Baden.",
+    "moreInfo":"Mehr Informationen"
   }
 }

@@ -10,10 +10,8 @@
                 <img class="banner" src="assets/images/banner-light.svg" alt="😢"/>
             </ng-template>
         </div>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut lectus arcu bibendum at varius vel pharetra vel turpis. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Id velit ut tortor pretium viverra. Netus et malesuada fames ac turpis egestas.</p>
-
-        <button mat-stroked-button color="primary" (click)="openGithub()">More info</button>
+        <p>{{ 'teachu.descriptionTitle' | translate }}<br>{{ 'teachu.descriptionDetail' | translate }}</p>
+        <button mat-stroked-button color="primary" (click)="openGithub()">{{ 'teachu.moreInfo' | translate }}</button>
     </div>
 
     <form [formGroup]="form">

@@ -227,5 +227,10 @@
     "friday":"Vendredi",
     "saturday":"Samedi",
     "sunday":"Dimanche"
+  },
+  "teachu":{
+    "descriptionTitle":"«Révolutionner la collaboration digitale entre les élèves, les enseignants et les parents dans les écoles secondaires suisses.»",
+    "descriptionDetail":"Un travail de projet interdisciplinaire de Roman Bürge, Micha Schweizer, Oliver Umbricht et Eric Wermelinger, réalisé entre avril et octobre 2022 à la maturité professionnelle de l'école professionnelle de Baden.",
+    "moreInfo":"Plus d'informations"
   }
 }
