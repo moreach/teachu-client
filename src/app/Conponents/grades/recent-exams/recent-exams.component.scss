@@ -34,7 +34,7 @@
             grid-template-rows: 50% 50%;
             grid-template-columns: 100%;
 
-            background-color: var(--teachu-grey);
+            background-color: var(--teachu-base-1);
             border-radius: 10px;
 
             .text-container {
@@ -43,13 +43,13 @@
                 flex-direction: row;
 
                 .exam-title {
-                    color: var(--teachu-black);
+                    color: var(--teachu-base-5);
                     width: calc(100% - 40px);
                     font-size: 20px;
                 }
 
                 .exam-grade {
-                    color: var(--teachu-primary);
+                    color: var(--teachu-primary-4);
                     width: 40px;
                     font-weight: bold;
                     text-align: center;
@@ -57,18 +57,18 @@
                 }
 
                 .exam-date {
-                    color: var(--teachu-primary);
+                    color: var(--teachu-primary-4);
                     font-style: italic;
                 }
             }
         }
 
         .recent-exam:hover {
-            background-color: var(--teachu-accent-hover);
+            background-color: var(--teachu-secondary-0);
         }
 
         .recent-exam:active {
-            background-color: var(--teachu-accent-click);
+            background-color: var(--teachu-secondary-2);
         }
     }
 }

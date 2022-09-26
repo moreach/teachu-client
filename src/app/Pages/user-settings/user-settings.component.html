@@ -25,6 +25,30 @@
                                   [buttonText]="'userSettings.upload'"
                                   (done)="profileImageUploaded()">
         </app-profile-pic-uploader>
+
+        <div class="logout">
+            <button class="logout-button"
+                    *ngIf="!askLogoutVisible else askLogout"
+                    (click)="askLogoutVisible = true"
+                    mat-raised-button color="warn">
+                {{ "userSettings.logout.logout" | translate }}
+            </button>
+            <ng-template #askLogout >
+                <b>{{ "userSettings.logout.question" | translate }}</b>
+                <button (click)="logout()"
+                        color="warn"
+                        mat-mini-fab
+                        matTooltip="{{ 'userSettings.logout.logout' | translate }}">
+                    <mat-icon>logout</mat-icon>
+                </button>
+                <button (click)="askLogoutVisible = false"
+                        color="primary"
+                        mat-mini-fab
+                        matTooltip="{{ 'userSettings.logout.stay' | translate }}">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </ng-template>
+        </div>
     </div>
 
     <div id="userData" class="user-data" *ngIf="user">

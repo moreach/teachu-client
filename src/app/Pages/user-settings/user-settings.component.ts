@@ -1,11 +1,14 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
-import {FormBuilder, FormControl, Validators} from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
 import { DarkThemeService } from "src/app/Framework/dark-theme/dark-theme.service";
 import { UserService } from "./user.service";
 import { skip, Subject, switchMap, takeUntil, throttleTime} from "rxjs";
 import {UserOwnDTO} from "../../DTOs/User/UserOwnDTO";
 import {UserOwnChangeDTO} from "../../DTOs/User/UserOwnChangeDTO";
 import { GetLanguage } from "src/app/DTOs/Enums/Language";
+import {ApiService} from "../../Framework/API/api.service";
+import {TokenService} from "../../Framework/API/token.service";
+import {endpoints} from "../../Config/endpoints";
 
 @Component({
     selector: "user-settings",
@@ -23,12 +26,15 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
     phoneNumberControl: FormControl;
     profileImageControl: FormControl;
     phoneSavedTimeout: number | undefined;
+    askLogoutVisible: boolean = false;
     private uploadedProfileImage: File | undefined;
     private darkThemeSubject: Subject<boolean> = new Subject<boolean>();
 
     constructor(
       private darkThemeService: DarkThemeService,
       private userService: UserService,
+      private api: ApiService,
+      private tokenService: TokenService,
     ) {
         this.phoneNumberControl = new FormControl('', [ Validators.required ]);
         this.profileImageControl = new FormControl(this.uploadedProfileImage, [
@@ -110,5 +116,13 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
         this.saveDarkTheme(this.darkTheme);
         this.unsubscribe.next();
         this.unsubscribe.complete();
+    }
+
+    logout(){
+        this.api.callApi(endpoints.Login, { "refresh": this.tokenService.getRefreshToken() }, "DELETE").subscribe(() => {
+            this.tokenService.resetAll();
+            this.darkThemeService.setDarkTheme(false);
+            location.reload();
+        });
     }
 }

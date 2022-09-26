@@ -35,7 +35,7 @@ export class TimetableComponent implements OnInit {
   constructor(
     private timetableService: TimetableService,
     private dialog: MatDialog,
-  ) { 
+  ) {
     this.dates$ = combineLatest([
       this.relevantDate$,
       this.isWeekView$,
@@ -122,7 +122,7 @@ export class TimetableComponent implements OnInit {
   }
 
   getColor(lesson: TimetableLessonDTO, allLessons: TimetableDayDTO[]): string {
-    const colors = ['primary', 'accent', 'warn', 'secondary'];
+    const colors = ['primary-4', 'secondary-4', 'error-0', 'secondary-1'];
     let color = 0;
     const lessons = allLessons.flatMap(d => d.lessons);
     for (let l of lessons) {
@@ -138,7 +138,7 @@ export class TimetableComponent implements OnInit {
   }
 
   getFontColor(background: string): string {
-    return (background === 'var(--teachu-primary)') ? 'var(--teachu-white)' : 'var(--teachu-black)';
+    return (background === 'var(--teachu-primary-4)') ? 'var(--teachu-base-0)' : 'var(--teachu-base-5)';
   }
 
   openDetails(lesson: TimetableLessonDTO | null, date: Date, days: TimetableDayDTO[]) {
