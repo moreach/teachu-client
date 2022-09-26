@@ -18,7 +18,7 @@
     "dashboard":"Dashboard"
   },
   "schoolInfos":{
-    "schoolInfos":"Schule Infos"
+    "schoolInfos":"Schulinfos"
   },
   "grades":{
     "grades":"Noten",
@@ -68,12 +68,12 @@
    "class":" Klasseninfo"
   },
   "absences":{
-    "absences":"Abwesenheiten",
-    "noAbsences":"Herzlichen Glückwunsch, Sie haben keine Abwesenheiten!",
-    "verify":"Abwesenheit bestätigen",
-    "reject":"Abwesenheit ablehnen",
-    "edit":"Abwesenheit bearbeiten",
-    "add":"Abwesenheit hinzufügen",
+    "absences":"Absenzen",
+    "noAbsences":"Herzlichen Glückwunsch, Sie haben keine Absenzen!",
+    "verify":"Absenz bestätigen",
+    "reject":"Absenz ablehnen",
+    "edit":"Absenz bearbeiten",
+    "add":"Absenz hinzufügen",
     "title":"Titel",
     "description":"Beschreibung",
     "save":"Änderungen speichern",

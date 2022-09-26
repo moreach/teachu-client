@@ -75,7 +75,7 @@ export class MenuTreeService {
                 obs.next({
                     icon: "school",
                     leave: false,
-                    translatedTitle: "Classes",
+                    titleTranslationKey: "classlist.class",
                     children: classes.map(clazz => ({
                         icon: "local_library",
                         leave: true,
