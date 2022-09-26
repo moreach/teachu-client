@@ -1,6 +1,6 @@
 <div *ngIf="schoolInfos$ | async as schoolInfos; else spinner" [ngClass]="{ 'page': true }">
   <div *ngFor="let info of schoolInfos" [ngClass]="{ 'school-info': true, 'important': info.important }">
-    <app-image *ngIf="info.imageId" [imageId]="info.imageId"></app-image>
+    <app-image *ngIf="info.imageId" class="school-info__image" [imageId]="info.imageId"></app-image>
     <mat-icon *ngIf="info.pinned" class="mat-icon school-info__pinned">bookmark</mat-icon>
     <div class="school-info__header">
       <span>{{(info.date | date: 'dd.MM.yyyy')}}</span>

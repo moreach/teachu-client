@@ -8,15 +8,14 @@
             <div *ngFor="let schoolInfo of schoolInfos">
                 <div class="entry school-info">
                     <div class="title-bar-content">
-                        <div class="bold center">{{ schoolInfo.title }}</div>
-                        <div class="center">{{ schoolInfo.date | date: 'dd.MM.yyyy' }}</div>
+                        <div class="bold center no-overflow">{{ schoolInfo.title }}</div>
                         <div class="icons">
                             <mat-icon *ngIf="schoolInfo.important" class="mat-icon">announcement</mat-icon>
                             <mat-icon *ngIf="schoolInfo.pinned" class="mat-icon">bookmark</mat-icon>
                         </div>
                     </div>
                     <div class="hidden details">
-                        {{ schoolInfo.creator }}: {{ schoolInfo.message }}
+                        {{ schoolInfo.date | date: 'dd.MM.yyyy' }} - {{ schoolInfo.creator }}: {{ schoolInfo.message }}
                     </div>
                 </div>
             </div>
