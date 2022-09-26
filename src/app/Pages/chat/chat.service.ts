@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { combineLatest, filter, map, Observable, tap } from 'rxjs';
+import { combineLatest, filter, interval, map, Observable, startWith, switchMap, tap } from 'rxjs';
 import { endpoints } from 'src/app/Config/endpoints';
 import { ChatConversationDTO } from 'src/app/DTOs/Chat/ChatConversationDTO';
 import { ChatMessageRequestDTO } from 'src/app/DTOs/Chat/ChatMessageRequestDTO';
@@ -15,28 +15,36 @@ import { ApiService } from 'src/app/Framework/API/api.service';
 })
 export class ChatService {
 
-  // TODO EW: bind reload in more elegant way
+  PULLING_RATE = 5000;
 
   constructor(
     private api: ApiService,
   ) { }
 
   getChatOverview$(): Observable<ChatResponseDTO[]> {
-    return this.api.callApi<ChatResponseDTO[]>(endpoints.Chat, { }, 'GET');
+    return interval(this.PULLING_RATE).pipe(
+      startWith(0),
+      switchMap(_ => this.api.callApi<ChatResponseDTO[]>(endpoints.Chat, { }, 'GET')),
+    );
   }
 
   getChatConversation$(chatId: string): Observable<ChatConversationDTO> {
-    return combineLatest(
-      this.api.callApi<ChatMessageResponseDTO[]>(endpoints.Chat + '/' + endpoints.Messages + '/' + chatId, { }, 'GET'),
-      this.api.callApi<ChatResponseDTO[]>(endpoints.Chat, { }, 'GET')
-    ).pipe(
-      map(([messages, chats]) => {
-        return {
-          info: chats.find(chat => chat.id === chatId),
-          messages: messages.reverse(),
-        } as ChatConversationDTO;
+    return interval(this.PULLING_RATE).pipe(
+      startWith(0),
+      switchMap(_ => {
+        return combineLatest(
+          this.api.callApi<ChatMessageResponseDTO[]>(endpoints.Chat + '/' + endpoints.Messages + '/' + chatId, { }, 'GET'),
+          this.api.callApi<ChatResponseDTO[]>(endpoints.Chat, { }, 'GET')
+        ).pipe(
+          map(([messages, chats]) => {
+            return {
+              info: chats.find(chat => chat.id === chatId),
+              messages: messages.reverse(),
+            } as ChatConversationDTO;
+          }),
+        );
       }),
-    );
+    );   
   }
 
   getChatConversationInfo$(chatId: string): Observable<ChatResponseDTO> {
