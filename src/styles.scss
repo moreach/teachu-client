@@ -40,7 +40,7 @@ $teachu-dark-theme: mat.define-dark-theme((
 ));
 
 :root {
-    background-color: var(--teachu-white);
+    background-color: var(--teachu-base-0);
 }
 
 .darkTheme {
@@ -55,20 +55,24 @@ $teachu-dark-theme: mat.define-dark-theme((
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--teachu-white);
+  background: var(--teachu-base-0);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--teachu-grey-darkest);
+  background: var(--teachu-base-3);
   border-radius: 20px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--teachu-grey-darker);
+  background: var(--teachu-base-4);
 }
 
-body { min-height: 100vh; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  min-height: 100vh;
+  background-color: var(--teachu-base-0);
+}
 
 // remove default toasty styles
 .toast-container .ngx-toastr {
