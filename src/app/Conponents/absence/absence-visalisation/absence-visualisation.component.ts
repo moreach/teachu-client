@@ -19,7 +19,7 @@ export class AbsenceVisualisationComponent {
 
     visualizeDate(dateNumber: number): string{
         const date: Date = new Date(dateNumber);
-        return date.toDateString() + " " + date.getHours() + ":" + date.getMinutes();
+        return date.toDateString() + " " + (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ":" + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes());
     }
 
     parentVerify(){
