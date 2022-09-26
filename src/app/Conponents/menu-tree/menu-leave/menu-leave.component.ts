@@ -18,9 +18,9 @@ export class MenuLeaveComponent {
     }
 
     leaveClicked() {
-        this.leaveClickedEvent.emit(this.item);
         if (this.item != undefined && !!this.item.url) {
             this.router.navigate([this.item.url]);
         }
+        this.leaveClickedEvent.emit(this.item);
     }
 }

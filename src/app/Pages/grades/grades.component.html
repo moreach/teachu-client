@@ -1,4 +1,4 @@
-<div class="student-view-container">
+<div *ngIf="hasLoaded; else spinner" class="student-view-container">
     <app-recent-exams [amount]="RECENT_EXAMS_AMOUNT" [semesterData]="allSemesterDTOs" (examClickedEvent)="recentExamClicked($event)"></app-recent-exams>
     <div [class]="getGridClass()">
         <app-menu-tree [style.display]="getMenuTreeDisplay()"
@@ -17,3 +17,4 @@
         </app-grade-detail>
     </div>
 </div>
+<ng-template #spinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>

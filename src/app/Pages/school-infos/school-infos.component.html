@@ -1,4 +1,4 @@
-<div *ngIf="schoolInfos$ | async as schoolInfos" [ngClass]="{ 'page': true }">
+<div *ngIf="schoolInfos$ | async as schoolInfos; else spinner" [ngClass]="{ 'page': true }">
   <div *ngFor="let info of schoolInfos" [ngClass]="{ 'info': true, 'important': info.important }">
     <div class="header">
       <div class="text">
@@ -11,3 +11,4 @@
     <app-image *ngIf="info.imageId" [imageId]="info.imageId"></app-image>
   </div>
 </div>
+<ng-template #spinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>

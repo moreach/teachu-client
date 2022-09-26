@@ -14,6 +14,7 @@ export class AbsencesComponent implements OnInit{
     absences: AbsenceInfoDTO[] | undefined;
     isParent: boolean = false;
     newMode: boolean = false;
+    isLoading = true;
 
     private absenceInEditing: string | undefined;
 
@@ -33,6 +34,7 @@ export class AbsencesComponent implements OnInit{
         this.service.getAbsences$().subscribe(abs => {
             this.absenceInEditing = undefined;
             this.absences = abs;
+            this.isLoading = false;
         });
     }
 
