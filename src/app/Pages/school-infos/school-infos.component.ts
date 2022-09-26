@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { Observable } from 'rxjs';
+import {map, Observable} from 'rxjs';
 import { SchoolInfoDTO } from 'src/app/DTOs/SchoolInfo/SchoolInfoDTO';
 import { SchoolInfosService } from './school-infos.service';
 
@@ -15,6 +15,8 @@ export class SchoolInfosComponent {
   constructor(
     private schoolInfosService: SchoolInfosService,
   ) {
-    this.schoolInfos$ = this.schoolInfosService.getSchoolInfos();
+    this.schoolInfos$ = this.schoolInfosService.getSchoolInfos().pipe(
+      map(info => info.sort((a, b) => (a.pinned === b.pinned)? 0 : a.pinned? -1 : 1))
+    );
   }
 }
