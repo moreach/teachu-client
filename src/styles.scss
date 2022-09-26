@@ -78,3 +78,9 @@ body {
 .toast-container .ngx-toastr {
   padding: 0 !important;
 }
+
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

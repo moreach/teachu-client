@@ -26,6 +26,8 @@ export class GradesComponent implements OnInit {
     menuOpen: boolean = true;
     currentUIState: "MENU_ONLY" | "CLASS_GRADES_OVERVIEW" | "GRADES_OVERVIEW" = "MENU_ONLY";
 
+    hasLoaded = false;
+
     constructor(
         private userService: UserService,
         private gradeService: GradeService,
@@ -34,8 +36,11 @@ export class GradesComponent implements OnInit {
 
     ngOnInit(): void {
         this.onResize();
-        this.api.callApi<GradeSemesterDTO[]>(endpoints.Grade, {}, 'GET')
-            .subscribe((grades) => this.grades = grades);
+        this.hasLoaded = false;
+        this.api.callApi<GradeSemesterDTO[]>(endpoints.Grade, {}, 'GET').subscribe(grades => {
+            this.grades = grades;
+            this.hasLoaded = true;
+        });
     }
 
     set grades(gradeDTO: GradeSemesterDTO[]) {

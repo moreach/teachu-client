@@ -1,4 +1,4 @@
-<div *ngIf="info$ | async as info" class="chat-info">
+<div *ngIf="info$ | async as info; else spinner" class="chat-info">
     <div class="chat-title">
         <h1>{{ info.title }}</h1>
     </div>
@@ -35,3 +35,4 @@
         <button *ngIf="isAdmin(info.creator.id)" mat-button (click)="editChat(info)">{{ 'chat.editChat' | translate }}</button>
     </div>
 </div>
+<ng-template #spinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>

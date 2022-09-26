@@ -1,4 +1,4 @@
-<div *ngIf="conversation$ | async as conversation" class="page">
+<div *ngIf="conversation$ | async as conversation; else spinner" class="page">
     <div (click)="openSettings()" class="chat-info pointer">
         <app-image *ngIf="isGroupChat(conversation.info); else groupImage" [round]="true" [size]="48" [imageId]="conversation.info.members[0].imageId"></app-image>
         <ng-template #groupImage>
@@ -41,3 +41,4 @@
         </div>
     </form>
 </div>
+<ng-template #spinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>

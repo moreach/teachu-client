@@ -1,32 +1,35 @@
-<div class="head">
-    <div>
-        <button mat-button (click)="openNewGroupChatDialog()">{{ 'chat.newChat' | translate }}</button>
-    </div>
-</div>
-<div *ngIf="chatOverviews$ | async as chatOverviews"  class="chat-overview-list">
-    <div *ngFor="let chat of chatOverviews">
-        <div class="chat-overview-detail" (click)="openDetail(chat.id)">
-            <app-image [size]="48" [imageId]="getProfileImage(chat)"></app-image>
-            <div class="chat-middle-section">
-                <div>
-                    <div class="chat-title">{{ chat.title }}</div>
-                    <div *ngIf="chat.lastMessage?.user; else noMessage" class="chat-last-msg">
-                        {{ isOwn(chat.lastMessage.user.id) ? ('chat.you' | translate) : (chat.lastMessage.user.firstName + ' ' + chat.lastMessage.user.lastName) }}: <i>{{ chat.lastMessage.message }}</i>
-                    </div>
-                    <ng-template #noMessage>
-                        <div class="chat-last-msg">-</div>
-                    </ng-template>
-                </div>
-            </div>
-            <div *ngIf="chat.lastMessage?.timestamp else noMessageDate" class="chat-last-msg-date">
-                {{ !chat.lastMessage ? '-' : '' }}{{ !chat.lastMessage ? '' : (isToday(chat.lastMessage.timestamp) ? (getDateFromEpoch(chat.lastMessage.timestamp) | date: 'HH:mm') : (getDateFromEpoch(chat.lastMessage.timestamp) | date: 'dd.MM.yyyy')) }}
-            </div>
-            <ng-template #noMessageDate>
-                <div class="chat-last-msg-date">-</div>
-            </ng-template>
+<div *ngIf="chatOverviews$ | async as chatOverviews; else spinner">
+    <div class="head">
+        <div>
+            <button mat-button (click)="openNewGroupChatDialog()">{{ 'chat.newChat' | translate }}</button>
         </div>
     </div>
-    <div *ngIf="isEmpty(chatOverviews)">
-        <div class="chat-overview-detail">{{ 'chat.noChats' | translate }}</div>
+    <div class="chat-overview-list">
+        <div *ngFor="let chat of chatOverviews">
+            <div class="chat-overview-detail" (click)="openDetail(chat.id)">
+                <app-image [size]="48" [imageId]="getProfileImage(chat)"></app-image>
+                <div class="chat-middle-section">
+                    <div>
+                        <div class="chat-title">{{ chat.title }}</div>
+                        <div *ngIf="chat.lastMessage?.user; else noMessage" class="chat-last-msg">
+                            {{ isOwn(chat.lastMessage.user.id) ? ('chat.you' | translate) : (chat.lastMessage.user.firstName + ' ' + chat.lastMessage.user.lastName) }}: <i>{{ chat.lastMessage.message }}</i>
+                        </div>
+                        <ng-template #noMessage>
+                            <div class="chat-last-msg">-</div>
+                        </ng-template>
+                    </div>
+                </div>
+                <div *ngIf="chat.lastMessage?.timestamp else noMessageDate" class="chat-last-msg-date">
+                    {{ !chat.lastMessage ? '-' : '' }}{{ !chat.lastMessage ? '' : (isToday(chat.lastMessage.timestamp) ? (getDateFromEpoch(chat.lastMessage.timestamp) | date: 'HH:mm') : (getDateFromEpoch(chat.lastMessage.timestamp) | date: 'dd.MM.yyyy')) }}
+                </div>
+                <ng-template #noMessageDate>
+                    <div class="chat-last-msg-date">-</div>
+                </ng-template>
+            </div>
+        </div>
+        <div *ngIf="isEmpty(chatOverviews)">
+            <div class="chat-overview-detail">{{ 'chat.noChats' | translate }}</div>
+        </div>
     </div>
 </div>
+<ng-template #spinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>

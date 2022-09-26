@@ -1,4 +1,4 @@
-<div *ngIf="schoolInfos$ | async as schoolInfos" [ngClass]="{ 'page': true }">
+<div *ngIf="schoolInfos$ | async as schoolInfos; else spinner" [ngClass]="{ 'page': true }">
   <div *ngFor="let info of schoolInfos" [ngClass]="{ 'school-info': true, 'important': info.important }">
     <app-image *ngIf="info.imageId" [imageId]="info.imageId"></app-image>
     <mat-icon *ngIf="info.pinned" class="mat-icon school-info__pinned">bookmark</mat-icon>
@@ -12,3 +12,4 @@
     </div>
   </div>
 </div>
+<ng-template #spinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>

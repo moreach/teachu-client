@@ -1,48 +1,54 @@
-<div class="head">
-    <h2 *ngIf="isWeekView$ | async">{{ 'timetable.weekFrom' | translate }} {{ (startDate$ | async) | date:'dd.MM.yyyy' }} - {{ (endDate$ | async) | date:'dd.MM.yyyy' }}</h2>
-    <h2 *ngIf="!(isWeekView$ | async)">{{ (relevantDate$ | async) | date:'dd.MM.yyyy' }}</h2>
-    <div>
-        <button (click)="changeRelevantDate(-1)" mat-icon-button>
-            <mat-icon>chevron_left</mat-icon>
-        </button>
-        <button (click)="changeRelevantDate(1)" mat-icon-button>
-            <mat-icon>chevron_right</mat-icon>
-        </button>
-    </div>
-</div>
-<div *ngIf="lessons$ | async as lessonsOnDays">
-    <div *ngIf="lessonsInfo$ | async as hours" [ngClass]="{ calendar: true, week: (isWeekView$ | async) }">
+<div *ngIf="pageLoaded$ | async; else spinner">
+    <div class="head">
+        <h2 *ngIf="isWeekView$ | async">{{ 'timetable.weekFrom' | translate }} {{ (startDate$ | async) | date:'dd.MM.yyyy' }} - {{ (endDate$ | async) | date:'dd.MM.yyyy' }}</h2>
+        <h2 *ngIf="!(isWeekView$ | async)">{{ (relevantDate$ | async) | date:'dd.MM.yyyy' }}</h2>
         <div>
-            <div class="block date fist-line" [style]="{'height': '100px'}"></div>
-            <div *ngFor="let hour of hours" class="block hour info">
-                <div>{{ hour.start }}</div>
-                <div class="divider">-</div>
-                <div>{{ hour.end }}</div>
-            </div>
+            <button (click)="changeRelevantDate(-1)" mat-icon-button>
+                <mat-icon>chevron_left</mat-icon>
+            </button>
+            <button (click)="changeRelevantDate(1)" mat-icon-button>
+                <mat-icon>chevron_right</mat-icon>
+            </button>
         </div>
-        <div *ngFor="let day of (dates$ | async)" class="day hours">
-            <div class="block date first-line">
-                <div [ngClass]="{ today: isToday(day), dateInfo: true }" class="pointer" (click)="openDetails(null, day, lessonsOnDays)">
-                    <div>{{ day | date: 'dd.MM.yyyy' }}</div>
-                    <div *ngIf="getEventsOfDay(day) as events">
-                        <div *ngFor="let event of events" class="event-info" [style]="{ 'height': '20px' }">
-                            <mat-icon [style]="{ 'font-size': '14px' }" class="event-info-icon">info</mat-icon>
-                            <div>{{ event }}</div>
+    </div>
+    <div *ngIf="!isLessonsLoading; else lessonsSpinner">
+        <div *ngIf="lessons$ | async as lessonsOnDays">
+            <div *ngIf="lessonsInfo$ | async as hours" [ngClass]="{ calendar: true, week: (isWeekView$ | async) }">
+                <div>
+                    <div class="block date fist-line" [style]="{'height': '100px'}"></div>
+                    <div *ngFor="let hour of hours" class="block hour info">
+                        <div>{{ hour.start }}</div>
+                        <div class="divider">-</div>
+                        <div>{{ hour.end }}</div>
+                    </div>
+                </div>
+                <div *ngFor="let day of (dates$ | async)" class="day hours">
+                    <div class="block date first-line">
+                        <div [ngClass]="{ today: isToday(day), dateInfo: true }" class="pointer" (click)="openDetails(null, day, lessonsOnDays)">
+                            <div>{{ day | date: 'dd.MM.yyyy' }}</div>
+                            <div *ngIf="getEventsOfDay(day) as events">
+                                <div *ngFor="let event of events" class="event-info" [style]="{ 'height': '20px' }">
+                                    <mat-icon [style]="{ 'font-size': '14px' }" class="event-info-icon">info</mat-icon>
+                                    <div>{{ event }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngFor="let hour of hours" class="block hour">
+                        <div *ngIf="getCorrespondingLesson(lessonsOnDays, day, hour.timetableId) as lesson" class="lesson" [ngStyle]="{ 'background-color': getColor(lesson, lessonsOnDays), 'color': getFontColor(getColor(lesson, lessonsOnDays)) }"
+                        [matTooltip]="lesson.subject + ' - ' + lesson.room + ' - ' + lesson.teacher.firstName + ' ' + lesson.teacher.lastName" matTooltipPosition="right"
+                        (click)="openDetails(lesson, day, lessonsOnDays)">
+                            <div class="lesson-subject">{{ lesson.subject }}</div>
+                            <div *ngIf="lesson.event" class="event-info">
+                                <mat-icon [style]="{ 'font-size': '14px' }" class="event-info-icon">info</mat-icon>
+                                <div>{{ lesson.event.title }}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div *ngFor="let hour of hours" class="block hour">
-                <div *ngIf="getCorrespondingLesson(lessonsOnDays, day, hour.timetableId) as lesson" class="lesson" [ngStyle]="{ 'background-color': getColor(lesson, lessonsOnDays), 'color': getFontColor(getColor(lesson, lessonsOnDays)) }"
-                [matTooltip]="lesson.subject + ' - ' + lesson.room + ' - ' + lesson.teacher.firstName + ' ' + lesson.teacher.lastName" matTooltipPosition="right"
-                (click)="openDetails(lesson, day, lessonsOnDays)">
-                    <div class="lesson-subject">{{ lesson.subject }}</div>
-                    <div *ngIf="lesson.event" class="event-info">
-                        <mat-icon [style]="{ 'font-size': '14px' }" class="event-info-icon">info</mat-icon>
-                        <div>{{ lesson.event.title }}</div>
-                    </div>
-                </div>
-            </div>
+            </div>    
         </div>
-    </div>    
+    </div>
+    <ng-template #lessonsSpinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>
 </div>
+<ng-template #spinner><div class="spinner-wrapper"><div *showSpinner="true"></div></div></ng-template>

@@ -1,7 +1,7 @@
 import { KeyValue } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject, combineLatest, map, merge, Observable, shareReplay, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, merge, Observable, shareReplay, switchMap, tap } from 'rxjs';
 import { TimetableDayDTO, TimetableLessonDTO } from 'src/app/DTOs/Timetable/TimetableDayDTO';
 import { TimetableLayoutDTO } from 'src/app/DTOs/Timetable/TimetableLayoutDTO';
 import { addDays, equalDates, getFirstDayOfWeek, getLastDayOfWeek } from 'src/app/Framework/Helpers/DateHelpers';
@@ -24,6 +24,8 @@ export class TimetableComponent implements OnInit {
   VIEW_BREAK_POINT: number = 1100;
   lessons$ = new BehaviorSubject<TimetableDayDTO[]>([]);
   lessonsInfo$: Observable<TimetableLayoutDTO[]>;
+  pageLoaded$: Observable<boolean>;
+  isLessonsLoading: boolean = false;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -66,9 +68,24 @@ export class TimetableComponent implements OnInit {
       this.relevantDate$,
       this.isWeekView$
     ).pipe(
+      tap(_ => this.isLessonsLoading = true),
       switchMap(_ => this.getLessons$()),
-    ).subscribe(lessons => this.lessons$.next(lessons));
-    this.lessonsInfo$ = this.timetableService.getLessonInfo$();
+    ).subscribe(lessons => {
+      this.lessons$.next(lessons);
+      this.isLessonsLoading = false;
+    });
+    this.lessonsInfo$ = this.timetableService.getLessonInfo$().pipe(
+      shareReplay(1)
+    );
+
+    this.pageLoaded$ = combineLatest([
+      this.lessons$,
+      this.lessonsInfo$,
+      this.dates$,
+    ]).pipe(
+      map(_ => true),
+      shareReplay(1)
+    );
   }
 
   ngOnInit(): void {

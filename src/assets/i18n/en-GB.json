@@ -232,5 +232,10 @@
         "friday":"Friday",
         "saturday":"Saturday",
         "sunday":"Sunday"
+    },
+    "teachu":{
+        "descriptionTitle":"«Revolutionizing digital collaboration between students, teachers and parents at Swiss high schools.»",
+        "descriptionDetail":"An interdisciplinary project work by Roman Bürge, Micha Schweizer, Oliver Umbricht and Eric Wermelinger, developed from April - October 2022 at Berufsfachschule Baden.",
+        "moreInfo":"More Informations"
     }
 }
