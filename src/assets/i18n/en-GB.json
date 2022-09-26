@@ -148,6 +148,11 @@
             "missingLow":"Password has to contain one lowercase letter",
             "missingNumber":"Password has to contain at least one  number",
             "wrongCurrent":"E-Mail or Password wrong."
+        },
+        "logout":{
+            "logout":"Logout",
+            "stay":"Stay here",
+            "question":"Do you really want to log out?"
         }
     },
     "errorBackend":{

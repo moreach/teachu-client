@@ -65,4 +65,16 @@ export class TokenService {
   getUserId() {
     return localStorage.getItem(appConfig.APPLICATION_USER_ID) ?? '';
   }
+
+  removeUserId(){
+      localStorage.removeItem(appConfig.APPLICATION_USER_ID);
+  }
+
+  resetAll(){
+      this.removeExpired();
+      this.removeRefreshToken();
+      this.removeToken();
+      this.removeUserId();
+      this.setSelectedLanguage("en-GB");
+  }
 }
