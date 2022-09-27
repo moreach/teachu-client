@@ -38,13 +38,13 @@
                 <button (click)="logout()"
                         color="warn"
                         mat-mini-fab
-                        matTooltip="{{ 'userSettings.logout.logout' | translate }}">
+                        [matTooltip]="'userSettings.logout.logout' | translate">
                     <mat-icon>logout</mat-icon>
                 </button>
                 <button (click)="askLogoutVisible = false"
                         color="primary"
                         mat-mini-fab
-                        matTooltip="{{ 'userSettings.logout.stay' | translate }}">
+                        [matTooltip]="'userSettings.logout.stay' | translate">
                     <mat-icon>cancel</mat-icon>
                 </button>
             </ng-template>
