@@ -9,6 +9,8 @@ import { GetLanguage } from "src/app/DTOs/Enums/Language";
 import {ApiService} from "../../Framework/API/api.service";
 import {TokenService} from "../../Framework/API/token.service";
 import {endpoints} from "../../Config/endpoints";
+import { appRoutes } from "src/app/Config/appRoutes";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "user-settings",
@@ -27,6 +29,7 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
     profileImageControl: FormControl;
     phoneSavedTimeout: number | undefined;
     askLogoutVisible: boolean = false;
+    isLoggedOut: boolean = false;
     private uploadedProfileImage: File | undefined;
     private darkThemeSubject: Subject<boolean> = new Subject<boolean>();
 
@@ -35,6 +38,7 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
       private userService: UserService,
       private api: ApiService,
       private tokenService: TokenService,
+      private router: Router,
     ) {
         this.phoneNumberControl = new FormControl('', [ Validators.required ]);
         this.profileImageControl = new FormControl(this.uploadedProfileImage, [
@@ -112,17 +116,18 @@ export class UserSettingsComponent implements OnInit, OnDestroy{
     }
 
     ngOnDestroy() {
-        this.savePhoneNumber(this.phoneNumberControl.value);
-        this.saveDarkTheme(this.darkTheme);
+        if (!this.isLoggedOut) {
+            this.savePhoneNumber(this.phoneNumberControl.value);
+            this.saveDarkTheme(this.darkTheme);
+        }
         this.unsubscribe.next();
         this.unsubscribe.complete();
     }
 
     logout(){
-        this.api.callApi(endpoints.Login, { "refresh": this.tokenService.getRefreshToken() }, "DELETE").subscribe(() => {
-            this.tokenService.resetAll();
-            this.darkThemeService.setDarkTheme(false);
-            location.reload();
-        });
+        this.isLoggedOut = true;
+        this.api.callApi(endpoints.Login, { "refresh": this.tokenService.getRefreshToken() }, "DELETE").subscribe();
+        this.tokenService.resetAll();
+        this.router.navigate([appRoutes.Login]);
     }
 }

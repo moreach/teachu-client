@@ -71,10 +71,8 @@ export class TokenService {
   }
 
   resetAll(){
-      this.removeExpired();
-      this.removeRefreshToken();
-      this.removeToken();
-      this.removeUserId();
-      this.setSelectedLanguage("en-GB");
+    this.removeExpired();
+    this.removeRefreshToken();
+    this.removeToken();
   }
 }

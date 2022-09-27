@@ -84,7 +84,6 @@ export class GroupChatDialogComponent implements OnInit {
   }
 
   getNameFromId(id: string) {
-    console.log(this.allUsers)
     const filtered = this.allUsers.filter(user => user.id === id);
     if (filtered.length === 0) {
       return '';

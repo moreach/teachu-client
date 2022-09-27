@@ -148,6 +148,11 @@
       "missingLow":"Das Passwort muss einen Kleinbuchstaben enthalten",
       "missingNumber":"Das Passwort muss mindestens eine Zahl enthalten",
       "wrongCurrent":"E-Mail oder Passwort inkorrekt"
+    },
+    "logout":{
+      "logout":"Logout",
+      "stay":"Abbrechen",
+      "question":"Möchten Sie sich wirklich ausloggen?"
     }
   },
   "errorBackend":{

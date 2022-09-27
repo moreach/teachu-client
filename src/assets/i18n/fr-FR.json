@@ -148,6 +148,11 @@
       "missingLow":"Le mot de passe doit contenir une lettre minuscule",
       "missingNumber":"Le mot de passe doit contenir au moins un chiffre",
       "wrongCurrent":"Courriel ou mot de passe incorrect."
+    },
+    "logout":{
+      "logout":"Logout",
+      "stay":"Rester ici",
+      "question":"Vous êtes sur que vous voulez partir?"
     }
   },
   "errorBackend":{
