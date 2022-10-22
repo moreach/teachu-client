@@ -38,7 +38,7 @@
             </div>
             <div *ngFor="let lesson of timetable.lessons" class="entry timetable-lesson">
                 <div class="timetable-lesson-title-bar">
-                    <div class="pointer center bold">{{ lesson.from }} - {{ lesson.to }} {{ lesson.subject }}</div>
+                    <div class="pointer center bold">{{ formatTime(lesson.from) }} - {{ formatTime(lesson.from) }} {{ lesson.subject }}</div>
                 </div>
                 <div class="hidden details">
                     <div>{{ 'timetable.teacher' | translate }}: {{ lesson.teacher }}</div>

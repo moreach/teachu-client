@@ -1,12 +1,12 @@
-import { KeyValue } from '@angular/common';
-import { Component, HostListener, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject, combineLatest, map, merge, Observable, shareReplay, switchMap, tap } from 'rxjs';
-import { TimetableDayDTO, TimetableLessonDTO } from 'src/app/DTOs/Timetable/TimetableDayDTO';
-import { TimetableLayoutDTO } from 'src/app/DTOs/Timetable/TimetableLayoutDTO';
-import { addDays, equalDates, getFirstDayOfWeek, getLastDayOfWeek } from 'src/app/Framework/Helpers/DateHelpers';
-import { LessonDetailsComponent } from './lesson-details/lesson-details.component';
-import { TimetableService } from './timetable.service';
+import {KeyValue} from '@angular/common';
+import {Component, HostListener, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {BehaviorSubject, combineLatest, map, merge, Observable, shareReplay, switchMap, tap} from 'rxjs';
+import {TimetableDayDTO, TimetableLessonDTO} from 'src/app/DTOs/Timetable/TimetableDayDTO';
+import {TimetableLayoutDTO} from 'src/app/DTOs/Timetable/TimetableLayoutDTO';
+import {addDays, equalDates, getFirstDayOfWeek, getLastDayOfWeek} from 'src/app/Framework/Helpers/DateHelpers';
+import {LessonDetailsComponent} from './lesson-details/lesson-details.component';
+import {TimetableService} from './timetable.service';
 
 @Component({
   selector: 'app-timetable',
@@ -168,5 +168,13 @@ export class TimetableComponent implements OnInit {
     }
     const events = [correspondingDay.userEvent?.title, correspondingDay.schoolClassEvent?.title, correspondingDay.schoolEvent?.title];
     return events.filter(e => !!e);
+  }
+
+  formatTime(time: string): string {
+    if((time.match(/:/g) || []).length < 2)
+      return time;
+
+    let split: string[] = time.split(":");
+    return `${split[0]}:${split[1]}`;
   }
 }

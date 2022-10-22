@@ -1,15 +1,14 @@
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { map, Observable, tap } from 'rxjs';
-import { appRoutes } from 'src/app/Config/appRoutes';
-import { ChatResponseDTO } from 'src/app/DTOs/Chat/ChatResponseDTO';
-import { UserExternalUserDTO } from 'src/app/DTOs/User/UserExternalUserDTO';
-import { TokenService } from 'src/app/Framework/API/token.service';
-import { isToday } from 'src/app/Framework/Helpers/DateHelpers';
-import { truncateToMaxChars } from 'src/app/Framework/Helpers/StringHelpers';
-import { ChatService } from '../chat.service';
-import { GroupChatDialogComponent } from '../group-chat-dialog/group-chat-dialog.component';
+import {Component} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {Router} from '@angular/router';
+import {map, Observable} from 'rxjs';
+import {appRoutes} from 'src/app/Config/appRoutes';
+import {ChatResponseDTO} from 'src/app/DTOs/Chat/ChatResponseDTO';
+import {TokenService} from 'src/app/Framework/API/token.service';
+import {isToday} from 'src/app/Framework/Helpers/DateHelpers';
+import {truncateToMaxChars} from 'src/app/Framework/Helpers/StringHelpers';
+import {ChatService} from '../chat.service';
+import {GroupChatDialogComponent} from '../group-chat-dialog/group-chat-dialog.component';
 
 @Component({
   selector: 'app-chat-overview',
@@ -75,6 +74,10 @@ export class ChatOverviewComponent {
 
   isOwn(userId: string) {
     return userId === this.tokenService.getUserId();
+  }
+
+  isSoloChat(chat: ChatResponseDTO): boolean {
+    return chat.members.length === 2; // 2 because the current user is also in there
   }
 
   getProfileImage(chat: ChatResponseDTO) {
