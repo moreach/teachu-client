@@ -17,9 +17,9 @@
                 <div>
                     <div class="block date fist-line" [style]="{'height': '100px'}"></div>
                     <div *ngFor="let hour of hours" class="block hour info">
-                        <div>{{ hour.start }}</div>
+                        <div>{{ formatTime(hour.start) }}</div>
                         <div class="divider">-</div>
-                        <div>{{ hour.end }}</div>
+                        <div>{{ formatTime(hour.end) }}</div>
                     </div>
                 </div>
                 <div *ngFor="let day of (dates$ | async)" class="day hours">

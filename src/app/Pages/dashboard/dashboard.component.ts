@@ -1,17 +1,17 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { appRoutes } from 'src/app/Config/appRoutes';
-import { DashboardAbsenceDTO } from 'src/app/DTOs/Dashboard/DashboardAbsenceDTO';
-import { DashboardChatDTO } from 'src/app/DTOs/Dashboard/DashboardChatDTO';
-import { DashboardClassListDTO } from 'src/app/DTOs/Dashboard/DashboardClassListDTO';
-import { DashboardGradeDTO } from 'src/app/DTOs/Dashboard/DashboardGradeDTO';
-import { DashboardSchoolInfoDTO } from 'src/app/DTOs/Dashboard/DashboardSchoolInfoDTO';
-import { DashboardTimetableDTO } from 'src/app/DTOs/Dashboard/DashboardTimetableDTO';
-import { UserExternalUserDTO } from 'src/app/DTOs/User/UserExternalUserDTO';
-import { TokenService } from 'src/app/Framework/API/token.service';
-import { isToday } from 'src/app/Framework/Helpers/DateHelpers';
-import { DashboardService } from './dashboard.service';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {appRoutes} from 'src/app/Config/appRoutes';
+import {DashboardAbsenceDTO} from 'src/app/DTOs/Dashboard/DashboardAbsenceDTO';
+import {DashboardChatDTO} from 'src/app/DTOs/Dashboard/DashboardChatDTO';
+import {DashboardClassListDTO} from 'src/app/DTOs/Dashboard/DashboardClassListDTO';
+import {DashboardGradeDTO} from 'src/app/DTOs/Dashboard/DashboardGradeDTO';
+import {DashboardSchoolInfoDTO} from 'src/app/DTOs/Dashboard/DashboardSchoolInfoDTO';
+import {DashboardTimetableDTO} from 'src/app/DTOs/Dashboard/DashboardTimetableDTO';
+import {UserExternalUserDTO} from 'src/app/DTOs/User/UserExternalUserDTO';
+import {TokenService} from 'src/app/Framework/API/token.service';
+import {isToday} from 'src/app/Framework/Helpers/DateHelpers';
+import {DashboardService} from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -81,6 +81,14 @@ export class DashboardComponent {
       return '-';
     }
     return array.join(', ');
+  }
+
+  formatTime(time: string): string {
+    if((time.match(/:/g) || []).length < 2)
+      return time;
+
+    let split: string[] = time.split(":");
+    return `${split[0]}:${split[1]}`;
   }
 
   isToday(date: Date) {

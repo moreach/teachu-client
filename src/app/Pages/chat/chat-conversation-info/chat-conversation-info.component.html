@@ -5,7 +5,7 @@
     <div class="chat-image-wrap">
         <app-image *ngIf="getProfileImage(info.members); else groupImage" [round]="true" [size]="100" [imageId]="getProfileImage(info.members) ?? ''"></app-image>
         <ng-template #groupImage>
-            <mat-icon [style]="{'font-size': '48px'}" class="chat-image">group</mat-icon>
+            <mat-icon style="font-size: 75px; height: 128px; width: 128px; display: flex; justify-content: center; align-items: center;">group</mat-icon>
         </ng-template>
     </div>
     <div *ngFor="let user of info.members">

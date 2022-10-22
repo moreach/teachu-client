@@ -7,7 +7,12 @@
     <div class="chat-overview-list">
         <div *ngFor="let chat of chatOverviews">
             <div class="chat-overview-detail" (click)="openDetail(chat.id)">
-                <app-image [size]="48" [imageId]="getProfileImage(chat)"></app-image>
+                <app-image *ngIf="isSoloChat(chat) else chatIcon" [size]="48" [imageId]="getProfileImage(chat)"></app-image>
+                <ng-template #chatIcon>
+                    <div style="height: 48px; width: 48px;">
+                        <mat-icon style="font-size: 48px">group</mat-icon>
+                    </div>
+                </ng-template>
                 <div class="chat-middle-section">
                     <div>
                         <div class="chat-title">{{ chat.title }}</div>

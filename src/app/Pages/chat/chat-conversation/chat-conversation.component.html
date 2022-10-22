@@ -1,6 +1,6 @@
 <div *ngIf="conversation$ | async as conversation; else spinner" class="page">
     <div (click)="openSettings()" class="chat-info pointer">
-        <app-image *ngIf="isGroupChat(conversation.info); else groupImage" [round]="true" [size]="48" [imageId]="conversation.info.members[0].imageId"></app-image>
+        <app-image *ngIf="isSoloChat(conversation.info); else groupImage" [round]="true" [size]="48" [imageId]="conversation.info.members[0].imageId"></app-image>
         <ng-template #groupImage>
             <mat-icon [style]="{'font-size': '40px', 'margin-left': '4px'}" class="chat-image">group</mat-icon>
         </ng-template>

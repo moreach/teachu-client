@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
-import { appRoutes } from 'src/app/Config/appRoutes';
-import { ChatConversationDTO } from 'src/app/DTOs/Chat/ChatConversationDTO';
-import { ChatResponseDTO } from 'src/app/DTOs/Chat/ChatResponseDTO';
-import { UserExternalUserDTO } from 'src/app/DTOs/User/UserExternalUserDTO';
-import { TokenService } from 'src/app/Framework/API/token.service';
-import { isToday } from 'src/app/Framework/Helpers/DateHelpers';
-import { truncateToMaxChars } from 'src/app/Framework/Helpers/StringHelpers';
-import { ChatService } from '../chat.service';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {map, Observable} from 'rxjs';
+import {appRoutes} from 'src/app/Config/appRoutes';
+import {ChatConversationDTO} from 'src/app/DTOs/Chat/ChatConversationDTO';
+import {ChatResponseDTO} from 'src/app/DTOs/Chat/ChatResponseDTO';
+import {UserExternalUserDTO} from 'src/app/DTOs/User/UserExternalUserDTO';
+import {TokenService} from 'src/app/Framework/API/token.service';
+import {isToday} from 'src/app/Framework/Helpers/DateHelpers';
+import {truncateToMaxChars} from 'src/app/Framework/Helpers/StringHelpers';
+import {ChatService} from '../chat.service';
 
 @Component({
   selector: 'app-chat-conversation',
@@ -63,8 +63,8 @@ export class ChatConversationComponent implements OnInit {
     });
   }
 
-  isGroupChat(chat: ChatResponseDTO) {
-    return chat.members.length > 2;
+  isSoloChat(chat: ChatResponseDTO) {
+    return chat.members.length === 2;
   }
 
   isOwn(userId: string) {
